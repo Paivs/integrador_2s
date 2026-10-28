@@ -1,0 +1,202 @@
+body{
+   margin: 0;
+   padding: 0;
+   font-family: "Arima", system-ui;
+   font-optical-sizing: auto;
+   font-weight: 400;
+   font-style: normal;
+   background-color: #f0d3c394;
+}
+
+.cabecalho{
+    display: flex;
+    width: 100%;
+    height: 140px;
+    background-color: #796761;
+    justify-content: left;
+    align-items: center;
+}
+
+.cabecalho a{
+    text-decoration: none;
+}
+
+.cabecalho p{
+    color: white;
+    font-size: 30px;
+}
+
+.loginTitulo p{
+    color: #796761;
+    font-size: 30px;
+}
+
+nav ul{
+    display: flex;
+    padding-left: 0;
+    margin-top: 25px;
+}
+
+nav ul li{
+    list-style: none;
+    margin-right: 130px;
+}
+
+nav ul li a{
+    text-decoration: none;
+}
+
+.login{
+    display: flex;
+    width: 90px;
+    height: 50px;
+    background-color: #edd4c6;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+}
+
+.img-cabecalho a img{
+    list-style: none;
+    margin-right: 800px;
+}
+
+.img-rodape a img{
+    list-style: none;
+    margin-right: 500px;
+}
+
+img {
+  display: block;
+}
+
+.rodape{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    height: 190px;
+    background-color: #796761;
+    justify-content: left;
+    align-items: center;
+}
+
+.rodape table{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.rodape table tr td a p{
+    color: white;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.rodape table tr td a{
+    text-decoration: none;
+}
+
+.espacamentoRodape{
+    width: 5px;
+    height: 100px;
+    background-color: white;
+}
+
+.redesSociais{
+    display: flex;
+    padding-left: 0;
+    margin-left: 250px;
+}
+
+.redesSociais nav ul li{
+    list-style: none;
+    margin-right: 50px;
+}
+
+.redesSociais nav ul li a{
+    text-decoration: none;
+}
+
+.direitos {
+    width: 100%; /* Força o elemento a ocupar a linha inteira */
+    text-align: center;
+    color: rgba(255, 255, 255, 0.733);
+    font-size: 11px;
+    margin-top: 20px;
+}
+
+.inicialLogin{
+    display: flex;
+    width: 100%;
+    min-height: 450px;
+    align-items: stretch;
+}
+
+.inicialLogin > img {
+    width: 40%;
+    object-fit: cover;
+}
+
+.formLogin {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    padding: 40px;
+    box-sizing: border-box;
+}
+
+.formLogin form p {
+    color: #796761;
+    font-size: 20px;
+    margin: 10px 0;
+    text-align: center;
+}
+
+.titulo p {
+    color: #796761;
+    font-size: 80px;
+    margin: 0;
+    text-align: center;
+}
+
+.formLogin form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 500px;
+    max-width: 100%;
+    align-items: center;
+}
+
+.formLogin input{
+    background-color: #ffffff;
+    border-radius: 40px;
+    border-color: #796761;
+    border-width: 4px;
+    width: 500px;
+    height: 60px;
+    margin-bottom: 30px;
+    font-size: 30px;
+
+}
+
+.formLogin button{
+    background-color: #e9b0b2;
+    border-style:hidden;
+    border-radius: 20px;
+    padding: 10px;
+    font-family: "Arima", system-ui;
+    color: #752325;
+    width: 300px;
+    height: 60px;
+    font-size:30px;
+   
+}
+
+.formLogin ::placeholder{
+    font-family: "Arima", system-ui;
+    color: #7d655c;
+}
