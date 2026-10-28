@@ -65,19 +65,50 @@ nav ul li a{
     list-style: none;
     margin-right: 500px;
 }
+.areaForm{
+    justify-content:center;
+    display:flex;
+    align-items: center;
 
+}
+
+.img-login{
+    width: 950px;
+
+}
 
 
 .form{
     justify-self: right;
     display:block;
+    max-width: 935px;
+    width: 90%;
+    padding-left: 100px;
 
+}
+
+.form h1{
+    font-size:50px;
+    color: #6b4f36;
+    text-align:center;
+}
+
+.display-flex{
+    display:flex;
+    justify-content:flex-start;
+    padding-right: 15px;
+    margin-right: 60px;
 }
 
 .form input{
     background-color: #ffffff;
-    border-radius: 10px;
+    border-radius: 40px;
     border-color: #917d79;
+    border-width: 5px;
+    width: 90%;
+    height: 80px;
+    margin-bottom: 30px;
+    font-size: 30px;
 
 }
 
@@ -88,15 +119,20 @@ nav ul li a{
     padding: 10px;
     font-family: "Arima", system-ui;
     color: #752325;
+    width: 40%;
+    height: 80px;
+    font-size:30px;
+   
 }
 .form ::placeholder{
     font-family: "Arima", system-ui;
     color: #7d655c;
 }
-.img-login{
-    width: 950px;
 
+.form p {
+    font-size: 20px;
 }
+
 
 .rodape{
     display: flex;
