@@ -8,6 +8,10 @@ body{
    background-color: #f0d3c394;
 }
 
+img {
+  display: block;
+}
+
 .cabecalho{
     display: flex;
     width: 1895px;
