@@ -13,7 +13,7 @@
 
 <body>
     <div class="cabecalho">
-        <div class="img-cabecalho"><a href="homelogin.php"><img src="logo.png" alt=""></a></div>
+        <div class="img-cabecalho"><a href="homelogin.php"><img src="imgs/logo.png" alt=""></a></div>
         <nav>
             <ul>
                 <li><a href="login.php">
@@ -52,14 +52,14 @@
                 <br>
                 <div class="display-flex">
                     <label for="data"></label>
-                    <input type="number" name="data" placeholder="Data de Nasc.:" id="data">
+                    <input type="text" name="data" placeholder="Data de Nasc.:" id="data">
 
                     <label for="ano"></label>
-                    <input type="number" name="ano" placeholder="Escolaridade:" id="ano">
+                    <input type="text" name="ano" placeholder="Escolaridade:" id="ano">
                 </div>
                 <br>
                 <label for="telefone"></label>
-                <input type="number" name="telefone" placeholder="Telefone:" id="telefone">
+                <input type="text" name="telefone" placeholder="Telefone:" id="telefone">
                 <br>
                 <label for="senha"></label>
                 <input type="text" name="senha" placeholder="Senha:" id="senha">
@@ -71,7 +71,7 @@
 
     </div>
     <div class="rodape">
-        <div class="img-rodape"><a href="homelogin.php"><img src="logo.png" alt=""></a></div>
+        <div class="img-rodape"><a href="homelogin.php"><img src="imgs/logo.png" alt=""></a></div>
         <table cellpadding="3">
             <tr>
                 <td><a href="pedidos.html">
@@ -165,8 +165,8 @@
         <div class="redesSociais">
             <nav>
                 <ul>
-                    <li><a href=""><img src="git.png" alt=""></a></li>
-                    <li><a href=""><img src="insta.png" alt=""></a></li>
+                    <li><a href=""><img src="imgs/git.png" alt=""></a></li>
+                    <li><a href=""><img src="imgs/insta.png" alt=""></a></li>
                 </ul>
             </nav>
         </div>
