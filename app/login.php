@@ -24,7 +24,25 @@
     </nav>
     <div class="login"><a href="login.php"><div class="loginTitulo"><p>login</p></div></a></div>
     </div>
+    <div class="inicialLogin">
     <img src="/img-yasmin/login-img.png" alt="">
+        <div class="formLogin">
+            <div class="titulo"><p>Login</p></div>
+            <form action="" method="post">
+                <input type="text" name="id_usuario" hidden>
+
+                <label for="email"></label>
+                <input type="text" name="email" id="email" placeholder="E-Mail">
+
+                <label for="senha"></label>
+                <input type="password" name="senha" id="senha" placeholder="Senha">
+
+                <p>Não possui uma conta? <a href="cadastro.php">Cadastre-se aqui</a></p>
+
+                <button type="submit">Acessar Conta</button>
+            </form>
+        </div>
+    </div>
     <div class="rodape">
         <div class="img-rodape"><a href="homelogin.php"><img src="/img-yasmin/logo.png" alt=""></a></div>
         <table cellpadding="3">
