@@ -1,0 +1,131 @@
+body{
+   margin: 0;
+   padding: 0;
+   font-family: "Arima", system-ui;
+   font-optical-sizing: auto;
+   font-weight: weight;
+   font-style: normal;
+   background-color: #f0d3c394;
+}
+
+.cabecalho{
+    display: flex;
+    width: 100%;
+    height: 150px;
+    background-color: #796761;
+    justify-content: left;
+    align-items: center;
+}
+
+.cabecalho a{
+    text-decoration: none;
+}
+
+.cabecalho p{
+    color: white;
+    font-size: 30px;
+}
+
+.loginTitulo p{
+    color: #796761;
+    font-size: 30px;
+}
+
+nav ul{
+    display: flex;
+    padding-left: 0;
+    margin-top: 25px;
+}
+
+nav ul li{
+    list-style: none;
+    margin-right: 130px;
+}
+
+nav ul li a{
+    text-decoration: none;
+}
+
+.login{
+    display: flex;
+    width: 90px;
+    height: 50px;
+    background-color: #edd4c6;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+}
+
+.img-cabecalho a img{
+    list-style: none;
+    margin-right: 800px;
+}
+
+.img-rodape a img{
+    list-style: none;
+    margin-right: 500px;
+}
+
+img {
+  display: block;
+}
+
+.rodape{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    height: 200px;
+    background-color: #796761;
+    justify-content: left;
+    align-items: center;
+}
+
+.rodape table{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.rodape table tr td a p{
+    color: white;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.rodape table tr td a{
+    text-decoration: none;
+}
+
+.espacamentoRodape{
+    width: 5px;
+    height: 100px;
+    background-color: white;
+}
+
+.redesSociais{
+    display: flex;
+    padding-left: 0;
+    margin-left: 250px;
+}
+
+.redesSociais nav ul li{
+    list-style: none;
+    margin-right: 50px;
+}
+
+.redesSociais nav ul li a{
+    text-decoration: none;
+}
+
+.direitos {
+    width: 100%; /* Força o elemento a ocupar a linha inteira */
+    text-align: center;
+    color: rgba(255, 255, 255, 0.733);
+    font-size: 11px;
+    margin-top: 20px;
+}
+
+.titulo{
+    color: #796761;
+    font-size: 30px;
+}
