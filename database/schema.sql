@@ -1,6 +1,20 @@
-CREATE TABLE IF NOT EXISTS exemplos (
+/*CREATE TABLE IF NOT EXISTS exemplos (
     id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     titulo VARCHAR(120) NOT NULL,
     criado_em TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);*/
+
+CREATE TABLE IF NOT EXISTS veiculos (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    nome_modelo VARCHAR(120) NOT NULL,
+    placa VARCHAR(7) NOT NULL UNIQUE,
+    ano SMALLINT UNSIGNED NOT NULL,
+    proprietario VARCHAR(120) NOT NULL,
+    quilometragem INT UNSIGNED NOT NULL DEFAULT 0,
+    criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+INSERT INTO veiculos
+(nome_modelo, placa, ano, proprietario, quilometragem)
+VALUES
+('Honda Civic Touring', 'ABC1D23', 2022, 'Carlos Almeida', 48500);
