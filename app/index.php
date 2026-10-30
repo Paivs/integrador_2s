@@ -26,6 +26,7 @@ try {
 <body>
     <h1>Projeto Integrador:Food Campus</h1>
     <h2>Anaaa Laaaura</h2>
+    <h3>OLAAAAAAAAAAAAAA</h3>
     <p>O ambiente PHP está funcionando.</p>
     <div class="status">
         Banco de dados: <strong><?= htmlspecialchars($databaseStatus, ENT_QUOTES, 'UTF-8') ?></strong>
