@@ -21,7 +21,7 @@ Defina valores diferentes e fortes em cada aplicação:
 APP_ENV=production
 DB_HOST=db
 DB_PORT=3306
-DB_DATABASE=carcare
+DB_DATABASE=integrador
 DB_USERNAME=integrador
 DB_PASSWORD=senha-exclusiva-do-grupo
 DB_ROOT_PASSWORD=outra-senha-exclusiva
