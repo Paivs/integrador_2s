@@ -53,6 +53,39 @@ docker compose up -d --build
 
 Volumes criados anteriormente com MariaDB também devem ser removidos antes de iniciar o MySQL, pois os arquivos internos dos dois bancos não são compatíveis.
 
+## Áreas do CarCare
+
+O sistema possui dois tipos de acesso:
+
+- **cliente:** cadastra os próprios veículos, solicita uma manutenção e acompanha o status;
+- **funcionário:** consulta todos os clientes, cadastra serviços e peças e atualiza o status das manutenções.
+
+Toda solicitação criada pelo cliente recebe automaticamente o status `Solicitado`.
+Somente um funcionário pode alterar para `Agendado`, `Em andamento`,
+`Concluído` ou `Cancelado`.
+
+### Primeiro funcionário
+
+Por segurança, nenhuma senha é salva no GitHub. Depois de preparar o banco,
+acesse `http://localhost:8080/cadastro-funcionario.php` e crie a primeira
+conta da oficina. Essa página deixa de aceitar cadastros assim que o primeiro
+funcionário é criado.
+
+As contas criadas pela opção **Criar conta** do login são sempre clientes.
+
+## Atualizar um banco que já existe
+
+Se o projeto já estava funcionando antes da separação entre cliente e funcionário,
+não apague o volume. Execute a migração uma única vez:
+
+```powershell
+docker compose cp .\database\migracao-perfis.sql db:/tmp/migracao-perfis.sql
+docker compose exec db sh -c 'mysql --default-character-set=utf8mb4 -uroot -p"$MYSQL_ROOT_PASSWORD" "$MYSQL_DATABASE" < /tmp/migracao-perfis.sql'
+```
+
+Depois, atualize a página no navegador. A migração preserva os veículos e as
+manutenções existentes.
+
 ## Comandos úteis
 
 ```bash
@@ -70,4 +103,3 @@ docker compose down           # encerra o ambiente
 - Cada fork é cadastrado como uma aplicação independente no Coolify.
 
 Consulte [docs/alunos.md](docs/alunos.md) para o fluxo de trabalho e [docs/deploy-coolify.md](docs/deploy-coolify.md) para a publicação.
-# integrador_2s

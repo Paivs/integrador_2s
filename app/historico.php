@@ -5,13 +5,27 @@ protegerPagina();
 
 $paginaAtual = 'historico';
 
-$comando = $pdo->query(
-    "SELECT manutencoes.*, veiculos.nome_modelo, veiculos.placa
-     FROM manutencoes
-     INNER JOIN veiculos ON veiculos.id = manutencoes.veiculo_id
-     WHERE manutencoes.status = 'Concluída'
-     ORDER BY manutencoes.data_agendada DESC"
-);
+$sql = "SELECT manutencoes.*,
+               veiculos.marca,
+               veiculos.modelo,
+               veiculos.placa,
+               clientes.nome AS proprietario,
+               funcionarios.nome AS funcionario
+        FROM manutencoes
+        INNER JOIN veiculos ON veiculos.id = manutencoes.veiculo_id
+        INNER JOIN clientes ON clientes.id = veiculos.cliente_id
+        LEFT JOIN funcionarios ON funcionarios.id = manutencoes.funcionario_id
+        WHERE manutencoes.status = 'Concluido'";
+$parametros = [];
+
+if (usuarioEhCliente()) {
+    $sql .= ' AND veiculos.cliente_id = ?';
+    $parametros[] = $_SESSION['cliente_id'];
+}
+
+$sql .= ' ORDER BY manutencoes.data_conclusao DESC';
+$comando = $pdo->prepare($sql);
+$comando->execute($parametros);
 $historico = $comando->fetchAll();
 
 $maiorQuilometragem = 0;
@@ -38,7 +52,10 @@ foreach ($historico as $registro) {
     <main class="conteudo">
       <section class="pagina">
         <header class="cabecalho">
-          <div><h1>Histórico</h1><p>Consulte as manutenções concluídas.</p></div>
+          <div>
+            <h1>Histórico</h1>
+            <p><?php echo usuarioEhFuncionario() ? 'Consulte todos os serviços concluídos.' : 'Consulte as revisões concluídas dos seus veículos.'; ?></p>
+          </div>
         </header>
 
         <div class="indicadores resumo dois">
@@ -49,19 +66,35 @@ foreach ($historico as $registro) {
         <?php if (count($historico) === 0): ?>
           <div class="painel central">
             <div class="miniatura"><img src="imagens/icone-historico.png" alt=""></div>
-            <h2>Seu histórico está vazio</h2>
-            <p>As manutenções concluídas aparecerão aqui.</p>
+            <h2>O histórico está vazio</h2>
+            <p>As manutenções concluídas pelo funcionário aparecerão aqui.</p>
           </div>
         <?php else: ?>
           <div class="tabela-container">
             <table>
-              <thead><tr><th>Data</th><th>Veículo</th><th>Serviço</th><th>Quilometragem</th></tr></thead>
+              <thead>
+                <tr>
+                  <th>Conclusão</th>
+                  <th>Veículo</th>
+                  <?php if (usuarioEhFuncionario()): ?><th>Cliente</th><?php endif; ?>
+                  <th>Serviço</th>
+                  <th>Funcionário</th>
+                  <th>Quilometragem</th>
+                </tr>
+              </thead>
               <tbody>
                 <?php foreach ($historico as $registro): ?>
                   <tr>
-                    <td><?php echo date('d/m/Y', strtotime($registro['data_agendada'])); ?></td>
-                    <td><strong><?php echo textoSeguro($registro['nome_modelo']); ?></strong><small><?php echo textoSeguro($registro['placa']); ?></small></td>
-                    <td><?php echo textoSeguro($registro['servico']); ?></td>
+                    <td><?php echo date('d/m/Y', strtotime($registro['data_conclusao'] ?: $registro['data_agendamento'])); ?></td>
+                    <td>
+                      <strong><?php echo textoSeguro(trim($registro['marca'] . ' ' . $registro['modelo'])); ?></strong>
+                      <small><?php echo textoSeguro($registro['placa']); ?></small>
+                    </td>
+                    <?php if (usuarioEhFuncionario()): ?>
+                      <td><?php echo textoSeguro($registro['proprietario']); ?></td>
+                    <?php endif; ?>
+                    <td><?php echo textoSeguro($registro['descricao']); ?></td>
+                    <td><?php echo textoSeguro($registro['funcionario'] ?: 'Não informado'); ?></td>
                     <td><?php echo number_format($registro['quilometragem'], 0, ',', '.'); ?> km</td>
                   </tr>
                 <?php endforeach; ?>

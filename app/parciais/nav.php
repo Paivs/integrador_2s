@@ -21,13 +21,20 @@
       <img src="imagens/icone-historico.png">
       <span>Histórico</span>
     </a>
+
+    <?php if (usuarioEhFuncionario()): ?>
+      <a class="item <?php echo $paginaAtual === 'catalogo' ? 'ativo' : ''; ?>" href="catalogo.php">
+        <img src="imagens/icone-lembrete.png">
+        <span>Serviços e peças</span>
+      </a>
+    <?php endif; ?>
   </nav>
 
   <div class="perfil">
     <div class="avatar">CC</div>
     <div class="perfil_dados">
       <strong><?php echo textoSeguro($_SESSION['usuario_nome']); ?></strong>
-      <span>Usuário</span>
+      <span><?php echo usuarioEhFuncionario() ? 'Funcionário' : 'Cliente'; ?></span>
     </div>
     <a class="sair" href="logout.php">Sair</a>
   </div>

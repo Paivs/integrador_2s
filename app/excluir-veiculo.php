@@ -1,14 +1,16 @@
 <?php
 
 require_once __DIR__ . '/init.php';
-protegerPagina();
+protegerCliente();
 
-// A exclusão só acontece quando o formulário usa o método POST.
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $id = intval($_POST['id'] ?? 0);
 
-    $comando = $pdo->prepare('DELETE FROM veiculos WHERE id = ?');
-    $comando->execute([$id]);
+    // A condição cliente_id impede a exclusão de veículos de outra pessoa.
+    $comando = $pdo->prepare(
+        'DELETE FROM veiculos WHERE id = ? AND cliente_id = ?'
+    );
+    $comando->execute([$id, $_SESSION['cliente_id']]);
 }
 
 header('Location: veiculos.php?mensagem=excluido');

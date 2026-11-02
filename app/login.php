@@ -10,6 +10,7 @@ if (isset($_SESSION['usuario_id'])) {
 
 $erro = '';
 $email = '';
+$totalFuncionarios = $pdo->query('SELECT COUNT(*) FROM funcionarios')->fetchColumn();
 
 // O código abaixo só é executado quando o formulário é enviado.
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -20,7 +21,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $erro = 'Preencha o e-mail e a senha.';
     } else {
         // O ponto de interrogação recebe o e-mail com segurança.
-        $comando = $pdo->prepare('SELECT * FROM usuarios WHERE email = ?');
+        $comando = $pdo->prepare(
+            'SELECT usuarios.*,
+                    clientes.id AS cliente_id,
+                    funcionarios.id AS funcionario_id
+             FROM usuarios
+             LEFT JOIN clientes ON clientes.usuario_id = usuarios.id
+             LEFT JOIN funcionarios ON funcionarios.usuario_id = usuarios.id
+             WHERE usuarios.email = ?'
+        );
         $comando->execute([$email]);
         $usuario = $comando->fetch();
 
@@ -31,6 +40,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['usuario_id'] = $usuario['id'];
             $_SESSION['usuario_nome'] = $usuario['nome'];
             $_SESSION['usuario_email'] = $usuario['email'];
+            $_SESSION['usuario_tipo'] = $usuario['tipo'];
+            $_SESSION['cliente_id'] = $usuario['cliente_id'];
+            $_SESSION['funcionario_id'] = $usuario['funcionario_id'];
 
             header('Location: index.php');
             exit;
@@ -90,6 +102,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <p class="login_cadastro">
           Ainda não tem uma conta? <a href="cadastro-usuario.php">Criar conta</a>
         </p>
+
+        <?php if ($totalFuncionarios == 0): ?>
+          <p class="login_cadastro">
+            Primeiro acesso da oficina? <a href="cadastro-funcionario.php">Criar funcionário</a>
+          </p>
+        <?php endif; ?>
       </div>
     </section>
   </main>

@@ -3,7 +3,7 @@
 // Dados recebidos do arquivo .env pelo Docker.
 $host = getenv('DB_HOST') ?: 'db';
 $porta = getenv('DB_PORT') ?: '3306';
-$nomeBanco = getenv('DB_DATABASE') ?: 'integrador';
+$nomeBanco = getenv('DB_DATABASE') ?: 'carcare';
 $usuarioBanco = getenv('DB_USERNAME') ?: 'integrador';
 $senhaBanco = getenv('DB_PASSWORD');
 

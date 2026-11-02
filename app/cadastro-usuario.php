@@ -5,10 +5,12 @@ require_once __DIR__ . '/init.php';
 $erro = '';
 $nome = '';
 $email = '';
+$telefone = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nome = trim($_POST['nome'] ?? '');
     $email = trim($_POST['email'] ?? '');
+    $telefone = trim($_POST['telefone'] ?? '');
     $senha = $_POST['senha'] ?? '';
     $confirmarSenha = $_POST['confirmar_senha'] ?? '';
 
@@ -31,11 +33,35 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // A senha é transformada em um código protegido antes de ser salva.
             $senhaProtegida = password_hash($senha, PASSWORD_DEFAULT);
 
-            $comando = $pdo->prepare('INSERT INTO usuarios (nome, email, senha) VALUES (?, ?, ?)');
-            $comando->execute([$nome, $email, $senhaProtegida]);
+            try {
+                // As duas inserções formam um único cadastro de cliente.
+                $pdo->beginTransaction();
 
-            header('Location: login.php?cadastro=ok');
-            exit;
+                $comando = $pdo->prepare(
+                    "INSERT INTO usuarios (nome, email, senha, tipo)
+                     VALUES (?, ?, ?, 'cliente')"
+                );
+                $comando->execute([$nome, $email, $senhaProtegida]);
+
+                $usuarioId = $pdo->lastInsertId();
+
+                $comandoCliente = $pdo->prepare(
+                    'INSERT INTO clientes (usuario_id, nome, telefone, email)
+                     VALUES (?, ?, ?, ?)'
+                );
+                $comandoCliente->execute([$usuarioId, $nome, $telefone, $email]);
+
+                $pdo->commit();
+
+                header('Location: login.php?cadastro=ok');
+                exit;
+            } catch (PDOException $erroBanco) {
+                if ($pdo->inTransaction()) {
+                    $pdo->rollBack();
+                }
+
+                $erro = 'Não foi possível criar a conta. Tente novamente.';
+            }
         }
     }
 }
@@ -77,6 +103,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
           <label for="email">E-mail</label>
           <input id="email" name="email" type="email" value="<?php echo textoSeguro($email); ?>" required>
+
+          <label for="telefone">Telefone</label>
+          <input id="telefone" name="telefone" value="<?php echo textoSeguro($telefone); ?>" placeholder="(11) 99999-9999">
 
           <label for="senha">Senha</label>
           <input id="senha" name="senha" type="password" minlength="8" required>

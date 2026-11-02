@@ -1,7 +1,7 @@
 <?php
 
 require_once __DIR__ . '/init.php';
-protegerPagina();
+protegerFuncionario();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $id = intval($_POST['id'] ?? 0);

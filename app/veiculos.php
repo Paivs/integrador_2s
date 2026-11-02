@@ -7,7 +7,6 @@ $paginaAtual = 'veiculos';
 $busca = trim($_GET['busca'] ?? '');
 $mensagem = '';
 
-// Mostra uma mensagem de acordo com a ação realizada.
 if (($_GET['mensagem'] ?? '') === 'cadastrado') {
     $mensagem = 'Veículo cadastrado com sucesso.';
 } elseif (($_GET['mensagem'] ?? '') === 'editado') {
@@ -16,18 +15,35 @@ if (($_GET['mensagem'] ?? '') === 'cadastrado') {
     $mensagem = 'Veículo excluído com sucesso.';
 }
 
-if ($busca !== '') {
-    $comando = $pdo->prepare(
-        'SELECT * FROM veiculos
-         WHERE nome_modelo LIKE ? OR placa LIKE ? OR proprietario LIKE ?
-         ORDER BY id DESC'
-    );
-    $termo = '%' . $busca . '%';
-    $comando->execute([$termo, $termo, $termo]);
-    $veiculos = $comando->fetchAll();
-} else {
-    $veiculos = $pdo->query('SELECT * FROM veiculos ORDER BY id DESC')->fetchAll();
+// O funcionário enxerga todos. O cliente enxerga somente os próprios veículos.
+$sql = 'SELECT veiculos.*, clientes.nome AS proprietario
+        FROM veiculos
+        INNER JOIN clientes ON clientes.id = veiculos.cliente_id';
+$parametros = [];
+$filtros = [];
+
+if (usuarioEhCliente()) {
+    $filtros[] = 'veiculos.cliente_id = ?';
+    $parametros[] = $_SESSION['cliente_id'];
 }
+
+if ($busca !== '') {
+    $filtros[] = '(veiculos.modelo LIKE ?
+                    OR veiculos.marca LIKE ?
+                    OR veiculos.placa LIKE ?
+                    OR clientes.nome LIKE ?)';
+    $termo = '%' . $busca . '%';
+    array_push($parametros, $termo, $termo, $termo, $termo);
+}
+
+if (count($filtros) > 0) {
+    $sql .= ' WHERE ' . implode(' AND ', $filtros);
+}
+
+$sql .= ' ORDER BY veiculos.id DESC';
+$comando = $pdo->prepare($sql);
+$comando->execute($parametros);
+$veiculos = $comando->fetchAll();
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -44,15 +60,18 @@ if ($busca !== '') {
     <main class="conteudo">
       <section class="pagina">
         <?php if ($mensagem !== ''): ?>
-          <div class="alerta sucesso"><?php echo $mensagem; ?></div>
+          <div class="alerta sucesso"><?php echo textoSeguro($mensagem); ?></div>
         <?php endif; ?>
 
         <header class="cabecalho">
           <div>
             <h1>Proprietários e veículos</h1>
-            <p>Cadastre, consulte e acompanhe todos os veículos.</p>
+            <p><?php echo usuarioEhFuncionario() ? 'Consulte os veículos dos clientes.' : 'Cadastre e acompanhe seus veículos.'; ?></p>
           </div>
-          <a class="botao primario" href="cadastro-veiculo.php">Cadastrar veículo</a>
+
+          <?php if (usuarioEhCliente()): ?>
+            <a class="botao primario" href="cadastro-veiculo.php">Cadastrar veículo</a>
+          <?php endif; ?>
         </header>
 
         <form class="filtros" action="veiculos.php" method="get">
@@ -67,7 +86,7 @@ if ($busca !== '') {
           <div class="vazio">
             <img class="ilustracao" src="imagens/estado-sem-veiculo.png" alt="Ilustração de carro">
             <h2>Nenhum veículo encontrado</h2>
-            <p>Cadastre um veículo para começar.</p>
+            <p><?php echo usuarioEhCliente() ? 'Cadastre um veículo para começar.' : 'Nenhum cliente possui veículo cadastrado.'; ?></p>
           </div>
         <?php else: ?>
           <div class="tabela-container">
@@ -78,29 +97,32 @@ if ($busca !== '') {
                   <th>Placa</th>
                   <th>Proprietário</th>
                   <th>Quilometragem</th>
-                  <th>Ações</th>
+                  <?php if (usuarioEhCliente()): ?><th>Ações</th><?php endif; ?>
                 </tr>
               </thead>
               <tbody>
                 <?php foreach ($veiculos as $veiculo): ?>
                   <tr>
                     <td>
-                      <strong><?php echo textoSeguro($veiculo['nome_modelo']); ?></strong>
-                      <small>Ano <?php echo $veiculo['ano']; ?></small>
+                      <strong><?php echo textoSeguro(trim($veiculo['marca'] . ' ' . $veiculo['modelo'])); ?></strong>
+                      <small>Ano <?php echo intval($veiculo['ano']); ?></small>
                     </td>
                     <td><span class="placa"><?php echo textoSeguro($veiculo['placa']); ?></span></td>
                     <td><?php echo textoSeguro($veiculo['proprietario']); ?></td>
                     <td><?php echo number_format($veiculo['quilometragem'], 0, ',', '.'); ?> km</td>
-                    <td>
-                      <div class="acoes-tabela">
-                        <a href="editar-veiculo.php?id=<?php echo $veiculo['id']; ?>">Editar</a>
 
-                        <form action="excluir-veiculo.php" method="post">
-                          <input type="hidden" name="id" value="<?php echo $veiculo['id']; ?>">
-                          <button type="submit">Excluir</button>
-                        </form>
-                      </div>
-                    </td>
+                    <?php if (usuarioEhCliente()): ?>
+                      <td>
+                        <div class="acoes-tabela">
+                          <a href="editar-veiculo.php?id=<?php echo $veiculo['id']; ?>">Editar</a>
+
+                          <form action="excluir-veiculo.php" method="post">
+                            <input type="hidden" name="id" value="<?php echo $veiculo['id']; ?>">
+                            <button type="submit">Excluir</button>
+                          </form>
+                        </div>
+                      </td>
+                    <?php endif; ?>
                   </tr>
                 <?php endforeach; ?>
               </tbody>

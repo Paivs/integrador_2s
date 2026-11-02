@@ -1,42 +1,50 @@
 <?php
 
 require_once __DIR__ . '/init.php';
-protegerPagina();
+protegerCliente();
 
 $paginaAtual = 'veiculos';
 $erro = '';
 $id = intval($_GET['id'] ?? $_POST['id'] ?? 0);
 
-// Busca o veículo que será editado.
-$consulta = $pdo->prepare('SELECT * FROM veiculos WHERE id = ?');
-$consulta->execute([$id]);
+// O cliente só consegue abrir um veículo que pertence a ele.
+$consulta = $pdo->prepare(
+    'SELECT * FROM veiculos WHERE id = ? AND cliente_id = ?'
+);
+$consulta->execute([$id, $_SESSION['cliente_id']]);
 $veiculo = $consulta->fetch();
 
 if (!$veiculo) {
+    http_response_code(404);
     exit('Veículo não encontrado.');
 }
 
-$nomeModelo = $veiculo['nome_modelo'];
+$marca = $veiculo['marca'];
+$modelo = $veiculo['modelo'];
 $placa = $veiculo['placa'];
 $ano = $veiculo['ano'];
-$proprietario = $veiculo['proprietario'];
 $quilometragem = $veiculo['quilometragem'];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $nomeModelo = trim($_POST['nome_modelo'] ?? '');
+    $marca = trim($_POST['marca'] ?? '');
+    $modelo = trim($_POST['modelo'] ?? '');
     $placa = strtoupper(trim($_POST['placa'] ?? ''));
     $placa = str_replace(['-', ' '], '', $placa);
     $ano = intval($_POST['ano'] ?? 0);
-    $proprietario = trim($_POST['proprietario'] ?? '');
     $quilometragem = intval($_POST['quilometragem'] ?? 0);
 
-    if ($nomeModelo === '' || $placa === '' || $proprietario === '') {
+    if ($marca === '' || $modelo === '' || $placa === '') {
         $erro = 'Preencha todos os campos.';
     } elseif (strlen($placa) !== 7) {
         $erro = 'A placa precisa ter 7 caracteres.';
+    } elseif ($ano < 1900 || $ano > date('Y') + 1) {
+        $erro = 'Digite um ano válido.';
+    } elseif ($quilometragem < 0) {
+        $erro = 'A quilometragem não pode ser negativa.';
     } else {
-        // Procura a mesma placa em outro veículo.
-        $placaRepetida = $pdo->prepare('SELECT id FROM veiculos WHERE placa = ? AND id != ?');
+        $placaRepetida = $pdo->prepare(
+            'SELECT id FROM veiculos WHERE placa = ? AND id != ?'
+        );
         $placaRepetida->execute([$placa, $id]);
 
         if ($placaRepetida->fetch()) {
@@ -44,10 +52,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } else {
             $comando = $pdo->prepare(
                 'UPDATE veiculos
-                 SET nome_modelo = ?, placa = ?, ano = ?, proprietario = ?, quilometragem = ?
-                 WHERE id = ?'
+                 SET marca = ?, modelo = ?, placa = ?, ano = ?, quilometragem = ?
+                 WHERE id = ? AND cliente_id = ?'
             );
-            $comando->execute([$nomeModelo, $placa, $ano, $proprietario, $quilometragem, $id]);
+            $comando->execute([
+                $marca,
+                $modelo,
+                $placa,
+                $ano,
+                $quilometragem,
+                $id,
+                $_SESSION['cliente_id']
+            ]);
 
             header('Location: veiculos.php?mensagem=editado');
             exit;
@@ -83,15 +99,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <form action="editar-veiculo.php" method="post">
         <input type="hidden" name="id" value="<?php echo $id; ?>">
 
-        <label>Nome ou modelo<input name="nome_modelo" value="<?php echo textoSeguro($nomeModelo); ?>" required></label>
+        <div class="colunas">
+          <label>Marca<input name="marca" value="<?php echo textoSeguro($marca); ?>" required></label>
+          <label>Modelo<input name="modelo" value="<?php echo textoSeguro($modelo); ?>" required></label>
+        </div>
 
         <div class="colunas">
           <label>Placa<input name="placa" value="<?php echo textoSeguro($placa); ?>" required></label>
-          <label>Ano<input name="ano" type="number" value="<?php echo $ano; ?>" required></label>
+          <label>Ano<input name="ano" type="number" value="<?php echo intval($ano); ?>" required></label>
         </div>
 
-        <label>Proprietário<input name="proprietario" value="<?php echo textoSeguro($proprietario); ?>" required></label>
-        <label>Quilometragem<input name="quilometragem" type="number" min="0" value="<?php echo $quilometragem; ?>" required></label>
+        <label>Quilometragem<input name="quilometragem" type="number" min="0" value="<?php echo intval($quilometragem); ?>" required></label>
 
         <div class="acoes">
           <a class="botao secundario" href="veiculos.php">Cancelar</a>

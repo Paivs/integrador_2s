@@ -1,42 +1,71 @@
 <?php
 
 require_once __DIR__ . '/init.php';
-protegerPagina();
+protegerCliente();
 
 $paginaAtual = 'manutencoes';
 $erro = '';
 $veiculoId = '';
-$servico = '';
-$dataAgendada = '';
+$servicoId = '';
+$dataAgendamento = '';
 $quilometragem = '';
 $observacoes = '';
 
-$veiculos = $pdo->query('SELECT id, nome_modelo, placa FROM veiculos ORDER BY nome_modelo')->fetchAll();
+// O cliente só pode escolher um veículo que pertence a ele.
+$consultaVeiculos = $pdo->prepare(
+    'SELECT id, marca, modelo, placa, quilometragem
+     FROM veiculos
+     WHERE cliente_id = ?
+     ORDER BY marca, modelo'
+);
+$consultaVeiculos->execute([$_SESSION['cliente_id']]);
+$veiculos = $consultaVeiculos->fetchAll();
+
+$servicos = $pdo->query(
+    'SELECT * FROM servicos WHERE ativo = 1 ORDER BY nome'
+)->fetchAll();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $veiculoId = intval($_POST['veiculo_id'] ?? 0);
-    $servico = trim($_POST['servico'] ?? '');
-    $dataAgendada = $_POST['data_agendada'] ?? '';
+    $servicoId = intval($_POST['servico_id'] ?? 0);
+    $dataAgendamento = $_POST['data_agendamento'] ?? '';
     $quilometragem = intval($_POST['quilometragem'] ?? 0);
     $observacoes = trim($_POST['observacoes'] ?? '');
 
-    if ($veiculoId === 0 || $servico === '' || $dataAgendada === '') {
-        $erro = 'Preencha o veículo, o serviço e a data.';
+    $consultaVeiculo = $pdo->prepare(
+        'SELECT id FROM veiculos WHERE id = ? AND cliente_id = ?'
+    );
+    $consultaVeiculo->execute([$veiculoId, $_SESSION['cliente_id']]);
+    $veiculoValido = $consultaVeiculo->fetch();
+
+    $consultaServico = $pdo->prepare(
+        'SELECT id, nome FROM servicos WHERE id = ? AND ativo = 1'
+    );
+    $consultaServico->execute([$servicoId]);
+    $servico = $consultaServico->fetch();
+
+    if (!$veiculoValido || !$servico || $dataAgendamento === '') {
+        $erro = 'Selecione o veículo, o serviço e a data.';
+    } elseif ($dataAgendamento < date('Y-m-d')) {
+        $erro = 'A data não pode estar no passado.';
     } elseif ($quilometragem < 0) {
-        $erro = 'Quilometragem não pode ser negativa.';
+        $erro = 'A quilometragem não pode ser negativa.';
     } else {
+        // O cliente não escolhe o status: toda nova solicitação começa assim.
         $comando = $pdo->prepare(
             'INSERT INTO manutencoes
-            (veiculo_id, servico, data_agendada, quilometragem, status, observacoes)
-            VALUES (?, ?, ?, ?, ?, ?)'
+            (veiculo_id, servico_id, descricao, data_agendamento,
+             quilometragem, status, observacoes)
+            VALUES (?, ?, ?, ?, ?, ?, ?)'
         );
 
         $comando->execute([
             $veiculoId,
-            $servico,
-            $dataAgendada,
+            $servicoId,
+            $servico['nome'],
+            $dataAgendamento,
             $quilometragem,
-            'Agendada',
+            'Solicitado',
             $observacoes
         ]);
 
@@ -50,7 +79,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Agendar manutenção | CarCare</title>
+  <title>Solicitar manutenção | CarCare</title>
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/cadastro-veiculo.css">
 </head>
@@ -62,7 +91,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <div class="sobreposicao">
     <div class="caixa cadastro-veiculo">
       <div class="formulario_titulo">
-        <div><h2>Agendar manutenção</h2><p>Registre o serviço e a data.</p></div>
+        <div><h2>Solicitar manutenção</h2><p>O status inicial será definido automaticamente como Solicitado.</p></div>
         <a class="fechar" href="manutencoes.php">×</a>
       </div>
 
@@ -71,7 +100,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <?php endif; ?>
 
       <?php if (count($veiculos) === 0): ?>
-        <div class="alerta erro">Cadastre um veículo primeiro.</div>
+        <div class="alerta erro">Cadastre um veículo antes de solicitar uma manutenção.</div>
+        <a class="botao primario" href="cadastro-veiculo.php">Cadastrar veículo</a>
+      <?php elseif (count($servicos) === 0): ?>
+        <div class="alerta erro">A oficina ainda não cadastrou serviços.</div>
       <?php else: ?>
         <form action="agendar-manutencao.php" method="post">
           <label>
@@ -80,24 +112,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
               <option value="">Selecione</option>
               <?php foreach ($veiculos as $veiculo): ?>
                 <option value="<?php echo $veiculo['id']; ?>" <?php echo $veiculoId == $veiculo['id'] ? 'selected' : ''; ?>>
-                  <?php echo textoSeguro($veiculo['nome_modelo']); ?> — <?php echo textoSeguro($veiculo['placa']); ?>
+                  <?php echo textoSeguro(trim($veiculo['marca'] . ' ' . $veiculo['modelo'])); ?> — <?php echo textoSeguro($veiculo['placa']); ?>
                 </option>
               <?php endforeach; ?>
             </select>
           </label>
 
-          <label>Serviço<input name="servico" value="<?php echo textoSeguro($servico); ?>" placeholder="Troca de óleo" required></label>
+          <label>
+            Serviço
+            <select name="servico_id" required>
+              <option value="">Selecione</option>
+              <?php foreach ($servicos as $servico): ?>
+                <option value="<?php echo $servico['id']; ?>" <?php echo $servicoId == $servico['id'] ? 'selected' : ''; ?>>
+                  <?php echo textoSeguro($servico['nome']); ?> — R$ <?php echo number_format($servico['valor'], 2, ',', '.'); ?>
+                </option>
+              <?php endforeach; ?>
+            </select>
+          </label>
 
           <div class="colunas">
-            <label>Data<input name="data_agendada" type="date" value="<?php echo textoSeguro($dataAgendada); ?>" required></label>
-            <label>Quilometragem<input name="quilometragem" type="number" min="0" value="<?php echo textoSeguro($quilometragem); ?>"></label>
+            <label>Data desejada<input name="data_agendamento" type="date" min="<?php echo date('Y-m-d'); ?>" value="<?php echo textoSeguro($dataAgendamento); ?>" required></label>
+            <label>Quilometragem<input name="quilometragem" type="number" min="0" value="<?php echo textoSeguro($quilometragem); ?>" required></label>
           </div>
 
-          <label>Observações<textarea name="observacoes" rows="3"><?php echo textoSeguro($observacoes); ?></textarea></label>
+          <label>Observações<textarea name="observacoes" rows="3" placeholder="Explique o que está acontecendo com o veículo."><?php echo textoSeguro($observacoes); ?></textarea></label>
 
           <div class="acoes">
             <a class="botao secundario" href="manutencoes.php">Cancelar</a>
-            <button class="botao primario" type="submit">Agendar</button>
+            <button class="botao primario" type="submit">Enviar solicitação</button>
           </div>
         </form>
       <?php endif; ?>

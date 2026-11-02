@@ -1,25 +1,25 @@
 <?php
 
 require_once __DIR__ . '/init.php';
-protegerPagina();
+protegerCliente();
 
 $paginaAtual = 'veiculos';
 $erro = '';
-$nomeModelo = '';
+$marca = '';
+$modelo = '';
 $placa = '';
 $ano = '';
-$proprietario = '';
 $quilometragem = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $nomeModelo = trim($_POST['nome_modelo'] ?? '');
+    $marca = trim($_POST['marca'] ?? '');
+    $modelo = trim($_POST['modelo'] ?? '');
     $placa = strtoupper(trim($_POST['placa'] ?? ''));
     $placa = str_replace(['-', ' '], '', $placa);
     $ano = intval($_POST['ano'] ?? 0);
-    $proprietario = trim($_POST['proprietario'] ?? '');
     $quilometragem = intval($_POST['quilometragem'] ?? 0);
 
-    if ($nomeModelo === '' || $placa === '' || $proprietario === '') {
+    if ($marca === '' || $modelo === '' || $placa === '') {
         $erro = 'Preencha todos os campos.';
     } elseif (strlen($placa) !== 7) {
         $erro = 'A placa precisa ter 7 caracteres.';
@@ -28,25 +28,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } elseif ($quilometragem < 0) {
         $erro = 'A quilometragem não pode ser negativa.';
     } else {
-        // Confere se a placa já está no banco.
         $consulta = $pdo->prepare('SELECT id FROM veiculos WHERE placa = ?');
         $consulta->execute([$placa]);
 
         if ($consulta->fetch()) {
             $erro = 'Esta placa já está cadastrada.';
         } else {
+            // O proprietário é definido automaticamente pelo usuário conectado.
             $comando = $pdo->prepare(
                 'INSERT INTO veiculos
-                (usuario_id, nome_modelo, placa, ano, proprietario, quilometragem)
+                (cliente_id, marca, modelo, placa, ano, quilometragem)
                 VALUES (?, ?, ?, ?, ?, ?)'
             );
 
             $comando->execute([
-                $_SESSION['usuario_id'],
-                $nomeModelo,
+                $_SESSION['cliente_id'],
+                $marca,
+                $modelo,
                 $placa,
                 $ano,
-                $proprietario,
                 $quilometragem
             ]);
 
@@ -75,7 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <div class="formulario_titulo">
         <div>
           <h2>Cadastrar veículo</h2>
-          <p>Preencha os dados principais do veículo.</p>
+          <p>O veículo será vinculado automaticamente à sua conta.</p>
         </div>
         <a class="fechar" href="veiculos.php">×</a>
       </div>
@@ -85,31 +85,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <?php endif; ?>
 
       <form action="cadastro-veiculo.php" method="post">
-        <label>
-          Nome ou modelo
-          <input name="nome_modelo" value="<?php echo textoSeguro($nomeModelo); ?>" placeholder="Volkswagen Gol 1.6 MSI" required>
-        </label>
-
         <div class="colunas">
-          <label>
-            Placa
-            <input name="placa" maxlength="8" value="<?php echo textoSeguro($placa); ?>" placeholder="BRA2E19" required>
-          </label>
-          <label>
-            Ano
-            <input name="ano" type="number" value="<?php echo textoSeguro($ano); ?>" required>
-          </label>
+          <label>Marca<input name="marca" value="<?php echo textoSeguro($marca); ?>" placeholder="Volkswagen" required></label>
+          <label>Modelo<input name="modelo" value="<?php echo textoSeguro($modelo); ?>" placeholder="Gol 1.6 MSI" required></label>
         </div>
 
-        <label>
-          Proprietário
-          <input name="proprietario" value="<?php echo textoSeguro($proprietario); ?>" required>
-        </label>
+        <div class="colunas">
+          <label>Placa<input name="placa" maxlength="8" value="<?php echo textoSeguro($placa); ?>" placeholder="BRA2E19" required></label>
+          <label>Ano<input name="ano" type="number" value="<?php echo textoSeguro($ano); ?>" required></label>
+        </div>
 
-        <label>
-          Quilometragem atual
-          <input name="quilometragem" type="number" min="0" value="<?php echo textoSeguro($quilometragem); ?>" required>
-        </label>
+        <label>Quilometragem atual<input name="quilometragem" type="number" min="0" value="<?php echo textoSeguro($quilometragem); ?>" required></label>
 
         <div class="acoes">
           <a class="botao secundario" href="veiculos.php">Cancelar</a>
