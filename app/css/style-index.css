@@ -14,12 +14,32 @@
 
 .busca input{
     margin-right: 20px;
+    padding: 5px;
+    border-radius: 10px;
+    border: 1px solid white;
+}
+
+.busca select{
+    margin-right: 20px;
+    padding: 5px;
+    border-radius: 10px;
+    border: 1px solid white;
+}
+
+.busca button{
+    margin-right: 20px;
+    padding: 5px;
+    background-color: blue;
+    color: white;
+    border-radius: 10px;
+    border: 1px solid blue;
 }
 
 .telaObjetos{
     display: flex;
     justify-content: center;
     background-color: #6e7279;
+    flex-wrap: wrap;
     border-radius: 25px;
     font-family: "Momo Trust Display", sans-serif;
     padding: 10px;
@@ -35,6 +55,15 @@
     width: 300px;
     transition: transform 0.3s ease;
     box-shadow: 0px 2px 10px black;
+}
+
+.objeto button{
+    margin-right: 20px;
+    padding: 5px;
+    background-color: #3ddc84;
+    color: black;
+    border-radius: 10px;
+    border: 1px solid #3ddc84;
 }
 
 .objeto:hover {
