@@ -1,0 +1,168 @@
+@import url('https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap');
+
+html {
+  scroll-behavior: smooth;
+}
+
+:root {
+  --fundo:#F4F7FA;
+  --cartoes:#FFFFFF;
+  --secundaria:#E6ECF2;
+  --primaria:#3FD6E8;
+  --alertas:#F2B93B;
+  --perdido:#E85A4F;
+  --encontrado:#3DDC84;
+  --texto:#14181E;
+   --fundodark:#14181E;
+}
+
+body {
+  background-color: var(--fundo);
+  color: var(--texto);
+  font-family: "Google Sans", sans-serif;
+  margin: 0;
+  padding: 2rem;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+body.dark{
+  --fundo:#14181E;
+  --cartoes:#1E232B;
+  --secundaria:#2A303A;
+  --primaria:#3FD6E8;
+  --alertas:#F2B93B;
+  --perdido:#E85A4F;
+  --encontrado:#3DDC84;
+  --texto:#EEF3F6;
+}
+
+.right-side p , .right-side h1{
+  color: var(--secundaria);
+}
+
+#logo {
+  height: auto;
+  width: 50%;
+  display: inline-block;
+}
+
+footer {
+  width: 49%;
+}
+
+header{
+  width: 49%;
+}
+
+.left-side{
+  width: 45%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 2.5rem 3rem;
+  z-index: 10;
+}
+
+.right-side{
+width: 55%;
+background-color: var(--fundodark);
+color: var(--cartoes);
+display: flex;
+flex-direction: column;
+justify-content: space-between;
+padding: 10px;
+position: relative;
+overflow: hidden;
+min-height: 650px;
+}
+
+.right-side h3{
+color: var(--primaria)
+}
+
+#h3 {
+display: flex;
+justify-content: center;
+}
+
+#h1 {
+display: flex;
+justify-content: center;
+}
+
+#p2{
+display: flex;
+justify-content: center;
+}
+
+#p1{
+display: flex;
+justify-content: center;
+}
+
+.displayFlex {
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+.img {
+  display: flex;
+  gap: 15px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding: 12px;
+}
+
+.img img{
+  width: 280px;
+  height: 190px;
+  object-fit: cover;
+  flex: 10 0 auto;
+  border-radius: 10px;
+  scroll-snap-align: start;
+}
+
+.container-obj {
+  margin-left: 160px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.card-left p, .card-right p {
+  color: var(--texto);
+}
+
+.obj-titles {
+  display: flex;
+  justify-content: space-between;
+}
+
+.mala {
+  font-size: 1.25rem;
+  text-align: center;
+  background-color: var(--secundaria);
+  border-radius: 20px;
+}
+.mochila {
+  font-size: 1.25rem;
+  text-align: center;
+  background-color: var(--secundaria);
+  border-radius: 20px;
+}
+
+.card-left {
+  background-color: var(--cartoes);
+  gap: 30px;
+  padding: 20px;
+  border-radius: 20px;
+}
+
+.card-right {
+  background-color: var(--cartoes);
+  gap: 30px;
+  padding: 20px;
+  border-radius: 20px;
+  margin-right: 150px;
+}
