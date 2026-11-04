@@ -47,6 +47,7 @@ nav li a img{
 
 nav li a:hover{
     transform: scale(1.5);
+    color: rgb(235, 120, 26);
 }
 
 .espaco {
