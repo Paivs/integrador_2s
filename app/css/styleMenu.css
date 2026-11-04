@@ -11,23 +11,22 @@ body{
 p{
     width: 80px;
 }
-.layout-container {
+.layout-menu {
   display: flex;
   min-height: 100vh;
 }
-.layout-container img{
+.layout-menu img{
     transition: transform 0.3s ease, z-index 0.3s ease;
     position: relative;
     z-index: 1;
 }
-.layout-container img:hover{
+.layout-menu img:hover{
   transition-duration: 0,8s;
   transform: scale(1.05);
   z-index: 5;
 }
 
-/* Estiliza o cabeçalho lateral */
-.sidebar-header {
+.menu-lateral {
   width: 225px;
   background-color: #151a1c;
   color: #7bd798;
@@ -37,32 +36,32 @@ p{
   justify-content: flex-start;
 }
 
-.sidebar-header nav ul {
+.menu-lateral nav ul {
   list-style: none;
   padding: 0;
   margin-top: 20px;
 }
 
 
-.sidebar-header nav li {
+.menu-lateral nav li {
   margin-top: 10px;
   margin-bottom: 20px;
 }
 
-.sidebar-header nav a {
+.menu-lateral nav a {
   color: #7bd798;
   text-decoration: none;
   font-family: 'Nanum Gothic';
   font-size: 15px;
 }
-/* Esconde a setinha padrão do HTML */
+
 summary::-webkit-details-marker {
   display: none;
 }
-.accordion{
+.mouse{
     cursor: pointer;
 }
-.accordion-title {
+.titulo {
   color: #38efa6;
   font-weight: bold;
   padding: 10px 0;
@@ -70,7 +69,7 @@ summary::-webkit-details-marker {
   user-select: none;
 }
 
-.accordion-content {
+.elementos-blocos {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -87,15 +86,10 @@ summary::-webkit-details-marker {
   font-weight: bold;
 }
 
-/* Destaque da opção selecionada */
-.item.active {
-  background-color: #d8f8b7;
-  color: #0d1b1e;
-}
-.coiso{
+.elemento{
     display: flex;
 }
-.coiso img{
+.elemento img{
     margin-top: 7px;
     width: 32px;
     height: 30px;
