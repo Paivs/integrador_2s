@@ -1,0 +1,103 @@
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&display=swap');
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Nanum Gothic';
+}
+body{
+  background-color: #090b0c;
+}
+p{
+    width: 80px;
+}
+.layout-container {
+  display: flex;
+  min-height: 100vh;
+}
+.layout-container img{
+    transition: transform 0.3s ease, z-index 0.3s ease;
+    position: relative;
+    z-index: 1;
+}
+.layout-container img:hover{
+  transition-duration: 0,8s;
+  transform: scale(1.05);
+  z-index: 5;
+}
+
+/* Estiliza o cabeçalho lateral */
+.sidebar-header {
+  width: 225px;
+  background-color: #151a1c;
+  color: #7bd798;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.sidebar-header nav ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 20px;
+}
+
+
+.sidebar-header nav li {
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.sidebar-header nav a {
+  color: #7bd798;
+  text-decoration: none;
+  font-family: 'Nanum Gothic';
+  font-size: 15px;
+}
+/* Esconde a setinha padrão do HTML */
+summary::-webkit-details-marker {
+  display: none;
+}
+.accordion{
+    cursor: pointer;
+}
+.accordion-title {
+  color: #38efa6;
+  font-weight: bold;
+  padding: 10px 0;
+  list-style: none;
+  user-select: none;
+}
+
+.accordion-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  padding-top: 5px;
+}
+
+.item {
+  background: none;
+  border: none;
+  color: #38efa6;
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-weight: bold;
+}
+
+/* Destaque da opção selecionada */
+.item.active {
+  background-color: #d8f8b7;
+  color: #0d1b1e;
+}
+.coiso{
+    display: flex;
+}
+.coiso img{
+    margin-top: 7px;
+    width: 32px;
+    height: 30px;
+    margin-right: 5px;
+}
