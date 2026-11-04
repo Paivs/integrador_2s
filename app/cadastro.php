@@ -2,6 +2,38 @@
     
     require_once __DIR__ . '/init.php';
 
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+        $nomeBancadaPost = trim($_POST['nomeBancada']);
+        $descricaoBancadaPost = trim($_POST['descricao']);
+        $numeroPessoasPost = trim($_POST['quantidade']);
+        $primeiraVantagem = trim($_POST['vantagem1']);
+        $segundaVantagem = trim($_POST['vantagem2']);
+
+        $listaCamposObrigados = [
+            'nome' => 'Nome',
+            'descricao' => 'Descrição',
+            'numeroPessoas' => 'Quantidade',
+            'primeiraVantagem' => 'Vantagem 1',
+            'segundaVantagem' => 'Vantagem 2',
+        ];
+
+        foreach($listaCamposObrigados as $campo => $nome) {
+            
+            if (!isset($_POST[$campo]) || trim($_POST[$campo]) === '') {
+                header("Location: cadastro.php?erro=$nome . Invalido");
+            }
+
+            if(empty($valor)) {
+                header("Location: cadastro.php?erro=dadosInvalidos");
+                exit;
+            }
+
+        }
+
+    }
+
+
 ?>
 
 
@@ -17,7 +49,7 @@
     <form action="" method="POST">
         <label for="nome">Nome da bancada:</label>
         <br>
-        <input type="text" name="nome" id="nome" required>
+        <input type="text" name="nomeBancada" id="nomeBancada" required>
         <br>
 
 
@@ -35,8 +67,8 @@
 
 
         <ol>
-            <li><input type="text" name="vantagem2" placeholder="Ex: Arduino e sensores..."></li>
-            <li><input type="text" name="vantagem3" placeholder="Ex: Pc's e notebooks..."></li>
+            <li><input type="text" name="vantagem1" placeholder="Ex: Arduino e sensores..."></li>
+            <li><input type="text" name="vantagem2" placeholder="Ex: Pc's e notebooks..."></li>
         </ol>
 
 
