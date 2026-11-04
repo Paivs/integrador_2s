@@ -1,6 +1,6 @@
 <html>
     <head>
-        <link rel="stylesheet" href="styleMenu.css">
+        <link rel="stylesheet" href="/css/styleMenu.css">
     </head>
     <body>
         <div class="layout-container">
