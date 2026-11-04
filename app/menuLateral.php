@@ -6,7 +6,7 @@
         <div class="layout-menu">
   <header class="menu-lateral">
     <center>
-        <img src="./img/Energy Monitor (Prototipação).png" width="130">
+        <img src="./img/Energy Monitor.png" width="130">
     </center>
     <nav>
       <ul class="nav">
@@ -41,7 +41,7 @@
           <li><a href="#">Análise e comparativos</a></li>
         </div>
         <div class="elemento">
-          <a href="#"><img src="/img/Problemas.png"></a>
+          <a href="#"><img src="/img/Avisos.png"></a>
           <li><a href="#">Engajamento e Avisos</a></b></li>
         </div>
       </ul>
