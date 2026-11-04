@@ -142,13 +142,13 @@ overflow: hidden;
 .torneios a {
 
 color: rgb(235, 120, 26); 
-font-size: 3.6em; 
+font-size: 4.3em; 
 font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; 
-font-weight: 600; 
+font-weight: 800; 
 background: transparent;
 border: none;
 text-decoration: none;
-margin-left: 740px;
+margin-left: 725px;
 
 }
 
@@ -162,4 +162,8 @@ margin-left: 740px;
 .torneios a:hover {
   color: #ffffff;
 }
+
+
+
+
 
