@@ -2,87 +2,25 @@
   box-sizing: border-box;
 }
 
-/*  NEBULOSAS  */
+/*  FUNDO  */
 
-.nebulas {
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  overflow: hidden;
-  pointer-events: none;
+body {
+  margin: 0;
+  min-height: 100vh;
+  overflow-x: hidden;
+  display: grid;
+  place-items: center;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  background-color: #06041a;          /* cor enquanto a imagem carrega */
+  background-image: url("fundo.png"); /* imagem na mesma pasta deste CSS */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
-.nebula {
-  position: absolute;
-  width: 57.6vw;
-  height: 50.4vw;
-  min-width: 384px;
-  min-height: 336px;
-  border-radius: 50%;
-  filter: blur(55px);
-  mix-blend-mode: screen;
-  opacity: 0.7;
-}
+/*  CONTEÚDO (sol à esquerda, formulário à direita)  */
 
-.nebula--roxa {
-  top: -22%;
-  left: -16%;
-
-  background: radial-gradient(
-    ellipse,
-    rgba(125, 70, 255, 0.47) 0%,
-    rgba(92, 47, 190, 0.25) 38%,
-    transparent 72%
-  );
-
-  animation: mover-roxa 32s ease-in-out infinite alternate;
-}
-
-.nebula--violeta {
-  top: -10%;
-  right: -20%;
-
-  background: radial-gradient(
-    ellipse,
-    rgba(186, 65, 255, 0.38) 0%,
-    rgba(114, 45, 175, 0.20) 42%,
-    transparent 72%
-  );
-
-  animation: mover-violeta 38s ease-in-out infinite alternate;
-}
-
-.nebula--azul {
-  bottom: -30%;
-  left: 8%;
-
-  background: radial-gradient(
-    ellipse,
-    rgba(35, 115, 255, 0.34) 0%,
-    rgba(34, 75, 180, 0.19) 42%,
-    transparent 72%
-  );
-
-  animation: mover-azul 35s ease-in-out infinite alternate;
-}
-
-@keyframes mover-roxa {
-  to {
-    transform: translate(5vw, 4vh) scale(1.12);
-  }
-}
-
-@keyframes mover-violeta {
-  to {
-    transform: translate(-5vw, 5vh) scale(1.1);
-  }
-}
-
-@keyframes mover-azul {
-  to {
-    transform: translate(6vw, -4vh) scale(1.14);
-  }
-}
 .conteudo {
   position: relative;
   z-index: 1;
@@ -91,7 +29,7 @@
   max-width: 1180px;
   margin: 0 auto;
   padding: 40px 32px;
- display: grid;
+  display: grid;
   grid-template-columns: minmax(0, 1fr) 400px;
   align-items: center;
   gap: 80px;
@@ -191,8 +129,9 @@
   animation: orbitar 8s linear infinite;
 }
 
-body{margin:0;min-height:100vh;display:grid;place-items:center;background:#06041a;font-family:"Segoe UI",system-ui,sans-serif}
-.posicaoforms{width:100%;max-width:400px;box-sizing:border-box;padding:32px;color:#efecff;background:rgba(22,15,60,.55);border:1px solid rgba(167,139,250,.18);border-radius:18px}
+/*  FORMULÁRIO  */
+
+.posicaoforms{width:100%;max-width:400px;padding:32px;color:#efecff;background:rgba(22,15,60,.55);border:1px solid rgba(167,139,250,.18);border-radius:18px}
 .logo{font-weight:700;font-size:18px}
 .logo span,.posicaoforms a{color:#ffb547;text-decoration:none}
 .posicaoforms h2{margin:22px 0 4px;font-size:28px;font-weight:400}
@@ -206,4 +145,3 @@ body{margin:0;min-height:100vh;display:grid;place-items:center;background:#06041
 .linha{display:flex;justify-content:space-between;font-size:13px}
 .formulario button{margin-top:14px;padding:12px;font-size:15px;font-weight:600;color:#1c0f00;background:linear-gradient(135deg,#ffb547,#ff8a3d);border:none;border-radius:10px;cursor:pointer}
 .formulario button:hover{filter:brightness(1.07)}
-
