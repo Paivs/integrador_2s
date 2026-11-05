@@ -4,24 +4,23 @@
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-        $nomeBancadaPost = trim($_POST['nomeBancada']);
-        $descricaoBancadaPost = trim($_POST['descricao']);
-        $numeroPessoasPost = trim($_POST['quantidade']);
-        $primeiraVantagem = trim($_POST['vantagem1']);
-        $segundaVantagem = trim($_POST['vantagem2']);
+        $nomeBancadaPost = trim($_POST['nomeBancada'] ?? '');
+        $descricaoBancadaPost = trim($_POST['descricao'] ?? '');
+        $numeroPessoasPost = trim($_POST['quantidade'] ?? '');
+        $primeiraVantagem = trim($_POST['vantagem1'] ?? '');
+        $segundaVantagem = trim($_POST['vantagem2'] ?? '');
 
-        $listaCamposObrigados = [
-            'nome' => 'Nome',
-            'descricao' => 'Descrição',
-            'numeroPessoas' => 'Quantidade',
-            'primeiraVantagem' => 'Vantagem 1',
-            'segundaVantagem' => 'Vantagem 2',
-        ];
-
-        if (empty($nomeBancadaPost) && empty($descricaoBancadaPost) && empty($numeroPessoasPost) && empty($primeiraVantagem) && empty($segundaVantagem)) {
-            header('Location: cadastro.php?erro=preenchimentoInvalido')
+        if (empty($nomeBancadaPost) || empty($descricaoBancadaPost) || empty($numeroPessoasPost) || empty($primeiraVantagem) || empty($segundaVantagem)) {
+            header("Location: cadastro.php?erro=preenchimentoInvalido");
             exit;
         }
+
+        if (!is_numeric($numeroPessoasPost) || $numeroPessoasPost <= 0) {
+            header("Location: cadastro.php?erro=bancadaInvalida");
+            exit;
+        }
+
+
 
     }
 
@@ -75,7 +74,7 @@
 
 
         <label for="imagem">Escolha uma imagem:</label>
-        <input type="file" id="imagem" name="imagem" accept="image/*">
+        <input type="file" id="imagem" name="imagem" accept="image/png, image/jpeg" required>
 
 
         <button type="submit">Registrar</button>
@@ -83,7 +82,7 @@
         <?php
         
             if (isset($_GET['erro'])) {
-                $erros = ['preenchimentoInvalido', 'bancadaInvalida']
+                $erros = ['preenchimentoInvalido', 'bancadaInvalida'];
 
                 foreach ($erros as $erro) {
                     if ($_GET['erro'] === $erro) {
