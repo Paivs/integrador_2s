@@ -18,17 +18,9 @@
             'segundaVantagem' => 'Vantagem 2',
         ];
 
-        foreach($listaCamposObrigados as $campo => $nome) {
-            
-            if (!isset($_POST[$campo]) || trim($_POST[$campo]) === '') {
-                header("Location: cadastro.php?erro=$nome . Invalido");
-            }
-
-            if(empty($valor)) {
-                header("Location: cadastro.php?erro=dadosInvalidos");
-                exit;
-            }
-
+        if (empty($nomeBancadaPost) && empty($descricaoBancadaPost) && empty($numeroPessoasPost) && empty($primeiraVantagem) && empty($segundaVantagem)) {
+            header('Location: cadastro.php?erro=preenchimentoInvalido')
+            exit;
         }
 
     }
@@ -87,6 +79,21 @@
 
 
         <button type="submit">Registrar</button>
+
+        <?php
+        
+            if (isset($_GET['erro'])) {
+                $erros = ['preenchimentoInvalido', 'bancadaInvalida']
+
+                foreach ($erros as $erro) {
+                    if ($_GET['erro'] === $erro) {
+                        echo "<p>Erro: $erro</p>";
+                    }
+                }
+
+            }
+        
+        ?>
 
 
     </form>
