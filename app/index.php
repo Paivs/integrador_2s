@@ -18,11 +18,7 @@ try {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Projeto Integrador</title>
     <link rel="stylesheet" href="index.css">
-    <style>
-        body { font-family: system-ui, sans-serif; max-width: 720px; margin: 4rem auto; padding: 0 1rem; line-height: 1.5; }
-        .status { padding: 1rem; border-radius: .5rem; background: #eef6ee; }
-        code { background: #eee; padding: .15rem .3rem; border-radius: .25rem; }
-    </style>
+    
 </head>
 <body>
     <h1>Projeto Integrador: SolarControl</h1>
