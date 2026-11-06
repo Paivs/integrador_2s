@@ -1,15 +1,19 @@
 <?php
 
+require_once __DIR__ . '/init.php';
+
 if (isset($_SESSION['user'])) {
   $user = $_SESSION['user'];
+  $perfil = $_SESSION['perfil'] ?? '';
 } else {
   $user = "";
+  $perfil = "";
 }
 
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 
 <head>
   <meta charset="UTF-8">
@@ -21,7 +25,7 @@ if (isset($_SESSION['user'])) {
 <body>
   <header class="header">
     <div class="header-conteudo">
-      <a href="./index.php" alt="" class="logo"><img src="./img/cabecalho/logo.png" alt=""></a>
+      <a href="./index.php" class="logo"><img src="./img/cabecalho/logo.png" alt="Logo"></a>
       <nav>
         <ul class="menu">
           <li><a href="./index.php">Início</a></li>
@@ -47,15 +51,27 @@ if (isset($_SESSION['user'])) {
 
           <li><a href="">Quem Somos</a></li>
           <li><a href="">Projetos</a></li>
-          <li><a href="./loginADM.php">Administrador</a></li>
-          <li><a href="./logout.php">Logout</a></li>
+
+          <?php if ($perfil == 'admin'): ?>
+            <li><a href=".dashboard.php">Administrador</a></li>
+          <?php endif; ?>
+          
+          <?php if ($user != ""): ?>
+            <li><a href="./logout.php">Logout</a></li>
+          <?php endif; ?>
         </ul>
       </nav>
-      <?php if ($user != "") {   ?>
-        <a href="./loginUsuario.php" class="usuario"><img src="./img/cabecalho/usuario.png" alt="" width="56px">Olá <?= $user ?></a>
-      <?php } else { ?>
-        <a href="./loginUsuario.php" class="usuario"><img src="./img/cabecalho/usuario.png" alt="" width="56px"></a>
-      <?php } ?>
+
+      <?php if ($user != ""): ?>
+        <a href="./loginUsuario.php" class="usuario">
+          <img src="./img/cabecalho/usuario.png" alt="Usuário" width="56px">
+          Olá, <?= $user ?>
+        </a>
+      <?php else: ?>
+        <a href="./loginUsuario.php" class="usuario">
+          <img src="./img/cabecalho/usuario.png" alt="Login" width="56px">
+        </a>
+      <?php endif; ?>
     </div>
   </header>
 </body>
