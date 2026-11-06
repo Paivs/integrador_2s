@@ -37,7 +37,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST" || isset($_POST)){
             $consulta = $pdo->prepare('
                 INSERT INTO usuarios (email_conta,senha_conta,username_conta) VALUES (:email, :senha, :username)
             ');
-            $consulta->execute(['email_conta' => $email, 'senha_conta' => $senha, 'username_conta' => $username]);
+            $consulta->execute(['email' => $email, 'senha' => $senha, 'username' => $username]);
             header("Location: index.php");
             exit;
             }catch(PDOException $e){

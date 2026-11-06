@@ -1,0 +1,43 @@
+<?php
+
+require_once __DIR__ . "/init.php";
+
+$usuarios = readAll($pdo, "usuarios");
+
+if($_SERVER['REQUEST_METHOD'] == "GET" || isset($_GET['erro'])){
+    $erro = $_GET['erro'] ?? null;
+}
+
+?>
+
+<!DOCTYPE html>
+<html lang="PT-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entrar conta</title>
+</head>
+<body>
+    <?php require_once __DIR__ . "/cabecalho.php" ?>
+
+    <?php if(!isset($_SESSION['cadastrado'])):?>
+    <form action="processarEntrarConta.php" method="POST">
+        <label for="email">E-mail</label>
+        <input type="text" name="email" id="email" placeholder="E-mail">
+        <br>
+        <label for="senha">Senha</label>
+        <input type="text" name="senha" id="senha" placeholder="Senha">
+        <?php if($erro == "EMAIL_SENHA"):?>
+            <p>SENHA OU EMAIL INCORRETOS</p>
+        <?php endif ?>  
+        <br>
+        <button type="submit">Entrar</button>
+    </form>
+    <a href="./criarConta.php">Criar conta</a>
+    <?php endif ?>
+    <?php if(isset($_SESSION['cadastrado'])):?>
+        <p>VOCE ESTÁ CADASTRADO</p>
+        <a href="sair_conta.php">SAIR DA CONTA?</a>
+    <?php endif ?>
+</body>
+</html>
