@@ -1,29 +1,71 @@
-CREATE database EnergyMonitor;
-use EnergyMonitor;
-CREATE TABLE salas(
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    nome varchar(100) not null,
-    setor varchar(100) not null,
-    gasto decimal(65, 2) not null,
-    meta decimal(65, 2) not null,
-    equipamentos int(100) not null,
-    areaTotal decimal(65, 2) not null,
-    tempoDeUso time not null,
-    estado varchar(20) not null
+CREATE DATABASE IF NOT EXISTS EnergyMonitor;
+USE EnergyMonitor;
+
+
+CREATE TABLE usuarios (
+id INT AUTO_INCREMENT PRIMARY KEY,
+nome VARCHAR(100) NOT NULL,
+email VARCHAR(100) NOT NULL UNIQUE,
+senha VARCHAR(255) NOT NULL,
+cargo VARCHAR(50) DEFAULT 'Gerente', 
+criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+empresa VARCHAR (100) NOT NULL
 );
-CREATE TABLE usuarios(
-	id INT PRIMARY KEY AUTO_INCREMENT,
-    nome varchar(100) not null,
-    email varchar(100) not null,
-    senha varchar(50) not null,
-    permissao varchar(50) not null
+
+
+CREATE TABLE setor (
+id INT AUTO_INCREMENT PRIMARY KEY,
+nome VARCHAR(100) NOT NULL,
+descricao VARCHAR (300),
+empresa_setor VARCHAR (100) NOT NULL,
+criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
-CREATE TABLE dados(
-	ambienteMedidor varchar(100) not null,
-    kwh decimal(65, 2) not null,
-    blocoAndar varchar(100) not null,
-    area decimal(65, 2) not null,
-    resposavel varchar(100) not null,
-    horario TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    origem varchar(100) not null
+
+
+CREATE TABLE ambientes (
+id INT AUTO_INCREMENT PRIMARY KEY,
+setor_id INT NOT NULL,
+nome VARCHAR(100) NOT NULL,
+andar VARCHAR(20) NOT NULL,
+empresa_ambiente VARCHAR(100) NOT NULL,
+area_m2 DECIMAL(10,2) NOT NULL,
+qtd_equipamentos INT DEFAULT 0,
+tempo_uso_medio_diario TIME NOT NULL,
+estado_medidor VARCHAR(30) DEFAULT 'ATIVO',
+codigo_medidor VARCHAR(50) NOT NULL UNIQUE,
+CONSTRAINT fk_ambiente_setor FOREIGN KEY (setor_id) REFERENCES setor(id) ON DELETE CASCADE
+);
+
+
+CREATE TABLE leituras (
+id INT AUTO_INCREMENT PRIMARY KEY,
+ambiente_id INT NOT NULL,
+usuario_id INT DEFAULT NULL,
+data_hora DATETIME NOT NULL,
+leitura_acumulada_kwh DECIMAL(12,3) NOT NULL,
+origem ENUM('Manual', 'Simulado', 'CSV') DEFAULT 'Manual',
+criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+CONSTRAINT fk_leitura_ambiente FOREIGN KEY (ambiente_id) REFERENCES ambientes(id) ON DELETE CASCADE,
+CONSTRAINT fk_leitura_usuario FOREIGN KEY (usuario_id) REFERENCES usuarios(id) ON DELETE SET NULL
+);
+
+CREATE TABLE metas (
+id INT AUTO_INCREMENT PRIMARY KEY,
+ambiente_id INT UNIQUE NOT NULL,
+mes_ano DATE UNIQUE NOT NULL,
+meta_kwh DECIMAL(12,2) NOT NULL,
+meta_reais DECIMAL(12,2) NOT NULL,
+CONSTRAINT fk_meta_ambiente FOREIGN KEY (ambiente_id) REFERENCES ambientes(id) ON DELETE CASCADE
+);	
+
+
+CREATE TABLE relatorios_problemas (
+id INT AUTO_INCREMENT PRIMARY KEY,
+ambiente_id INT NOT NULL,
+usuario_id INT NOT NULL,
+problema_relatado TEXT NOT NULL,
+estado VARCHAR(30) DEFAULT 'Pendente',
+criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+CONSTRAINT fk_problema_ambiente FOREIGN KEY (ambiente_id) REFERENCES ambientes(id) ON DELETE CASCADE,
+CONSTRAINT fk_problema_usuario FOREIGN KEY (usuario_id) REFERENCES usuarios(id) ON DELETE CASCADE
 );
