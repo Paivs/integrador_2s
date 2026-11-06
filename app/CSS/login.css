@@ -1,0 +1,171 @@
+* {
+  box-sizing: border-box;
+}
+
+
+/*  FUNDO  */
+
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  overflow-x: hidden;
+  display: grid;
+  place-items: center;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  background-image: url("../imagens/fundo.png"); /* imagem na mesma pasta deste CSS */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+
+/*  CONTEÚDO (sol à esquerda, formulário à direita)  */
+
+
+.conteudo {
+  position: relative;
+  z-index: 1;
+  min-height: 100svh;
+  width: 100%;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 40px 32px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 400px;
+  align-items: center;
+  gap: 80px;
+}
+
+
+/*  SISTEMA SOLAR  */
+
+
+.sistema-solar {
+  position: relative;
+  width: min(420px, 100%);
+  aspect-ratio: 1;
+  flex-shrink: 0;
+}
+
+
+/* Linhas das órbitas e trajetos dos planetas */
+.sistema-solar .anel,
+.sistema-solar .trajeto {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+}
+
+
+.sistema-solar .anel {
+  border: 1px dashed rgba(167, 139, 250, 0.32);
+}
+
+
+.sistema-solar .media {
+  inset: 16%;
+}
+
+
+.sistema-solar .interna {
+  inset: 32%;
+}
+
+
+/* Sol central */
+.sistema-solar .sol {
+  position: absolute;
+  inset: 41%;
+  border-radius: 50%;
+
+
+  background: radial-gradient(
+    circle at 35% 35%,
+    #ffb547,
+    #ff8a3d
+  );
+
+
+  box-shadow:
+    0 0 60px 18px rgba(255, 181, 71, 0.35),
+    0 0 140px 40px rgba(139, 108, 255, 0.16);
+}
+
+
+/* Planeta externo: azul */
+.sistema-solar .trajeto span {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 12px;
+  height: 12px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: #5ad1ff;
+  box-shadow: 0 0 14px #5ad1ff;
+}
+
+
+/* Planeta intermediário: roxo */
+.sistema-solar .trajeto.media span {
+  width: 9px;
+  height: 9px;
+  background: #8b6cff;
+  box-shadow: 0 0 14px #8b6cff;
+}
+
+
+/* Planeta interno: branco */
+.sistema-solar .trajeto.interna span {
+  width: 6px;
+  height: 6px;
+  background: #efecff;
+  box-shadow: none;
+}
+
+
+/* Movimento dos planetas */
+@keyframes orbitar {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+.sistema-solar .trajeto.externo {
+  animation: orbitar 26s linear infinite;
+}
+
+
+.sistema-solar .trajeto.media {
+  animation: orbitar 15s linear infinite reverse;
+}
+
+
+.sistema-solar .trajeto.interna {
+  animation: orbitar 8s linear infinite;
+}
+
+
+/*  FORMULÁRIO  */
+
+
+.posicaoforms{width:100%;max-width:400px;padding:32px;color:#efecff;background:rgba(22,15,60,.55);border:1px solid rgba(167,139,250,.18);border-radius:18px}
+.logo{font-weight:700;font-size:18px}
+.logo span,.posicaoforms a{color:#ffb547;text-decoration:none}
+.posicaoforms h2{margin:22px 0 4px;font-size:28px;font-weight:400}
+.sub{margin:0 0 20px;font-size:14px;color:#a6a0cc}
+.centro{margin:20px 0 0;text-align:center;font-size:12px}
+.formulario{display:flex;flex-direction:column;gap:6px;margin:0}
+.formulario label{font-size:13px;color:#a6a0cc}
+.formulario input:not([type=checkbox]){margin-bottom:12px;padding:12px;font-size:15px;color:#efecff;background:rgba(30,21,78,.7);border:1px solid rgba(167,139,250,.32);border-radius:10px;outline:none}
+.formulario input:focus{border-color:#ffb547;box-shadow:0 0 0 3px rgba(255,181,71,.35)}
+.formulario input[type=checkbox]{accent-color:#ffb547}
+.linha{display:flex;justify-content:space-between;font-size:13px}
+.formulario button{margin-top:14px;padding:12px;font-size:15px;font-weight:600;color:#1c0f00;background:linear-gradient(135deg,#ffb547,#ff8a3d);border:none;border-radius:10px;cursor:pointer}
+.formulario button:hover{filter:brightness(1.07)}
+
+
+

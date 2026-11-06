@@ -1,0 +1,22 @@
+* {
+  box-sizing: border-box;
+}
+
+
+/*  FUNDO  */
+
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  overflow-x: hidden;
+  display: grid;
+  place-items: center;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  background-color: #06041a;          /* cor enquanto a imagem carrega */
+  background-image: url("/app/imagens/fundo.png"); /* imagem na mesma pasta deste CSS */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
