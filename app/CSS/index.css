@@ -1,0 +1,30 @@
+* {
+  box-sizing: border-box;
+}
+
+/* FUNDO */
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  color: #efecff;
+  background-color: #06041a;                     /* cor enquanto a imagem carrega */
+  background-image: url("../imagens/fundo.png"); /* sai da pasta CSS e entra em imagens */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+/* MENU */
+.menu{position:fixed;top:0;left:0;bottom:0;width:220px;padding:24px 14px;display:flex;flex-direction:column;gap:6px;background:rgba(8,5,30,.55);border-right:1px solid rgba(167,139,250,.18)}
+.logo{padding:0 10px 20px;font-size:18px;font-weight:700}
+.logo b{color:#ffb547}
+.menu a{padding:10px 12px;border-radius:10px;color:#a6a0cc;font-size:14px;text-decoration:none}
+.menu a:hover{color:#efecff;background:rgba(139,108,255,.16)}
+.menu a.ativo{color:#ffb547;background:rgba(30,21,78,.7)}
+.menu .sair{margin-top:auto}
+
+/* CONTEÚDO */
+.pagina{margin-left:220px;padding:24px 32px}
+
