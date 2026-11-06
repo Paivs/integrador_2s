@@ -1,9 +1,50 @@
 <?php
-
 require_once __DIR__ . '/init.php';
 
-?>
+$_SESSION['user'] = null;
 
+$users = readAll(database(), "Usuarios");
+
+if ($_SERVER['REQUEST_METHOD'] === "POST") {
+    $email = trim($_POST['email'] ?? '');
+    $senha = $_POST['senha'] ?? '';
+
+    if ($email === '' && $senha === '') {
+        header("Location: loginUsuario.php?erro=campos_vazios");
+        exit;
+    }
+    if ($email === '') {
+        header("Location: loginUsuario.php?erro=usuario_nao_preenchido");
+        exit;
+    }
+    if ($senha === '') {
+        header("Location: loginUsuario.php?erro=senha_nao_preenchida");
+        exit;
+    }
+
+    $usuarioEncontrado = null;
+    foreach ($users as $user) {
+        if ($user['email'] == $email) {
+            $usuarioEncontrado = $user;
+            break;
+        }
+    }
+
+    if ($usuarioEncontrado) {
+        if ($usuarioEncontrado['senha'] == $senha) {
+            $_SESSION['user'] = $usuarioEncontrado['nome_usuario'];
+            header("Location: index.php");
+            exit;
+        } else {
+            header("Location: loginUsuario.php?erro=senha_invalida");
+            exit;
+        }
+    } else {
+        header("Location: loginUsuario.php?erro=credenciais_invalidas");
+        exit;
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -18,7 +59,7 @@ require_once __DIR__ . '/init.php';
 </head>
 
 <body>
-    <?php require_once __DIR__ . '/nav.php' ?>
+    <?php require_once __DIR__ . '/nav.php'; ?>
 
     <section class="loginADM">
         <div class="conteudo">
@@ -29,7 +70,7 @@ require_once __DIR__ . '/init.php';
                 </div>
 
                 <div class="campo">
-                    <label for="senha">Senha</label>
+                    <label for="senha">Senha:</label>
                     <input type="password" id="senha" name="senha" required>
                 </div>
 
@@ -40,10 +81,16 @@ require_once __DIR__ . '/init.php';
                 <h4 class="textoLogin">Não tem conta?</h4>
                 <a class="textoLink" href="">Cadastre-se Aqui!</a>
             </div>
+            <div class="erro">
+                <?php
+                if (isset($_GET['erro']) && $_GET['erro'] != "") {
+                    echo "<p>Erro detectado: {$_GET['erro']} </p>";
+                }
+                ?>
+            </div>
         </div>
     </section>
 
-    <?php require_once __DIR__ . '/footer.php' ?>
+    <?php require_once __DIR__ . '/footer.php'; ?>
 </body>
-
 </html>

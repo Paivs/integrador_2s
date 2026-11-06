@@ -141,3 +141,8 @@
         font-size: 13px;
     }
 }
+
+.erro {
+    text-align: center;
+    color: #ff0000;
+}

@@ -1,13 +1,25 @@
+<?php
+
+if (isset($_SESSION['user'])) {
+  $user = $_SESSION['user'];
+} else {
+  $user = "";
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="./css/nav.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="./css/nav.css">
 </head>
+
 <body>
-    <header class="header">
+  <header class="header">
     <div class="header-conteudo">
       <a href="./index.php" alt="" class="logo"><img src="./img/cabecalho/logo.png" alt=""></a>
       <nav>
@@ -34,13 +46,18 @@
           </li>
 
           <li><a href="">Quem Somos</a></li>
-          <li><a href="">Tutoriais</a></li>
           <li><a href="">Projetos</a></li>
           <li><a href="./loginADM.php">Administrador</a></li>
+          <li><a href="./logout.php">Logout</a></li>
         </ul>
       </nav>
-      <a href="./loginUsuario.php" class="usuario"><img src="./img/cabecalho/usuario.png" alt="" width="56px"></a>
+      <?php if ($user != "") {   ?>
+        <a href="./loginUsuario.php" class="usuario"><img src="./img/cabecalho/usuario.png" alt="" width="56px">Olá <?= $user ?></a>
+      <?php } else { ?>
+        <a href="./loginUsuario.php" class="usuario"><img src="./img/cabecalho/usuario.png" alt="" width="56px"></a>
+      <?php } ?>
     </div>
   </header>
 </body>
+
 </html>
