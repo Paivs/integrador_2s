@@ -11,12 +11,12 @@
     <nav>
       <ul class="nav">
         <div class="elemento">
-          <a href="#"><img src="./img/Dashboard.png"></a>
-          <li><b><a href="#">DashBoard</a></li>
+          <a href="./index.php"><img src="./img/Dashboard.png"></a>
+          <li><b><a href="./index.php">DashBoard</a></li>
         </div>
         <div class="elemento">
-          <a href="#"><img src="/img/LançamentoDados.png"></a>
-          <li><a href="#">Lançamento de Dados</a></li>
+          <a href="./lançamento_de_dados.php"><img src="/img/LançamentoDados.png"></a>
+          <li><a href="./lançamento_de_dados.php">Lançamento de Dados</a></li>
         </div>
         <details class="mouse">
           <summary class="titulo">
