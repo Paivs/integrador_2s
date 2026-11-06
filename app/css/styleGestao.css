@@ -1,0 +1,57 @@
+body{
+    background-color: #090b0c;
+}
+.tabelasJuntas{
+    display: flex;
+}
+.rankingBorder{
+    margin-top: 10px;
+    border: 2px solid #00ff73;
+    border-radius: 80px;
+    width: 1000px;
+    height: 500px;
+    background-color: #151a1c;
+}
+.rankingGastos h2{
+    margin-top: 10px;
+    margin-left: 80px;
+}
+.rankingGastos p{
+    margin-left: 80px;
+    opacity: 80%;
+}
+.rankingMetaBorder{
+    margin-top: 30px;
+    border: 2px solid #00ff73;
+    border-radius: 80px;
+    width: 1100px;
+    height: 500px;
+    background-color: #151a1c;
+}
+.rankingGastosMeta h2{
+    margin-top: 10px;
+    margin-left: 80px;
+}
+.rankingGastosMeta p{
+    margin-left: 80px;
+    opacity: 80%;
+}
+
+
+
+
+.rankingTabela{
+    margin-top: 10px;
+    margin-left: 70px;
+    border: 2px solid #00ff73;
+    border-radius: 80px;
+    width: 500px;
+    height: 450px;
+    background-color: #151a1c;
+}
+.rankingTabelaConteudo{
+    margin-left: 80px;
+    margin-top: 10px;
+}
+
+
