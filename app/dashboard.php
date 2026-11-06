@@ -18,6 +18,7 @@
                     <td>Área</td>
                     <td>Preço</td>
                     <td>Ações</td>
+                    <td>Status</td>
                 </tr>
             </thead>
             <tbody>
@@ -27,9 +28,10 @@
                         <td><?=  $p['nome_bancada'] ?></td>   
                         <td><?=  $p['area_bancada'] ?></td>     
                         <td><?=  $p['preco_bancada'] ?></td>     
+                        <td><?=  $p['status_bancada'] ?></td>     
                         <td>
                             <a href="editarBancada.php?id=<?= $p['id_bancada']?>">Editar</a>
-                            <a href="deletarBancada.php?id=<?= $p['id_bancada']?>">Deletar</a>
+                            <a href="deleteBancada.php?id=<?= $p['id_bancada']?>">Deletar</a>
                         </td>   
                     </tr>
                 <?php endforeach;?>
@@ -55,7 +57,7 @@
                         <td><?=  $p['estoque'] ?></td>    
                         <td>
                             <a href="editarFerramenta.php?id=<?= $p['id_ferramenta']?>">Editar</a>
-                            <a href="deletarFerramenta.php?id=<?= $p['id_ferramenta']?>">Deletar</a>
+                            <a href="deleteFerramenta.php?id=<?= $p['id_ferramenta']?>">Deletar</a>
                         </td>   
                     </tr>
                 <?php endforeach;?>
