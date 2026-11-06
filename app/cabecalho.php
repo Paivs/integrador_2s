@@ -15,8 +15,8 @@
 
     <div class="cabecalho">
     <nav>
-            <div class="links"><li><a href=""><img src="./img/logo.png" alt=""></a></li>
-            <li><a href="">TORNEIOS</a></li>
+            <div class="links"><li><a href="./index.php"><img src="./img/logo.png" alt=""></a></li>
+            <li><a href="./torneios.php">TORNEIOS</a></li>
             <li><a href="">Partidas</a></li>
             <li><a href="">Equipes</a></li>
             <li><a class="espaco" href="">Rankings</a></li>
