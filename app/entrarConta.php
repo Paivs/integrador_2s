@@ -33,6 +33,7 @@ if($_SERVER['REQUEST_METHOD'] == "GET" || isset($_GET['erro'])){
         <br>
         <button type="submit">Entrar</button>
     </form>
+    <a href="./criarConta.php">Criar conta</a>
     <?php endif ?>
     <?php if(isset($_SESSION['cadastrado'])):?>
         <p>VOCE ESTÁ CADASTRADO</p>

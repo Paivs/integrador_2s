@@ -18,11 +18,11 @@
             <div class="links"><li><a href="./index.php"><img src="./img/logo.png" alt=""></a></li>
             <li><a href="./torneios.php">TORNEIOS</a></li>
             <li><a href="">Partidas</a></li>
-            <li><a href="">Equipes</a></li>
+            <li><a href="./equipes.php">Equipes</a></li>
             <li><a class="espaco" href="">Rankings</a></li>
             </div>
 
-            <div class=""><li><a href=""><img class="foto_login" src="./img/login.png" alt=""></a></li></div>
+            <div class=""><li><a href="./entrarConta.php"><img class="foto_login" src="./img/login.png" alt=""></a></li></div>
     </nav>
     </div>
 
