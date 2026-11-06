@@ -7,27 +7,36 @@ if($_SERVER['REQUEST_METHOD'] == "POST" || isset($_POST)){
     $senha = $_POST['senha'];
 
     $usuarios = readAll($pdo, "usuarios");
+    $id = null;
+
+    $usuario_email = null;
+    $usuario_senha = null;
 
     foreach($usuarios as $u){
         if($email == $u['email_conta']){
             $usuario_email = $email;
-        }else{
-            $usuario_email = null;
-        }
-        if($senha == $u['senha_conta']){
-            $usuario_senha = $senha;
-        }else{
-            $usuario_senha = null;
-        }
+            if($senha == $u['senha_conta']){
+                $usuario_senha = $senha;
+                $id = $u['id'];
+                break;
+            }
+        } 
     }
-
     if($usuario_email == null){
-        header("Location: entrarConta.php?erro=EMAIL");
+        header("Location: entrarConta.php?erro=EMAIL_SENHA");
         exit;
     }elseif($usuario_senha == null){
-        header("Location: entrarConta.php?erro=SENHA");
+        header("Location: entrarConta.php?erro=EMAIL_SENHA");
         exit;
-    }else{
-        
     }
 }
+
+
+
+$_SESSION['cadastrado'] = [
+    'email' => $email,
+    'senha' => $senha,
+    'id' => $id
+];
+
+header("Location: entrarConta.php");
