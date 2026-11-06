@@ -7,7 +7,7 @@ $paginaAtual = 'veiculos';
 $erro = '';
 $id = intval($_GET['id'] ?? $_POST['id'] ?? 0);
 
-// O cliente só consegue abrir um veículo que pertence a ele.
+// O cliente só consegue abrir um veículo dele
 $consulta = $pdo->prepare(
     'SELECT * FROM veiculos WHERE id = ? AND cliente_id = ?'
 );

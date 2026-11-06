@@ -8,7 +8,6 @@ $email = '';
 $cargo = '';
 $totalFuncionarios = $pdo->query('SELECT COUNT(*) FROM funcionarios')->fetchColumn();
 
-// A criação fica disponível somente enquanto a oficina ainda não tem funcionário.
 if ($totalFuncionarios > 5) {
     http_response_code(403);
     exit('O primeiro funcionário já foi cadastrado. Volte para o login.');

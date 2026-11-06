@@ -1,15 +1,13 @@
 <?php
 
-// A sessão guarda os dados do usuário que fez login.
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-// Carrega a conexão e as funções básicas de CRUD da estrutura principal.
 require_once __DIR__ . '/banco/database.php';
 require_once __DIR__ . '/banco/crud.php';
 
-// Impede o acesso de pessoas que ainda não fizeram login.
+// Impede o acesso de quem não fez loginn
 function protegerPagina()
 {
     if (!isset($_SESSION['usuario_id'])) {
@@ -18,19 +16,17 @@ function protegerPagina()
     }
 }
 
-// Retorna verdadeiro quando o usuário conectado é funcionário.
 function usuarioEhFuncionario()
 {
     return ($_SESSION['usuario_tipo'] ?? '') === 'funcionario';
 }
 
-// Retorna verdadeiro quando o usuário conectado é cliente.
 function usuarioEhCliente()
 {
     return ($_SESSION['usuario_tipo'] ?? '') === 'cliente';
 }
 
-// Protege páginas e ações exclusivas dos funcionários.
+// aqui seria a proteção de infos do func
 function protegerFuncionario()
 {
     protegerPagina();
@@ -41,7 +37,7 @@ function protegerFuncionario()
     }
 }
 
-// Protege páginas e ações exclusivas dos clientes.
+// e esse do cliente
 function protegerCliente()
 {
     protegerPagina();
@@ -52,7 +48,7 @@ function protegerCliente()
     }
 }
 
-// Converte o valor técnico do banco em um texto correto para a tela.
+// aqui o func consegue mudar o status
 function nomeStatus($status)
 {
     $nomes = [
@@ -66,7 +62,6 @@ function nomeStatus($status)
     return $nomes[$status] ?? $status;
 }
 
-// Define uma classe CSS simples para cada status.
 function classeStatus($status)
 {
     $classes = [
@@ -80,7 +75,6 @@ function classeStatus($status)
     return $classes[$status] ?? '';
 }
 
-// Evita que códigos HTML sejam executados ao mostrar dados do banco.
 function textoSeguro($texto)
 {
     return htmlspecialchars($texto ?? '', ENT_QUOTES, 'UTF-8');

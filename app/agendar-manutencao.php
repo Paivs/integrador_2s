@@ -11,7 +11,7 @@ $dataAgendamento = '';
 $quilometragem = '';
 $observacoes = '';
 
-// O cliente só pode escolher um veículo que pertence a ele.
+// O cliente só pode escolher um veículo dele
 $consultaVeiculos = $pdo->prepare(
     'SELECT id, marca, modelo, placa, quilometragem
      FROM veiculos
@@ -51,7 +51,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } elseif ($quilometragem < 0) {
         $erro = 'A quilometragem não pode ser negativa.';
     } else {
-        // O cliente não escolhe o status: toda nova solicitação começa assim.
+
+      
+        // O cliente não escolhe o status não: toda nova solicitação tem que começar assim 
         $comando = $pdo->prepare(
             'INSERT INTO manutencoes
             (veiculo_id, servico_id, descricao, data_agendamento,

@@ -6,7 +6,7 @@ protegerPagina();
 $paginaAtual = 'inicio';
 
 if (usuarioEhFuncionario()) {
-    // O funcionário acompanha os números gerais da oficina.
+    // O funcionário acompanha os números oficina :VV.
     $totalVeiculos = $pdo->query('SELECT COUNT(*) FROM veiculos')->fetchColumn();
 
     $resumo = $pdo->query(

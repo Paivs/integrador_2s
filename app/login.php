@@ -12,7 +12,7 @@ $erro = '';
 $email = '';
 $totalFuncionarios = $pdo->query('SELECT COUNT(*) FROM funcionarios')->fetchColumn();
 
-// O código abaixo só é executado quando o formulário é enviado.
+// O código abaixo só é executado se o form for enviado
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = trim($_POST['email'] ?? '');
     $senha = $_POST['senha'] ?? '';
@@ -20,7 +20,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($email === '' || $senha === '') {
         $erro = 'Preencha o e-mail e a senha.';
     } else {
-        // O ponto de interrogação recebe o e-mail com segurança.
         $comando = $pdo->prepare(
             'SELECT usuarios.*,
                     clientes.id AS cliente_id,
@@ -34,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $usuario = $comando->fetch();
 
         if ($usuario && password_verify($senha, $usuario['senha'])) {
-            // Troca o código da sessão depois do login.
+            // Troca sessão depois do login.
             session_regenerate_id(true);
 
             $_SESSION['usuario_id'] = $usuario['id'];
