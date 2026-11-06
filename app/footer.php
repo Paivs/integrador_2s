@@ -51,9 +51,9 @@
   <div class="footer-baixo">
     <p>© 2026 MakerLab. Todos os direitos reservados.</p>
     <div class="redes">
-      <a href=""><img src="https://placehold.co/50x50" alt="LinkedIn"></a>
-      <a href=""><img src="https://placehold.co/50x50" alt="WhatsApp"></a>
-      <a href=""><img src="https://placehold.co/50x50" alt="Instagram"></a>
+      <a href=""><img src="./img/cabecalho/in.png" alt="LinkedIn"></a>
+      <a href=""><img src="./img/cabecalho/wpp.png" alt="WhatsApp"></a>
+      <a href=""><img src="./img/cabecalho/insta.png" alt="Instagram"></a>
     </div>
   </div>
 </footer>

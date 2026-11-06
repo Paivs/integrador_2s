@@ -39,7 +39,7 @@
           <li><a href="">Administrador</a></li>
         </ul>
       </nav>
-      <a href="" class="usuario">🤣</a>
+      <a href="" class="usuario"><img src="./img/cabecalho/usuario.png" alt="" width="56px"></a>
     </div>
   </header>
 </body>
