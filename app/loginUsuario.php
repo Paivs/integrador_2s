@@ -32,6 +32,11 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
 
     if ($usuarioEncontrado) {
         if ($usuarioEncontrado['senha'] == $senha) {
+            if ($usuarioEncontrado['perfil'] == 'admin') {
+                $_SESSION['user'] = $usuarioEncontrado['nome_usuario'];
+                header("Location: dashboard.php");
+                exit;
+            }
             $_SESSION['user'] = $usuarioEncontrado['nome_usuario'];
             header("Location: index.php");
             exit;
@@ -93,4 +98,5 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
 
     <?php require_once __DIR__ . '/footer.php'; ?>
 </body>
+
 </html>
