@@ -17,12 +17,14 @@ CREATE TABLE IF NOT EXISTS Bancadas (
     id_bancada INT AUTO_INCREMENT PRIMARY KEY,
     nome_bancada VARCHAR(100) NOT NULL,
     descricao_bancada TEXT,
+    quantidade_bancada INT NOT NULL,
+    primeira_vantagem VARCHAR(30),
+    segunda_vantagem VARCHAR(30),
     imagens_bancada VARCHAR(255),
     preco_bancada DECIMAL(10,2) NOT NULL,
     status_bancada ENUM('disponivel', 'manutencao', 'indisponivel') NOT NULL DEFAULT 'disponivel',
     area_bancada VARCHAR(50)
 );
-
 CREATE TABLE IF NOT EXISTS Ferramentas (
     id_ferramenta INT AUTO_INCREMENT PRIMARY KEY,
     nome_ferramenta VARCHAR(100) NOT NULL,

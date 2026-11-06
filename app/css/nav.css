@@ -1,0 +1,95 @@
+ * {
+     margin: 0;
+     padding: 0;
+     box-sizing: border-box;
+ }
+
+ body {
+     font-family: 'Open Sans', sans-serif;
+     color: white;
+ }
+
+ a {
+     text-decoration: none;
+     color: white;
+ }
+
+ ul {
+     list-style: none;
+ }
+
+.header {
+     position: absolute;
+     top: 0;
+     left: 0;
+     width: 100%;
+     z-index: 10;
+     background-color: #2a2870;
+     border-bottom: 1px solid #4a4890;
+ }
+
+ .header-conteudo {
+     max-width: 1650px;
+     height: 110px;
+     margin: 0 auto;
+     padding: 0 30px;
+     display: flex;
+     align-items: center;
+     justify-content: space-between;
+ }
+
+ .logo {
+     font-size: 36px;
+     font-weight: 700;
+ }
+
+ .menu {
+     display: flex;
+     align-items: center;
+     gap: 42px;
+ }
+
+ .menu a {
+     font-size: 22px;
+     font-weight: 600;
+ }
+
+ .menu a:hover {
+     color: #f5a03c;
+ }
+
+ .tem-submenu {
+     position: relative;
+ }
+
+ .submenu {
+     display: none;
+     position: absolute;
+     top: 100%;
+     left: 0;
+     width: 280px;
+     padding: 10px 0;
+     background-color: #2a2870;
+     border: 1px solid #4a4890;
+     border-radius: 8px;
+ }
+
+ .tem-submenu:hover .submenu {
+     display: block;
+ }
+
+ .submenu a {
+     display: block;
+     padding: 12px 20px;
+     font-size: 20px;
+     font-weight: 400;
+ }
+
+ .usuario {
+     width: 54px;
+     height: 54px;
+     font-size: 30px;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+ }
