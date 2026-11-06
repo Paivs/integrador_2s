@@ -53,7 +53,7 @@ if (isset($_SESSION['user'])) {
           <li><a href="">Projetos</a></li>
 
           <?php if ($perfil == 'admin'): ?>
-            <li><a href=".dashboard.php">Administrador</a></li>
+            <li><a href="./dashboard.php">Administrador</a></li>
           <?php endif; ?>
           
           <?php if ($user != ""): ?>
