@@ -12,7 +12,7 @@
       <a href="./index.php" alt="" class="logo"><img src="./img/cabecalho/logo.png" alt=""></a>
       <nav>
         <ul class="menu">
-          <li><a href="">Início</a></li>
+          <li><a href="./index.php">Início</a></li>
 
           <li class="tem-submenu">
             <a href="">Reservas ▾</a>
@@ -39,7 +39,7 @@
           <li><a href="./loginADM.php">Administrador</a></li>
         </ul>
       </nav>
-      <a href="" class="usuario"><img src="./img/cabecalho/usuario.png" alt="" width="56px"></a>
+      <a href="./loginUsuario.php" class="usuario"><img src="./img/cabecalho/usuario.png" alt="" width="56px"></a>
     </div>
   </header>
 </body>
