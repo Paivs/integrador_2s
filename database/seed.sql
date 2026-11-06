@@ -23,16 +23,16 @@ VALUES
 -- 2. BANCADAS
 -- ==========================================
 INSERT INTO Bancadas
-(nome_bancada, descricao_bancada, imagens_bancada, preco_bancada, status_bancada, area_bancada)
+(nome_bancada, descricao_bancada, quantidade_bancada, primeira_vantagem, segunda_vantagem, imagens_bancada, preco_bancada, status_bancada, area_bancada)
 VALUES
-('Bancada de Eletrônica', 'Espaço para projetos eletrônicos e circuitos.', 'eletronica.jpg', 25.00, 'disponivel', 'Eletrônica'),
-('Bancada de Impressão 3D', 'Espaço equipado para impressão 3D.', 'impressao3d.jpg', 35.00, 'disponivel', 'Prototipagem'),
-('Bancada de Marcenaria', 'Espaço para trabalhos com madeira.', 'marcenaria.jpg', 30.00, 'disponivel', 'Marcenaria'),
-('Bancada de Robótica', 'Espaço para montagem e programação de robôs.', 'robotica.jpg', 40.00, 'manutencao', 'Robótica'),
-('Bancada de Prototipagem', 'Espaço para desenvolvimento de protótipos.', 'prototipagem.jpg', 28.00, 'disponivel', 'Prototipagem'),
-('Bancada de Corte a Laser', 'Espaço equipado para corte e gravação a laser.', 'corte_laser.jpg', 45.00, 'disponivel', 'Corte e Usinagem'),
-('Bancada de Química e Materiais', 'Espaço para testes com resinas, tintas e polímeros.', 'quimica.jpg', 32.00, 'disponivel', 'Química'),
-('Bancada de IoT & Sensores', 'Espaço dedicado a automação residencial e redes sem fio.', 'iot.jpg', 38.00, 'disponivel', 'Eletrônica');
+('Bancada de Eletrônica', 'Espaço para projetos eletrônicos e circuitos.', 6, 'Arduino e sensores', 'Ferros de solda', 'eletronica.jpg', 25.00, 'disponivel', 'Eletrônica'),
+('Bancada de Impressão 3D', 'Espaço equipado para impressão 3D.', 4, 'Impressoras 3D', 'Filamentos variados', 'impressao3d.jpg', 35.00, 'disponivel', 'Prototipagem'),
+('Bancada de Marcenaria', 'Espaço para trabalhos com madeira.', 8, 'Serras e lixadeiras', 'Bancada reforçada', 'marcenaria.jpg', 30.00, 'disponivel', 'Marcenaria'),
+('Bancada de Robótica', 'Espaço para montagem e programação de robôs.', 6, 'Kits de robótica', 'Notebooks', 'robotica.jpg', 40.00, 'manutencao', 'Robótica'),
+('Bancada de Prototipagem', 'Espaço para desenvolvimento de protótipos.', 5, 'Mesa ampla', 'Ferramentas manuais', 'prototipagem.jpg', 28.00, 'disponivel', 'Prototipagem'),
+('Bancada de Corte a Laser', 'Espaço equipado para corte e gravação a laser.', 3, 'Cortadora a laser', 'Exaustão', 'corte_laser.jpg', 45.00, 'disponivel', 'Corte e Usinagem'),
+('Bancada de Química e Materiais', 'Espaço para testes com resinas, tintas e polímeros.', 4, 'Capela de exaustão', 'Balanças de precisão', 'quimica.jpg', 32.00, 'disponivel', 'Química'),
+('Bancada de IoT & Sensores', 'Espaço dedicado a automação residencial e redes sem fio.', 6, 'Módulos Wi-Fi', 'Sensores variados', 'iot.jpg', 38.00, 'disponivel', 'Eletrônica');
 
 -- ==========================================
 -- 3. FERRAMENTAS
