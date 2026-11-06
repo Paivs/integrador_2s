@@ -33,8 +33,9 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
     if ($usuarioEncontrado) {
         if ($usuarioEncontrado['senha'] == $senha) {
             if ($usuarioEncontrado['perfil'] == 'admin') {
+                $_SESSION['perfil'] = $usuarioEncontrado['perfil'];
                 $_SESSION['user'] = $usuarioEncontrado['nome_usuario'];
-                header("Location: dashboard.php");
+                header("Location: index.php");
                 exit;
             }
             $_SESSION['user'] = $usuarioEncontrado['nome_usuario'];
