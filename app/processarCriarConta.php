@@ -1,6 +1,6 @@
 <?php
 
-#require_once __DIR__ . "/init.php";
+require_once __DIR__ . "/init.php";
 
 if($_SERVER['REQUEST_METHOD'] == "POST" || isset($_POST)){
     $senha = $_POST['senha'];
@@ -33,7 +33,16 @@ if($_SERVER['REQUEST_METHOD'] == "POST" || isset($_POST)){
             header("Location: criarConta.php?erro=USERNAME_ERRADO");
             exit;
     }else{
-        header("Location: criarConta.php");
-        # ainda vou adicionar mais coisa
+        try{
+            $consulta = $pdo->prepare('
+                INSERT INTO usuarios (email_conta,senha_conta,username_conta) VALUES (:email, :senha, :username)
+            ');
+            $consulta->execute(['email_conta' => $email, 'senha_conta' => $senha, 'username_conta' => $username]);
+            header("Location: index.php");
+            exit;
+            }catch(PDOException $e){
+                error_log($e->getMessage());
+                exit("Erro ao salvar as informações. Confira o log");
+            }
+        }
     }
-}

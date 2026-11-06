@@ -10,11 +10,11 @@ function database(): PDO
         return $connection;
     }
 
-    $host = getenv('DB_HOST') ?: '127.0.0.1';
+    $host = getenv('DB_HOST') ?: 'db';
     $port = getenv('DB_PORT') ?: '3306';
-    $database = getenv('DB_DATABASE') ?: 'GameHub';
-    $username = getenv('DB_USERNAME') ?: 'root';
-    $password = getenv('DB_PASSWORD') ?: 'Senai123';
+    $database = getenv('DB_DATABASE') ?: 'integrador';
+    $username = getenv('DB_USERNAME') ?: 'integrador';
+    $password = getenv('DB_PASSWORD') ?: '';
 
     $dsn = "mysql:host={$host};port={$port};dbname={$database};charset=utf8mb4";
 

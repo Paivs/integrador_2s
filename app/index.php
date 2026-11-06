@@ -9,7 +9,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/app/css/index.css">
-    <title>Página inicial</title>
+    <title>GameHub</title>
 </head>
     <body>
         <?php require_once __DIR__ . "/cabecalho.php" ?>
@@ -36,9 +36,7 @@
             <br>
             <br>
             <br>
-            <br>
-            <br>
-            <br>
+           
             
 
             <div class="explorar">
@@ -62,7 +60,7 @@
                 <a href=""><b><i>VER TORNEIOS</i></b></a>
             </div>
             </div>
-        </div>
+        <?php require_once __DIR__ . "/rodape.php"?>
     </body>
 </html>
 
