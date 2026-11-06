@@ -1,0 +1,32 @@
+body{
+    background-color: #090b0c;
+}
+
+.supremo{
+    display: flex;
+}
+
+.card{
+    background-color: black;
+    border: 1px solid greenyellow;
+    padding: 20px;
+    border-radius: 20px;
+    width: 600px;
+    margin-right: 50px;
+}
+
+.card2{
+    background-color: black;
+    border: 1px solid greenyellow;
+    padding: 20px;
+    border-radius: 20px;
+    width: 600px;
+}
+
+.card3{
+    background-color: black;
+    border: 1px solid greenyellow;
+    padding: 20px;
+    border-radius: 20px;
+    width: 600px;
+}
