@@ -21,7 +21,7 @@
             'area'             => trim($_POST['area'] ?? ''),
         ];
 
-        // -------------- Validação dos dados (apos limpar eles) ------------------
+        // -------------- Validação dos dados (apos limpar eles) -----------------
 
         if ($dados['nomeBancada'] == '') {
             $erros['nome'] = 'O campo nome da bancada é obrigatório, tente novamente.';
