@@ -1,24 +1,26 @@
 <?php
-    require_once __DIR__ . "/banco/crud.php";
-    require_once __DIR__ . "/banco/database.php";
+    require_once __DIR__ . '/init.php';
 
-    if($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['email']) && isset($_POST['senha'])){
-        $email = $_POST['email'];
-        $senha = $_POST['senha'];
-    }
-    $mensagem = "Login inválido, tente novamente."
+    $mensagem = "Login inválido, tente novamente.";
+    $usuarios = [];
+    readAll(database(), "usuarios", "where=", $usuarios);
 ?>
 <html>
     <head>
-        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="./css/styleLogin.css">
         <title>Login</title>
     </head>
     <body>
         <center>
-
+            <div class="titulo">
+                <img src="./img/Energy Monitor.png">
+                <br>
+            </div>
+            <img src="./img/texto.png" width="500">
             <div class="formulario-login">
-                <form action="" method="POST">
-                    <input type="text" name="email" id="email" placeholder="Email">
+                <h2>Insira seu e-mail e senha</h2>
+                <form action="processa-login.php" method="POST">
+                    <input type="email" name="email" id="email" placeholder="Email">
                     <br>
                     <br>
                     <input type="text" name="senha" id="senha" placeholder="Senha">
@@ -34,12 +36,3 @@
         </center>
     </body>
 </html>
-<?php
-    $usuario = [];
-    $usuariologin = read(database(), "usuarios", "email=" . $email, $usuario);
-    if ($usuario['senha'] !== $senha){
-        header("Location: login.php?erro=login_inválido");
-    }elseif($usuario['senha'] == $senha){
-        header("Location: index.php");
-    }
-?>
