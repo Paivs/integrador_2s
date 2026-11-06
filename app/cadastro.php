@@ -25,7 +25,7 @@
 
         if ($dados['nomeBancada'] == '') {
             $erros['nome'] = 'O campo nome da bancada é obrigatório, tente novamente.';
-        } elseif (mb_strlen($dados['nomeBancada']) > 100) {
+        } elseif (strlen($dados['nomeBancada']) > 100) {
             $erros['nome'] = 'O campo nome da bancada deve ter no máximo 100 caracteres, tente novamente.';
         } elseif (read($pdo, 'Bancadas', 'nome_bancada = ?', [$dados['nomeBancada']]) !== false) {
             $erros['nome'] = 'O nome da bancada já está sendo utilizado, por favor escolha outro.';
@@ -35,7 +35,7 @@
 
         if ($dados['descricao'] == '') {
             $erros['descricao'] = 'O campo descrição é obrigatório, tente novamente.';
-        } elseif (mb_strlen($dados['descricao']) > 300) {
+        } elseif (strlen($dados['descricao']) > 300) {
             $erros['descricao'] = 'O campo descrição deve ter no máximo 300 caracteres, tente novamente.';
         }
 
@@ -51,7 +51,7 @@
 
         if ($dados['primeiraVantagem'] == '') {
             $erros['primeiraVantagem'] = 'O primeiro campo de vantagem é obrigatório, tente novamente.';
-        } elseif (mb_strlen($dados['primeiraVantagem']) > 30) {
+        } elseif (strlen($dados['primeiraVantagem']) > 30) {
             $erros['primeiraVantagem'] = 'O primeiro campo de vantagem deve ter no máximo 30 caracteres, tente novamente.';
         }
 
@@ -59,7 +59,7 @@
 
         if ($dados['segundaVantagem'] == '') {
             $erros['segundaVantagem'] = 'O segundo campo de vantagem é obrigatório, tente novamente.';
-        } elseif (mb_strlen($dados['segundaVantagem']) > 30) {
+        } elseif (strlen($dados['segundaVantagem']) > 30) {
             $erros['segundaVantagem'] = 'O segundo campo de vantagem deve ter no máximo 30 caracteres, tente novamente.';
         }
 
@@ -69,7 +69,7 @@
             $erros['imagem'] = 'O campo de imagem é obrigatório.';
         } elseif (filter_var($dados['imagem'], FILTER_VALIDATE_URL) === false) {
             $erros['imagem'] = 'O campo de imagem precisa ser um link válido.';
-        } elseif (mb_strlen($dados['imagem']) > 255) {
+        } elseif (strlen($dados['imagem']) > 255) {
             $erros['imagem'] = 'O link da imagem deve ter no máximo 255 caracteres.';
         }
 
