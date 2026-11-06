@@ -1,0 +1,136 @@
+  * {
+     margin: 0;
+     padding: 0;
+     box-sizing: border-box;
+ }
+
+ body {
+     font-family: 'Open Sans', sans-serif;
+     color: white;
+ }
+
+ a {
+     text-decoration: none;
+     color: white;
+ }
+
+ ul {
+     list-style: none;
+ }
+ 
+ .footer {
+     background-color: #2a2870;
+     color: white;
+     padding: 60px 30px 30px;
+ }
+
+ .footer-conteudo {
+     max-width: 1650px;
+     margin: 0 auto;
+     display: flex;
+     justify-content: space-between;
+     align-items: flex-start;
+     gap: 60px;
+ }
+
+ .footer-marca {
+     width: 420px;
+ }
+
+ .footer-marca img {
+     width: 240px;
+     display: block;
+     margin-bottom: 15px;
+ }
+
+ .footer-marca p {
+     font-size: 20px;
+     line-height: 1.4;
+ }
+
+ .footer-coluna h3,
+ .footer-novidades h3 {
+     font-size: 36px;
+     font-weight: 400;
+     margin-bottom: 8px;
+ }
+
+ .footer-coluna li {
+     margin-bottom: 6px;
+ }
+
+ .footer-coluna a {
+     font-size: 18px;
+ }
+
+ .footer-coluna a:hover {
+     color: #f5a03c;
+ }
+
+ .footer-novidades {
+     width: 480px;
+ }
+
+ .footer-novidades p {
+     font-size: 18px;
+     line-height: 1.4;
+     margin-bottom: 20px;
+ }
+
+ .form-novidades {
+     display: flex;
+     gap: 15px;
+ }
+
+ .form-novidades input {
+     flex: 1;
+     padding: 14px 18px;
+     font-size: 20px;
+     color: white;
+     background-color: #2a2870;
+     border: 3px solid #4a4890;
+     border-radius: 10px;
+ }
+
+ .form-novidades input::placeholder {
+     color: white;
+ }
+
+ .form-novidades button {
+     width: 60px;
+     background-color: #f5a03c;
+     color: white;
+     font-size: 26px;
+     border: none;
+     border-radius: 10px;
+     cursor: pointer;
+ }
+
+ .footer-linha {
+     max-width: 1650px;
+     margin: 45px auto 20px auto;
+     border-top: 3px solid white;
+ }
+
+ .footer-baixo {
+     max-width: 1650px;
+     margin: 0 auto;
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+ }
+
+ .footer-baixo p {
+     font-size: 20px;
+ }
+
+ .redes {
+     display: flex;
+     gap: 20px;
+ }
+
+ .redes img {
+     width: 50px;
+     height: 50px;
+     display: block;
+ }
