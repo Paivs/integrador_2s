@@ -9,7 +9,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
-    <a href="partidas.php"></a>
 </head>
 <body>
 
@@ -18,7 +17,7 @@
     <nav>
             <div class="links"><li><a href="./index.php"><img src="./img/logo.png" alt=""></a></li>
             <li><a href="./torneios.php">TORNEIOS</a></li>
-            <li><a href="">Partidas</a></li>
+            <li><a href="./partidas.php">Partidas</a></li>
             <li><a href="./equipes.php">Equipes</a></li>
             <li><a class="espaco" href="">Rankings</a></li>
             </div>
