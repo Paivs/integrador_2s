@@ -1,0 +1,93 @@
+.Banner {
+  position: relative;
+  width: 100%;
+  height: 700px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+
+.banner-torneios {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; 
+  z-index: 1;
+}
+
+.Banner::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to right, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.8) 30%, rgba(0, 0, 0, 0) 70%);
+  z-index: 2; 
+}
+
+.texto {
+    position: relative;
+    z-index: 3;
+    padding-left: 3%;
+    color: white;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; 
+    font-size: 40px;
+    font-style: italic;
+}
+
+.texto span{
+     color: rgb(235, 120, 26); 
+    }
+    
+.texto p{
+    font-size: 20px;
+    margin-top: 20px;
+    margin-bottom: 40px;
+}
+    
+.texto a{
+    text-decoration: none;
+    border: 1px ;
+    background-color:#f4892f;
+    color: aliceblue;
+    padding: 10px;
+    padding-left: 30px;
+    padding-right: 30px;
+    border-radius: 20px;
+    font-size: 35px;
+}
+
+.fundo{
+    position: relative; 
+    width: 100%;
+}
+
+.titulo {
+    position: relative;
+    z-index: 2; 
+    padding: 50px; 
+}
+
+.titulo h1 {
+    color: #ffffff;
+    font-style: italic; 
+    text-transform: uppercase;
+    text-shadow: 4px 4px 5px rgba(255, 255, 255, 0.2);
+}
+
+.titulo span {
+    color: #f38630; 
+}
+
+
+.icone-coroa {
+    position: absolute;
+    width: 30px; 
+}
+
+.img-fundo{
+    width: 100%;
+    position: absolute;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+}

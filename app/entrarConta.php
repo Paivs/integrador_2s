@@ -2,6 +2,8 @@
 
 require_once __DIR__ . "/init.php";
 
+$usuarios = readAll($pdo, "usuarios");
+
 if($_SERVER['REQUEST_METHOD'] == "GET" || isset($_GET['erro'])){
     $erro = $_GET['erro'] ?? null;
 }
@@ -18,19 +20,23 @@ if($_SERVER['REQUEST_METHOD'] == "GET" || isset($_GET['erro'])){
 <body>
     <?php require_once __DIR__ . "/cabecalho.php" ?>
 
+    <?php if(!isset($_SESSION['cadastrado'])):?>
     <form action="processarEntrarConta.php" method="POST">
         <label for="email">E-mail</label>
         <input type="text" name="email" id="email" placeholder="E-mail">
         <br>
         <label for="senha">Senha</label>
         <input type="text" name="senha" id="senha" placeholder="Senha">
-        <?php if($erro == "SENHA"):?>
-            <p>SENHA OU EMAIL INCORRETOS</p>
-        <?php elseif($erro == "EMAIL"):?>
+        <?php if($erro == "EMAIL_SENHA"):?>
             <p>SENHA OU EMAIL INCORRETOS</p>
         <?php endif ?>  
         <br>
-        <button type="submit">Entrar</button>  
+        <button type="submit">Entrar</button>
     </form>
+    <?php endif ?>
+    <?php if(isset($_SESSION['cadastrado'])):?>
+        <p>VOCE ESTÁ CADASTRADO</p>
+        <a href="sair_conta.php">SAIR DA CONTA?</a>
+    <?php endif ?>
 </body>
 </html>

@@ -26,8 +26,8 @@ CREATE TABLE IF NOT EXISTS torneios (
     format_torneio VARCHAR(50) NOT NULL,
     nmjogo_torneio VARCHAR(50) NOT NULL,
     horainit_torneio VARCHAR(15) NOT NULL,
-    taxa double default 0.0,
-    tipo ENUM('comunidade', 'gamehub') default 'gamehub'
+    taxa double not null default 0.0,
+    tipo ENUM('comunidade', 'gamehub') not null default 'gamehub'
 );
 
 
