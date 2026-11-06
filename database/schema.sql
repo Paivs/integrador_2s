@@ -1,6 +1,93 @@
-CREATE TABLE IF NOT EXISTS exemplos (
-    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    titulo VARCHAR(120) NOT NULL,
-    criado_em TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
-);
+-- schema
+CREATE DATABASE IF NOT EXISTS PetConnect; 
 
+USE PetConnect; 
+
+CREATE TABLE IF NOT EXISTS usuarios (
+	id_usuario INT UNSIGNED AUTO_INCREMENT PRIMARY KEY, 
+	nome VARCHAR(20) NOT NULL,
+	email VARCHAR(30) UNIQUE NOT NULL, 
+	senha VARCHAR(100) NOT NULL, 
+	data_nascimento DATE NOT NULL, 
+	telefone VARCHAR(20) NOT NULL, 
+	cidade VARCHAR(20) NOT NULL, 
+	estado VARCHAR(20) NOT NULL, 
+	cadastro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+); 
+
+USE PetConnect; 
+
+CREATE TABLE IF NOT EXISTS animais(
+	id_animal INT UNSIGNED AUTO_INCREMENT PRIMARY KEY, 
+	nome VARCHAR(20) NOT NULL,
+	especie ENUM('CACHORRO', 'GATO', 'OUTRO') NOT NULL, 
+	idade INT NOT NULL, 
+	sexo ENUM('MACHO', 'FEMEA', 'OUTRO') NOT NULL, 
+	porte ENUM('PEQUENO', 'MEDIO', 'GRANDE') NOT NULL,
+	cidade VARCHAR(20) NOT NULL, 
+	estado VARCHAR(20) NOT NULL, 
+	raca VARCHAR(11) NOT NULL, 
+	situacao_animal TEXT NOT NULL, 
+	status_animal ENUM('DISPONIVEL', 'EM_PROCESSO', 'ADOTADO') DEFAULT 'DISPONIVEL', 
+	criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    url_imagem VARCHAR(255) NOT NULL
+
+); 
+
+USE PetConnect; 
+
+CREATE TABLE IF NOT EXISTS solicitacoes_adocao(
+	id_solicitacao INT UNSIGNED AUTO_INCREMENT PRIMARY KEY, 
+	id_usuario INT UNSIGNED NOT NULL, 
+	id_animal INT UNSIGNED NOT NULL, 
+	status ENUM('EM_ANALISE', 'APROVADO', 'RECUSADO', 'CANCELADA') DEFAULT 'EM_ANALISE',
+	observacoes TEXT, 
+	data_solicitacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP, 
+	atualizado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,   
+	FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario), 
+	FOREIGN KEY (id_animal) REFERENCES animais(id_animal)
+); 
+
+USE PetConnect; 
+
+CREATE TABLE IF NOT EXISTS favoritos(
+	id_usuario INT UNSIGNED NOT NULL, 
+	id_animal INT UNSIGNED NOT NULL, 
+	criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario), 
+	FOREIGN KEY (id_animal) REFERENCES animais(id_animal)
+); 
+
+USE PetConnect; 
+
+CREATE TABLE IF NOT EXISTS produtos(
+	id_produto INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+	nome VARCHAR(20) NOT NULL,
+ 	categoria ENUM('UTILITARIO', 'BRINQUEDO', 'PETISCO') NOT NULL, 
+	preco DECIMAL(10,2) NOT NULL, 
+	estoque INT NOT NULL DEFAULT 0, 
+	especie_indicada ENUM('CACHORRO', 'GATO', 'TODOS')
+); 
+
+USE PetConnect; 
+
+CREATE TABLE IF NOT EXISTS pedidos(
+	id_pedido INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+	id_usuario INT UNSIGNED NOT NULL, 
+	valor_total DECIMAL(10,2) NOT NULL, 
+	status ENUM('AGUARDANDO_PAGAMENTO', 'PAGO', 'ENVIADO', 'ENTREGUE', 'CANCELADO') DEFAULT 'AGUARDANDO_PAGAMENTO', 
+	criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP, 
+	FOREIGN KEY(id_usuario) REFERENCES usuarios(id_usuario)
+
+); 
+
+USE PetConnect; 
+
+CREATE TABLE IF NOT EXISTS itens_pedidos(
+	id_itens INT UNSIGNED AUTO_INCREMENT PRIMARY KEY, 
+	id_pedido INT UNSIGNED NOT NULL,
+	id_produto INT UNSIGNED NOT NULL, 
+	quantidade INT NOT NULL, 
+	FOREIGN KEY (id_pedido) REFERENCES pedidos(id_pedido), 
+	FOREIGN KEY (id_produto) REFERENCES produtos(id_produto)
+); 

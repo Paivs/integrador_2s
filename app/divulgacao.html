@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PetConnect - Página Inicial</title>
+  <link rel="stylesheet" href="divulgacao.css">
+  <link rel="shortcut icon" href="img/PetConnectLOGO.png" type="image/x-icon">
+</head>
+<body>
+
+ 
+  <header class="cabecalho-principal">
+    <div class="container-cabecalho">
+      <!-- Logo PetConnect -->
+      <div class="logo-cabecalho">
+        <img src="img/PetConnectLOGO.png" alt="PetConnect Logo">
+      </div>
+
+  
+      <div class="barra-pesquisa">
+        <input type="text" placeholder="para o seu pet, procure aqui">
+        <button class="botao-pesquisa" type="button">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        </button>
+      </div>
+
+    
+      <nav class="menu-navegacao">
+        <a href="#">Quero Adotar</a>
+        <a href="#">Quero Divulgar</a>
+        <a href="#">Nossos Produtos</a>
+        <a href="#">PetConnect</a>
+      </nav>
+
+     
+      <div class="acoes-usuario">
+        <a href="#" class="icone-favorito">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l8.78-8.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+        </a>
+        <a href="#" class="botao-cadastro">Cadastro</a>
+      </div>
+    </div>
+  </header>
+  
+
+  <main class="conteudo-principal">
+    <div class="container-central">
+      <h1 class="titulo-pagina">Cadastre um animal para a adoção</h1>
+
+      <form class="formulario-cadastro">
+        
+      
+        <div class="campo-formulario">
+          <label class="rotulo-campo">Nome do Animal</label>
+          <input type="text" class="entrada-texto">
+        </div>
+
+        
+        <div class="grupo-duplo">
+          <div class="campo-formulario">
+            <label class="rotulo-campo">Espécie</label>
+            <input type="text" class="entrada-texto">
+          </div>
+          <div class="campo-formulario">
+            <label class="rotulo-campo">Idade</label>
+            <input type="text" class="entrada-texto">
+          </div>
+        </div>
+
+     
+        <div class="grupo-duplo">
+          <div class="campo-formulario">
+            <label class="rotulo-campo">Sexo</label>
+            <input type="text" class="entrada-texto">
+          </div>
+          <div class="campo-formulario">
+            <label class="rotulo-campo">Porte</label>
+            <input type="text" class="entrada-texto">
+          </div>
+        </div>
+
+   
+        <div class="grupo-duplo">
+          <div class="campo-formulario">
+            <label class="rotulo-campo">Estado</label>
+            <input type="text" class="entrada-texto">
+          </div>
+          <div class="campo-formulario">
+            <label class="rotulo-campo">Cidade</label>
+            <input type="text" class="entrada-texto">
+          </div>
+        </div>
+
+       
+        <div class="grupo-duplo alinhado-base">
+          <div class="campo-formulario">
+            <label class="rotulo-campo">Situação do animal</label>
+          </div>
+          <div class="campo-formulario">
+            <label class="rotulo-campo">Raça</label>
+            <input type="text" class="entrada-texto">
+          </div>
+        </div>
+
+        <div class="campo-formulario">
+          <textarea class="caixa-descricao"></textarea>
+        </div>
+
+    
+        
+        <label class="rotulo-campo">Foto Principal</label>
+        <img src="img/patinhatraço.png" alt="patinha" width="300">
+           
+  
+
+        <div class="secao-opcoes">
+          <h2 class="titulo-secao">Cuidados Veterinários</h2>
+          <div class="grupo-tags">
+            <button type="button" class="botao-tag">Castrado</button>
+            <button type="button" class="botao-tag">Vacinado</button>
+          </div>
+        </div>
+
+       
+        <div class="secao-opcoes">
+          <h2 class="titulo-secao">Temperamento</h2>
+          <div class="grupo-tags">
+            <button type="button" class="botao-tag">Dócil</button>
+            <button type="button" class="botao-tag">Brincalhão</button>
+            <button type="button" class="botao-tag">Sociável</button>
+            <button type="button" class="botao-tag">Raivoso</button> 
+          </div>
+        </div>
+
+      
+        <div class="secao-opcoes">
+          <h2 class="titulo-secao">Sociável com...</h2>
+          <div class="grupo-tags">
+            <button type="button" class="botao-tag">Gatos</button>
+            <button type="button" class="botao-tag">Desconhecidos</button>
+            <button type="button" class="botao-tag">Cachorros</button>
+            <button type="button" class="botao-tag">Outros</button>
+          </div>
+        </div>
+
+
+        <div class="secao-opcoes">
+          <h2 class="titulo-secao">Vive bem com...</h2>
+          <div class="grupo-tags">
+            <button type="button" class="botao-tag">Apartamento</button>
+            <button type="button" class="botao-tag">Casa</button>
+            <button type="button" class="botao-tag">Outro</button>
+          </div>
+        </div>
+
+   
+        <button type="submit" class="botao-divulgar">Divulgar</button>
+
+      </form>
+    </div>
+  </main>
+
+
+  <footer class="rodape-principal">
+    <div class="container-rodape">
+   
+      <div class="coluna-logo-rodape">
+        <img src="img/PetConnectLOGO.png" alt="PetConnect Logo">
+      </div>
+
+      <div class="coluna-rodape">
+        <h4 class="titulo-coluna-rodape">Quero Adotar</h4>
+        <ul>
+          <li><a href="#">Cães</a></li>
+          <li><a href="#">Gatos</a></li>
+        </ul>
+      </div>
+
+      
+      <div class="coluna-rodape">
+        <h4 class="titulo-coluna-rodape">Produtos</h4>
+        <ul>
+          <li><a href="#">Cães</a></li>
+          <li><a href="#">Gatos</a></li>
+        </ul>
+      </div>
+
+   
+      <div class="coluna-rodape">
+        <h4 class="titulo-coluna-rodape">Institucional</h4>
+        <ul>
+          <li><a href="#">PetConnect</a></li>
+        </ul>
+      </div>
+
+    
+      <div class="coluna-rodape">
+        <h4 class="titulo-coluna-rodape">Atendimento</h4>
+        <ul>
+          <li><a href="#">Meu Perfil</a></li>
+          <li><a href="#">Segurança e Privacidade</a></li>
+        </ul>
+      </div>
+
+   
+      <div class="coluna-rodape">
+        <h4 class="titulo-coluna-rodape">Redes Sociais</h4>
+        <div class="icones-redes-sociais">
+        
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
