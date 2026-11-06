@@ -71,7 +71,11 @@
     color: #ffffff;
     font-style: italic; 
     text-transform: uppercase;
-    text-shadow: 4px 4px 5px rgba(255, 255, 255, 0.2);
+    text-shadow: 4px 4px 5px rgba(255, 255, 255, 0.5);
+    font-size: 80px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; 
+    text-align: center;
+    margin-top: 125px;
 }
 
 .titulo span {
@@ -79,9 +83,10 @@
 }
 
 
-.icone-coroa {
+.titulo img {
     position: absolute;
-    width: 30px; 
+    width: 250px;
+    margin-left: 440px; 
 }
 
 .img-fundo{
