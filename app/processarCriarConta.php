@@ -38,6 +38,9 @@ if($_SERVER['REQUEST_METHOD'] == "POST" || isset($_POST)){
                 INSERT INTO usuarios (email_conta,senha_conta,username_conta) VALUES (:email, :senha, :username)
             ');
             $consulta->execute(['email' => $email, 'senha' => $senha, 'username' => $username]);
+
+            $id = $pdo->lastInsertId();
+
             $_SESSION['cadastrado'] = [
                 'email' => $email,
                 'senha' => $senha,
@@ -48,7 +51,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST" || isset($_POST)){
             exit;
             }catch(PDOException $e){
                 error_log($e->getMessage());
-                exit("Erro ao salvar as informações. Confira o log");
+                exit("Erro ao salvar as informações. E-mail ou senha ja existe");
             }
         }
     }
