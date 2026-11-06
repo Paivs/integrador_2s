@@ -2,8 +2,7 @@
     require_once __DIR__ . '/init.php';
 
     $mensagem = "Login inválido, tente novamente.";
-    $usuarios = [];
-    readAll(database(), "usuarios", "where=", $usuarios);
+    $usuarios = read(database(), "usuarios");
 ?>
 <html>
     <head>
@@ -20,7 +19,7 @@
             <div class="formulario-login">
                 <h2>Insira seu e-mail e senha</h2>
                 <form action="processa-login.php" method="POST">
-                    <input type="email" name="email" id="email" placeholder="Email">
+                    <input type="text" name="email" id="email" placeholder="Email">
                     <br>
                     <br>
                     <input type="text" name="senha" id="senha" placeholder="Senha">
