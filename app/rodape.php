@@ -22,10 +22,10 @@
         <div class="footer-col links-col">
             <h3>Acessos Rápidos:</h3>
             <ul class="acessos">
-                <li><a class="trofeuzinho" href="./index.html">Torneios</a> <img class="trofeu" src="./img/Emblema de Troféu Gamer Coroado.png" alt=""></li>
-                <li><a href="./movimento.html">Equipes</a> <img class="equipe" src="./img/equipe.png" alt=""></li>
-                <li><a href="#">Ranking</a> <img class="ranking" src="./img/Ícone de gráfico ascendente branco.png" alt=""></li>
-                <li><a href="./PontosColeta.html">Partidas</a> <img class="partida" src="./img/controle.jpg" alt=""></li>
+                <li><a class="trofeuzinho" href="./torneios.php">Torneios</a> <img class="trofeu" src="./img/Emblema de Troféu Gamer Coroado.png" alt=""></li>
+                <li><a href="./equipes.php">Equipes</a> <img class="equipe" src="./img/equipe.png" alt=""></li>
+                <li><a href="./ranking.php">Ranking</a> <img class="ranking" src="./img/Ícone de gráfico ascendente branco.png" alt=""></li>
+                <li><a href="./partidas.php">Partidas</a> <img class="partida" src="./img/controle.jpg" alt=""></li>
             </ul>
         </div>
 
