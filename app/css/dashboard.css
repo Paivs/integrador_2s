@@ -1,0 +1,13 @@
+body {
+    display: flex;
+}
+
+.conteudo {
+    flex: 1;
+    padding: 30px;
+    overflow-x: auto;
+}
+
+.sidebar {
+    flex-shrink: 0;
+}
