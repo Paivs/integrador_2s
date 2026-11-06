@@ -32,13 +32,7 @@
             <a href=""><i>SAIBA MAIS...</i></a>
         </div>
         <div class="preto">
-            <br>
-            <br>
-            <br>
-            <br>
-           
             
-
             <div class="explorar">
                 <h1><i><b>EXPLORE OUTRAS <span class="exploração">COMPETIÇÕES</span> </class></b></i></h1>
             </div>
