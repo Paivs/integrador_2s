@@ -18,6 +18,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST" || isset($_POST)){
             if($senha == $u['senha_conta']){
                 $usuario_senha = $senha;
                 $id = $u['id'];
+                $username = $u['username_conta'];
                 break;
             }
         } 
@@ -36,6 +37,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST" || isset($_POST)){
 $_SESSION['cadastrado'] = [
     'email' => $email,
     'senha' => $senha,
+    'username' => $username,
     'id' => $id
 ];
 

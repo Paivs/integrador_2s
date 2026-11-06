@@ -38,6 +38,12 @@ if($_SERVER['REQUEST_METHOD'] == "POST" || isset($_POST)){
                 INSERT INTO usuarios (email_conta,senha_conta,username_conta) VALUES (:email, :senha, :username)
             ');
             $consulta->execute(['email' => $email, 'senha' => $senha, 'username' => $username]);
+            $_SESSION['cadastrado'] = [
+                'email' => $email,
+                'senha' => $senha,
+                'username' => $username,
+                'id' => $id
+            ];
             header("Location: index.php");
             exit;
             }catch(PDOException $e){
