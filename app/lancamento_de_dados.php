@@ -4,6 +4,7 @@
 ?>
 <html>
     <head>
+        <link rel="stylesheet" href="./css/styleDados.css">
         <title>Lançamento de Dados</title>
     </head>
     <body>
