@@ -31,7 +31,7 @@
 
                 <div class="container-mid">
                     <div class="form">
-                        <form action="processaLog.php" method="post">
+                        <form action="processaCad.php" method="post">
                             <div class="nome">
                                 <label for="nome">Nome Completo</label><br>
                                 <input type="text" name="nome" id="nome" placeholder="Digite seu nome" required>
