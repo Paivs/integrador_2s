@@ -6,12 +6,6 @@ $erro = '';
 $nome = '';
 $email = '';
 $cargo = '';
-$totalFuncionarios = $pdo->query('SELECT COUNT(*) FROM funcionarios')->fetchColumn();
-
-if ($totalFuncionarios > 5) {
-    http_response_code(403);
-    exit('O primeiro funcionário já foi cadastrado. Volte para o login.');
-}
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nome = trim($_POST['nome'] ?? '');
@@ -72,7 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Primeiro funcionário | CarCare</title>
+  <title>Cadastro de funcionário | CarCare</title>
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/login.css">
 </head>
@@ -85,14 +79,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       </a>
       <div class="login_mensagem">
         <h1>Área da oficina.</h1>
-        <h1 class="bem-vindo">Primeiro acesso.</h1>
+        <h1 class="bem-vindo">Novo funcionário.</h1>
       </div>
     </section>
 
     <section class="login_acesso">
       <div class="login_cartao">
         <h2>Criar funcionário</h2>
-        <p class="login_descricao">Esta configuração pode ser feita somente uma vez.</p>
+        <p class="login_descricao">Preencha os dados para criar uma conta de funcionário.</p>
 
         <?php if ($erro !== ''): ?>
           <div class="alerta erro"><?php echo textoSeguro($erro); ?></div>
