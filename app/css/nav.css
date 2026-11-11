@@ -1,4 +1,4 @@
- * {
+* {
      margin: 0;
      padding: 0;
      box-sizing: border-box;
@@ -86,10 +86,11 @@
  }
 
  .usuario {
-     width: 54px;
-     height: 54px;
+     min-height: 54px;
      font-size: 19px;
      display: flex;
      align-items: center;
      justify-content: center;
+     gap: 10px;
+     white-space: nowrap;
  }

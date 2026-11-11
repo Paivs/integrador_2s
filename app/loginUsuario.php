@@ -1,7 +1,10 @@
 <?php
 require_once __DIR__ . '/init.php';
 
-$_SESSION['user'] = null;
+if ($_SERVER['REQUEST_METHOD'] !== 'POST' && !empty($_SESSION['user'])) {
+header("Location: perfil.php");
+exit;
+}
 
 $users = readAll(database(), "Usuarios");
 
@@ -9,45 +12,42 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
     $email = trim($_POST['email'] ?? '');
     $senha = $_POST['senha'] ?? '';
 
-    if ($email === '' && $senha === '') {
-        header("Location: loginUsuario.php?erro=campos_vazios");
-        exit;
+if ($email === '' && $senha === '') {
+header("Location: loginUsuario.php?erro=campos_vazios");
+exit;
     }
-    if ($email === '') {
-        header("Location: loginUsuario.php?erro=usuario_nao_preenchido");
-        exit;
+if ($email === '') {
+header("Location: loginUsuario.php?erro=usuario_nao_preenchido");
+exit;
     }
-    if ($senha === '') {
-        header("Location: loginUsuario.php?erro=senha_nao_preenchida");
-        exit;
+if ($senha === '') {
+header("Location: loginUsuario.php?erro=senha_nao_preenchida");
+exit;
     }
 
     $usuarioEncontrado = null;
-    foreach ($users as $user) {
-        if ($user['email'] == $email) {
-            $usuarioEncontrado = $user;
-            break;
+foreach ($users as $u) {
+if ($u['email'] == $email) {
+            $usuarioEncontrado = $u;
+break;
         }
     }
 
-    if ($usuarioEncontrado) {
-        if ($usuarioEncontrado['senha'] == $senha) {
-            if ($usuarioEncontrado['perfil'] == 'admin') {
-                $_SESSION['perfil'] = $usuarioEncontrado['perfil'];
-                $_SESSION['user'] = $usuarioEncontrado['nome_usuario'];
-                header("Location: index.php");
-                exit;
-            }
+if ($usuarioEncontrado) {
+if ($usuarioEncontrado['senha'] == $senha) {
+            session_regenerate_id(true);
             $_SESSION['user'] = $usuarioEncontrado['nome_usuario'];
-            header("Location: index.php");
-            exit;
+            $_SESSION['id'] = $usuarioEncontrado['id_usuario'];
+            $_SESSION['perfil'] = $usuarioEncontrado['perfil'];
+header("Location: index.php");
+exit;
         } else {
-            header("Location: loginUsuario.php?erro=senha_invalida");
-            exit;
+header("Location: loginUsuario.php?erro=senha_invalida");
+exit;
         }
     } else {
-        header("Location: loginUsuario.php?erro=credenciais_invalidas");
-        exit;
+header("Location: loginUsuario.php?erro=credenciais_invalidas");
+exit;
     }
 }
 ?>
@@ -65,7 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
 </head>
 
 <body>
-    <?php require_once __DIR__ . '/nav.php'; ?>
+<?php require_once __DIR__ . '/nav.php'; ?>
 
     <section class="loginADM">
         <div class="conteudo">
@@ -88,16 +88,16 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
                 <a class="textoLink" href="">Cadastre-se Aqui!</a>
             </div>
             <div class="erro">
-                <?php
-                if (isset($_GET['erro']) && $_GET['erro'] != "") {
-                    echo "<p>Erro detectado: {$_GET['erro']} </p>";
+<?php
+if (isset($_GET['erro']) && $_GET['erro'] != "") {
+echo "<p>Erro detectado: " . $_GET['erro'] . " </p>";
                 }
-                ?>
+?>
             </div>
         </div>
     </section>
 
-    <?php require_once __DIR__ . '/footer.php'; ?>
+<?php require_once __DIR__ . '/footer.php'; ?>
 </body>
 
 </html>
