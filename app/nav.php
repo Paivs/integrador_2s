@@ -63,7 +63,7 @@ if (isset($_SESSION['user'])) {
       </nav>
 
       <?php if ($user != ""): ?>
-        <a href="./loginUsuario.php" class="usuario">
+        <a href="./perfil.php" class="usuario">
           <img src="./img/cabecalho/usuario.png" alt="Usuário" width="56px">
           Olá, <?= $user ?>
         </a>
