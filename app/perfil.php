@@ -2,17 +2,34 @@
 
 require_once __DIR__ . '/init.php';
 
+
 if (empty($_SESSION['id'])) {
     header("Location: loginUsuario.php");
     exit;
+    }
+    
+    
+    if($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['id'])){
+        
+        update(database(), "Usuarios", [
+            "nome_usuario" => "{$_POST['nome_usuario']}",
+            "telefone" => "{$_POST['telefone']}",
+            "email" => "{$_POST['email']}",
+            "instituicao" => "{$_POST['instituicao']}"
+            ], "id_usuario = ?", [$_SESSION['id']]);
+        $_SESSION['user'] = $_POST['nome_usuario'];
+        header("Location: perfil.php");
+        exit;
+            
 }
-
 $usuario = read($pdo, "Usuarios", "id_usuario = ?", [$_SESSION['id']]);
 
 if (!$usuario) {
     header("Location: logout.php");
     exit;
 }
+
+
 
 ?>
 
@@ -45,9 +62,9 @@ if (!$usuario) {
                 <img class="perfil-foto" src="./img/cabecalho/usuario.png" alt="Foto do usuário">
                 <div class="perfil-dados">
                     <b>User:</b>
-                    <span><?= htmlspecialchars($usuario['nome_usuario']) ?></span>
+                    <span><?= $usuario['nome_usuario'] ?></span>
                     <b>Email:</b>
-                    <span><?= htmlspecialchars($usuario['email']) ?></span>
+                    <span><?= $usuario['email'] ?></span>
                 </div>
             </section>
 
@@ -55,24 +72,26 @@ if (!$usuario) {
                 <h2>Informações pessoais</h2>
 
                 <form class="perfil-form" action="" method="post">
+                    <input type="text" name="id" value="<?= $_SESSION['id'] ?>" hidden>
+
                     <div class="campo">
-                        <label for="nome">Nome completo</label>
-                        <input type="text" id="nome" name="nome_usuario" value="<?= htmlspecialchars($usuario['nome_usuario']) ?>">
+                        <label for="nome">Nome de usuário:</label>
+                        <input type="text" id="nome" name="nome_usuario" value="<?= $usuario['nome_usuario'] ?>">
                     </div>
 
                     <div class="campo">
                         <label for="telefone">Telefone</label>
-                        <input type="tel" id="telefone" name="telefone" value="<?= htmlspecialchars($usuario['telefone'] ?? '') ?>">
+                        <input type="tel" id="telefone" name="telefone" value="<?= $usuario['telefone'] ?? '' ?>">
                     </div>
 
                     <div class="campo">
                         <label for="email">Email</label>
-                        <input type="email" id="email" name="email" value="<?= htmlspecialchars($usuario['email']) ?>">
+                        <input type="email" id="email" name="email" value="<?= $usuario['email'] ?>">
                     </div>
 
                     <div class="campo">
                         <label for="instituicao">Instituição</label>
-                        <input type="text" id="instituicao" name="instituicao" value="<?= htmlspecialchars($usuario['instituicao'] ?? '') ?>">
+                        <input type="text" id="instituicao" name="instituicao" value="<?= $usuario['instituicao'] ?? '' ?>">
                     </div>
 
                     <button type="submit" class="botao-salvar">Salvar alterações</button>
