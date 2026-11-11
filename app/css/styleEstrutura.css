@@ -1,0 +1,22 @@
+body{
+    background-color: #090b0c;
+}
+
+.setor{
+    background-color: #151a1c;
+    padding: 20px;
+    border: 1px solid #7bd798;
+    border-radius: 20px;    
+}
+
+.total_kwh{
+    background-color: #090b0c;
+    padding: 20px;
+    border-radius: 20px;
+    width: 300px;
+}
+
+.total_kwh h4{
+    color: #3d694e;
+    font-size: 20px;
+}
