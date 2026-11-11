@@ -4,11 +4,11 @@
 
 <html>
 <head>
-    
     <link rel="stylesheet" href="./css/styleEngajaAvisos.css">
     <link rel="stylesheet" href="./css/styleMenu.css">
     <title>Engajamento e avisos</title>
 </head>
+
 <body>
     <div class="menu-conf">
         <?php require_once __DIR__ . "/menuLateral.php" ?>
@@ -18,8 +18,11 @@
             
         <div class="supremo"><div class="card">
                 
+                <center><h2>Setor Mais Verde do Mês</h2>
+                <br>
+                <p>Lab. de Química 02</p>
                 <p>Bloco C</p>
-                <p>1° Andar</p>
+                <p>1° Andar</p></center>
                 <br>
                 <p>Dentro da Meta</p>
                 <br>
@@ -36,28 +39,68 @@
             <br>
             <br>
             <div class="card2-3">
+           
             <div class="card2">
             <form action="">
-                <h1>Relatar Problemas nas Sala</h1>
+                <center><h1>Relatar Problemas nas Sala</h1></center>
                 <br>
                 <p>Seu Setor de Trabalho</p>
                 <input type="text">
                 <br>
+                <br>
                 <p>Seu Bloco - Andar e Sala</p>
                 <input type="text">
+                <br>
                 <br>
                 <p>Qual o Problema Relatado</p>
                 <input type="text">
                 <br>
+                <br>
                 <button type="button">Enviar</button>    
             </form></div>
-            <div class="card3"><h2>Frase do dia</h2>
+
+            <div class="card3">
+                <center><h2>Frase do dia</h2></center>
             <br>
-            <p>Cuidar do planeta começa no nosso interruptor. Ao apagar uma luz ou tirar um aparelho da tomada, você economiza dinheiro e preserva os recursos naturais.<br>
-        Economizar energia é um gesto simples que gera um futuro mais sustentável para todos.</p></div>
+            <center><p>Cuidar do planeta começa no nosso interruptor. Ao apagar uma luz ou tirar um aparelho da tomada, você economiza dinheiro e preserva os recursos naturais.<br><br>
+        Economizar energia é um gesto simples que gera um futuro mais sustentável para todos.</p></div></center>
     </div>
     </div>
+    <div class="ranking"><table>
+    <h2>Ranking de Consumo do Setor</h2>
+    <tr class="ranking_cabaca">
+        <th>Pos.</th>
+        <th>Ambiente/Sala</th>
+        <th>Consumo</th>
+        <th>Status de Meta</th>
+    </tr>
+    <tr>
+        <td class="normal">1</td>
+        <td class="normal">Lab. de Química 02</td>
+        <td class="normal">2.394.2 KWh</td>
+        <td class="status">Excedido -8%</td>
+    </tr>
+    <tr>
+        <td class="normal">2</td>
+        <td class="normal">Lab. de Química 01</td>
+        <td class="normal">1.424.5 KWh</td>
+        <td class="status">Atenção</td>
+    </tr> 
+    <tr>
+        <td class="normal">3</td>
+        <td class="normal">Refeitório</td>
+        <td class="normal">1.100.2 KWh</td>
+        <td class="status">Dentro da Meta</td>
+    </tr>
+    <tr>
+        <td class="normal">4</td>
+        <td class="normal">Administração</td>
+        <td class="normal">1.036.8 KWh</td>
+        <td class="status">Dentro da Meta</td>
+    </tr>
+</table></div>
 </div>
 </div>
+
 </body>
 </html>

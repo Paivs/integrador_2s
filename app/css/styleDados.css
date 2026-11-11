@@ -1,1 +1,27 @@
-
+body{
+    background-color: #090b0c;
+}
+.form-manual {
+    width: 80%;
+    background-color: #151a1c;
+    padding: 20px;
+    border-radius: 45px;
+    border: 2px solid #007e39;
+    margin-bottom: 20px;
+    margin-right: 1300px;
+}
+.form-manual h2 {
+    color: #31c166;
+    margin-bottom: 20px;
+}
+.conteudo h1 {
+    color: #31c166;
+    margin-bottom: 20px;
+}
+.from-registro {
+    background-color: #151a1c;
+    padding: 20px;
+    border-radius: 45px;
+    border: 2px solid #007e39;
+    margin-bottom: 20px;
+}

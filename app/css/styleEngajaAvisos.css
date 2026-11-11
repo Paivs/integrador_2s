@@ -7,26 +7,78 @@ body{
 }
 
 .card{
-    background-color: black;
-    border: 1px solid greenyellow;
+    background-color: #151a1c;
+    border: 1px solid #007e39;
     padding: 20px;
-    border-radius: 20px;
+    border-radius: 30px;
     width: 600px;
     margin-right: 50px;
+    color: #e0f9b1;
+}
+.card h2{
+    color: #31c166;
 }
 
 .card2{
-    background-color: black;
-    border: 1px solid greenyellow;
+    background-color: #151a1c;
+    border: 1px solid #007e39;
     padding: 20px;
     border-radius: 20px;
-    width: 600px;
+    width: 530px;
+    color: #e0f9b1;
+}
+.card2 h1{
+    color: #31c166;
+}
+.card2 button{
+    background-color: #007e39;
+    color: #e0f9b1 ;
+    border-radius: 10px;
+    height: 50px;
+    width: 400px;
+    border: none;
+}
+.card2 input{
+    background-color: #e0f9b1;
+    color: #151a1c;
+    border-radius: 10px;
+    height: 50px;
+    width: 400px;
+    border: none;
+    margin-top: 8px;
 }
 
 .card3{
-    background-color: black;
-    border: 1px solid greenyellow;
+    margin-top: 10px;
+    background-color: #151a1c;
+    border: 1px solid #007e39;
     padding: 20px;
     border-radius: 20px;
-    width: 600px;
+    width: 530px;
+    height: 200px;
+    color: #e0f9b1;
+}
+.card3 h2{
+    color: #31c166;
+}
+
+.ranking{
+    background-color: #151a1c;
+    padding: 20px;
+    border-radius: 20px;
+    width: 530px;
+    height: 200px;
+    color: #e0f9b1;
+    margin-top: 10px;
+    border: 1px solid #007e39;
+}
+.ranking_cabaca{
+    background-color: #4fbe71;
+    color: #000000;
+    border: none;
+}
+
+.ranking td{
+    background-color: #e0f9b1;
+    color: #000000;
 }
