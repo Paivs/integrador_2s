@@ -43,6 +43,8 @@ if ($_SERVER['REQUEST_METHOD'] == "GET" || isset($_GET['erro'])) {
                 <p class="erro">USERNAME SÓ PODE CONTER NO MAXIMO 20 CARACTERIES</p>
             <?php elseif ($erro == "USERNAME_ERRADO"): ?>
                 <p class="erro">USERNAME TEM QUE CONTER NO MINIMO 5 CARACTERIES</p>
+            <?php elseif ($erro == "CARACTERE_INVALIDO"): ?>
+                <p class="erro">USERNAME NÃO PODE CONTER CARACTERES ESPECIAIS E ESPAÇO</p>
             <?php endif ?>
             <br>
             <div class="campo">

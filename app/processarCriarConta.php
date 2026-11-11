@@ -8,6 +8,10 @@ if($_SERVER['REQUEST_METHOD'] == "POST" || isset($_POST)){
     $username = $_POST['username'];
     
     if(
+        preg_match('/[^a-zA-Z0-9_-]/', $username)) {
+        header("Location: criarConta.php?erro=CARACTERE_INVALIDO");
+        exit;
+        }elseif(
         strlen(trim($senha)) > 50) {
             header("Location: criarConta.php?erro=SENHA");
             exit;
@@ -51,7 +55,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST" || isset($_POST)){
             exit;
             }catch(PDOException $e){
                 error_log($e->getMessage());
-                exit("Erro ao salvar as informações. E-mail ou senha ja existe");
+                exit("Erro ao salvar as informações. E-mail ja existe");
             }
         }
     }
