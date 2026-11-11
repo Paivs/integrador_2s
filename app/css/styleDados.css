@@ -1,27 +1,71 @@
 body{
     background-color: #090b0c;
 }
+
 .form-manual {
-    width: 80%;
     background-color: #151a1c;
     padding: 20px;
     border-radius: 45px;
     border: 2px solid #007e39;
     margin-bottom: 20px;
-    margin-right: 1300px;
+    margin-right: 900px;
 }
 .form-manual h2 {
     color: #31c166;
-    margin-bottom: 20px;
+    margin-bottom: 50px;
+    margin-left: 20px;
 }
+.form-manual label {
+    color: #ffffff;
+    margin-left: 30px;
+}
+.form-manual select {
+    margin-left: 30px;
+    border-radius: 20px;
+    border: 2px solid  #31c166;
+    background-color: #31c166;
+    margin-top: 20px;
+    width: 600px;
+    height: 40px;
+}
+.form-manual input{
+    margin-left: 30px;
+    border-radius: 20px;
+    border: 2px solid  #31c166;
+    background-color: #31c166;
+    margin-top: 20px;
+    width: 600px;
+    height: 40px;
+}
+.form-manual button {
+    margin-left: 200px;
+    border-radius: 20px;
+    border: 2px solid  #31c166;
+    background-color: #31c166;
+    margin-top: 20px;
+    width: 300px;
+    height: 50px;
+    
+}
+
 .conteudo h1 {
     color: #31c166;
     margin-bottom: 20px;
 }
-.from-registro {
+.coneiner-conteudo {
+    display: flex;
+    margin-left: 10px;
+}
+.form-registrar {
     background-color: #151a1c;
     padding: 20px;
-    border-radius: 45px;
+    border-radius: 50px;
     border: 2px solid #007e39;
+    margin-bottom: 20px;
+    margin-right: 600px;
+}
+.form-registrar table thead tr {
+    background-color: #4fbe71;
+    border-radius: 20px;
     margin-bottom: 20px;
 }
