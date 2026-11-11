@@ -1,6 +1,31 @@
+.funcao{
+     display: flex;
+     margin-bottom: 50px;
+     margin-left: 100px;
+}
+
+.funcao a{
+    text-decoration: none;
+    border: 1px solid;  
+    padding: 15px 25px;
+    margin-left: 150px;
+    border-radius: 15px;
+    height: 30px;
+    background-color: #ffffff ;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; 
+    font-size: 30px;
+    color: #595959; 
+    padding-bottom: 25px;
+}
+
+.funcao a span{
+    color: #f4892f;
+}
+
 .barra-pesquisa {
   display: flex;
-  max-width: 400px;
+  height: 60px;
+  max-width: 700px;
   width: 100%;
   border: 2px solid #ccc;
   border-radius: 24px;
@@ -103,26 +128,9 @@
     object-fit: contain;
 }
 
-.funcao{
-     display: flex;
-     margin-bottom: 30px;
-     margin-left: 200px;
-}
 
-.funcao a{
-    text-decoration: none;
-    border: 1px solid;  
-    padding: 15px 25px;
-    margin-left: 50px;
-    border-radius: 15px;
-    height: 20px;
-    background-color: #ffffff ;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; 
-    font-size: 25px;
-    color: #595959; 
-    padding-bottom: 25px;
-}
 
 .funcao a span{
     color: #f4892f;
 }
+
