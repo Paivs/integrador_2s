@@ -6,17 +6,74 @@ body{
     background-color: #151a1c;
     padding: 20px;
     border: 1px solid #7bd798;
-    border-radius: 20px;    
+    border-radius: 20px;
+    margin-bottom: 40px;
 }
 
 .total_kwh{
     background-color: #090b0c;
     padding: 20px;
     border-radius: 20px;
-    width: 300px;
+    height: 200px;
+    width: 500px;
+    margin-right: 20px;
 }
 
 .total_kwh h4{
     color: #3d694e;
     font-size: 20px;
+}
+
+.total_reais{
+    background-color: #090b0c;
+    padding: 20px;
+    border-radius: 20px;
+    height: 200px;
+    width: 500px;
+    margin-right: 20px;
+}
+
+.total_reais h4{
+    color: #3d694e;
+    font-size: 20px;
+}
+
+.eficiencia{
+    background-color: #090b0c;
+    padding: 20px;
+    border-radius: 20px;
+    height: 200px;
+    width: 500px;
+}
+
+.eficiencia h4{
+    color: #3d694e;
+    font-size: 20px;
+}
+
+
+.kwh_e_reais{
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.setor_info{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.setor_e_area{
+    display: flex;
+    align-items: center;
+}
+
+.setor_e_area h3{
+    color: #def9b6;
+    margin-left: 30px;
+}
+
+.info{
+    margin-right: 50px;
 }
