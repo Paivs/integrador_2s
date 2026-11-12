@@ -13,3 +13,148 @@
 #pagina-manutencoes .central p {
   font-size: 15px;
 }
+
+/* Card principal de agendamento do cliente */
+.bloco-manutencao {
+  background-color: #202e36;
+  margin-top: 32px;
+  padding: 28px;
+  border-radius: 16px;
+  display: grid;
+  grid-template-columns: 1.15fr 1fr 1fr;
+  gap: 28px;
+  align-items: center;
+}
+
+.bloco-manutencao h2,
+.bloco-manutencao h3,
+.bloco-manutencao p {
+  color: #ffffff;
+}
+
+/* Coluna 1: Logo + Mapa */
+.bloco-manutencao .coluna-mapa {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.bloco-manutencao .marca {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.bloco-manutencao .marca .logo {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.bloco-manutencao .marca h2 {
+  font-size: 16px;
+  margin: 0;
+}
+
+#mapa.maps {
+  width: 100%;
+  height: 250px;
+  border-radius: 24px;
+  overflow: hidden;
+}
+
+/* Garante texto escuro dentro do balão do mapa */
+#mapa .maplibregl-popup-content {
+  color: #0f172a;
+}
+
+/* Coluna 2: Campos do formulário */
+.bloco-manutencao .coluna-campos {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.bloco-manutencao .campo-box {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  background-color: #cbd5e1;
+  padding: 8px 12px;
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+
+.bloco-manutencao .campo-box span {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #1e293b;
+}
+
+.bloco-manutencao .campo-box select,
+.bloco-manutencao .campo-box input {
+  width: 100%;
+  border: none;
+  background: transparent;
+  font-size: 14px;
+  font-weight: 600;
+  color: #0f172a;
+  outline: none;
+}
+
+.bloco-manutencao .linha-dupla {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+/* Coluna 3: Preço médio e botão */
+.bloco-manutencao .coluna-preco {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 16px;
+}
+
+.bloco-manutencao .aviso-preco {
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: #e2e8f0;
+  max-width: 260px;
+  margin: 0;
+}
+
+.bloco-manutencao .valor-destaque {
+  font-size: 36px;
+  font-weight: 800;
+  color: #ffffff;
+}
+
+.bloco-manutencao .botao-solicitar {
+  background-color: #cbd5e1;
+  color: #0f172a;
+  border: none;
+  border-radius: 999px;
+  padding: 14px 28px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+.bloco-manutencao .botao-solicitar:hover {
+  background-color: #ffffff;
+  transform: translateY(-1px);
+}
+
+/* Adaptação para telas menores */
+@media (max-width: 960px) {
+  .bloco-manutencao {
+    grid-template-columns: 1fr;
+  }
+}
