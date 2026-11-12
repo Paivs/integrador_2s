@@ -10,7 +10,6 @@ if (isset($_SESSION['usuario_id'])) {
 
 $erro = '';
 $email = '';
-$totalFuncionarios = $pdo->query('SELECT COUNT(*) FROM funcionarios')->fetchColumn();
 
 // O código abaixo só é executado se o form for enviado
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -99,14 +98,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </form>
 
         <p class="login_cadastro">
-          Ainda não tem uma conta? <a href="cadastro-usuario.php">Criar conta</a>
+          É cliente? <a href="cadastro-usuario.php">Criar conta de cliente</a>
         </p>
 
-        <?php if ($totalFuncionarios == 0): ?>
-          <p class="login_cadastro">
-            Primeiro acesso da oficina? <a href="cadastro-funcionario.php">Criar funcionário</a>
-          </p>
-        <?php endif; ?>
+        <p class="login_cadastro">
+          É funcionário? <a href="cadastro-funcionario.php">Criar conta de funcionário</a>
+        </p>
       </div>
     </section>
   </main>
