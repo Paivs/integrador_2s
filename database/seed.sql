@@ -101,63 +101,65 @@ VALUES
 ('Módulo ESP32 Wi-Fi/Bluetooth', 'Eletrônica', 18, 8);
 
 
+
 -- ==========================================
 -- 4. PROJETOS
 -- ==========================================
 
 INSERT INTO Projetos
-(nome_projeto, descricao_projeto, duracao, arquivo_projeto, id_criador)
+(nome_projeto, descricao_projeto, id_criador)
 VALUES
 (
  'Robô Seguidor de Linha',
  'Construção de um robô autônomo capaz de seguir trajetos utilizando sensores e programação.',
- 10, NULL, 1
+ 1
 ),
 (
  'Impressão 3D de Miniaturas',
  'Desenvolvimento de miniaturas personalizadas utilizando modelagem e impressão tridimensional.',
- 15, NULL, 2
+ 2
 ),
 (
  'Circuito Eletrônico Inteligente',
  'Criação de um circuito eletrônico utilizando Arduino, sensores e componentes eletrônicos.',
- 20, NULL, 3
+ 3
 ),
 (
  'Móvel Sustentável',
  'Construção de um pequeno móvel utilizando madeira reaproveitada e ferramentas de marcenaria.',
- 8, NULL, 4
+ 4
 ),
 (
  'Estação Meteorológica',
  'Desenvolvimento de uma estação meteorológica para monitoramento de temperatura e umidade.',
- 30, NULL, 5
+ 5
 ),
 (
  'Sistema de Corte a Laser',
  'Criação de peças personalizadas utilizando equipamentos de corte e gravação a laser.',
- 12, NULL, 6
+ 6
 ),
 (
  'Experimentos com Polímeros',
  'Estudo e desenvolvimento de materiais utilizando resinas, tintas e diferentes polímeros.',
- 25, NULL, 7
+ 7
 ),
 (
  'Automação Residencial IoT',
  'Desenvolvimento de um sistema de automação residencial utilizando módulos Wi-Fi e sensores.',
- 18, NULL, 8
+ 8
 ),
 (
  'Braço Robótico Automatizado',
  'Montagem e programação de um braço robótico utilizando motores e componentes eletrônicos.',
- 40, NULL, 9
+ 9
 ),
 (
  'Mini Protótipo Mecânico',
  'Construção de um protótipo mecânico para testar soluções de engenharia e mecanismos.',
- 5, NULL, 10
+ 10
 );
+
 
 
 -- ==========================================
