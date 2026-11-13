@@ -1,13 +1,92 @@
 body {
     display: flex;
-}
-
-.conteudo {
-    flex: 1;
-    padding: 30px;
-    overflow-x: auto;
+    background: #f5f6f8;
+    color: #24292f;
+    font-family: 'Alexandria', Arial, sans-serif;
 }
 
 .sidebar {
     flex-shrink: 0;
+    position: sticky;
+    top: 0;
+}
+
+.conteudo {
+    flex: 1;
+    padding: 32px;
+    overflow-x: auto;
+}
+
+.secao {
+    background: #fff;
+    border: 1px solid #e1e5ea;
+    border-radius: 10px;
+    padding: 24px;
+    margin-bottom: 30px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.secao h1 {
+    font-size: 24px;
+    font-weight: 600;
+    color: #252a31;
+    margin-bottom: 20px;
+}
+
+.caixa-tabela {
+    border: 1px solid #b8c0ca;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 14px 16px;
+    text-align: left;
+    border-right: 1px solid #d1d6dd;
+    border-bottom: 1px solid #d1d6dd;
+}
+
+th {
+    background: #f0f2f4;
+    color: #343a40;
+}
+
+th:last-child,
+td:last-child {
+    border-right: none;
+}
+
+tr:last-child td {
+    border-bottom: none;
+}
+
+.botao {
+    display: inline-block;
+    padding: 9px 12px;
+    margin-right: 6px;
+    border-radius: 6px;
+    color: #fff;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+.editar {
+    background: #198754;
+}
+
+.editar:hover {
+    background: #157347;
+}
+
+.excluir {
+    background: #dc3545;
+}
+
+.excluir:hover {
+    background: #bb2d3b;
 }

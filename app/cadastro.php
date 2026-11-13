@@ -137,8 +137,8 @@
                     <a href="index.php"><img src="img/cabecalho/logo.png" alt=""></a>
                 </div>
                     
-                <a href="#" class="item">
-                    <img src="./img/icons/pen_whiteback.webp" alt="" class="icone">
+                <a href="./dashboard.php" class="item">
+                    <img src="./img/icons/pen.webp" alt="" class="icone">
                     <span>Dashboard</span>
                 </a>
                     
