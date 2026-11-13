@@ -85,7 +85,7 @@ exit;
 
             <div class="moverTextos">
                 <h4 class="textoLogin">Não tem conta?</h4>
-                <a class="textoLink" href="">Cadastre-se Aqui!</a>
+                <a class="textoLink" href="./cadastroUser.php">Cadastre-se Aqui!</a>
             </div>
             <div class="erro">
 <?php
