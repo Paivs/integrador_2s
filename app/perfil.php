@@ -2,34 +2,34 @@
 
 require_once __DIR__ . '/init.php';
 
-
 if (empty($_SESSION['id'])) {
     header("Location: loginUsuario.php");
     exit;
-    }
-    
-    
-    if($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['id'])){
-        
-        update(database(), "Usuarios", [
-            "nome_usuario" => "{$_POST['nome_usuario']}",
-            "telefone" => "{$_POST['telefone']}",
-            "email" => "{$_POST['email']}",
-            "instituicao" => "{$_POST['instituicao']}"
-            ], "id_usuario = ?", [$_SESSION['id']]);
-        $_SESSION['user'] = $_POST['nome_usuario'];
-        header("Location: perfil.php");
-        exit;
-            
 }
-$usuario = read($pdo, "Usuarios", "id_usuario = ?", [$_SESSION['id']]);
+
+if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['id'])) {
+
+    update(database(), "Usuarios", [
+        "nome_usuario" => "{$_POST['nome_usuario']}",
+        "telefone" => "{$_POST['telefone']}",
+        "email" => "{$_POST['email']}",
+        "instituicao" => "{$_POST['instituicao']}"
+    ], "id_usuario = ?", [$_SESSION['id']]);
+
+    $_SESSION['user'] = $_POST['nome_usuario'];
+    header("Location: perfil.php");
+    exit;
+}
+
+$usuario = read(database(), "Usuarios", "id_usuario = ?", [$_SESSION['id']]);
 
 if (!$usuario) {
     header("Location: logout.php");
     exit;
 }
 
-
+$reservaUsuario = readAll(database(), "Reservas", "id_usuario = ?", [$_SESSION['id']]);
+$bancada = readAll(database(), "Bancadas", "id_bancada", []);
 
 ?>
 
@@ -97,6 +97,41 @@ if (!$usuario) {
                     <button type="submit" class="botao-salvar">Salvar alterações</button>
                 </form>
             </section>
+            <br>
+            <header class="perfil-cabecalho">
+                <h1>Minhas reservas:</h1>
+                <p>Veja suas bancadas reservadas e suas informações.</p>
+            </header>
+
+            <table class="tabelaReservas">
+                <thead>
+                    <tr>
+                        <th>Data Reserva:</th>
+                        <th>Horas Reservadas:</th>
+                        <th>Preço Total:</th>
+                        <th>ID Bancada:</th>
+                        <th>ID Projeto:</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php if (!empty($reservaUsuario)): ?>
+                        <?php foreach ($reservaUsuario as $reserva): ?>
+                            <tr>
+                                <td><?= $reserva['data_reserva'] ?></td>
+                                <td><?= $reserva['horas_reservadas'] ?></td>
+                                <td>R$ <?= number_format($reserva['preco_total'], 2, ',', '.') ?></td>
+                                <td><?= $reserva['id_bancada'] ?></td>
+                                <td><?= $reserva['id_projeto'] ?></td>
+                            </tr>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <tr>
+                            <td colspan="5">Você ainda não possui reservas.</td>
+                        </tr>
+                    <?php endif; ?>
+                </tbody>
+            </table>
+
         </div>
     </main>
 
