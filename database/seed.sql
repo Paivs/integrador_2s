@@ -3,16 +3,28 @@
 
 USE GameHub;
 
+
 -- =========================================
 -- 1. TABELA EQUIPES
 -- =========================================
 
-INSERT INTO equipes (nome, img, jogo_equipe) VALUES
-('FURIA', 'furia.png', 'Counter-Strike 2'),
-('LOUD', 'loud.png', 'Valorant'),
-('Team Liquid', 'liquid.png', 'League of Legends'),
-('MIBR', 'mibr.png', 'Counter-Strike 2'),
-('Pain Gaming', 'pain.png', 'League of Legends');
+INSERT INTO equipes (nome, img, jogo_equipe, descricao) VALUES
+
+('FURIA', 'furia.png', 'Counter-Strike 2',
+'A FURIA é uma organização brasileira de esports reconhecida mundialmente por sua competitividade, dedicação e presença em grandes campeonatos internacionais.'),
+
+('LOUD', 'loud.png', 'Valorant',
+'A LOUD é uma organização brasileira de esports conhecida por sua forte comunidade, jogadores talentosos e destaque no cenário competitivo de Valorant.'),
+
+('Team Liquid', 'liquid.png', 'League of Legends',
+'A Team Liquid é uma organização internacional de esports com tradição competitiva, presença global e equipes de alto nível em diversas modalidades.'),
+
+('MIBR', 'mibr.png', 'Counter-Strike 2',
+'O MIBR é uma tradicional organização brasileira de esports, conhecida por sua história no Counter-Strike e participação em grandes competições mundiais.'),
+
+('Pain Gaming', 'pain.png', 'League of Legends',
+'A paiN Gaming é uma organização brasileira de esports com uma trajetória marcante, torcida apaixonada e forte presença no cenário competitivo de League of Legends.');
+
 
 -- =========================================
 -- 2. TABELA USUARIOS
