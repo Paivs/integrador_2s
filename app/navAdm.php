@@ -15,24 +15,24 @@
                     <a href="index.php"><img src="img/cabecalho/logo.png" alt=""></a>
                 </div>
                 
-                <a href="#" class="item ativo">
-                    <img src="./img/icons/pen_whiteback.webp" alt="" class="icone">
+                <a href="./dashboard.php" class="item ativo">
+                    <img src="./img/icons/pen-roxo.png" alt="" class="icone">
                     <span>Dashboard</span>
                 </a>
                 
-                <a href="#" class="item">
-                    <img src="./img/icons/plus.webp" alt="" class="icone">
-                    <span>Adicionar Ferramenta</span>
+                <a href="./adicionarFerramenta.php" class="item">
+                    <img src="./img/icons/plus-branco.png" alt="" class="icone">
+                    <span>Ferramenta</span>
                 </a>
                 
-                <a href="#" class="item">
-                    <img src="./img/icons/plus.webp" alt="" class="icone">
-                    <span>Adicionar Bancada</span>
+                <a href="./adicionarBancada.php" class="item">
+                    <img src="./img/icons/plus-branco.png" alt="" class="icone">
+                    <span>Bancada</span>
                 </a>
                 
-                <a href="#" class="item">
-                    <img src="./img/icons/folder.webp" alt="" class="icone">
-                    <span>Histórico de Reservas</span>
+                <a href="./historicoReservas.php" class="item">
+                    <img src="./img/icons/folder-branco.png" alt="" class="icone">
+                    <span>Reservas</span>
                 </a>
             </div>
         </nav>

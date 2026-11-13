@@ -76,11 +76,11 @@ tr:last-child td {
 }
 
 .editar {
-    background: #198754;
+    background: #2D2568;
 }
 
 .editar:hover {
-    background: #157347;
+    background: #27205a;
 }
 
 .excluir {
@@ -89,4 +89,20 @@ tr:last-child td {
 
 .excluir:hover {
     background: #bb2d3b;
+}
+
+.etiqueta {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 12px;
+    color: #fff;
+    font-size: 13px;
+}
+
+.vermelha {
+    background: #dc3545;
+}
+
+.verde {
+    background: #198754;
 }
