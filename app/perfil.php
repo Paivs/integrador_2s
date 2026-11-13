@@ -114,25 +114,28 @@ $bancada = readAll(database(), "Bancadas", "id_bancada", []);
                     </tr>
                 </thead>
                 <tbody>
-                    <?php if (!empty($reservaUsuario)): ?>
-                        <?php foreach ($reservaUsuario as $reserva): ?>
-                            <tr>
-                                <td><?= $reserva['data_reserva'] ?></td>
-                                <td><?= $reserva['horas_reservadas'] ?></td>
-                                <td>R$ <?= number_format($reserva['preco_total'], 2, ',', '.') ?></td>
-                                <td><?php $bancadaUser = read(database(), "Bancadas", "id_bancada = ?", [$reserva['id_bancada']]);
+                    <div class="caixa-tabela">
+                        <?php if (!empty($reservaUsuario)): ?>
+                            <?php foreach ($reservaUsuario as $reserva): ?>
+                                <tr>
+                                    <td><?= $reserva['data_reserva'] ?></td>
+                                    <td><?= $reserva['horas_reservadas'] ?></td>
+                                    <td>R$ <?= number_format($reserva['preco_total'], 2, ',', '.') ?></td>
+                                    <td><?php $bancadaUser = read(database(), "Bancadas", "id_bancada = ?", [$reserva['id_bancada']]);
                                         echo $bancadaUser['nome_bancada'];
-                                    ?></td>
-                                <td><?php $projetoUser = read(database(), "Projetos", "id_projeto = ?", [$reserva['id_projeto']]);
+                                        ?></td>
+                                    <td><?php $projetoUser = read(database(), "Projetos", "id_projeto = ?", [$reserva['id_projeto']]);
                                         echo $projetoUser['nome_projeto'];
-                                    ?></td>
+                                        ?></td>
+                                </tr>
+                            <?php endforeach; ?>
+                        <?php else: ?>
+                            <tr>
+                                <td colspan="5">Você ainda não possui reservas.</td>
                             </tr>
-                        <?php endforeach; ?>
-                    <?php else: ?>
-                        <tr>
-                            <td colspan="5">Você ainda não possui reservas.</td>
-                        </tr>
-                    <?php endif; ?>
+                        <?php endif; ?>
+                    </div>
+
                 </tbody>
             </table>
 
