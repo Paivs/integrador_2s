@@ -19,7 +19,7 @@
             <li><a href="./torneios.php">TORNEIOS</a></li>
             <li><a href="./partidas.php">Partidas</a></li>
             <li><a href="./equipes.php">Equipes</a></li>
-            <li><a class="espaco" href="">Rankings</a></li>
+            <li><a class="espaco" href="./ranking.php">Rankings</a></li>
             </div>
 
             <div class=""><li><a href="./entrarConta.php"><img class="foto_login" src="./img/login.png" alt=""></a></li></div>
