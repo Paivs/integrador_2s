@@ -48,25 +48,63 @@ if (!empty($busca)) {
                 <?php endif; ?>
             </form>
 
-            <a href=""><i>CRIAR <span>EQUIPE</span></i></a>
+            <a href="#popup"><i>CRIAR <span>EQUIPE</span></i></a>
+
+<div id="popup" class="criar-equipe">
+    <div class="popup-box">
+        <a class="fechar" href="#">&times;</a>
+
+        <h1>CRIAÇÃO DE <span>EQUIPE</span></h1>
+
+        <form class="criarConta" action="processaEquipes.php" method="POST">
+            <div class="linha-superior">
+                
+                <label for="logo" class="logo">
+                    ESCOLHA UMA LOGO
+                    <input type="file" id="logo" name="logo" accept="image/*" hidden>
+                </label>
+
+                
+                <div class="coluna-input">
+                    <input type="text" name="nome" placeholder="ESCOLHA UM NOME:">
+                    <input type="text" name="jogo" placeholder="ESCOLHA O JOGO:">
+                </div>
+
+                
+                <select name="privacidade" class="privacidade">
+                    <option value="" disabled selected>TIPO DE PRIVACIDADE</option>
+                    <option value="publica">PÚBLICA</option>
+                    <option value="privada">PRIVADA</option>
+                </select>
+            </div>
+
+            
+            <textarea name="descricao" placeholder="DESCRIÇÃO:"></textarea>
+
+            
+            <button type="submit">CRIAR EQUIPE:</button>
+        </form>
+    </div>
+</div>
+
         </div>
 
         <div class="conteudo-equipes">
             <table class="tabela-equipes">
                 <thead>
                     <tr>
-                        <th>Jogo</th>
-                        <th>Escudo</th>
-                        <th>Nome</th>
+                        <th><i>Escudo</i></th>
+                        <th><i>Nome</i></th>
+                        <th><i>Jogo</i></th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php if (!empty($equipes)): ?>
                         <?php foreach ($equipes as $e): ?>
                             <tr>
-                                <td><?= htmlspecialchars($e['jogo_equipe']) ?></td>
-                                <td><img src="<?= htmlspecialchars($e['img']) ?>" alt="<?= htmlspecialchars($e['nome']) ?>" class="img-equipe"></td>
+                                <td><img src="./img/logos/<?= htmlspecialchars($e['img']) ?>" alt="<?= htmlspecialchars($e['nome']) ?>" class="img-equipe"></td>
                                 <td><?= htmlspecialchars($e['nome']) ?></td>
+                                <td><?= htmlspecialchars($e['jogo_equipe']) ?></td>
                             </tr>
                         <?php endforeach; ?>
                     <?php else: ?>
