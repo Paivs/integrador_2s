@@ -11,7 +11,7 @@
 
 .sidebar {
     position: relative;
-    width: 330px;
+    width: 300px;
     height: 100vh;
     background: #2D2568;
     display: flex;
@@ -37,6 +37,7 @@
     display: flex;
     flex-direction: column;
     gap: 12px;
+    margin-top:-200px;
 }
 
 .item {
@@ -51,9 +52,17 @@
     border-radius: 16px;
 }
 
+.item:hover {
+    background: #27205a;
+}   
+
 .item.ativo {
     background: #fff;
     color: #2d2566;
+}
+
+.item.ativo:hover {
+    background: #dfdfdf;
 }
 
 .item span {

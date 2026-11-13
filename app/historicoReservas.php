@@ -30,32 +30,33 @@
     <link rel="stylesheet" href="css/dashboard.css">
 </head>
 <body style="left: 50px;">
-    <header>
+    <header>    
+        
         <nav class="sidebar">
             <div class="sidebar-content">
-                    
+                
                 <div class="logo">
                     <a href="index.php"><img src="img/cabecalho/logo.png" alt=""></a>
                 </div>
-                    
-               <a href="./dashboard.php" class="item">
-                    <img src="./img/icons/pen.webp" alt="" class="icone">
+                
+                <a href="./dashboard.php" class="item">
+                    <img src="./img/icons/pen_branco.png" alt="" class="icone">
                     <span>Dashboard</span>
                 </a>
-                    
+                
                 <a href="./adicionarFerramenta.php" class="item">
-                    <img src="./img/icons/plus.webp" alt="" class="icone">
-                    <span>Adicionar Ferramenta</span>
+                    <img src="./img/icons/plus_branco.png" alt="" class="icone">
+                    <span>Ferramenta</span>
                 </a>
-                    
+                
                 <a href="./adicionarBancada.php" class="item">
-                    <img src="./img/icons/plus.webp" alt="" class="icone">
-                    <span>Adicionar Bancada</span>
+                    <img src="./img/icons/plus_branco.png" alt="" class="icone">
+                    <span>Bancada</span>
                 </a>
-                    
+                
                 <a href="./historicoReservas.php" class="item ativo">
-                    <img src="./img/icons/pen_whiteback.webp" alt="" class="icone">
-                    <span>Histórico de Reservas</span>
+                    <img src="./img/icons/folder_roxo.png" alt="" class="icone">
+                    <span>Reservas</span>
                 </a>
             </div>
         </nav>

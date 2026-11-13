@@ -25,33 +25,33 @@
         <link rel="stylesheet" href="css/dashboard.css">
     </head>
     <body>
-        <header>
-
+        <header>    
+        
             <nav class="sidebar">
                 <div class="sidebar-content">
-
+                    
                     <div class="logo">
                         <a href="index.php"><img src="img/cabecalho/logo.png" alt=""></a>
                     </div>
-
+                    
                     <a href="./dashboard.php" class="item ativo">
-                    <img src="./img/icons/pen_whiteback.webp" alt="" class="icone">
-                    <span>Dashboard</span>
+                        <img src="./img/icons/pen_roxo.png" alt="" class="icone">
+                        <span>Dashboard</span>
                     </a>
                     
                     <a href="./adicionarFerramenta.php" class="item">
-                        <img src="./img/icons/plus.webp" alt="" class="icone">
-                        <span>Adicionar Ferramenta</span>
+                        <img src="./img/icons/plus_branco.png" alt="" class="icone">
+                        <span>Ferramenta</span>
                     </a>
-                        
+                    
                     <a href="./adicionarBancada.php" class="item">
-                        <img src="./img/icons/plus.webp" alt="" class="icone">
-                        <span>Adicionar Bancada</span>
+                        <img src="./img/icons/plus_branco.png" alt="" class="icone">
+                        <span>Bancada</span>
                     </a>
-                        
+                    
                     <a href="./historicoReservas.php" class="item">
-                        <img src="./img/icons/folder.webp" alt="" class="icone">
-                        <span>Histórico de Reservas</span>
+                        <img src="./img/icons/folder_branco.png" alt="" class="icone">
+                        <span>Reservas</span>
                     </a>
                 </div>
             </nav>
@@ -80,7 +80,15 @@
                                     <td><?= $p['nome_bancada'] ?></td>
                                     <td><?= $p['area_bancada'] ?></td>
                                     <td><?= $p['preco_bancada'] ?></td>
-                                    <td><?= $p['status_bancada'] ?></td>
+                                    <td>
+                                        <?php if ($p['status_bancada'] == "indisponivel"): ?>
+                                            <span class="etiqueta vermelha">Indisponível</span>
+                                        <?php elseif ($p['status_bancada'] == "disponivel"): ?>
+                                            <span class="etiqueta verde">Disponível</span>
+                                        <?php else: ?>
+                                            <?= $p['status_bancada'] ?>
+                                        <?php endif; ?>
+                                    </td>
                                     <td>
                                         <a class="botao editar" href="editarBancada.php?id=<?= $p['id_bancada'] ?>">Editar</a>
                                         <a class="botao excluir" href="deleteBancada.php?id=<?= $p['id_bancada'] ?>">Deletar</a>
@@ -111,7 +119,13 @@
                                     <td><?= $p['id_ferramenta'] ?></td>
                                     <td><?= $p['nome_ferramenta'] ?></td>
                                     <td><?= $p['area'] ?></td>
-                                    <td><?= $p['estoque'] ?></td>
+                                    <td>
+                                        <?php if ($p['estoque'] == 0): ?>
+                                            <span class="etiqueta vermelha">Sem estoque</span>
+                                        <?php else: ?>
+                                            <span class="etiqueta verde"><?= $p['estoque'] ?></span>
+                                        <?php endif; ?>
+                                    </td>
                                     <td>
                                         <a class="botao editar" href="editarFerramenta.php?id=<?= $p['id_ferramenta'] ?>">Editar</a>
                                         <a class="botao excluir" href="deleteFerramenta.php?id=<?= $p['id_ferramenta'] ?>">Deletar</a>
