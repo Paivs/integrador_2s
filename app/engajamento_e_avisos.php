@@ -1,5 +1,6 @@
 <?php
     require_once __DIR__ . '/init.php';
+    
 ?>
 
 <html>
@@ -66,7 +67,7 @@
         Economizar energia é um gesto simples que gera um futuro mais sustentável para todos.</p></div></center>
     </div>
     </div>
-    <div class="ranking"><table>
+    <div class="ranking"><center><table>
     <h2>Ranking de Consumo do Setor</h2>
     <tr class="ranking_cabaca">
         <th>Pos.</th>
@@ -98,8 +99,12 @@
         <td class="normal">1.036.8 KWh</td>
         <td class="status">Dentro da Meta</td>
     </tr>
-</table></div>
+</table>
 </div>
+</center>
+
+</div>
+
 </div>
 
 </body>
