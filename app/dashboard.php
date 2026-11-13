@@ -4,6 +4,16 @@
     $bancadas = readAll($pdo, "Bancadas");
     $ferramentas = readAll($pdo, "Ferramentas");
 
+    if (isset($_SESSION['id'])) {
+        $userAtual = read(database(), "Usuarios", "id_usuario = {$_SESSION['id']}");
+        if($userAtual['perfil'] != "admin" || !isset($userAtual)){
+            header("Location: index.php");
+            exit;
+        }
+    }else{
+        header("Location: index.php");
+        exit;
+    };
 ?>
 
 <!DOCTYPE html>
@@ -25,21 +35,21 @@
                     </div>
 
                     <a href="./dashboard.php" class="item ativo">
-                        <img src="./img/icons/pen_whiteback.webp" alt="" class="icone">
-                        <span>Dashboard</span>
+                    <img src="./img/icons/pen_whiteback.webp" alt="" class="icone">
+                    <span>Dashboard</span>
                     </a>
-
-                    <a href="#" class="item">
+                    
+                    <a href="./adicionarFerramenta.php" class="item">
                         <img src="./img/icons/plus.webp" alt="" class="icone">
-                        <span>Adicionar Equipamento</span>
+                        <span>Adicionar Ferramenta</span>
                     </a>
-
-                    <a href="./cadastro.php" class="item">
+                        
+                    <a href="./adicionarBancada.php" class="item">
                         <img src="./img/icons/plus.webp" alt="" class="icone">
                         <span>Adicionar Bancada</span>
                     </a>
-
-                    <a href="#" class="item">
+                        
+                    <a href="./historicoReservas.php" class="item">
                         <img src="./img/icons/folder.webp" alt="" class="icone">
                         <span>Histórico de Reservas</span>
                     </a>

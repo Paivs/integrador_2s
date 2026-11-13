@@ -22,7 +22,7 @@
                 
                 <a href="#" class="item">
                     <img src="./img/icons/plus.webp" alt="" class="icone">
-                    <span>Adicionar Equipamento</span>
+                    <span>Adicionar Ferramenta</span>
                 </a>
                 
                 <a href="#" class="item">
