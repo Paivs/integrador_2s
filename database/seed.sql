@@ -84,31 +84,31 @@ INSERT INTO torneios (
     tipo
 ) VALUES
 
-('Phantom Tournament', '2026-11-20', 3000, 10,
+('Phantom Tournament', '2026-11-20', 10000, 10,
 'Pontos corridos', 'Valorant', '16:00',
 'phantom.png', 'chaveamento1.png', 15.00, 'gamehub'),
 
-('Rocket Champions', '2026-11-25', 2500, 10,
+('Rocket Champions', '2026-11-25', 15000, 10,
 'Eliminatoria', 'Rocket League', '15:00',
 'rocket.png', 'chaveamento2.png', 10.00, 'comunidade'),
 
-('Master League', '2026-12-05', 7000, 16,
+('Master League', '2026-12-05', 25000, 16,
 'Eliminatoria', 'Counter-Strike 2', '18:00',
 'master.png', 'chaveamento3.png', 20.00, 'gamehub'),
 
-('EA Cup', '2026-12-02', 4000, 16,
+('EA Cup', '2026-12-02', 250, 16,
 'Eliminatoria', 'EA FC', '12:00',
 'eacup.png', 'chaveamento4.png', 10.00, 'gamehub'),
 
-('FN Cup', '2026-12-09', 9000, 16,
+('FN Cup', '2026-12-09',500, 16,
 'Eliminatoria', 'Fortnite', '12:00',
 'fncup.png', 'chaveamento5.png', 10.00, 'gamehub'),
 
-('Siege Cup', '2026-12-14', 3000, 16,
+('Siege Cup', '2026-12-14', 1000, 16,
 'Eliminatoria', 'Tom Clancy''s Rainbow Six Siege', '12:00',
 'siege.png', 'chaveamento6.png', 10.00, 'gamehub'),
 
-('CNLOL', '2026-12-22', 2000, 16,
+('CNLOL', '2026-12-22', 750, 16,
 'Eliminatoria', 'League of Legends', '12:00',
 'cnlol.png', 'chaveamento7.png', 10.00, 'gamehub');
 
