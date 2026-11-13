@@ -70,7 +70,7 @@ CREATE TABLE IF NOT EXISTS Ferramentas (
 CREATE TABLE IF NOT EXISTS Projetos (
     id_projeto INT AUTO_INCREMENT PRIMARY KEY,
     nome_projeto VARCHAR(100) NOT NULL,
-    descricao_projeto TEXT
+    descricao_projeto TEXT,
     data_criacao DATETIME DEFAULT CURRENT_TIMESTAMP,
     id_criador INT NOT NULL,
 

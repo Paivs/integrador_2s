@@ -120,8 +120,12 @@ $bancada = readAll(database(), "Bancadas", "id_bancada", []);
                                 <td><?= $reserva['data_reserva'] ?></td>
                                 <td><?= $reserva['horas_reservadas'] ?></td>
                                 <td>R$ <?= number_format($reserva['preco_total'], 2, ',', '.') ?></td>
-                                <td><?= $reserva['id_bancada'] ?></td>
-                                <td><?= $reserva['id_projeto'] ?></td>
+                                <td><?php $bancadaUser = read(database(), "Bancadas", "id_bancada = ?", [$reserva['id_bancada']]);
+                                        echo $bancadaUser['nome_bancada'];
+                                    ?></td>
+                                <td><?php $projetoUser = read(database(), "Projetos", "id_projeto = ?", [$reserva['id_projeto']]);
+                                        echo $projetoUser['nome_projeto'];
+                                    ?></td>
                             </tr>
                         <?php endforeach; ?>
                     <?php else: ?>
