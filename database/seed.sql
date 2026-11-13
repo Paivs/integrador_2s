@@ -80,25 +80,25 @@ VALUES
 -- ==========================================
 
 INSERT INTO Ferramentas
-(nome_ferramenta, area, estoque, id_bancada, status_ferramenta)
+(nome_ferramenta, area, estoque, id_bancada)
 VALUES
-('Ferro de Solda', 'Eletrônica', 10, 1, 'disponivel'),
-('Multímetro Digital', 'Eletrônica', 8, 1, 'disponivel'),
-('Osciloscópio', 'Eletrônica', 3, 1, 'disponivel'),
-('Impressora 3D Ender 3', 'Prototipagem', 2, 2, 'disponivel'),
-('SLA Resin Printer', 'Prototipagem', 1, 2, 'disponivel'),
-('Serra Tico-Tico', 'Marcenaria', 5, 3, 'disponivel'),
-('Lixadeira Orbital', 'Marcenaria', 4, 3, 'indisponivel'),
-('Tupia Manual', 'Marcenaria', 2, 3, 'disponivel'),
-('Arduino Uno', 'Robótica', 15, 4, 'disponivel'),
-('Kit Servomotores', 'Robótica', 10, 4, 'indisponivel'),
-('Raspberry Pi 4', 'Robótica', 6, 4, 'disponivel'),
-('Chave de Fenda', 'Prototipagem', 20, 5, 'disponivel'),
-('Micro Retífica', 'Prototipagem', 6, 5, 'disponivel'),
-('Alicate de Corte', 'Eletrônica', 12, 1, 'disponivel'),
-('Cortadora Laser CO2', 'Corte e Usinagem', 1, 6, 'disponivel'),
-('Exaustor Industrial', 'Química', 2, 7, 'disponivel'),
-('Módulo ESP32 Wi-Fi/Bluetooth', 'Eletrônica', 18, 8, 'disponivel');
+('Ferro de Solda', 'Eletrônica', 10, 1),
+('Multímetro Digital', 'Eletrônica', 8, 1),
+('Osciloscópio', 'Eletrônica', 3, 1),
+('Impressora 3D Ender 3', 'Prototipagem', 2, 2),
+('SLA Resin Printer', 'Prototipagem', 1, 2),
+('Serra Tico-Tico', 'Marcenaria', 5, 3),
+('Lixadeira Orbital', 'Marcenaria', 4, 3),
+('Tupia Manual', 'Marcenaria', 2, 3),
+('Arduino Uno', 'Robótica', 15, 4),
+('Kit Servomotores', 'Robótica', 10, 4),
+('Raspberry Pi 4', 'Robótica', 6, 4),
+('Chave de Fenda', 'Prototipagem', 20, 5),
+('Micro Retífica', 'Prototipagem', 6, 5),
+('Alicate de Corte', 'Eletrônica', 12, 1),
+('Cortadora Laser CO2', 'Corte e Usinagem', 1, 6),
+('Exaustor Industrial', 'Química', 2, 7),
+('Módulo ESP32 Wi-Fi/Bluetooth', 'Eletrônica', 18, 8);
 
 
 -- ==========================================

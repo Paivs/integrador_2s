@@ -135,17 +135,9 @@ CREATE TABLE IF NOT EXISTS Reservas (
 -- ==========================================
 
 CREATE OR REPLACE VIEW vw_ferramentas_bancadas AS
-SELECT
-    f.id_ferramenta,
-    f.nome_ferramenta,
-    f.area,
-    f.estoque,
-    f.status_ferramenta,
-    b.id_bancada,
-    b.nome_bancada
-FROM Ferramentas f
-INNER JOIN Bancadas b
-    ON f.id_bancada = b.id_bancada;
+SELECT f.id_ferramenta, f.nome_ferramenta, f.area, f.estoque,
+       b.id_bancada, b.nome_bancada
+FROM Ferramentas f INNER JOIN Bancadas b ON f.id_bancada = b.id_bancada;
 
 
 -- ==========================================
