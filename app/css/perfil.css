@@ -180,6 +180,25 @@ body {
     }
 }
 
-.tabelaReservas {
-    
+.caixa-tabela {
+    border: 1px solid #b8c0ca;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 14px 16px;
+    text-align: left;
+    border-right: 1px solid #d1d6dd;
+    border-bottom: 1px solid #d1d6dd;
+}
+
+th {
+    background: #f0f2f4;
+    color: #343a40;
 }
