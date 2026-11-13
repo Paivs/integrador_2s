@@ -106,8 +106,8 @@ $bancada = readAll(database(), "Bancadas", "id_bancada", []);
                         <th>Data Reserva:</th>
                         <th>Horas Reservadas:</th>
                         <th>Preço Total:</th>
-                        <th>ID Bancada:</th>
-                        <th>ID Projeto:</th>
+                        <th>Bancada:</th>
+                        <th>Projeto:</th>
                     </tr>
                 </thead>
                 <tbody>

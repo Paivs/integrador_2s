@@ -16,7 +16,7 @@
     };
 
 
-    $bancadaSelecionada = [];
+    $bancadaSelecionada = [];   
 
     
     
