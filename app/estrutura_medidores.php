@@ -19,22 +19,54 @@ $metas = readAll(database(), "metas");
         <div class="menu-conf">
             <?php require_once __DIR__ . '/menuLateral.php'; ?>
             <div class="conteudo"> <! Todo o conteúdo da página vai aqui >
-
-                <h1>Estrutura de Medidores</h1> <! Título da página >
+            
+                <h1>Estrutura de Medidores </h1> <! Título da página >
+                            <br>
                             <br>
 
                 <?php foreach ($setores as $setor): ?> <! Cards com cada setor >
-
-                    <div class="setor">
-
-                        <?php
+                    <?php
+            
                         $area_total = 0;
                         foreach ($ambientes as $ambiente) {
                             if ($ambiente['setor_id'] == $setor['id']) {
                                 $area_total += $ambiente['area_m2'];
                             }
-                        } ?>
+                        }
+
+                        $total_kwh = 0;
+                        foreach ($ambientes as $ambiente) {
+                            foreach ($leituras as $leitura) {
+                                if ($leitura['ambiente_id'] == $ambiente['id'] && $ambiente['setor_id'] == $setor['id']) {
+                                    $total_kwh += $leitura['leitura_acumulada_kwh'];
+                                }
+                            }
+                        } 
                         
+                        $meta_setor = 0;
+                        foreach ($metas as $meta) {
+                            foreach ($ambientes as $ambiente) {     
+                                if($meta['ambiente_id'] == $ambiente['id'] && $ambiente['setor_id'] == $setor['id']) {
+                                    $meta_setor += $meta['meta_kwh'];
+                                }
+                            }
+                        }
+                        
+                        $porcentagem_meta = ($total_kwh / $meta_setor) * 100;
+                        $porcentagem_meta = number_format($porcentagem_meta, 2);
+
+                        if ($porcentagem_meta > 100) {
+                            $cor_meta = 'vermelho';
+                        } elseif ($porcentagem_meta > 80) {
+                            $cor_meta = 'amarelo';
+                        } else {
+                            $cor_meta = 'verde';
+                        }
+
+                    ?>
+
+                    <div class="setor_<?php echo $cor_meta; ?>">
+
                         <div class="setor_info">
 
                             <div class="setor_e_area">
@@ -44,7 +76,20 @@ $metas = readAll(database(), "metas");
                             </div>    
 
                             <div class="info">
-                                <h2><?php echo $setor['nome']; ?></h2>
+                                <h2 class="setor_nome"><?php echo $setor['nome']; ?></h2>
+                                <h2>
+                                    <?php 
+                                    
+                                    if($cor_meta == 'vermelho'){ 
+                                        echo "<b>Alerta 🔴</b>"; 
+                                    } elseif($cor_meta == 'amarelo'){ 
+                                        echo "<b>Atenção 🟡</b>";
+                                    } else {
+                                        echo "<b>Suave 🟢</b>";
+                                    }
+                    
+                                    ?>
+                                </h2>
                             </div>
                                     
                         </div>  <br>
@@ -54,33 +99,13 @@ $metas = readAll(database(), "metas");
                             <h2>Gasto de energia</h2>
                             <h4>Em quilowatt-hora (kWh)</h4> <br>
                             <?php
-                                $total_kwh = 0;
-                                foreach ($ambientes as $ambiente) {
-                                    foreach ($leituras as $leitura) {
-                                        if ($leitura['ambiente_id'] == $ambiente['id'] && $ambiente['setor_id'] == $setor['id']) {
-                                            $total_kwh += $leitura['leitura_acumulada_kwh'];
-                                        }
-                                    }
-                                }
-
-                                echo "<h1>" . $total_kwh . " kWh</h1><br>";
                                 
-                                $meta_setor = 0;
-                                foreach ($metas as $meta) {
-                                    foreach ($ambientes as $ambiente) {
-                                        
-                                        if($meta['ambiente_id'] == $ambiente['id'] && $ambiente['setor_id'] == $setor['id']) {
-                                            $meta_setor += $meta['meta_kwh'];
-                                            
-                                        }
-                                    }
-                                }
-
-                                $porcentagem_meta = ($total_kwh / $meta_setor) * 100;
-                                $porcentagem_meta = number_format($porcentagem_meta, 2);
-
-                                echo "<h4>Meta: " . $meta_setor . " kWh | " . $porcentagem_meta . " % da meta</h4>";
+                                echo "<h1>" . $total_kwh . " kWh</h1><br>";
+                          
+                                echo "<h4>Meta: " . $meta_setor . " kWh | <b class='meta_" . $cor_meta . "'>" . $porcentagem_meta . " % da meta</b></h4>";
+                            
                             ?> 
+
 
                         </div>
 
