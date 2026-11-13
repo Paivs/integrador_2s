@@ -47,9 +47,6 @@ $bancada = readAll(database(), "Bancadas", "id_bancada", []);
     <?php require_once __DIR__ . '/nav.php' ?>
     <br>
     <br>
-    <br>
-    <br>
-    <br>
     <main class="perfil-pagina">
         <div class="perfil-card">
 

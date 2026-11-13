@@ -50,7 +50,7 @@ if (isset($_SESSION['user'])) {
           </li>
 
           <li><a href="">Quem Somos</a></li>
-          <li><a href="">Projetos</a></li>
+          <li><a href="./projetos.php">Projetos</a></li>
 
           <?php if ($perfil == 'admin'): ?>
             <li><a href="./dashboard.php">Administrador</a></li>

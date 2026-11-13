@@ -87,10 +87,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <?php require_once __DIR__ . '/nav.php'; ?>
     <br>
     <br>
-    <br>
-    <br>
-    <br>
-    <br>
     <section class="loginADM">
         <div class="conteudo">
 
