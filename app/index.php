@@ -1,34 +1,60 @@
 <?php
-
-declare(strict_types=1);
-
-$databaseStatus = 'Conectado';
-
-try {
-    require_once __DIR__ . '/init.php';
-    $pdo->query('SELECT 1');
-} catch (Throwable $exception) {
-    $databaseStatus = 'Indisponível';
-}
+    
 ?>
-<!doctype html>
-<html lang="pt-BR">
+
+
+<!DOCTYPE html>
+<html lang="pt-br">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Projeto Integrador</title>
-    <style>
-        body { font-family: system-ui, sans-serif; max-width: 720px; margin: 4rem auto; padding: 0 1rem; line-height: 1.5; }
-        .status { padding: 1rem; border-radius: .5rem; background: #eef6ee; }
-        code { background: #eee; padding: .15rem .3rem; border-radius: .25rem; }
-    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/app/css/index.css">
+    <title>GameHub</title>
 </head>
-<body>
-    <h1>Projeto Integrador</h1>
-    <p>O ambiente PHP está funcionando.</p>
-    <div class="status">
-        Banco de dados: <strong><?= htmlspecialchars($databaseStatus, ENT_QUOTES, 'UTF-8') ?></strong>
-    </div>
-    <p>Comece a aplicação editando <code>app/index.php</code>.</p>
-</body>
+    <body>
+        <?php require_once __DIR__ . "/cabecalho.php" ?>
+
+    
+        <div class="tudo">
+        <div class="banner">
+        <img src="./img/cs2_banner.png" alt="Counter-Strike 2">
+        </div>
+        <div class="texto-sobreposto">
+            <h1><i><b>MASTERS LEAGUE</b></i></h1>
+        </div>
+        <div class="texto-sobreposto2">
+            <h2><i><b>INSCRIÇÕES ABERTAS!</b></i></h2>
+        </div>
+        <div class="texto-sobreposto3">
+            <h4><i><b>Mais de R$50.000 em prêmios para equipes!</b></i></h4>
+        </div>
+        <div class="saiba">
+            <a href=""><i>SAIBA MAIS...</i></a>
+        </div>
+        <div class="preto">
+            
+            <div class="explorar">
+                <h1><i><b>EXPLORE OUTRAS <span class="exploração">COMPETIÇÕES</span> </class></b></i></h1>
+            </div>
+            <div class="outros">
+            <h1><i><b>DE <span class="jogos">OUTROS</span> GRANDES JOGOS</b></i></h1>
+            </div>
+            </div>
+
+            <section class="seccao-video-fundo">
+            <div class="video-overlay"></div>
+
+            <video autoplay loop muted playsinline>
+                <source src="./img/cyberforge_background_vignette_forte.mp4" type="video/mp4">
+            </video>
+            
+            </section>
+            <div class="fundoTorneios">
+            <div class="torneios">
+                <a href=""><b><i>VER TORNEIOS</i></b></a>
+            </div>
+            </div>
+        <?php require_once __DIR__ . "/rodape.php"?>
+    </body>
 </html>
+
