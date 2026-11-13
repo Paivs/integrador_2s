@@ -12,7 +12,6 @@ INSERT INTO equipes (nome, img, jogo_equipe) VALUES
 ('LOUD', 'loud.png', 'Valorant'),
 ('Team Liquid', 'liquid.png', 'League of Legends'),
 ('MIBR', 'mibr.png', 'Counter-Strike 2'),
-('Fluxo', 'fluxo.png', 'Free Fire'),
 ('Pain Gaming', 'pain.png', 'League of Legends');
 
 -- =========================================
@@ -43,17 +42,21 @@ INSERT INTO torneios (
     taxa,
     tipo
 ) VALUES
-('GameHub Championship', '2026-11-15', 5000, 16, 'Eliminatoria', 'Counter-Strike 2', '14:00', 0.00, 'gamehub'),
 
-('Valorant Masters', '2026-11-20', 3000, 10, 'Pontos corridos', 'Valorant', '16:00', 15.00, 'gamehub'),
 
-('League of Legends Cup', '2026-11-25', 2500, 10, 'Eliminatoria', 'League of Legends', '15:00', 10.00, 'comunidade'),
+('Phantom Tournament', '2026-11-20', 3000, 10, 'Pontos corridos', 'Valorant', '16:00', 15.00, 'gamehub'),
 
-('Free Fire Battle', '2026-12-01', 1500, 20, 'Pontos corridos', 'Free Fire', '19:00', 5.00, 'comunidade'),
+('Rocket Champions', '2026-11-25', 2500, 10, 'Eliminatoria', 'Rocket League', '15:00', 10.00, 'comunidade'),
 
-('CS2 Pro League', '2026-12-05', 7000, 16, 'Eliminatoria', 'Counter-Strike 2', '18:00', 20.00, 'gamehub'),
+('Master League', '2026-12-05', 7000, 16, 'Eliminatoria', 'Counter-Strike 2', '18:00', 20.00, 'gamehub'),
 
-('GameHub Open', '2026-12-10', 1000, 8, 'Eliminatoria', 'Valorant', '13:00', 0.00, 'gamehub');
+('EA Cup', '2026-12-02', 4000, 16, 'Eliminatoria', 'EA FC', '12:00', 10.00, 'gamehub'),
+
+('FN Cup', '2026-12-09', 9000, 16, 'Eliminatoria', 'Fortnite', '12:00', 10.00, 'gamehub'),
+
+('Siege Cup', '2026-12-14', 3000, 16, 'Eliminatoria', 'Tom Clancy´s Rainbow Six Siege', '12:00', 10.00, 'gamehub'),
+
+('CNLOL', '2026-12-22', 2000, 16, 'Eliminatoria', 'League of Legends', '12:00', 10.00, 'gamehub'),
 
 -- =========================================
 -- 4. TABELA TORNEIOS_EQUIPES

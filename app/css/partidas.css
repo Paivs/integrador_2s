@@ -20,14 +20,14 @@ body {
 .banner-partida {
     position: relative;
     width: 100%;
-    height: 820px;          /* altura do banner, ajuste se quiser */
+    height: 820px;          
     background: #000;
     overflow: hidden;
     display: flex;
     align-items: center;
 }
 
-/* Foto da arena à direita, saindo do preto */
+
 .banner-partida__foto {
     position: absolute;
     top: 0;
@@ -41,7 +41,7 @@ body {
             mask-image: linear-gradient(to right, transparent 0%, #000 45%);
 }
 
-/* Texto por cima da foto */
+
 .banner-partida__titulo {
     position: relative;
     z-index: 1;
@@ -62,26 +62,7 @@ body {
     color: #f0483a;
 }
 
-/* Celular */
-@media (max-width: 600px) {
-    .banner-partida {
-        height: 320px;
-    }
 
-    .banner-partida__foto {
-        width: 100%;
-        opacity: 0.5;
-        -webkit-mask-image: none;
-                mask-image: none;
-    }
-
-    .banner-partida__titulo {
-        width: 100%;
-        margin: 0;
-        padding: 0 5%;
-        font-size: 2.2rem;
-    }
-}
 
 h1 {
     color: #f34039;
@@ -110,9 +91,14 @@ h1 {
     color: #f34039;
 }
 
+.paiCards{
+
+    display: flex;
+
+}
 
 .card{
-    margin-left: 100px;
+    margin-left: 260px;
     width: 350px;
     height: 600px;
     border: solid 1px;
@@ -123,19 +109,157 @@ h1 {
 
 }
 
+.card img{
+    margin-top: 10px;
+    border-radius: 20px;
+    width: 320px;
+    height: 150px;
+
+}
+
+.card p {
+    margin-top: 30px;
+    margin-left: 20px;
+    font-family: "Bebas Neue", "Oswald", Impact, sans-serif;
+    border-radius: 13px;
+}
+.subP {
+    color: #838383;
+    
+}
+
+
+.subP2 {
+    color: #838383;
+}
+
+.subP3 {
+    color: #838383;
+}
+
+.subP4 {
+    color: #838383;
+    margin-top: -10px;
+}
+
+
 .card2{
-    margin-left: 100px;
-    width: 350px;
+    margin-left: 60px;
+    margin-top: 20px;
+    width: 1000px;
     height: 600px;
     border: solid 1px;
-    padding: 15px;
-    margin-top: 20px;
+    padding: 50px;
     border-radius: 15px;
     border: solid #f34039;
+    
+}
+
+.pCard2{
+    display: flex;
+    justify-content: space-around;
+    font-family: "Bebas Neue", "Oswald", Impact, sans-serif;
+    font-size: 45px;
+    
+    
+}
+
+
+
+.pCard2H {
+    display: flex;
+    justify-content: space-around;
+    font-family: "Bebas Neue", "Oswald", Impact, sans-serif;
+    font-size: 45px;
+    position: relative;
+    top: -20px;
+}
+.pCard2H p {
+    
+    width: 80px;
+    text-align: center;
     
 
 }
 
-juntatudo{
-    display: flex;
+
+
+.cardcinza{
+    display: grid;
+    color: red;
+    font-size: small;
+    background-color: rgba(128, 128, 128, 0.527);
+    border-radius: 13px;
+    width: 80px;
+    height: 80px;
+    padding-top: 4px;
+    padding-left: 4px;
+    
+}
+
+.cardcinza1{
+       display: grid;
+    color: red;
+    font-size: small;
+    background-color: rgba(128, 128, 128, 0.527);
+    border-radius: 13px;
+    width: 80px;
+    height: 80px;
+    padding-top: 4px;
+    padding-left: 4px;
+    margin-top: 17px;
+     
+}
+
+.cardcinza2{
+       display: grid;
+    color: red;
+    font-size: small;
+    background-color: rgba(128, 128, 128, 0.527);
+    border-radius: 13px;
+    width: 80px;
+    height: 80px;
+    padding-top: 4px;
+    padding-left: 4px;
+    margin-top: 17px; 
+}
+
+.cardcinza3{
+    display: grid;
+    color: red;
+    font-size: small;
+    background-color: rgba(128, 128, 128, 0.527);
+    border-radius: 13px;
+    width: 80px;
+    height: 80px;
+    padding-top: 4px;
+    padding-left: 4px;
+    margin-top: 17px; 
+}
+
+
+.cardcinza4 {
+    display: grid;
+    color: red;
+    font-size: small;
+    background-color: rgba(128, 128, 128, 0.527);
+    border-radius: 13px;
+    width: 80px;
+    height: 80px;
+    padding-top: 4px;
+    padding-left: 4px;
+    margin-top: 17px; 
+}
+
+.cardcinza5 {
+    display: grid;
+    color: red;
+    font-size: small;
+    background-color: rgba(128, 128, 128, 0.247);
+    border-radius: 13px;
+    width: 80px;
+    height: 80px;
+    padding-top: 4px;
+    padding-left: 4px;
+    margin-top: 17px; 
 }

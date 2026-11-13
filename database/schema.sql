@@ -5,16 +5,19 @@ CREATE TABLE IF NOT EXISTS equipes (
 	id INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
     img VARCHAR(100) NOT NULL,
-    jogo_equipe VARCHAR(50) NOT NULL
+    jogo_equipe VARCHAR(50) NOT NULL,
+    descricao VARCHAR(100) NOT NULL,
+    privacidade VARCHAR(100) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS usuarios (
     id INT AUTO_INCREMENT PRIMARY KEY,
     email_conta VARCHAR(100) UNIQUE,
-    senha_conta VARCHAR(50) UNIQUE,
-    username_conta VARCHAR(100) NOT NULL,
+    senha_conta VARCHAR(50),
+    username_conta VARCHAR(100) NOT NULL UNIQUE,
     id_equipe INT,
-	CONSTRAINT fk_equipe FOREIGN KEY (id_equipe) REFERENCES  equipes(id)
+	CONSTRAINT fk_equipe FOREIGN KEY (id_equipe) REFERENCES  equipes(id),
+    perfil ENUM('root', 'normal') not null default 'normal'
 );
 
 CREATE TABLE IF NOT EXISTS torneios (
@@ -26,6 +29,8 @@ CREATE TABLE IF NOT EXISTS torneios (
     format_torneio VARCHAR(50) NOT NULL,
     nmjogo_torneio VARCHAR(50) NOT NULL,
     horainit_torneio VARCHAR(15) NOT NULL,
+    img VARCHAR(100) NOT NULL,
+    Chaveamento VARCHAR(100) NOT NULL,
     taxa double not null default 0.0,
     tipo ENUM('comunidade', 'gamehub') not null default 'gamehub'
 );

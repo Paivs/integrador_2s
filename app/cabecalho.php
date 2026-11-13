@@ -18,7 +18,7 @@
     <nav>
             <div class="links"><li><a href="./index.php"><img src="./img/logo.png" alt=""></a></li>
             <li><a href="./torneios.php">TORNEIOS</a></li>
-            <li><a href="">Partidas</a></li>
+            <li><a href="./partidas.php">Partidas</a></li>
             <li><a href="./equipes.php">Equipes</a></li>
             <li><a class="espaco" href="">Rankings</a></li>
             </div>
