@@ -33,11 +33,10 @@ header {
 
 .logo img {
     height: 100%;
-    width: auto;
+    width: 170px;
     object-fit: contain;
     display: block;
 }
-
 
 .menu {
     display: flex;
