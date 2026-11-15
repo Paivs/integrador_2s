@@ -11,6 +11,10 @@ if (!$objeto || $objeto['status_objeto'] !== 'Perdido') {
     exit;
 }
 
+update($pdo, 'objetos', ['status_objeto' => 'Encontrado'], 'idObjeto = ?', [$id]);
+
+create($pdo, 'achado', );
+
 $estado = $_GET['estadoObjeto'];
 $local = $_GET['localEncontrado'];
 
