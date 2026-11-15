@@ -6,6 +6,8 @@ $id = (int) ($_GET['idObjeto'] ?? 0);
 
 $objeto = read($pdo, 'objetos', 'idObjeto = ?', [$id]);
 
+$pontos = readAll($pdo, 'pontoColeta');
+
 if (!$objeto || $objeto['status_objeto'] !== 'Perdido') {
     header('Location: painelObjetos.php');
     exit;
@@ -16,8 +18,11 @@ $erro = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $estado = trim($_POST['estadoObjeto'] ?? '');
     $local  = trim($_POST['localEncontrado'] ?? '');
+    $idPonto = (int) ($_POST['idPontoColeta'] ?? 0);
 
-    if ($estado === '' || $local === '') {
+    $ponto   = read($pdo, 'pontoColeta', 'idEndereco = ?', [$idPonto]);
+
+    if ($estado === '' || $local === '' || !$ponto) {
         $erro = 'Preencha o estado e o local.';
     } else {
         create($pdo, 'achado', [
@@ -25,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'idUsuarioAchou'  => 2,  // TEMPORÁRIO: trocar por $_SESSION['id_usuario']
             'estadoObjeto'    => $estado,
             'localEncontrado' => $local,
-            'idPontoColeta'   => 1,  // TEMPORÁRIO: virá de um select
+            'idPontoColeta'   => $idPonto,
         ]);
 
         update($pdo, 'objetos', ['status_objeto' => 'Encontrado'], 'idObjeto = ?', [$id]);
@@ -95,6 +100,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <option value="Perfeito">Perfeito</option>
                     <option value="Com marcas de uso">Com marcas de uso</option>
                     <option value="Danificado">Danificado</option>
+                </select>
+
+
+                <label for="idPontoColeta">Onde você vai entregar o objeto?</label>
+                <select name="idPontoColeta" id="idPontoColeta" required>
+                    <option value="">Selecione</option>
+                    <?php foreach ($pontos as $p): ?>
+                        <option value="<?= (int) $p['idEndereco'] ?>">
+                            <?= htmlspecialchars($p['nome']) ?> - <?= htmlspecialchars($p['logradouro']) ?>, <?= (int) $p['numero'] ?>
+                        </option>
+                    <?php endforeach; ?>
                 </select>
 
                 <label for="localEncontrado">Onde você o achou?</label>
