@@ -11,12 +11,29 @@ if (!$objeto || $objeto['status_objeto'] !== 'Perdido') {
     exit;
 }
 
-update($pdo, 'objetos', ['status_objeto' => 'Encontrado'], 'idObjeto = ?', [$id]);
+$erro = '';
 
-create($pdo, 'achado', );
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $estado = trim($_POST['estadoObjeto'] ?? '');
+    $local  = trim($_POST['localEncontrado'] ?? '');
 
-$estado = $_GET['estadoObjeto'];
-$local = $_GET['localEncontrado'];
+    if ($estado === '' || $local === '') {
+        $erro = 'Preencha o estado e o local.';
+    } else {
+        create($pdo, 'achado', [
+            'idObjeto'        => $id,
+            'idUsuarioAchou'  => 2,  // TEMPORÁRIO: trocar por $_SESSION['id_usuario']
+            'estadoObjeto'    => $estado,
+            'localEncontrado' => $local,
+            'idPontoColeta'   => 1,  // TEMPORÁRIO: virá de um select
+        ]);
+
+        update($pdo, 'objetos', ['status_objeto' => 'Encontrado'], 'idObjeto = ?', [$id]);
+
+        header('Location: painelObjetos.php');
+        exit;
+    }
+}
 
 ?>
 <!DOCTYPE html>
@@ -43,12 +60,16 @@ $local = $_GET['localEncontrado'];
             <a href="./sobre.php">Sobre</a>
             <a href="./painelObjetos.php">Objetos guardados</a>
             <a href="./faq.php">Dúvidas</a>
-            <a href="./contato.php">Contato</a>
+            <a href="./FormContato.php">Contato</a>
             <a href="./cadastraObj.php" class="btn-cadastrar"><button>+ Cadastrar item</button></a>
         </nav>
     </header>
 
     <main>
+
+        <?php if ($erro): ?>
+            <p><?= htmlspecialchars($erro) ?></p>
+        <?php endif; ?>
 
         <h1>Você encontrou este objeto?</h1>
 
@@ -66,13 +87,14 @@ $local = $_GET['localEncontrado'];
                 </div>
             </div>
 
-            <form action="" method="get">
-                <label for="estado">Qual era o estado do objeto:</label>
-                <select name="estadoObjeto" id="estadoObjeto">
+            <form action="" method="post">
+
+                <label for="estadoObjeto">Qual era o estado do objeto:</label>
+                <select name="estadoObjeto" id="estadoObjeto" required>
                     <option value="">Selecione</option>
-                    <option value="perfeito">Perfeito</option>
-                    <option value="marcasDeUso">Marcas de uso</option>
-                    <option value="danificado">Danificado</option>
+                    <option value="Perfeito">Perfeito</option>
+                    <option value="Com marcas de uso">Com marcas de uso</option>
+                    <option value="Danificado">Danificado</option>
                 </select>
 
                 <label for="localEncontrado">Onde você o achou?</label>
