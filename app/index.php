@@ -39,7 +39,7 @@ foreach ($objetos as $o) {
         <a href="./sobre.php">Sobre</a>
         <a href="./painelObjetos.php">Objetos guardados</a>
         <a href="./faq.php">Dúvidas</a>
-        <a href="./contato.php">Contato</a>
+        <a href="./FormContato.php">Contato</a>
         <a href="./CadastrarItem.php" class="btn-cadastrar"><button>+ Cadastrar item</button></a>
     </div>
 </header>
@@ -55,7 +55,7 @@ foreach ($objetos as $o) {
         </div>
 
         <div class="criarConta">
-            <a href="./login.php">Criar Conta</a>
+            <a href="./cadastrarConta.php">Criar Conta</a>
         </div>
 
         <h2>Como funciona?</h2>
