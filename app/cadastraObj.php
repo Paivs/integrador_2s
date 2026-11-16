@@ -11,7 +11,7 @@ require_once __DIR__ . "/init.php";
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastrar Item</title>
-    <link rel="stylesheet" href="./css/cadastraObj.css">
+    <link rel="stylesheet" href="css/cadastraObj.css">
 </head>
 
 <body>
@@ -43,7 +43,7 @@ require_once __DIR__ . "/init.php";
                     <div class="linha-titulo">
                         <p class="ordem">1.</p>
                         <label for="nome">
-                            <h3>Nome do objeto:</h3>
+                            <p>Nome do objeto:</p>
                         </label>
                     </div>
 
@@ -54,7 +54,7 @@ require_once __DIR__ . "/init.php";
                     <div class="linha-titulo">
                         <p class="ordem">2.</p>
                         <label for="descricao">
-                            <h3>Descrição do objeto:</h3>
+                            <p>Descrição do objeto:</p>
                         </label>
                     </div>
 
@@ -65,7 +65,7 @@ require_once __DIR__ . "/init.php";
                     <div class="linha-titulo">
                         <p class="ordem">3.</p>
                         <label for="local">
-                            <h3>Local onde foi perdido ou encontrado:</h3>
+                            <p>Local onde foi perdido ou encontrado:</p>
                         </label>
                     </div>
                     
@@ -76,7 +76,7 @@ require_once __DIR__ . "/init.php";
                     <div class="linha-titulo">
                         <p class="ordem">4.</p>
                         <label for="categoria">
-                            <h3>Categoria</h3>
+                            <p>Categoria</p>
                         </label>
                         
                         <select name="categoria" id="categoria" required>
@@ -96,7 +96,7 @@ require_once __DIR__ . "/init.php";
                     <div class="linha-titulo">
                         <p class="ordem">5.</p>
                         <label for="status">
-                            <h3>Status atual:</h3>
+                            <p>Status atual:</p>
                         </label>
                         <select name="status" id="status">
                             <option value="perdido">Perdido</option>
