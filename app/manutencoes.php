@@ -57,7 +57,7 @@ foreach ($manutencoes as $manutencao) {
     }
 }
 
-// Dados para o formulário do cliente
+// Busca veículos e serviços para o formulário do cliente
 $veiculos = [];
 $servicos = [];
 $veiculoId = '';
@@ -90,7 +90,7 @@ if (usuarioEhCliente()) {
     <?php include __DIR__ . '/parciais/nav.php'; ?>
 
     <main class="conteudo">
-      <section class="pagina">
+      <section class="pagina" id="pagina-manutencoes">
         <?php if ($mensagem !== ''): ?>
           <div class="alerta <?php echo $mensagemErro ? 'erro' : 'sucesso'; ?>"><?php echo textoSeguro($mensagem); ?></div>
         <?php endif; ?>
@@ -123,18 +123,86 @@ if (usuarioEhCliente()) {
             <h2>Nenhuma manutenção registrada</h2>
             <p><?php echo usuarioEhCliente() ? 'Envie sua primeira solicitação.' : 'Nenhum cliente enviou uma solicitação.'; ?></p>
           </div>
+        <?php else: ?>
+          <div class="tabela-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Data</th>
+                  <th>Veículo</th>
+                  <?php if (usuarioEhFuncionario()): ?><th>Cliente</th><?php endif; ?>
+                  <th>Serviço</th>
+                  <th>Status</th>
+                  <th><?php echo usuarioEhFuncionario() ? 'Ações' : 'Responsável'; ?></th>
+                </tr>
+              </thead>
+              <tbody>
+                <?php foreach ($manutencoes as $manutencao): ?>
+                  <tr>
+                    <td><?php echo date('d/m/Y', strtotime($manutencao['data_agendamento'])); ?></td>
+                    <td>
+                      <strong><?php echo textoSeguro(trim($manutencao['marca'] . ' ' . $manutencao['modelo'])); ?></strong>
+                      <small><?php echo textoSeguro($manutencao['placa']); ?></small>
+                    </td>
+
+                    <?php if (usuarioEhFuncionario()): ?>
+                      <td><?php echo textoSeguro($manutencao['proprietario']); ?></td>
+                    <?php endif; ?>
+
+                    <td>
+                      <strong><?php echo textoSeguro($manutencao['descricao']); ?></strong>
+                      <?php if ($manutencao['observacoes']): ?>
+                        <small><?php echo textoSeguro($manutencao['observacoes']); ?></small>
+                      <?php endif; ?>
+                    </td>
+                    <td>
+                      <span class="status <?php echo classeStatus($manutencao['status']); ?>">
+                        <?php echo textoSeguro(nomeStatus($manutencao['status'])); ?>
+                      </span>
+                    </td>
+                    <td>
+                      <?php if (usuarioEhFuncionario()): ?>
+                        <div class="acoes-tabela">
+                          <form action="atualizar-manutencao.php" method="post">
+                            <input type="hidden" name="id" value="<?php echo $manutencao['id']; ?>">
+                            <select name="status" aria-label="Novo status">
+                              <option value="Solicitado" <?php echo $manutencao['status'] === 'Solicitado' ? 'selected' : ''; ?>>Solicitado</option>
+                              <option value="Agendado" <?php echo $manutencao['status'] === 'Agendado' ? 'selected' : ''; ?>>Agendado</option>
+                              <option value="Em andamento" <?php echo $manutencao['status'] === 'Em andamento' ? 'selected' : ''; ?>>Em andamento</option>
+                              <option value="Concluido" <?php echo $manutencao['status'] === 'Concluido' ? 'selected' : ''; ?>>Concluído</option>
+                              <option value="Cancelado" <?php echo $manutencao['status'] === 'Cancelado' ? 'selected' : ''; ?>>Cancelado</option>
+                            </select>
+                            <button type="submit">Salvar</button>
+                          </form>
+
+                          <form action="excluir-manutencao.php" method="post">
+                            <input type="hidden" name="id" value="<?php echo $manutencao['id']; ?>">
+                            <button type="submit">Excluir</button>
+                          </form>
+                        </div>
+                      <?php else: ?>
+                        <?php echo textoSeguro($manutencao['funcionario'] ?: 'Aguardando atendimento'); ?>
+                      <?php endif; ?>
+                    </td>
+                  </tr>
+                <?php endforeach; ?>
+              </tbody>
+            </table>
+          </div>
         <?php endif; ?>
 
         <?php if (usuarioEhCliente()): ?>
           <form class="bloco-manutencao" action="agendar-manutencao.php" method="post">
+            <!-- Coluna 1: Logo + Mapa -->
             <div class="coluna-mapa">
               <div class="marca">
-                <img class="logo" src="imagens/icone-carcare.png" alt="Logo do CarCare">
+                <img class="logo" src="imagens/logo-carcare.png" alt="Logo do CarCare">
                 <div><h2><strong>PONTOS DE MANUTENÇÃO CARCARE</strong></h2></div>
               </div>
               <div id="mapa" class="maps"></div>
             </div>
 
+            <!-- Coluna 2: Campos do formulário -->
             <div class="coluna-campos">
               <label class="campo-box">
                 <span>Carro</span>
@@ -181,6 +249,7 @@ if (usuarioEhCliente()) {
               </div>
             </div>
 
+            <!-- Coluna 3: Preço médio + Botão -->
             <div class="coluna-preco">
               <p class="aviso-preco">
                 PREÇO MÉDIO, ESSE PREÇO NÃO É OFICIAL, SERÁ AVALIADO PRIMEIRO PRESENCIALMENTE
@@ -190,66 +259,6 @@ if (usuarioEhCliente()) {
             </div>
           </form>
         <?php endif; ?>
-
-        <?php if (usuarioEhFuncionario() && count($manutencoes) > 0): ?>
-          <div class="tabela-container">
-            <table>
-              <thead>
-                <tr>
-                  <th>Data</th>
-                  <th>Veículo</th>
-                  <th>Cliente</th>
-                  <th>Serviço</th>
-                  <th>Status</th>
-                  <th>Ações</th>
-                </tr>
-              </thead>
-              <tbody>
-                <?php foreach ($manutencoes as $manutencao): ?>
-                  <tr>
-                    <td><?php echo date('d/m/Y', strtotime($manutencao['data_agendamento'])); ?></td>
-                    <td>
-                      <strong><?php echo textoSeguro(trim($manutencao['marca'] . ' ' . $manutencao['modelo'])); ?></strong>
-                      <small><?php echo textoSeguro($manutencao['placa']); ?></small>
-                    </td>
-                    <td><?php echo textoSeguro($manutencao['proprietario']); ?></td>
-                    <td>
-                      <strong><?php echo textoSeguro($manutencao['descricao']); ?></strong>
-                      <?php if ($manutencao['observacoes']): ?>
-                        <small><?php echo textoSeguro($manutencao['observacoes']); ?></small>
-                      <?php endif; ?>
-                    </td>
-                    <td>
-                      <span class="status <?php echo classeStatus($manutencao['status']); ?>">
-                        <?php echo textoSeguro(nomeStatus($manutencao['status'])); ?>
-                      </span>
-                    </td>
-                    <td>
-                      <div class="acoes-tabela">
-                        <form action="atualizar-manutencao.php" method="post">
-                          <input type="hidden" name="id" value="<?php echo $manutencao['id']; ?>">
-                          <select name="status" aria-label="Novo status">
-                            <option value="Solicitado" <?php echo $manutencao['status'] === 'Solicitado' ? 'selected' : ''; ?>>Solicitado</option>
-                            <option value="Agendado" <?php echo $manutencao['status'] === 'Agendado' ? 'selected' : ''; ?>>Agendado</option>
-                            <option value="Em andamento" <?php echo $manutencao['status'] === 'Em andamento' ? 'selected' : ''; ?>>Em andamento</option>
-                            <option value="Concluido" <?php echo $manutencao['status'] === 'Concluido' ? 'selected' : ''; ?>>Concluído</option>
-                            <option value="Cancelado" <?php echo $manutencao['status'] === 'Cancelado' ? 'selected' : ''; ?>>Cancelado</option>
-                          </select>
-                          <button type="submit">Salvar</button>
-                        </form>
-
-                        <form action="excluir-manutencao.php" method="post">
-                          <input type="hidden" name="id" value="<?php echo $manutencao['id']; ?>">
-                          <button type="submit">Excluir</button>
-                        </form>
-                      </div>
-                    </td>
-                  </tr>
-                <?php endforeach; ?>
-              </tbody>
-            </table>
-          </div>
-        <?php endif; ?>
       </section>
     </main>
   </div>
@@ -257,7 +266,6 @@ if (usuarioEhCliente()) {
   <?php if (usuarioEhCliente()): ?>
     <script src="https://unpkg.com/maplibre-gl@5.6.1/dist/maplibre-gl.js"></script>
     <script>
-      // 1. Atualização do preço médio conforme o serviço escolhido
       const selectServico = document.getElementById('select-servico');
       const precoEstimado = document.getElementById('preco-estimado');
 
@@ -272,7 +280,6 @@ if (usuarioEhCliente()) {
         });
       }
 
-      // 2. Configuração do Mapa CarCare
       const mapa = new maplibregl.Map({
         container: 'mapa',
         style: 'https://tiles.openfreemap.org/styles/liberty',
@@ -320,7 +327,6 @@ if (usuarioEhCliente()) {
         }
       ];
 
-      // Preenche o autocomplete com as oficinas
       const datalistUnidades = document.getElementById('unidades-carcare');
       const campoLocal = document.getElementById('campo-local');
 
@@ -330,7 +336,6 @@ if (usuarioEhCliente()) {
         datalistUnidades.appendChild(option);
       });
 
-      // Centraliza o mapa quando o utilizador escolhe uma oficina no campo Local
       campoLocal.addEventListener('change', function () {
         const valorDigitado = this.value.toLowerCase();
         const lojaEncontrada = lojas.find(l =>
@@ -349,7 +354,6 @@ if (usuarioEhCliente()) {
         }
       });
 
-      // Carrega os marcadores no mapa
       mapa.on('load', async function () {
         const limites = new maplibregl.LngLatBounds();
 
@@ -382,7 +386,6 @@ if (usuarioEhCliente()) {
                 this.src = 'imagens/logo-carcare.png';
               };
 
-              // Ao clicar no pino do mapa, preenche o campo Local automaticamente
               icone.addEventListener('click', () => {
                 campoLocal.value = `${loja.nome} - ${loja.endereco}`;
               });
@@ -423,4 +426,4 @@ if (usuarioEhCliente()) {
     </script>
   <?php endif; ?>
 </body>
-</html>
+</html> 
