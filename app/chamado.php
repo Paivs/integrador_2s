@@ -1,173 +1,147 @@
 <?php
 require_once __DIR__ . "/init.php";
 
-// Só entra quem fez login
 if (!isset($_SESSION["id_usuario"])) {
     header("Location: index.php");
     exit;
 }
 
-// Nome do próprio arquivo atual (funciona seja chamado.php ou chamados.php)
-$paginaAtual = basename($_SERVER["PHP_SELF"]);
-
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $id = filter_var($_POST["id"] ?? null, FILTER_VALIDATE_INT);
-
-    if ($id) {
-        if (isset($_POST["cancelar"])) {
-            update($pdo, "chamado", ["status_chamado" => "cancelado"], "id = ?", [$id]);
-        }
-
-        if (isset($_POST["excluir"])) {
-            delete($pdo, "chamado", "id = ?", [$id]);
-        }
-    }
-
-    header("Location: " . $paginaAtual);
+if (isset($_POST["excluir"])) {
+    $stmt = $pdo->prepare("DELETE FROM chamado WHERE id = ?");
+    $stmt->execute([$_POST["excluir"]]);
+    header("Location: chamado.php");
     exit;
 }
 
-$statusFiltro = trim($_GET["status"] ?? "");
+$status = $_GET["status"] ?? "";
+$busca  = trim($_GET["busca"] ?? "");
 
-if ($statusFiltro === "abertos") {
-    $chamados = readAll($pdo, "chamado", "status_chamado IN ('aguardando', 'em andamento')");
-} elseif ($statusFiltro !== "") {
-    $chamados = readAll($pdo, "chamado", "status_chamado = ?", [$statusFiltro]);
-} else {
-    $chamados = readAll($pdo, "chamado");
+// Busca por título OU pelo número formatado (#0001, 0001 ou 1)
+$sql = "SELECT c.*, a.nome AS nome_ambiente 
+        FROM chamado c 
+        LEFT JOIN ambiente a ON c.id_ambiente = a.id 
+        WHERE (c.titulo LIKE ? OR CONCAT('#', LPAD(c.id, 4, '0')) LIKE ?)";
+$params = ["%$busca%", "%$busca%"];
+
+if ($status !== "") {
+    $sql .= " AND c.status_chamado = ?";
+    $params[] = $status;
 }
 
-$nomeUsuario = $_SESSION["nome"] ?? "Usuário";
-$nivelUsuario = $_SESSION["nivel"] ?? "";
+$sql .= " ORDER BY c.data_chamado DESC";
+
+$stmt = $pdo->prepare($sql);
+$stmt->execute($params);
+$chamados = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
-  <meta charset="UTF-8">
-  <title>Meus Chamados</title>
-  <link rel="stylesheet" href="css/chamado.css">
+    <meta charset="UTF-8">
+    <title>Meus chamados - SchoolHelpDesk</title>
+    <link rel="stylesheet" href="css/chamado.css">
 </head>
-
 <body>
-  <div class="layout">
-    <div class="menu">
-      <h2>SchoolHelpDesk</h2>
-      <a href="painel.php">Início</a>
-      <a href="abrir_chamado.php">
-        Abrir chamado
-      </a>
-      <a href="<?= htmlspecialchars($paginaAtual) ?>" class="ativo">
-        Meus chamados
-      </a>
-      <a href="historico.php">
-        Histórico
-      </a>
-      <h4>CONTA</h4>
-      <a href="meu_perfil.php">Meu perfil</a>
-      <a href="logout.php">Sair</a>
-    </div>
-    <div class="conteudo">
-      <div class="topo">
-        <p>Início / Meus chamados</p>
-        <div class="usuario">
-          <span>
-            <?php echo htmlspecialchars(mb_strtoupper(mb_substr($nomeUsuario, 0, 2, "UTF-8"), "UTF-8"), ENT_QUOTES, "UTF-8"); ?>
-          </span>
-          <div>
-            <strong>
-              <?php echo htmlspecialchars($nomeUsuario, ENT_QUOTES, "UTF-8"); ?>
-            </strong>
-            <small>
-              <?php echo htmlspecialchars($nivelUsuario, ENT_QUOTES, "UTF-8"); ?>
-            </small>
-          </div>
-        </div>
-      </div>
-      <div class="pagina">
-        <div class="titulo-lista">
-          <div>
-            <h1>Meus chamados</h1>
-            <p class="subtitulo">
-              Consulte os chamados registrados por você
-            </p>
-          </div>
-          <a href="abrir_chamado.php" class="novo">
-            + Abrir novo chamado
-          </a>
-        </div>
-        <div class="abas">
-          <a href="<?= htmlspecialchars($paginaAtual) ?>" class="aba <?= $statusFiltro === '' ? 'ativa' : '' ?>">
-            Todos
-          </a>
-          <a href="<?= htmlspecialchars($paginaAtual) ?>?status=abertos" class="aba <?= $statusFiltro === 'abertos' ? 'ativa' : '' ?>">
-            Abertos
-          </a>
-          <a href="<?= htmlspecialchars($paginaAtual) ?>?status=em+andamento" class="aba <?= $statusFiltro === 'em andamento' ? 'ativa' : '' ?>">
-            Em andamento
-          </a>
-          <a href="<?= htmlspecialchars($paginaAtual) ?>?status=aguardando" class="aba <?= $statusFiltro === 'aguardando' ? 'ativa' : '' ?>">
-            Aguardando
-          </a>
-          <a href="<?= htmlspecialchars($paginaAtual) ?>?status=concluido" class="aba <?= $statusFiltro === 'concluido' ? 'ativa' : '' ?>">
-            Concluídos
-          </a>
-        </div>
-        <div class="filtros">
-          <input type="text" placeholder="Buscar por número, título ou ambiente">
-          <select>
-            <option>Tipo: Todos</option>
-            <option>Manutenção</option>
-            <option>Suporte técnico</option>
-          </select>
-          <select>
-            <option>Categoria</option>
-            <option>Hardware</option>
-            <option>Software</option>
-            <option>Rede</option>
-          </select>
-          <select>
-            <option>Últimos 90 dias</option>
-            <option>Últimos 30 dias</option>
-            <option>Últimos 7 dias</option>
-          </select>
-        </div>
-        <div class="lista-chamados">
 
-          <?php if (count($chamados) > 0) { ?>
-            <?php foreach ($chamados as $chamado) { ?>
-              <div class="chamado">
-                <h3><?php echo htmlspecialchars($chamado["titulo"], ENT_QUOTES, "UTF-8"); ?></h3>
-                <p>
-                  Data: <?php echo htmlspecialchars($chamado["data_chamado"], ENT_QUOTES, "UTF-8"); ?>
-                </p>
-                <p>
-                  Prioridade: <?php echo htmlspecialchars($chamado["prioridade"], ENT_QUOTES, "UTF-8"); ?>
-                </p>
-                <p>
-                  Status: <?php echo htmlspecialchars($chamado["status_chamado"], ENT_QUOTES, "UTF-8"); ?>
-                </p>
-                <form method="post" style="display:inline"
-                  onsubmit="return confirm('Deseja cancelar este chamado?')">
-                  <input type="hidden" name="id" value="<?php echo (int)$chamado["id"]; ?>">
-                  <button type="submit" name="cancelar">Cancelar</button>
-                </form>
-
-                <form method="post" style="display:inline"
-                  onsubmit="return confirm('Deseja excluir este chamado? Essa ação não pode ser desfeita.')">
-                  <input type="hidden" name="id" value="<?php echo (int)$chamado["id"]; ?>">
-                  <button type="submit" name="excluir">Excluir</button>
-                </form>
-              </div>
-              <hr>
-            <?php } ?>
-          <?php } else { ?>
-            <p>Nenhum chamado encontrado.</p>
-          <?php } ?>
-
+    <aside class="menu">
+        <div class="logo">
+            <img src="imagem/logo_schoolhelpdesk.png" alt="SchoolHelpDesk">
         </div>
-      </div>
-    </div>
-  </div>
+
+        <nav>
+            <a href="painel.php">Início</a>
+            <a href="abrir_chamado.php">Abrir chamado</a>
+            <a href="chamado.php" class="ativo">Meus chamados</a>
+            <a href="historico.php">Histórico</a>
+
+            <p class="grupo">CONTA</p>
+            <a href="meu_perfil.php">Meu perfil</a>
+        </nav>
+
+        <a href="logout.php" class="sair">Sair</a>
+    </aside>
+
+    <main class="conteudo">
+        <header class="topo">
+            <span class="caminho">Início / <strong>Meus chamados</strong></span>
+            <span class="nome-topo"><?= htmlspecialchars($_SESSION["nome"] ?? "") ?></span>
+        </header>
+
+        <section class="cabecalho-lista">
+            <div>
+                <h1>Meus chamados</h1>
+                <p class="subtitulo"><?= count($chamados) ?> chamados registrados</p>
+            </div>
+            <a href="abrir_chamado.php" class="botao">+ Abrir novo chamado</a>
+        </section>
+
+        <section class="cartao-tabela">
+            <div class="abas">
+                <a href="chamado.php" class="<?= $status === '' ? 'ativa' : '' ?>">Todos</a>
+                <a href="chamado.php?status=aguardando" class="<?= $status === 'aguardando' ? 'ativa' : '' ?>">Aguardando</a>
+                <a href="chamado.php?status=em andamento" class="<?= $status === 'em andamento' ? 'ativa' : '' ?>">Em andamento</a>
+                <a href="chamado.php?status=concluido" class="<?= $status === 'concluido' ? 'ativa' : '' ?>">Concluídos</a>
+                <a href="chamado.php?status=cancelado" class="<?= $status === 'cancelado' ? 'ativa' : '' ?>">Cancelados</a>
+            </div>
+
+            <form method="get" class="filtros">
+                <?php if ($status !== "") { ?>
+                    <input type="hidden" name="status" value="<?= htmlspecialchars($status) ?>">
+                <?php } ?>
+                <input type="text" name="busca" value="<?= htmlspecialchars($busca) ?>" placeholder="Buscar chamado por número ou título" class="campo-busca">
+                <button type="submit" class="botao">Buscar</button>
+            </form>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nº</th>
+                        <th>TÍTULO</th>
+                        <th>AMBIENTE</th>
+                        <th>PRIORIDADE</th>
+                        <th>STATUS</th>
+                        <th>ABERTURA</th>
+                        <th>AÇÃO</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php if (empty($chamados)) { ?>
+                        <tr>
+                            <td colspan="7" class="vazio">Nenhum chamado encontrado.</td>
+                        </tr>
+                    <?php } ?>
+
+                    <?php foreach ($chamados as $c) { 
+                        $prio = $c["prioridade"] ?? "media";
+                        $stat = $c["status_chamado"] ?? "aguardando";
+                        $classeStatus = str_replace(" ", "_", $stat);
+                    ?>
+                        <tr>
+                            <td class="codigo">#<?= str_pad((string) $c["id"], 4, "0", STR_PAD_LEFT) ?></td>
+                            <td class="col-titulo"><?= htmlspecialchars($c["titulo"]) ?></td>
+                            <td><?= htmlspecialchars($c["nome_ambiente"] ?? "Não informado") ?></td>
+                            <td>
+                                <span class="tag prio-<?= htmlspecialchars($prio) ?>">
+                                    <?= htmlspecialchars(ucfirst($prio)) ?>
+                                </span>
+                            </td>
+                            <td>
+                                <span class="tag status-<?= htmlspecialchars($classeStatus) ?>">
+                                    <?= htmlspecialchars(ucfirst($stat)) ?>
+                                </span>
+                            </td>
+                            <td><?= !empty($c["data_chamado"]) ? date("d/m/Y", strtotime($c["data_chamado"])) : "" ?></td>
+                            <td>
+                                <form method="post" onsubmit="return confirm('Deseja excluir este chamado?')">
+                                    <button type="submit" class="excluir" name="excluir" value="<?= $c["id"] ?>">Excluir</button>
+                                </form>
+                            </td>
+                        </tr>
+                    <?php } ?>
+                </tbody>
+            </table>
+        </section>
+    </main>
+
 </body>
 </html>

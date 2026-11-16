@@ -1,77 +1,77 @@
 <?php
 require_once __DIR__ . "/init.php";
 
-// Só entra no painel quem fez login.
-if (!isset($_SESSION['id_usuario'])) {
+if (!isset($_SESSION["id_usuario"])) {
     header("Location: index.php");
     exit;
 }
 
-// Se o login já tiver sido criado, o nome salvo na sessão será exibido.
-$nomeUsuario = $_SESSION['nome'] ?? 'Usuário';
+$nomeUsuario = $_SESSION["nome"] ?? "Usuário";
 
-// Busca os chamados. Quando existir um cliente na sessão, mostra apenas os chamados dele.
-if (isset($_SESSION['id_cliente'])) {
-    $chamados = readAll($pdo, 'chamado', 'id_cliente = ?', [$_SESSION['id_cliente']]);
+// Busca todos os chamados para contar nos cards de resumo
+if (isset($_SESSION["id_cliente"])) {
+    $todosChamados = readAll($pdo, "chamado", "id_cliente = ?", [$_SESSION["id_cliente"]]);
 } else {
-    $chamados = readAll($pdo, 'chamado');
+    $todosChamados = readAll($pdo, "chamado");
 }
 
-// Organiza os chamados do mais recente para o mais antigo.
-usort($chamados, function ($a, $b) {
-    return strtotime($b['data_chamado']) <=> strtotime($a['data_chamado']);
-});
-
-// Inicia os contadores dos cards
-$abertos = 0;
-$andamento = 0;
-$cancelado = 0;
+$abertos    = 0;
+$andamento  = 0;
 $concluidos = 0;
+$cancelados = 0;
 
-// Conta a quantidade de chamados em cada situação
-foreach ($chamados as $chamado) {
-    if ($chamado['status_chamado'] === 'cancelado') {
-        $cancelado++;
-    } elseif ($chamado['status_chamado'] === 'em andamento') {
+foreach ($todosChamados as $item) {
+    if ($item["status_chamado"] === "aguardando") {
+        $abertos++;
+    } elseif ($item["status_chamado"] === "em andamento") {
         $abertos++;
         $andamento++;
-    } elseif ($chamado['status_chamado'] === 'aguardando') {
-        $abertos++;
-    } elseif ($chamado['status_chamado'] === 'concluido') {
+    } elseif ($item["status_chamado"] === "concluido") {
         $concluidos++;
+    } elseif ($item["status_chamado"] === "cancelado") {
+        $cancelados++;
     }
 }
 
-// Filtra os chamados pelo número ou pelo título, caso o usuário pesquise.
-$termoBusca = trim($_GET['busca'] ?? '');
-if ($termoBusca !== '') {
-    $chamados = array_filter($chamados, function ($chamado) use ($termoBusca) {
-        return stripos((string) $chamado['id'], $termoBusca) !== false
-            || stripos($chamado['titulo'], $termoBusca) !== false;
-    });
+// Filtros das abas e da barra de pesquisa
+$status = $_GET["status"] ?? "";
+$busca  = trim($_GET["busca"] ?? "");
+
+$sql = "SELECT c.*, a.nome AS nome_ambiente
+        FROM chamado c
+        LEFT JOIN ambiente a ON c.id_ambiente = a.id
+        WHERE (c.titulo LIKE ? OR CONCAT('#', LPAD(c.id, 4, '0')) LIKE ?)";
+$params = ["%$busca%", "%$busca%"];
+
+if (isset($_SESSION["id_cliente"])) {
+    $sql .= " AND c.id_cliente = ?";
+    $params[] = $_SESSION["id_cliente"];
 }
 
-// Busca o nome do ambiente de cada chamado.
-foreach ($chamados as &$chamado) {
-    $ambiente = read($pdo, 'ambiente', 'id = ?', [$chamado['id_ambiente']]);
-    $chamado['nome_ambiente'] = $ambiente ? $ambiente['nome'] : 'Não informado';
+if ($status !== "") {
+    $sql .= " AND c.status_chamado = ?";
+    $params[] = $status;
 }
-unset($chamado);
 
+$sql .= " ORDER BY c.data_chamado DESC, c.id DESC";
+
+$stmt = $pdo->prepare($sql);
+$stmt->execute($params);
+$chamados = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SchoolHelpDesk</title>
+    <title>Painel - SchoolHelpDesk</title>
     <link rel="stylesheet" href="css/painel.css">
 </head>
 <body>
 
-    <div class="menu">
+    <aside class="menu">
         <div class="logo">
-            <img src="imagem/logo_schoolhelpdesk.png" alt="SchoolHelpDesk - Juntos por uma escola que funciona melhor!">
+            <img src="imagem/logo_schoolhelpdesk.png" alt="SchoolHelpDesk">
         </div>
 
         <nav>
@@ -85,14 +85,12 @@ unset($chamado);
         </nav>
 
         <a href="logout.php" class="sair">Sair</a>
-    </div>
+    </aside>
 
     <main class="conteudo">
 
         <header class="topo">
-            <form method="GET" action="painel.php">
-                <input type="text" name="busca" placeholder="Buscar chamado por número ou título" value="<?= htmlspecialchars($termoBusca) ?>">
-            </form>
+            <strong class="marca-topo">SchoolHelpdesk</strong>
             <span id="nomeUsuario"><?= htmlspecialchars($nomeUsuario) ?></span>
         </header>
 
@@ -101,7 +99,7 @@ unset($chamado);
                 <h1 class="saudacao">Olá, <?= htmlspecialchars($nomeUsuario) ?></h1>
                 <p class="subtitulo">Veja como estão seus chamados</p>
             </div>
-            <a href="abrir_chamado.php" class="botao">Abrir novo chamado</a>
+            <a href="abrir_chamado.php" class="botao">+ Abrir novo chamado</a>
         </section>
 
         <section class="cards">
@@ -115,58 +113,72 @@ unset($chamado);
             </div>
             <div class="card">
                 <strong class="numero"><?= $concluidos ?></strong>
-                <span class="rotulo-concluido">Concluidos</span>
+                <span class="rotulo-concluido">Concluídos</span>
             </div>
             <div class="card">
-                <strong class="numero"><?= $cancelado ?></strong>
+                <strong class="numero"><?= $cancelados ?></strong>
                 <span class="rotulo-cancelado">Cancelados</span>
             </div>
         </section>
 
-        <section class="tabela-box">
-            <h2 class="tabela-titulo">Chamados recentes</h2>
+        <section class="cartao-tabela">
+            <div class="abas">
+                <a href="painel.php" class="<?= $status === '' ? 'ativa' : '' ?>">Todos</a>
+                <a href="painel.php?status=aguardando" class="<?= $status === 'aguardando' ? 'ativa' : '' ?>">Aguardando</a>
+                <a href="painel.php?status=em andamento" class="<?= $status === 'em andamento' ? 'ativa' : '' ?>">Em andamento</a>
+                <a href="painel.php?status=concluido" class="<?= $status === 'concluido' ? 'ativa' : '' ?>">Concluídos</a>
+                <a href="painel.php?status=cancelado" class="<?= $status === 'cancelado' ? 'ativa' : '' ?>">Cancelados</a>
+            </div>
+
+            <form method="get" class="filtros">
+                <?php if ($status !== "") { ?>
+                    <input type="hidden" name="status" value="<?= htmlspecialchars($status) ?>">
+                <?php } ?>
+                <input type="text" name="busca" value="<?= htmlspecialchars($busca) ?>" placeholder="Buscar chamado por número ou título" class="campo-busca">
+                <button type="submit" class="botao">Buscar</button>
+            </form>
 
             <table>
                 <thead>
-                    <tr class="cabecalho">
+                    <tr>
                         <th>Nº</th>
-                        <th>Título</th>
-                        <th>Local</th>
-                        <th>Status</th>
-                        <th>Data</th>
+                        <th>TÍTULO</th>
+                        <th>AMBIENTE</th>
+                        <th>STATUS</th>
+                        <th>ABERTURA</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php if (count($chamados) > 0): ?>
-                        <?php foreach (array_slice($chamados, 0, 10) as $chamado): ?>
-                            <?php
-                                $status = $chamado['status_chamado'];
-                                $classeStatus = 'aberto';
-
-                                if ($status === 'em andamento') {
-                                    $classeStatus = 'andamento';
-                                } elseif ($status === 'concluido') {
-                                    $classeStatus = 'concluido';
-                                } elseif ($status === 'cancelado') {
-                                    $classeStatus = 'cancelado';
-                                }
-
-                                $nomeStatus = ucfirst($status);
-                                $dataFormatada = date('d/m/Y', strtotime($chamado['data_chamado']));
-                            ?>
-                            <tr>
-                                <td>#<?= str_pad((string) $chamado['id'], 4, '0', STR_PAD_LEFT) ?></td>
-                                <td><?= htmlspecialchars($chamado['titulo']) ?></td>
-                                <td><?= htmlspecialchars($chamado['nome_ambiente']) ?></td>
-                                <td><span class="status <?= $classeStatus ?>"><?= htmlspecialchars($nomeStatus) ?></span></td>
-                                <td><?= $dataFormatada ?></td>
-                            </tr>
-                        <?php endforeach; ?>
-                    <?php else: ?>
+                    <?php if (empty($chamados)) { ?>
                         <tr>
-                            <td colspan="5">Nenhum chamado encontrado.</td>
+                            <td colspan="5" class="vazio">Nenhum chamado encontrado.</td>
                         </tr>
-                    <?php endif; ?>
+                    <?php } ?>
+
+                    <?php foreach ($chamados as $c) {
+                        $stat = strtolower($c["status_chamado"] ?? "aguardando");
+                        $classeStatus = "aberto";
+
+                        if ($stat === "em andamento") {
+                            $classeStatus = "andamento";
+                        } elseif ($stat === "concluido") {
+                            $classeStatus = "concluido";
+                        } elseif ($stat === "cancelado") {
+                            $classeStatus = "cancelado";
+                        }
+                    ?>
+                        <tr>
+                            <td>#<?= str_pad((string) $c["id"], 4, "0", STR_PAD_LEFT) ?></td>
+                            <td><?= htmlspecialchars($c["titulo"]) ?></td>
+                            <td><?= htmlspecialchars($c["nome_ambiente"] ?? "Não informado") ?></td>
+                            <td>
+                                <span class="status <?= $classeStatus ?>">
+                                    <?= htmlspecialchars(ucfirst($stat)) ?>
+                                </span>
+                            </td>
+                            <td><?= !empty($c["data_chamado"]) ? date("d/m/Y", strtotime($c["data_chamado"])) : "" ?></td>
+                        </tr>
+                    <?php } ?>
                 </tbody>
             </table>
         </section>

@@ -1,14 +1,15 @@
 <?php
 require_once __DIR__ . "/init.php";
 
-// Busca os dados da conta que está conectada.
 if (!isset($_SESSION["id_usuario"])) {
     header("Location: index.php");
     exit;
 }
 
 $idUsuario = $_SESSION["id_usuario"];
-$usuario = read($pdo, "usuario", "id = ?", [$idUsuario]);
+$stmt = $pdo->prepare("SELECT * FROM usuario WHERE id = ? LIMIT 1");
+$stmt->execute([$idUsuario]);
+$usuario = $stmt->fetch(PDO::FETCH_ASSOC);
 
 if (!$usuario) {
     session_destroy();
@@ -16,11 +17,9 @@ if (!$usuario) {
     exit;
 }
 
-// Atualiza o nome da sessão com o nome salvo no banco.
 $_SESSION["nome"] = $usuario["nome"];
-
 $nomeNivel = ($usuario["nivel"] === "administrador") ? "Administrador" : "Técnico";
-
+$inicial = strtoupper(substr(trim($usuario["nome"]), 0, 1));
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -40,7 +39,7 @@ $nomeNivel = ($usuario["nivel"] === "administrador") ? "Administrador" : "Técni
         <nav>
             <a href="painel.php">Início</a>
             <a href="abrir_chamado.php">Abrir chamado</a>
-            <a href="chamados.php">Meus chamados</a>
+            <a href="chamado.php">Meus chamados</a>
             <a href="historico.php">Histórico</a>
 
             <p class="grupo">CONTA</p>
@@ -66,7 +65,7 @@ $nomeNivel = ($usuario["nivel"] === "administrador") ? "Administrador" : "Técni
 
         <section class="perfil-principal">
             <div class="avatar">
-                <?= htmlspecialchars(mb_strtoupper(mb_substr($usuario["nome"], 0, 1, "UTF-8"), "UTF-8"), ENT_QUOTES, "UTF-8") ?>
+                <?= htmlspecialchars($inicial, ENT_QUOTES, "UTF-8") ?>
             </div>
 
             <div class="identificacao">
