@@ -8,7 +8,7 @@ CREATE TABLE usuario(
     nome VARCHAR(100) NOT NULL,
     telefone VARCHAR(15),
     email VARCHAR(100) NOT NULL UNIQUE,
-    senha VARCHAR(100) NOT NULL
+    senha VARCHAR(255) NOT NULL            -- hash do password_hash() do PHP
 );
 
 CREATE TABLE pontoColeta(
@@ -50,28 +50,31 @@ CREATE TABLE achado(
 
 CREATE TABLE mensagem(
     idMensagem INT PRIMARY KEY AUTO_INCREMENT,
-    nomeUsuario INT NOT NULL,
-    assunto ENUM('Suporte', 'Sugestão', 'Reclamação') NOT NULL,
+    nome VARCHAR(100) NOT NULL,
+    telefone VARCHAR(11) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    assunto ENUM('suporte', 'sugestao', 'reclamacao') NOT NULL,
     mensagem TEXT NOT NULL,
-    FOREIGN KEY (nomeUsuario) REFERENCES usuario(idUsuario)
+    dataEnvio DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
 -- ========== DADOS ==========
 
+-- Senhas de teste (para entrar com password_verify): ana@123, bruno@123, carla@123, diego@123, elisa@123
 INSERT INTO usuario (nome, telefone, email, senha) VALUES
-('Ana Souza',      '11987654321', 'ana.souza@email.com',      SHA2('ana@123', 256)),
-('Bruno Lima',     '11976543210', 'bruno.lima@email.com',     SHA2('bruno@123', 256)),
-('Carla Mendes',   '11965432109', 'carla.mendes@email.com',   SHA2('carla@123', 256)),
-('Diego Santos',   '11954321098', 'diego.santos@email.com',   SHA2('diego@123', 256)),
-('Elisa Ferreira', '11943210987', 'elisa.ferreira@email.com', SHA2('elisa@123', 256));
+('Ana Souza',      '11987654321', 'ana.souza@email.com',      '$2b$12$hVtT1tfMMUh0GvYkLAoOouYUzMFUFvuqWK3JDb1k5GZO.27hE1EaK'),
+('Bruno Lima',     '11976543210', 'bruno.lima@email.com',     '$2b$12$itNe3Clxv1BHiodh3yMKTu8ijJQhxxcXdUmfN0IPvFztA/V2MWmgW'),
+('Carla Mendes',   '11965432109', 'carla.mendes@email.com',   '$2b$12$tD/f6KywWTr2gjhmzk338.GCLmLpI8H5x2617BDJv9esXNjvk5heO'),
+('Diego Santos',   '11954321098', 'diego.santos@email.com',   '$2b$12$lN0K/yM79aUFoXGu4/ptSOdA3ALC4BIrt/d3AWLdquWtZfum2dohq'),
+('Elisa Ferreira', '11943210987', 'elisa.ferreira@email.com', '$2b$12$ohr.AVcwBdSR1qAkG6aiaO2lxRcHtuSbbcm9SKaxh4Ev0yNGHCQJ2');
 
 -- Todos os pontos ficam no mesmo endereço (a empresa); o nome diferencia o lugar
 INSERT INTO pontoColeta (nome, logradouro, numero, bairro, cidade, estado, pais) VALUES
-('Recepção',   'Avenida Industrial', 450, 'Jardim', 'Santo André', 'São Paulo', 'Brasil'),
-('Portaria',   'Avenida Industrial', 450, 'Jardim', 'Santo André', 'São Paulo', 'Brasil'),
-('Secretaria', 'Avenida Industrial', 450, 'Jardim', 'Santo André', 'São Paulo', 'Brasil'),
-('Segurança',  'Avenida Industrial', 450, 'Jardim', 'Santo André', 'São Paulo', 'Brasil'),
-('Almoxarifado','Avenida Industrial', 450, 'Jardim', 'Santo André', 'São Paulo', 'Brasil');
+('Recepção',     'Avenida Industrial', 450, 'Jardim', 'Santo André', 'São Paulo', 'Brasil'),
+('Portaria',     'Avenida Industrial', 450, 'Jardim', 'Santo André', 'São Paulo', 'Brasil'),
+('Secretaria',   'Avenida Industrial', 450, 'Jardim', 'Santo André', 'São Paulo', 'Brasil'),
+('Segurança',    'Avenida Industrial', 450, 'Jardim', 'Santo André', 'São Paulo', 'Brasil'),
+('Almoxarifado', 'Avenida Industrial', 450, 'Jardim', 'Santo André', 'São Paulo', 'Brasil');
 
 INSERT INTO objetos (nomeUsuario, nome, descricao, localEncontrado, categoria, imagemObjeto, status_objeto) VALUES
 (1, 'Carteira',           'Carteira de couro preta com documentos',        'Recepção',              'Documentos',        '💳', 'Perdido'),
@@ -116,7 +119,7 @@ INSERT INTO achado (idObjeto, idUsuarioAchou, estadoObjeto, localEncontrado, idP
 (9,  3, 'Danificado',         'Sala de treinamento',  4, NOW() - INTERVAL 40 DAY, NULL),
 (11, 4, 'Perfeito',           'Corredor do 1º andar', 1, NOW() - INTERVAL 5 DAY,  NOW() - INTERVAL 1 DAY);
 
-INSERT INTO mensagem (nomeUsuario, assunto, mensagem) VALUES
-(1, 'Suporte',    'Não consegui cadastrar a foto do meu objeto.'),
-(3, 'Sugestão',   'Seria legal receber um aviso quando um objeto parecido com o meu for cadastrado.'),
-(4, 'Reclamação', 'O e-mail de aviso demorou para chegar.');
+INSERT INTO mensagem (nome, telefone, email, assunto, mensagem) VALUES
+('Ana Souza',    '11987654321', 'ana.souza@email.com',    'suporte',    'Não consegui cadastrar o meu objeto.'),
+('Carla Mendes', '11965432109', 'carla.mendes@email.com', 'sugestao',   'Seria legal receber um aviso quando um objeto parecido com o meu for cadastrado.'),
+('Diego Santos', '11954321098', 'diego.santos@email.com', 'reclamacao', 'O e-mail de aviso demorou para chegar.');
