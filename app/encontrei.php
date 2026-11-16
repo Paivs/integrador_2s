@@ -2,17 +2,42 @@
 
 require_once __DIR__ . "/init.php";
 
-// 1. Lê o id da URL (encontrei.php?id=7) e garante que é número
 $id = (int) ($_GET['idObjeto'] ?? 0);
 
-// 2. Busca UM objeto com esse id (o ? protege contra SQL injection)
 $objeto = read($pdo, 'objetos', 'idObjeto = ?', [$id]);
 
+$pontos = readAll($pdo, 'pontoColeta');
 
-// 3. Se não existir, ou se não estiver perdido, volta para o painel
 if (!$objeto || $objeto['status_objeto'] !== 'Perdido') {
     header('Location: painelObjetos.php');
     exit;
+}
+
+$erro = '';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $estado = trim($_POST['estadoObjeto'] ?? '');
+    $local  = trim($_POST['localEncontrado'] ?? '');
+    $idPonto = (int) ($_POST['idPontoColeta'] ?? 0);
+
+    $ponto   = read($pdo, 'pontoColeta', 'idEndereco = ?', [$idPonto]);
+
+    if ($estado === '' || $local === '' || !$ponto) {
+        $erro = 'Preencha o estado e o local.';
+    } else {
+        create($pdo, 'achado', [
+            'idObjeto'        => $id,
+            'idUsuarioAchou'  => 2,  // TEMPORÁRIO: trocar por $_SESSION['id_usuario']
+            'estadoObjeto'    => $estado,
+            'localEncontrado' => $local,
+            'idPontoColeta'   => $idPonto,
+        ]);
+
+        update($pdo, 'objetos', ['status_objeto' => 'Encontrado'], 'idObjeto = ?', [$id]);
+
+        header('Location: painelObjetos.php');
+        exit;
+    }
 }
 
 ?>
@@ -28,35 +53,86 @@ if (!$objeto || $objeto['status_objeto'] !== 'Perdido') {
 </head>
 
 <body>
-    <h1>Você encontrou este objeto?</h1>
-
-    <div class="tabela">
-        <div class="objeto">
-            <div class="emoji">
-                <p><?= htmlspecialchars($objeto['imagemObjeto']) ?></p>
-            </div>
-
-            <div class="conteudo">
-                <p>Nome: <?= htmlspecialchars($objeto['nome']) ?></p>
-                <p>Descrição: <?= htmlspecialchars($objeto['descricao']) ?></p>
-                <p>Categoria: <?= htmlspecialchars($objeto['categoria']) ?></p>
-                <p>Perdido em: <?= htmlspecialchars($objeto['localEncontrado']) ?></p>
-            </div>
+    <header>
+        <div class="logo">
+            <a href="./index.php"><img src="imagens/findit-white.png"></a>
         </div>
 
-        <form action="">
-            <label for="estato">Qual era o estado do objeto:</label>
-            <select name="estatoObjeto" id="estatoObjeto">
-                <option value="">Selecione</option>
-                <option value="normal">Normal</option>
-                <option value="precisaDeConcerto">Precisa de concerto</option>
-                <option value="quebrado">Quebrado</option>
-            </select>
+        <nav class="menu">
+            <a href="perfil.php" class="btn-perfil">
+                <img src="imagens/perfil.png" alt="Perfil">
+            </a>
+            <a href="./sobre.php">Sobre</a>
+            <a href="./painelObjetos.php">Objetos guardados</a>
+            <a href="./faq.php">Dúvidas</a>
+            <a href="./FormContato.php">Contato</a>
+            <a href="./cadastraObj.php" class="btn-cadastrar"><button>+ Cadastrar item</button></a>
+        </nav>
+    </header>
 
-            <label for="lugarEncontrado">Onde você o achou?</label>
-            <input type="text" id="estado" name="estado" required>
-        </form>
-    </div>
+    <main>
+
+        <?php if ($erro): ?>
+            <p><?= htmlspecialchars($erro) ?></p>
+        <?php endif; ?>
+
+        <h1>Você encontrou este objeto?</h1>
+
+        <div class="tabela">
+            <div class="objeto">
+                <div class="emoji">
+                    <p><?= htmlspecialchars($objeto['imagemObjeto']) ?></p>
+                </div>
+
+                <div class="conteudo">
+                    <p>Nome: <?= htmlspecialchars($objeto['nome']) ?></p>
+                    <p>Descrição: <?= htmlspecialchars($objeto['descricao']) ?></p>
+                    <p>Categoria: <?= htmlspecialchars($objeto['categoria']) ?></p>
+                    <p>Perdido em: <?= htmlspecialchars($objeto['localEncontrado']) ?></p>
+                </div>
+            </div>
+
+            <form action="" method="post">
+
+                <label for="estadoObjeto">Qual era o estado do objeto:</label>
+                <select name="estadoObjeto" id="estadoObjeto" required>
+                    <option value="">Selecione</option>
+                    <option value="Perfeito">Perfeito</option>
+                    <option value="Com marcas de uso">Com marcas de uso</option>
+                    <option value="Danificado">Danificado</option>
+                </select>
+
+
+                <label for="idPontoColeta">Onde você vai entregar o objeto?</label>
+                <select name="idPontoColeta" id="idPontoColeta" required>
+                    <option value="">Selecione</option>
+                    <?php foreach ($pontos as $p): ?>
+                        <option value="<?= (int) $p['idEndereco'] ?>">
+                            <?= htmlspecialchars($p['nome']) ?> - <?= htmlspecialchars($p['logradouro']) ?>, <?= (int) $p['numero'] ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
+
+                <label for="localEncontrado">Onde você o achou?</label>
+                <input type="text" id="localEncontrado" name="localEncontrado" required>
+
+                <div class="botoes">
+                    <button type="submit">Enviar</button>
+                    <a href="./FormContato.php">Não é este</a>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <footer>
+        <div class="rodape-coluna">
+            <p>Sistema de achados e perdidos. Devolvendo pertences de forma rápida e simples.</p>
+        </div>
+
+        <div class="direitos">
+            <p>&copy; 2026 Celeste System. Todos os direitos reservados.</p>
+        </div>
+    </footer>
 </body>
 
 </html>
