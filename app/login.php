@@ -16,7 +16,9 @@ require_once __DIR__ . "/init.php";
 <body>
     <header class="header-top">
         <div id="logo">
-            <img src="/css/imagens/logoLight.png" alt="Logo findIt">
+            <a href="index.php" class="btn-perfil">
+                <img src="/css/imagens/logoLight.png" alt="Logo findIt">
+            </a>
         </div>
         <div class="header-badge">
             <span class="pulse-dot"></span>
@@ -28,6 +30,18 @@ require_once __DIR__ . "/init.php";
         <section class="displayFlex">
             <div class="left-side">
                 <div class="container-sup">
+                    <div class="erro">
+                        <?php
+                        if (isset($_GET['erro']) && $_GET['erro'] != "") {
+                            echo "<h3> Ocorreram os Seguintes erros:</h3>";
+                            echo "<ul>";
+                            foreach ($_GET['erro'] as $erro) {
+                                echo "<li>" . htmlspecialchars($erro) . "</li>";
+                            }
+                            echo "</ul>";
+                        }
+                        ?>
+                    </div>
                     <h1 id="bemvindo">Que bom ter você de volta.</h1>
                     <br>
                     <p id="msg">Entre para acompanhar seus anúncios e reencontrar o que importa.</p>

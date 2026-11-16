@@ -231,3 +231,8 @@ header.header-top {
   box-shadow: 0 0 8px var(--encontrado);
   animation: pulse-glow 2s infinite ease-in-out;
 }
+
+.erro {
+  color: var(--perdido);
+  font-family: "Google Sans", sans-serif;
+}

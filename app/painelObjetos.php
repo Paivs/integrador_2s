@@ -28,6 +28,8 @@ if ($status !== '') {
 $where   = $condicoes ? implode(' AND ', $condicoes) : null;
 $objetos = readAll($pdo, 'objetos', $where, $params);
 
+
+
 ?>
 
 <!doctype html>
@@ -42,95 +44,95 @@ $objetos = readAll($pdo, 'objetos', $where, $params);
     <link rel="stylesheet" href="./css/style-painelObjetos.css">
 </head>
 
-<header>
-    <div class="logo">
-        <img src="imagens/logo.png">
-    </div>
-
-    <div class="menu">
-        <a href="perfil.php" class="btn-perfil">
-            <img src="imagens/perfil.png" alt="Perfil">
-        </a>
-        <a href="./sobre.php">Sobre</a>
-        <a href="./painelObjetos.php">Objetos guardados</a>
-        <a href="./faq.html">Dúvidas</a>
-        <a href="./contato.php">Contato</a>
-        <a href="./CadastrarItem.php" class="btn-cadastrar"><button>+ Cadastrar item</button></a>
-    </div>
-</header>
-
 <body>
-    <div class="fundo">
-
-        <div class="busca">
-            <form action="" method="get">
-                <div>
-                    <label for="pesquisa">Qual é o objeto perdido?</label>
-                    <input type="text" name="pesquisa" id="pesquisa" placeholder="Pesquise aqui..."
-                        value="<?= htmlspecialchars($pesquisa) ?>">
-
-                    <label for="categoria">Categoria</label>
-                    <select name="categoria" id="categoria">
-                        <option value="">Todas</option>
-                        <option value="acessórios">Acessórios</option>
-                        <option value="bolsas e mochilas">Bolsas e Mochilas</option>
-                        <option value="documentos">Documentos</option>
-                        <option value="eletrônicos">Eletrônicos</option>
-                        <option value="roupas">Roupas</option>
-                        <option value="roupas">Outros</option>
-                    </select>
-
-                    <label for="status">Status do Objeto</label>
-                    <select name="status" id="status">
-                        <option value="">Todos</option>
-                        <option value="perdido">Perdido</option>
-                        <option value="encontrado">Encontrado</option>
-                        <option value="abandonado">Abandonado</option>
-                    </select>
-                </div>
-
-                <div>
-                    <button type="submit">Buscar</button>
-                </div>
-            </form>
+    <header>
+        <div class="logo">
+            <a href="./index.php"><img src="imagens/findit-white.png"></a>
         </div>
 
-        <div class="telaObjetos">
-            <?php if (!$objetos): ?>
-                <p>Não encontramos nenhum objeto</p>
-            <?php endif; ?>
+        <nav class="menu">
+            <a href="perfil.php" class="btn-perfil">
+                <img src="imagens/perfil.png" alt="Perfil">
+            </a>
+            <a href="./sobre.php">Sobre</a>
+            <a href="./painelObjetos.php">Objetos guardados</a>
+            <a href="./faq.php">Dúvidas</a>
+            <a href="./FormContato.php">Contato</a>
+            <a href="./CadastrarItem.php" class="btn-cadastrar"><button>+ Cadastrar item</button></a>
+        </nav>
+    </header>
 
-            <?php foreach ($objetos as $o): ?>
-                <div class="objeto">
-                    <div class="emoji">
-                        <p><?= htmlspecialchars($o['imagemObjeto']) ?></p>
-                    </div>
-                    <div class="conteudo">
-                        <p>Nome: <?= htmlspecialchars($o['nome']) ?></p>
-                        <p>Descrição: <?= htmlspecialchars($o['descricao']) ?></p>
-                        <p>Status: <?= htmlspecialchars($o['status_objeto']) ?></p>
-                        <p>Categoria: <?= htmlspecialchars($o['categoria']) ?></p>
-                    </div>
-                    <?php if ($o['status_objeto'] == 'Perdido'): ?>
-                        <div class="botao">
-                            <form method="post" action="encontrei.php">
-                                <input type="hidden" name="id" value="<?= $o['id'] ?>">
-                                <button type="submit">Encontrei!!</button>
-                            </form>
+    <main>
 
-                            <?php
-                            $texto = "Objeto perdido: {$o['nome']} - {$o['descricao']}. Viu por aí? Acesse o Findit!";
-                            $link  = 'https://wa.me/?text=' . urlencode($texto);
-                            ?>
-                            <div class="compartilhar">
-                                <a href="<?= htmlspecialchars($link) ?>" target="_blank" rel="noopener">Compartilhar</a>
-                            </div>
+        <div class="fundo">
+
+            <div class="busca">
+                <form action="" method="get">
+                    <div>
+                        <label for="pesquisa">Qual é o objeto perdido?</label>
+                        <input type="text" name="pesquisa" id="pesquisa" placeholder="Pesquise aqui..."
+                            value="<?= htmlspecialchars($pesquisa) ?>">
+
+                        <label for="categoria">Categoria</label>
+                        <select name="categoria" id="categoria">
+                            <option value="">Todas</option>
+                            <option value="acessórios">Acessórios</option>
+                            <option value="bolsas e mochilas">Bolsas e Mochilas</option>
+                            <option value="documentos">Documentos</option>
+                            <option value="eletrônicos">Eletrônicos</option>
+                            <option value="roupas">Roupas</option>
+                            <option value="outros">Outros</option>
+                        </select>
+
+                        <label for="status">Status do Objeto</label>
+                        <select name="status" id="status">
+                            <option value="">Todos</option>
+                            <option value="perdido">Perdido</option>
+                            <option value="encontrado">Encontrado</option>
+                            <option value="abandonado">Abandonado</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <button type="submit">Buscar</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="telaObjetos">
+                <?php if (!$objetos): ?>
+                    <p>Não encontramos nenhum objeto</p>
+                <?php endif; ?>
+
+                <?php foreach ($objetos as $o): ?>
+                    <div class="objeto">
+                        <div class="emoji">
+                            <p><?= htmlspecialchars($o['imagemObjeto']) ?></p>
                         </div>
-                        <?php endif; ?>
-                </div>
-        <?php endforeach; ?>
+                        <div class="conteudo">
+                            <p>Nome: <?= htmlspecialchars($o['nome']) ?></p>
+                            <p>Descrição: <?= htmlspecialchars($o['descricao']) ?></p>
+                            <p>Status: <?= htmlspecialchars($o['status_objeto']) ?></p>
+                            <p>Categoria: <?= htmlspecialchars($o['categoria']) ?></p>
+                            <?php if ($o['status_objeto'] == 'Perdido'): ?>
+                                <div class="botao">
+                                    <a href="./encontrei.php?idObjeto=<?= $o['idObjeto'] ?>" class="botaoEncontrei">Encontrei!!</a>
+
+                                    <?php
+                                    $texto = "Objeto perdido: {$o['nome']} - {$o['descricao']}. Viu por aí? Acesse o Findit!";
+                                    $link  = 'https://wa.me/?text=' . urlencode($texto);
+                                    ?>
+
+                                    <a href="<?= htmlspecialchars($link) ?>" target="_blank" rel="noopener" class="botaoCompartilhar">Compartilhar</a>
+
+                                </div>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+
+
         </div>
-
-
-    </div>
+    </main>
 </body>

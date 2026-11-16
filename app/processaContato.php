@@ -35,6 +35,19 @@ if ($mensagem === '') {
     $erros[] = 'Escreva uma mensagem.';
 }
 
+if (count($erros) === 0) {
+    try {
+ 
+        $sql = 'INSERT INTO contato (telefone, nome, email, assunto, mensagem)
+                VALUES (?, ?, ?, ?, ?)';
+ 
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([$telefone, $nome, $email, $assunto, $mensagem]);
+    } catch (PDOException $e) {
+        $erros[] = $e->getMessage();
+    }
+}
+
 ?>
 
 <!DOCTYPE html>
