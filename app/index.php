@@ -1,4 +1,5 @@
 <?php
+<<<<<<< HEAD
 require_once __DIR__ . "/init.php";
 
 // Para onde o usuário vai depois de entrar
@@ -10,6 +11,21 @@ if (isset($_SESSION["id_usuario"])) {
     exit;
 }
 
+=======
+session_start();
+
+require_once __DIR__ . "/init.php";
+
+
+$painel = "painel.php";
+
+// Se já estiver logado, vai direto para o painel
+if (isset($_SESSION["id_usuario"])) {
+    header("Location: " . $painel);
+    exit;
+}
+
+>>>>>>> Rafaela
 $erro = "";
 $mensagem = "";
 $email = "";
@@ -36,8 +52,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     // Senha salva com password_hash (cadastro pelo sistema)
                     $senhaCorreta = true;
                 } elseif (hash_equals($usuario["senha"], $senha)) {
+<<<<<<< HEAD
                     // Senha antiga salva em texto puro (ex.: usuários do seed.sql).
                     // Aceita o login e já converte para hash.
+=======
+                    // Senha salva em texto(cadastro antigo)
+>>>>>>> Rafaela
                     $senhaCorreta = true;
                     update($pdo, "usuario", ["senha" => password_hash($senha, PASSWORD_DEFAULT)], "id = ?", [$usuario["id"]]);
                 }
@@ -69,7 +89,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - SchoolHelpDesk</title>
+<<<<<<< HEAD
     <link rel="stylesheet" href="css/login.css">
+=======
+    <link rel="stylesheet" href="login.css">
+>>>>>>> Rafaela
 </head>
 <body>
 
@@ -77,7 +101,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         <div class="lado-esquerdo">
             <div class="logo">
+<<<<<<< HEAD
                 <img src="imagem/logo_schoolhelpdesk.png" alt="SchoolHelpDesk - Juntos por uma escola que funciona melhor!">
+=======
+                <img src="img_index/logobranca.png" alt="SchoolHelpDesk">
+>>>>>>> Rafaela
             </div>
 
             <div class="texto-lateral">
@@ -127,7 +155,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     </div>
                 <?php } ?>
 
+<<<<<<< HEAD
                 <form action="index.php" method="POST">
+=======
+                <form action="login.php" method="POST">
+>>>>>>> Rafaela
 
                     <div class="campo">
                         <label for="email">E-mail institucional:</label>
@@ -162,7 +194,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
                 <div class="link-cadastro">
                     <p>Primeiro acesso?</p>
+<<<<<<< HEAD
                     <a href="cadastro.php">Criar conta</a>
+=======
+                    <a href="../Cadastro_Novo_usuario/cadastro.php">Criar conta</a>
+>>>>>>> Rafaela
                 </div>
 
                 <p class="aviso-final">Aluno, professor, funcionário ou administrador: o sistema direciona você para a área correta.</p>
