@@ -79,10 +79,18 @@
                             ?>
                         </div>
                     </div>
-
-
-
                     </div>
+                    <div class="tabelasJuntas">
+                        <?php foreach($setores as $setor): ?>
+                            <div class="statusSetor">
+                                <?php if($setor['estado_setor'] == 'Ativo'): ?>
+                                <h2><?= $setor['nome'] ?> 🟢</h2>
+                                <?php else: ?>
+                                <h2><?= $setor['nome'] ?> 🔴</h2>
+                                <?php endif ?>
+                            </div>
+                            <?php endforeach ?>
+                        </div>
             </div>
 
         </div>
