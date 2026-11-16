@@ -1,16 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Momo+Trust+Display&display=swap');
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
 body {
-  background-color: white;
   font-family: "Momo Trust Display", sans-serif;
-  position: relative;
-  min-height: 100vh;
+  margin: 0; 
+  padding-top: 70px;
 }
 
 header {
@@ -20,6 +13,12 @@ header {
   align-items: center;
   padding: 0 40px;
   height: 70px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  box-sizing: border-box;
+  z-index: 1000; 
 }
 
 .logo {

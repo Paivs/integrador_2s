@@ -56,7 +56,7 @@ foreach ($objetos as $o) {
 
         <div class="conta">
             <a href="./login.php" class="fazerLogin">fazer Login</a>
-            <a href="./cadastraConta.php" class="criarConta">Criar Conta</a>
+            <a href="./cadastrarConta.php" class="criarConta">Criar Conta</a>
         </div>
 
         <h2>Como funciona?</h2>
