@@ -10,24 +10,6 @@ body {
     color: #222;
 }
 
-/* header {
-    background-color: #0756c7;
-    color: white;
-    padding: 20px 8%;
-
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-header h1 {
-    font-size: 28px;
-}
-
-header span {
-    font-size: 16px;
-} */
-
 main {
     width: 85%;
     margin: 35px auto;

@@ -55,6 +55,13 @@ textarea {
   display: block;
 }
 
+.marca .logo {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
 .menu {
   display: grid;
   gap: 8px;
