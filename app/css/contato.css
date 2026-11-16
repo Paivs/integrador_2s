@@ -1,13 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Momo+Trust+Display&display=swap');
 
 :root {
-    --cor-fundo: #000000;
-    --cor-texto: #ffffff;
-    --cor-campo: #edf3f6;
-    --cor-campo-hover: #d9e2e8;
-    --cor-caixa: #1e222d;
-    --cor-rodape: #cdd0d3;
-    --cor-texto-escuro: #14181e;
+    --cor-fundo: #ffffff;
+    --cor-texto: #14181e;
+    --cor-campo: #1e222d;
+    --cor-campo-hover: #2c3242;
+    --cor-caixa: #e6ecf2;
+    --cor-rodape: #3f444b;
     --cor-verde: #3ddc84;
 }
 
