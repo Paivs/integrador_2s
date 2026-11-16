@@ -27,24 +27,24 @@ foreach ($objetos as $o) {
     <link rel="stylesheet" href="./css/style-index.css">
 </head>
 
-<header>
-    <div class="logo">
-        <img src="imagens/logo.png">
-    </div>
-
-    <div class="menu">
-        <a href="perfil.php" class="btn-perfil">
-            <img src="imagens/perfil.png" alt="Perfil">
-        </a>
-        <a href="./sobre.php">Sobre</a>
-        <a href="./painelObjetos.php">Objetos guardados</a>
-        <a href="./faq.php">Dúvidas</a>
-        <a href="./FormContato.php">Contato</a>
-        <a href="./CadastrarItem.php" class="btn-cadastrar"><button>+ Cadastrar item</button></a>
-    </div>
-</header>
-
 <body>
+    <header>
+        <div class="logo">
+            <a href="./index.php"><img src="imagens/findit-white.png"></a>
+        </div>
+
+        <nav class="menu">
+            <a href="perfil.php" class="btn-perfil">
+                <img src="imagens/perfil.png" alt="Perfil">
+            </a>
+            <a href="./sobre.php">Sobre</a>
+            <a href="./painelObjetos.php">Objetos guardados</a>
+            <a href="./faq.php">Dúvidas</a>
+            <a href="./FormContato.php">Contato</a>
+            <a href="./cadastraObj.php" class="btn-cadastrar"><button>+ Cadastrar item</button></a>
+        </nav>
+    </header>
+
     <main>
         <div class="topo">
             <h1>O seu rastreador de TODOS os objetos! (sim, todos)</h1>
@@ -54,8 +54,9 @@ foreach ($objetos as $o) {
             <img src="./imagens/tela-painel.png" alt="Tela do Painel de Objetos" width="900px">
         </div>
 
-        <div class="criarConta">
-            <a href="./cadastrarConta.php">Criar Conta</a>
+        <div class="conta">
+            <a href="./login.php" class="fazerLogin">fazer Login</a>
+            <a href="./cadastraConta.php" class="criarConta">Criar Conta</a>
         </div>
 
         <h2>Como funciona?</h2>

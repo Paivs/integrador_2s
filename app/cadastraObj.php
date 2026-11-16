@@ -19,24 +19,23 @@ require_once __DIR__ . "/init.php";
     <!-- menu -->
     <header>
         <div class="logo">
-            <img src="imagens/findit.png">
+            <a href="./index.php"><img src="imagens/findit-white.png" alt="FindIt"></a>
         </div>
 
-        <div class="menu">
+        <nav class="menu">
             <a href="perfil.php" class="btn-perfil">
                 <img src="imagens/perfil.png" alt="Perfil">
             </a>
-            <a href="sobre.html">Sobre</a>
-            <a href=".html">Objetos guardados</a>
-            <a href="faq.html">Dúvidas</a>
-            <a href="contato.html">Contato</a>
-            <a href="CadastrarItem.html" class="btn-cadastrar"><button>+ Cadastrar item</button></a>
-        </div>
+            <a href="./sobre.php">Sobre</a>
+            <a href="./painelObjetos.php">Objetos guardados</a>
+            <a href="./faq.php">Dúvidas</a>
+            <a href="./FormContato.php">Contato</a>
+            <a href="./CadastrarItem.php" class="btn-cadastrar"><button>+ Cadastrar item</button></a>
+        </nav>
     </header>
 
     <div class="lado-direito">
         <h2>Para realizar o cadastro de um novo objeto são necessárias as seguintes etapas:</h2>
-
 
         <form action="" method="POST" class="formulario">
             <div class="cadastro">
@@ -47,7 +46,8 @@ require_once __DIR__ . "/init.php";
                             <h3>Nome do objeto:</h3>
                         </label>
                     </div>
-                    <input class="resposta" type="text" id="nome" required>
+
+                    <input class="resposta" type="text" id="nome" name="nome" required>
                 </div>
 
                 <div class="grupo-campo">
@@ -57,7 +57,8 @@ require_once __DIR__ . "/init.php";
                             <h3>Descrição do objeto:</h3>
                         </label>
                     </div>
-                    <input class="resposta" type="text" id="descricao" required>
+
+                    <input class="resposta" type="text" id="descricao" name="descricao" required>
                 </div>
 
                 <div class="grupo-campo">
@@ -67,7 +68,8 @@ require_once __DIR__ . "/init.php";
                             <h3>Local onde foi perdido ou encontrado:</h3>
                         </label>
                     </div>
-                    <input class="resposta" type="text" id="local" required>
+                    
+                    <input class="resposta" type="text" id="local" name="local" required>
                 </div>
 
                 <div class="grupo-campo">
@@ -76,14 +78,16 @@ require_once __DIR__ . "/init.php";
                         <label for="categoria">
                             <h3>Categoria</h3>
                         </label>
-                        <select name="categoria" id="categoria">
-                            <option value="">Todas</option>
-                            <option value="acessórios">Acessórios</option>
-                            <option value="bolsas e mochilas">Bolsas e Mochilas</option>
+                        
+                        <select name="categoria" id="categoria" required>
+                           
+                            <option value="" disabled selected>Selecione...</option>
+                            <option value="acessorios">Acessórios</option>
+                            <option value="bolsas_mochilas">Bolsas e Mochilas</option>
                             <option value="documentos">Documentos</option>
-                            <option value="eletrônicos">Eletrônicos</option>
+                            <option value="eletronicos">Eletrônicos</option>
                             <option value="roupas">Roupas</option>
-                            <option value="roupas">Outros</option>
+                            <option value="outros">Outros</option>
                         </select>
                     </div>
                 </div>
@@ -104,169 +108,47 @@ require_once __DIR__ . "/init.php";
                 <div class="grupo-campo">
                     <div class="linha-titulo">
                         <p class="ordem">6.</p>
-                        <label for="categoria">
-                            <h3>Selecione a categoria a qual o objeto pertence:</h3>
-                        </label>
+                        <h3>Selecione o ícone do objeto:</h3>
                     </div>
                 </div>
             </div>
 
             <div class="circulos-container">
                 <div class="oito">
-                    <label class="circulo">
-                        <input type="radio" name="emoji_escolhido" value="chocolate: &#x1f36b" required>
-                        🍫
-                    </label>
-                    <br>
-
-                    <label class="circulo">
-                        <input type="radio" name="emoji_escolhido" value="garrafinha: &#x1f964" required>
-                        🥤
-                    </label>
-                    <br>
-
-                    <label class="circulo">
-                        <input type="radio" name="emoji_escolhido" value="relogio: &#x231a" required>
-                        ⌚
-                    </label>
-                    <br>
-
-                    <label class="circulo">
-                        <input type="radio" name="emoji_escolhido" value="guarda_chuva: &#x1f302" required>
-                        🌂
-                    </label>
-                    <br>
-
-                    <label class="circulo">
-                        <input type="radio" name="emoji_escolhido" value="bola_futebol: &#x26bd" required>
-                        ⚽
-                    </label>
-                    <br>
-
-                    <label class="circulo">
-                        <input type="radio" name="emoji_escolhido" value="equipamento: &#x1F6FC" required>
-                        🛼
-                    </label>
-                    <br>
-
-                    <label class="circulo">
-                        <input type="radio" name="emoji_escolhido" value="video_game: &#x1f3ae" required>
-                        🎮
-                    </label>
-                    <br>
-
-                    <label class="circulo">
-                        <input type="radio" name="emoji_escolhido" value="pelucia: &#x1f9f8" required>
-                        🧸
-                    </label>
-                    <br>
+                    <label class="circulo"><input type="radio" name="emoji_escolhido" value="🍫" required>🍫</label>
+                    <label class="circulo"><input type="radio" name="emoji_escolhido" value="🥤">🥤</label>
+                    <label class="circulo"><input type="radio" name="emoji_escolhido" value="⌚">⌚</label>
+                    <label class="circulo"><input type="radio" name="emoji_escolhido" value="🌂">🌂</label>
+                    <label class="circulo"><input type="radio" name="emoji_escolhido" value="⚽">⚽</label>
+                    <label class="circulo"><input type="radio" name="emoji_escolhido" value="🛼">🛼</label>
+                    <label class="circulo"><input type="radio" name="emoji_escolhido" value="🎮">🎮</label>
+                    <label class="circulo"><input type="radio" name="emoji_escolhido" value="🧸">🧸</label>
                 </div>
 
                 <div class="oito">
-                    <label class="circulo">
-                        <input type="radio" name="emoji_escolhido" value="oculos: &#x1f453" required>
-                        👓
-                    </label>
-                    <br>
-
-                    <label class="circulo">
-                        <input type="radio" name="emoji_escolhido" value="casaco: &#x1f9e5" required>
-                        🧥
-                    </label>
-                    <br>
-
-                    <label class="circulo">
-                        <input type="radio" name="emoji_escolhido" value="bone: &#x1f9e2" required>
-                        🧢
-                    </label>
-                    <br>
-
-                    <label class="circulo">
-                        <input type="radio" name="emoji_escolhido" value="bolsa: &#x1f45c" required>
-                        👜
-                    </label>
-                    <br>
-
-                    <label class="circulo">
-                        <input type="radio" name="emoji_escolhido" value="maquiagem: &#x1f484" required>
-                        💄
-                    </label>
-                    <br>
-
-                    <label class="circulo">
-                        <input type="radio" name="emoji_escolhido" value="anel: &#x1f48d" required>
-                        💍
-                    </label>
-                    <br>
-
-                    <label class="circulo">
-                        <input type="radio" name="emoji_escolhido" value="fone: &#x1f3a7" required>
-                        🎧
-                    </label>
-                    <br>
-
-                    <label class="circulo">
-                        <input type="radio" name="emoji_escolhido" value="celular: &#x1f4f1" required>
-                        📱
-                    </label>
-                    <br>
+                    <label class="circulo"><input type="radio" name="emoji_escolhido" value="👓">👓</label>
+                    <label class="circulo"><input type="radio" name="emoji_escolhido" value="🧥">🧥</label>
+                    <label class="circulo"><input type="radio" name="emoji_escolhido" value="🧢">🧢</label>
+                    <label class="circulo"><input type="radio" name="emoji_escolhido" value="👜">👜</label>
+                    <label class="circulo"><input type="radio" name="emoji_escolhido" value="💄">💄</label>
+                    <label class="circulo"><input type="radio" name="emoji_escolhido" value="💍">💍</label>
+                    <label class="circulo"><input type="radio" name="emoji_escolhido" value="🎧">🎧</label>
+                    <label class="circulo"><input type="radio" name="emoji_escolhido" value="📱">📱</label>
                 </div>
 
                 <div class="oito">
-                    <label class="circulo">
-                        <input type="radio" name="emoji_escolhido" value="computador: &#x1f4bb" required>
-                        💻
-                    </label>
-                    <br>
-
-                    <label class="circulo">
-                        <input type="radio" name="emoji_escolhido" value="camera: &#x1f4f7" required>
-                        📷
-                    </label>
-                    <br>
-
-                    <label class="circulo">
-                        <input type="radio" name="emoji_escolhido" value="livro: &#x1f4d" required>
-                        📚
-                    </label>
-                    <br>
-
-                    <label class="circulo">
-                        <input type="radio" name="emoji_escolhido" value="agenda: &#x1f4d3" required>
-                        📓
-                    </label>
-                    <br>
-
-                    <label class="circulo">
-                        <input type="radio" name="emoji_escolhido" value="cartao: &#x1f4b3" required>
-                        💳
-                    </label>
-                    <br>
-
-                    <label class="circulo">
-                        <input type="radio" name="emoji_escolhido" value="caneta: &#x1F58A" required>
-                        🖊️
-                    </label>
-                    <br>
-
-                    <label class="circulo">
-                        <input type="radio" name="emoji_escolhido" value="chave: &#x1f511" required>
-                        🔑
-                    </label>
-                    <br>
-
-                    <label class="circulo">
-                        <input type="radio" name="emoji_escolhido" value="martelo: &#x1f528" required>
-                        🔨
-                    </label>
-                    <br>
+                    <label class="circulo"><input type="radio" name="emoji_escolhido" value="💻">💻</label>
+                    <label class="circulo"><input type="radio" name="emoji_escolhido" value="📷">📷</label>
+                    <label class="circulo"><input type="radio" name="emoji_escolhido" value="📚">📚</label>
+                    <label class="circulo"><input type="radio" name="emoji_escolhido" value="📓">📓</label>
+                    <label class="circulo"><input type="radio" name="emoji_escolhido" value="💳">💳</label>
+                    <label class="circulo"><input type="radio" name="emoji_escolhido" value="🖊️">🖊️</label>
+                    <label class="circulo"><input type="radio" name="emoji_escolhido" value="🔑">🔑</label>
+                    <label class="circulo"><input type="radio" name="emoji_escolhido" value="🔨">🔨</label>
                 </div>
-
             </div>
-        </form>
 
-        <form action="" class="botao">
-            <button class="cadastrar" type="submit">Cadastrar</button>
+            <button class="botao" type="submit">Cadastrar</button>
         </form>
     </div>
 

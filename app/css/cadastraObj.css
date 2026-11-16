@@ -9,15 +9,30 @@
 body {
   background-color: white;
   font-family: "Momo Trust Display", sans-serif;
+  position: relative;
+  min-height: 100vh;
 }
 
 header {
-  background-color: black;
+  background-color: #000000;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0 40px;
   height: 70px;
+}
+
+.logo {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.logo img {
+  height: 100%;
+  width: 170px;
+  object-fit: contain;
+  display: block;
 }
 
 .menu {
@@ -34,14 +49,15 @@ header {
 
 .menu a {
   text-decoration: none;
-  color: #eef3f6;
+  color: #ffffff;
   font-size: 16px;
   font-weight: 500;
 }
 
 .menu button {
-  background-color: #eef3f6;
-  color: black;
+  background-color: #ffffff;
+  font-family: "Momo Trust Display", sans-serif;
+  color: #000000;
   border: none;
   padding: 10px 18px;
   border-radius: 20px;
@@ -51,23 +67,17 @@ header {
 
 h2 {
   padding: 8px;
-  align-items: left;
-  justify-content: left;
   display: flex;
   margin-left: 55px;
   color: black;
   font-size: 20px;
 }
 
-
-
 .linha-titulo {
   display: flex;
   align-items: center;
   margin-left: 105px;
-  /* Alinha o número e o texto verticalmente no centro */
   gap: 8px;
-  /* Espaço horizontal entre o número e a frase */
   margin-top: 15px;
 }
 
@@ -87,12 +97,10 @@ h2 {
   margin-bottom: 15px;
 }
 
-
 .grupo-campo input {
   width: 400px;
   margin-left: 110px;
   height: 25px;
-
 }
 
 .cadastro {
@@ -115,29 +123,21 @@ select {
   color: #2a303a;
   display: block;
   margin-top: 5px;
-  /* Deixa o input logo abaixo da frase */
-  width: 100%;
 }
 
 .circulos-container {
   display: flex;
   flex-direction: column;
-  /* grid-template-columns: repeat(auto-fit, minmax(65px, 1fr)); */
   gap: 10px;
   flex-wrap: wrap;
-  justify-content: left;
-  align-items: left;
   padding: 20px;
-  margin-bottom: 0.05px;
 }
 
 .oito {
   display: flex;
   flex-direction: row;
-  grid-template-columns: repeat(auto-fit, minmax(65px, 1fr));
   gap: 10px;
   flex-wrap: wrap;
-  justify-content: left;
   padding: 20px;
 }
 
@@ -146,7 +146,6 @@ select {
   height: 55px;
   border-radius: 50%;
   display: flex;
-  /* centraliza as imagens no centro dos círculos */
   align-items: center;
   justify-content: center;
   font-size: 36px;
@@ -157,7 +156,6 @@ select {
   background-color: #eef3f6;
 }
 
-/* Esconde o input original para aparecer apenas o emoji */
 .circulo input[type="radio"] {
   position: absolute;
   opacity: 0;
@@ -170,50 +168,38 @@ select {
   transform: scale(1.1);
 }
 
-/* mostra a opção selecionada */
 .circulo:has(input[type="radio"]:checked) {
-  box-shadow: 0 0 0 4px #3fd6e8;
-  /* borda azul de destaque */
+  box-shadow: 0 0 0 3px #3fd6e8;
   transform: scale(1.05);
 }
 
-.cadastrar {
+.botao {
   background-color: #3fd6e8;
   color: black;
   border-radius: 8px;
-  border: 12px;
+  border: none;
   width: 160px;
   height: 30px;
-  margin-left: 10px;
-}
-
-.botao {
-  display: flex;
-  justify-content: flex-start;
+  cursor: pointer;
+  font-family: "Momo Trust Display", sans-serif;
+  align-self: center;
+  margin: 10px 0 40px;
 }
 
 .lado-direito {
-  position: fixed;
-  flex-direction: column;
-  left: 0;
-  top: 8%;
   width: 40vw;
-  height: 100vh;
+  padding-bottom: 40px;
   display: flex;
-  align-items: center;
-  object-fit: cover;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .prateleira {
-  position: fixed;
-  flex-direction: column;
+  position: absolute;
   right: 0;
-  top: 7.8%;
+  top: 70px;      
+  bottom: 0;      
   width: 50vw;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  object-fit: cover;
 }
 
 .prateleira img {
@@ -221,4 +207,5 @@ select {
   height: 100%;
   object-fit: cover;
   border-radius: 25px;
+  display: block;
 }
