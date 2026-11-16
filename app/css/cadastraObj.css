@@ -1,23 +1,37 @@
 @import url('https://fonts.googleapis.com/css2?family=Momo+Trust+Display&display=swap');
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
 body {
-  background-color: white;
   font-family: "Momo Trust Display", sans-serif;
+  margin: 0; 
+  padding-top: 70px;
 }
 
 header {
-  background-color: black;
+  background-color: #000000;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0 40px;
   height: 70px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  box-sizing: border-box;
+  z-index: 1000; 
+}
+
+.logo {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.logo img {
+  height: 100%;
+  width: 170px;
+  object-fit: contain;
+  display: block;
 }
 
 .menu {
@@ -34,14 +48,16 @@ header {
 
 .menu a {
   text-decoration: none;
-  color: #eef3f6;
+  color: #ffffff;
   font-size: 16px;
   font-weight: 500;
 }
 
-.menu a.btn-cadastrar {
-  background-color: #eef3f6;
-  color: black;
+.menu button {
+  background-color: #ffffff;
+  font-family: "Momo Trust Display", sans-serif;
+  color: #000000;
+  border: none;
   padding: 10px 18px;
   border-radius: 20px;
   font-size: 15px;
@@ -62,10 +78,8 @@ h3 {
 .linha-titulo {
   display: flex;
   align-items: center;
-  /* alinha o número e o texto verticalmente no centro */
+  margin-left: 105px;
   gap: 8px;
-  /* espaço horizontal entre o número e a frase */
-  margin-left: 110px;
   margin-top: 15px;
 }
 
@@ -110,7 +124,6 @@ select {
   color: #2a303a;
   display: block;
   margin-top: 5px;
-  /* deixa o input logo abaixo da frase */
 }
 
 .circulos-container {
@@ -118,8 +131,6 @@ select {
   flex-direction: column;
   gap: 10px;
   flex-wrap: wrap;
-  justify-content: flex-start;
-  align-items: flex-start;
   padding: 20px;
 }
 
@@ -128,7 +139,6 @@ select {
   flex-direction: row;
   gap: 10px;
   flex-wrap: wrap;
-  justify-content: flex-start;
   padding: 20px;
 }
 
@@ -137,7 +147,6 @@ select {
   height: 55px;
   border-radius: 50%;
   display: flex;
-  /* centraliza os emojis no centro dos círculos */
   align-items: center;
   justify-content: center;
   font-size: 36px;
@@ -148,7 +157,6 @@ select {
   background-color: #eef3f6;
 }
 
-/* esconde o input original para aparecer apenas o emoji */
 .circulo input[type="radio"] {
   position: absolute;
   opacity: 0;
@@ -161,51 +169,38 @@ select {
   transform: scale(1.1);
 }
 
-/* mostra a opção selecionada */
 .circulo:has(input[type="radio"]:checked) {
-  box-shadow: 0 0 0 4px #3fd6e8;
-  /* borda azul de destaque */
+  box-shadow: 0 0 0 3px #3fd6e8;
   transform: scale(1.05);
 }
 
 .botao {
-  display: flex;
-  justify-content: flex-start;
-  margin-left: 125px; /* altere aqui para mover o botão */
-  margin-top: 10px;
-  margin-bottom: 30px;
-}
-
-.cadastrar {
   background-color: #3fd6e8;
   color: black;
   border-radius: 8px;
   border: none;
   width: 160px;
-  margin-left: 125px;
-  height: 36px;
+  height: 30px;
   cursor: pointer;
   font-family: "Momo Trust Display", sans-serif;
+  align-self: center;
+  margin: 10px 0 40px;
 }
 
-.lado-esquerdo {
-  position: fixed;
-  left: 0;
-  top: 70px;
+.lado-direito {
   width: 40vw;
+  padding-bottom: 40px;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
 }
 
 .prateleira {
-  position: fixed;
+  position: absolute;
   right: 0;
-  top: 70px;
+  top: 70px;      
+  bottom: 0;      
   width: 50vw;
-  height: calc(100vh - 70px);
-  display: flex;
-  align-items: center;
 }
 
 .prateleira img {
@@ -213,4 +208,5 @@ select {
   height: 100%;
   object-fit: cover;
   border-radius: 25px;
+  display: block;
 }

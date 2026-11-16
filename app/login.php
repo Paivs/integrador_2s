@@ -10,13 +10,19 @@ require_once __DIR__ . "/init.php";
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login | findIt</title>
-    <link rel="stylesheet" href="/Findit/app/css/login.css">
+    <link rel="stylesheet" href="/css/login.css">
 </head>
 
 <body>
-    <header class="metade">
+    <header class="header-top">
         <div id="logo">
-            <img src="/Findit/app/css/imagens/logoLight.png" alt="Logo findIt">
+            <a href="index.php" class="btn-perfil">
+                <img src="/css/imagens/logoLight.png" alt="Logo findIt">
+            </a>
+        </div>
+        <div class="header-badge">
+            <span class="pulse-dot"></span>
+            <span>+15 mil resgatados</span>
         </div>
     </header>
 
@@ -24,6 +30,18 @@ require_once __DIR__ . "/init.php";
         <section class="displayFlex">
             <div class="left-side">
                 <div class="container-sup">
+                    <div class="erro">
+                        <?php
+                        if (isset($_GET['erro']) && $_GET['erro'] != "") {
+                            echo "<h3> Ocorreram os Seguintes erros:</h3>";
+                            echo "<ul>";
+                            foreach ($_GET['erro'] as $erro) {
+                                echo "<li>" . htmlspecialchars($erro) . "</li>";
+                            }
+                            echo "</ul>";
+                        }
+                        ?>
+                    </div>
                     <h1 id="bemvindo">Que bom ter você de volta.</h1>
                     <br>
                     <p id="msg">Entre para acompanhar seus anúncios e reencontrar o que importa.</p>
@@ -56,7 +74,7 @@ require_once __DIR__ . "/init.php";
             </div>
 
             <div class="right-panel">
-                <img src="/Findit/app/css/imagens/imgright.jpg" alt="Perdeu? A gente encontra.">
+                <img src="/css/imagens/imgright.jpg" alt="Perdeu? A gente encontra.">
             </div>
         </section>
     </main>
