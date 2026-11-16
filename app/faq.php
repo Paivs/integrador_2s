@@ -20,7 +20,7 @@
 
     <header>
         <div class="logo">
-            <img src="imagens/findit.png">
+             <a href= "/index.php"><img src="imagens/findit.png"></a>   
         </div>
 
         <div class="menu">

@@ -1,51 +1,121 @@
-<?php
-
-require_once __DIR__ . "/init.php";
-
-?>
-
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Perfil</title>
+    <title>findIt. - Perfil do Usuário</title>
     <link rel="stylesheet" href="css/perfil.css">
 </head>
 <body>
-       <header>
-        <div class="logo">
-            <img src="imagens/findit.png">
+
+    
+    <header class="navbar">
+        <a href="#" class="logo">
+            <span class="logo-icon">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </span>
+            <span class="logo-text">findIt<span class="dot">.</span></span>
+        </a>
+
+        <div class="nav-user-icon">
+            <i class="fa-solid fa-user"></i>
         </div>
 
-        <div class="menu">
-            <a href="perfil.php" class="btn-perfil">
-                <img src="imagens/perfil.png" alt="Perfil">
-            </a>
-            <a href="sobre.php">Sobre</a>
-            <a href=".html">Objetos guardados</a>
-            <a href="faq.php">Dúvidas</a>
-            <a href="contato.php">Contato</a>
-            <a href="CadastrarItem.html" class="btn-cadastrar"><button>+ Cadastrar item</button></a>
-        </div>
+        <nav class="nav-links">
+            <a href="#">Sobre</a>
+            <a href="#">Objetos guardados</a>
+            <a href="#">Dúvidas</a>
+            <a href="#">Contato</a>
+        </nav>
+
+        <button class="btn-cadastrar">
+            <i class="fa-solid fa-circle-plus"></i> Cadastrar Item
+        </button>
     </header>
+ 
 
-     <br>
-     <br>
-     <br>
-    <div class="container">
+    <main class="main-container">
+        <section class="profile-card">
+            
+            
+            <div class="avatar-wrapper">
+                <div class="avatar-circle">
+                    <i class="fa-solid fa-user"></i>
+                </div>
+                <button class="edit-avatar-btn" title="Editar foto">
+                    <i class="fa-solid fa-pencil"></i>
+                </button>
+            </div>
 
-    <img src="imagens/perfil.png">
+          
+            <div class="info-pill name-pill">
+                <span>Nome do usuário</span>
+                <button class="edit-icon-btn" title="Editar nome">
+                    <i class="fa-solid fa-pencil"></i>
+                </button>
+            </div>
 
-    <div class="lista-textos">
-        <h2>Nome de Usuário</h2>
-        <h3>Telefone</h3>
-        <h3>Email</h3>
-        <h3>Tema</h3>
-        <h3>Endereço</h3>
-        <h3>Forma de Pagamento</h3>
-    </div>
-</div>
+            
+            <div class="info-list">
+                
+                <div class="info-pill">
+                    <div class="pill-left">
+                        <i class="fa-solid fa-phone"></i>
+                        <span>Telefone</span>
+                    </div>
+                    <button class="edit-icon-btn" title="Editar telefone">
+                        <i class="fa-solid fa-pencil"></i>
+                    </button>
+                </div>
+
+                
+                <div class="info-pill">
+                    <div class="pill-left">
+                        <i class="fa-regular fa-envelope"></i>
+                        <span>E-mail</span>
+                    </div>
+                    <button class="edit-icon-btn" title="Editar e-mail">
+                        <i class="fa-solid fa-pencil"></i>
+                    </button>
+                </div>
+
+               
+                <div class="info-pill">
+                    <div class="pill-left">
+                        <i class="fa-solid fa-circle-half-stroke"></i>
+                        <span>Tema</span>
+                    </div>
+                    <label class="theme-switch" title="Alternar tema">
+                        <input type="checkbox">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+
+                
+                <div class="info-pill">
+                    <div class="pill-left">
+                        <i class="fa-solid fa-house"></i>
+                        <span>Rua Azul</span>
+                    </div>
+                    <button class="edit-icon-btn" title="Editar endereço">
+                        <i class="fa-solid fa-pencil"></i>
+                    </button>
+                </div>
+
+                
+                <div class="info-pill">
+                    <div class="pill-left">
+                        <i class="fa-solid fa-wallet"></i>
+                        <span>Forma de pagamento</span>
+                    </div>
+                    <button class="edit-icon-btn" title="Editar pagamento">
+                        <i class="fa-solid fa-pencil"></i>
+                    </button>
+                </div>
+            </div>
+
+        </section>
+    </main>
+
 </body>
 </html>
