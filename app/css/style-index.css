@@ -21,7 +21,7 @@ header {
 
 .logo img {
     height: 100%;
-    width: auto;
+    width: 170px;
     object-fit: contain;
     display: block;
 }
@@ -66,20 +66,40 @@ header {
     margin-bottom: 100px;
 }
 
-.criarConta{
+.conta {
     display: flex;
+    justify-content: center;  
+    align-items: center;
+    gap: 50px;                
+    margin: 100px auto 0;      
+    width: 900px;
+    max-width: 100%;
 }
 
-.criarConta a {
-    background-color: blue;
-    color: aliceblue;
+.criarConta,
+.fazerLogin {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
     text-decoration: none;
-    margin: 0 auto;
+    text-align: center;
     border-radius: 17px;
     padding: 10px;
-    width: 95px;
-    margin-top: 100px;
+    width: 150px;
+    height: 50px;
     transition: transform 0.3s ease;
+}
+
+.criarConta {
+    background-color: blue;
+    color: aliceblue;
+    border: solid 2px blue;
+}
+
+.fazerLogin {
+    border: solid 2px blue;
+    color: blue;
 }
 
 .criarConta a:hover {
@@ -155,7 +175,7 @@ footer {
     color: rgb(193, 195, 197);
 }
 
-.demonstracao{
+.demonstracao {
     display: flex;
 }
 
