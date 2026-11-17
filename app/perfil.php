@@ -47,24 +47,36 @@ if (!$usuario) {
     <div class="container">
 
         <div class="quadro">
-            <img src="imagens/perfil.jpg">
+            <div class="topo">
+                <img src="imagens/perfil.jpg">
 
-            <div class="informacao">
-                <h2>Nome de Usuário</h2>
+                <div class="informacao">
+                    <div class="nome">
+                        <p><?= htmlspecialchars($usuario['nome']) ?></p>
+                    </div>
+                    
+                    <div class="email">
+                        <p><?= htmlspecialchars($usuario['email']) ?></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="edita">
+                <h3>Nome</h3>
                 <p><?= htmlspecialchars($usuario['nome']) ?></p>
             </div>
 
-            <div>
-                <h3>Email</h3>
+            <div class="edita">
+                <h3>E-mail</h3>
                 <p><?= htmlspecialchars($usuario['email']) ?></p>
             </div>
 
-            <div>
+            <div class="edita">
                 <h3>Telefone</h3>
                 <p><?= htmlspecialchars($usuario['telefone']) ?></p>
             </div>
 
-            <div>
+            <div class="edita">
                 <h3>Tema</h3>
             </div>
         </div>
