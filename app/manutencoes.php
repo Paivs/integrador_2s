@@ -105,9 +105,6 @@ if (usuarioEhCliente()) {
             </p>
           </div>
 
-          <?php if (usuarioEhCliente()): ?>
-            <a class="botao primario" href="agendar-manutencao.php">Solicitar manutenção</a>
-          <?php endif; ?>
         </header>
 
         <div class="indicadores resumo">
@@ -243,7 +240,7 @@ if (usuarioEhCliente()) {
                 </label>
 
                 <label class="campo-box">
-                  <span>Quilometragem</span>
+                  <span>Quilometragem do carro</span>
                   <input name="quilometragem" type="number" min="0" placeholder="Ex: 45000" value="<?php echo textoSeguro($quilometragem); ?>" required>
                 </label>
               </div>

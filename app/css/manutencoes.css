@@ -101,25 +101,21 @@
   outline: none;
 }
 
-/* Mantém fundo escuro nas opções do select */
 .bloco-manutencao .campo-box select option {
   background-color: #151d23;
   color: #ffffff;
 }
 
-/* Substitui o cinza padrão dos placeholders por branco suave */
 .bloco-manutencao .campo-box input::placeholder {
   color: rgba(255, 255, 255, 0.78);
   opacity: 1;
 }
 
-/* Ícone do calendário branco no campo de data */
 .bloco-manutencao .campo-box input[type="date"]::-webkit-calendar-picker-indicator {
   filter: invert(1);
   cursor: pointer;
 }
 
-/* Evita que o autofill do navegador pinte o fundo do input de branco */
 .bloco-manutencao .campo-box input:-webkit-autofill,
 .bloco-manutencao .campo-box input:-webkit-autofill:hover,
 .bloco-manutencao .campo-box input:-webkit-autofill:focus {
@@ -128,7 +124,6 @@
   transition: background-color 5000s ease-in-out 0s;
 }
 
-/* Lista customizada escura para o autocomplete de unidades (se usada no PHP) */
 .lista-unidades {
   position: absolute;
   top: 100%;
@@ -176,7 +171,6 @@
   gap: 10px;
 }
 
-/* Coluna 3: Preço médio e botão */
 .bloco-manutencao .coluna-preco {
   display: flex;
   flex-direction: column;
