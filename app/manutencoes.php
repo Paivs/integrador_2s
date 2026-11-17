@@ -194,7 +194,7 @@ if (usuarioEhCliente()) {
             <div class="coluna-mapa">
               <div class="marca">
                 <img class="logo" src="imagens/logo-carcare.png" alt="Logo do CarCare">
-                <div><h2><strong>PONTOS DE MANUTENÇÃO CARCARE</strong></h2></div>
+                <div><h2><strong>PONTOS DE MANUTENÇÃO</strong></h2></div>
               </div>
               <div id="mapa" class="maps"></div>
             </div>
