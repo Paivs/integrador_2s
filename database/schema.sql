@@ -1,3 +1,4 @@
+
 CREATE DATABASE IF NOT EXISTS carcare
 CHARACTER SET utf8mb4
 COLLATE utf8mb4_unicode_ci;
@@ -93,19 +94,27 @@ CREATE TABLE IF NOT EXISTS manutencao_pecas (
     FOREIGN KEY (peca_id) REFERENCES pecas(id)
 );
 
--- Cliente e carro fictícios solicitados pelo grupo.
+-- Cliente fictício 
 INSERT INTO clientes (nome, telefone, email)
 SELECT 'Lucas Andrade Silva', '(11) 99999-0000', 'lucas.exemplo@carcare.local'
 WHERE NOT EXISTS (
     SELECT id FROM clientes WHERE email = 'lucas.exemplo@carcare.local'
 );
 
-INSERT INTO veiculos (cliente_id, placa, marca, modelo, ano, quilometragem)
-SELECT clientes.id, 'BRA2E19', 'Volkswagen', 'Gol 1.6 MSI', 2020, 45820
-FROM clientes
-WHERE clientes.email = 'lucas.exemplo@carcare.local'
-  AND NOT EXISTS (SELECT id FROM veiculos WHERE placa = 'BRA2E19')
-LIMIT 1;
+-- Retirar o carro de exemplo de bancos antigos
+DELETE veiculos
+FROM veiculos
+INNER JOIN clientes ON clientes.id = veiculos.cliente_id
+WHERE veiculos.placa = 'BRA2E19'
+  AND veiculos.marca = 'Volkswagen'
+  AND veiculos.modelo = 'Gol 1.6 MSI'
+  AND veiculos.ano = 2020
+  AND veiculos.quilometragem = 45820
+  AND clientes.email = 'lucas.exemplo@carcare.local'
+  AND clientes.usuario_id IS NULL
+  AND NOT EXISTS (
+      SELECT 1 FROM manutencoes WHERE manutencoes.veiculo_id = veiculos.id
+  );
 
 -- Serviços iniciais para o cliente conseguir fazer uma solicitação.
 INSERT INTO servicos (nome, descricao, valor)
