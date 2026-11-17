@@ -1,3 +1,21 @@
+<?php
+
+session_start();
+
+require_once __DIR__ . "/init.php";
+
+// TEMPORÁRIO: sem login ainda, usa o usuário 1 (Ana). Quando o login existir, tire o "?? 1".
+$idUsuario = (int) ($_SESSION['id_usuario'] ?? 1);
+
+$usuario = read($pdo, 'usuario', 'idUsuario = ?', [$idUsuario]);
+
+if (!$usuario) {
+    header('Location: login.php');
+    exit;
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -22,25 +40,36 @@
             <a href="./painelObjetos.php">Objetos guardados</a>
             <a href="./faq.php">Dúvidas</a>
             <a href="./FormContato.php">Contato</a>
-            <a href="./CadastrarItem.php" class="btn-cadastrar"><button>+ Cadastrar item</button></a>
+            <a href="./cadastraObj.php" class="btn-cadastrar"><button>+ Cadastrar item</button></a>
         </nav>
     </header>
 
-    <br>
-    <br>
-    <br>
     <div class="container">
 
         <img src="imagens/perfil.png">
 
         <div class="lista-textos">
-            <h2>Nome de Usuário</h2>
-            <h3>Telefone</h3>
-            <h3>Email</h3>
-            <h3>Tema</h3>
-            <h3>Endereço</h3>
-            <h3>Forma de Pagamento</h3>
+            <div>
+                <h2>Nome de Usuário</h2>
+                <p><?= htmlspecialchars($usuario['nome']) ?></p>
+            </div>
+
+            <div>
+                <h3>Email</h3>
+                <p><?= htmlspecialchars($usuario['email']) ?></p>
+            </div>
+
+            <div>
+                <h3>Telefone</h3>
+                <p><?= htmlspecialchars($usuario['telefone']) ?></p>
+            </div>
+
+            <div>
+                <h3>Tema</h3>
+            </div>
         </div>
+
+        <a href="editaPerfil.php">edita</a>
     </div>
 </body>
 
