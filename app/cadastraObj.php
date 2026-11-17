@@ -30,7 +30,7 @@ require_once __DIR__ . "/init.php";
             <a href="./painelObjetos.php">Objetos guardados</a>
             <a href="./faq.php">Dúvidas</a>
             <a href="./FormContato.php">Contato</a>
-            <a href="./CadastrarItem.php" class="btn-cadastrar"><button>+ Cadastrar item</button></a>
+            <a href="./cadastraObj.php" class="btn-cadastrar"><button>+ Cadastrar item</button></a>
         </nav>
     </header>
 

@@ -31,12 +31,12 @@
             <a href="./painelObjetos.php">Objetos guardados</a>
             <a href="./faq.php">Dúvidas</a>
             <a href="./FormContato.php">Contato</a>
-            <a href="./CadastrarItem.php" class="btn-cadastrar"><button>+ Cadastrar item</button></a>
+            <a href="./cadastraObj.php" class="btn-cadastrar"><button>+ Cadastrar item</button></a>
         </nav>
     </header>
 
-    <div class="container">
-        <main>
+    <main>
+        <div class="container">
 
             <div class="faq-block">
                 <h2>1.Qual o prazo máximo para retirar um objeto?</h2>
@@ -58,7 +58,7 @@
                 <p>Após o prazo máximo ser atingido, enviaremos um e-mail avisando que o objeto será encaminhado para doação.</p>
             </div>
 
-        </main>
+    </main>
     </div>
 
 </body>
