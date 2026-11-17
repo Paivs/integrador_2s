@@ -7,15 +7,15 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit;
 }
  
-$telefone = preg_replace('/\D/', '', $_POST['telefone'] ?? '');
-$nome     = trim($_POST['Nome'] ?? '');
+$nome = trim($_POST['nome'] ?? '');
+$telefone = ($_POST['telefone'] ?? '');
 $email    = trim($_POST['email'] ?? '');
 $assunto  = $_POST['assunto'] ?? '';
 $mensagem = trim($_POST['mensagem'] ?? '');
- 
+
 $erros = [];
  
-if (strlen($telefone) < 10 || strlen($telefone) > 11) {
+if (strlen($telefone) < 11 || strlen($telefone) > 12) {
     $erros[] = 'Telefone inválido. Informe o DDD e o número.';
 }
  
@@ -38,14 +38,13 @@ if ($mensagem === '') {
 if (count($erros) === 0) {
     try {
  
-        $sql = 'INSERT INTO contato (telefone, nome, email, assunto, mensagem)
-                VALUES (?, ?, ?, ?, ?)';
- 
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute([$telefone, $nome, $email, $assunto, $mensagem]);
+        $sql = $pdo->prepare(
+            'INSERT INTO mensagem (nome, telefone, email, assunto, mensagem) VALUES (:nome, :telefone, :email, :assunto, :mensagem)');
+        $sql->execute(['nome' => $nome, 'telefone' => $telefone, 'email' => $email, 'assunto' => $assunto , 'mensagem' =>$mensagem]);
     } catch (PDOException $e) {
         $erros[] = $e->getMessage();
     }
+
 }
 
 ?>

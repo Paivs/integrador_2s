@@ -122,7 +122,7 @@ textarea {
     border: none;
     border-radius: 30px;
     background-color: var(--cor-campo);
-    color: var(--cor-texto-escuro);
+    color: var(--cor-caixa);
     font-family: inherit;
     font-size: 16px;
     transition: background-color 0.2s, box-shadow 0.2s;
@@ -146,7 +146,7 @@ textarea {
 }
 
 ::placeholder {
-    color: var(--cor-texto-escuro);
+    color: var(--cor-fundo);
     opacity: 0.7;
 }
 
