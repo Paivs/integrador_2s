@@ -34,7 +34,7 @@ if (!$usuario) {
 
         <nav class="menu">
             <a href="perfil.php" class="btn-perfil">
-                <img src="imagens/perfil.png" alt="Perfil">
+                <img src="imagens/perfil.jpg" alt="Perfil">
             </a>
             <a href="./sobre.php">Sobre</a>
             <a href="./painelObjetos.php">Objetos guardados</a>
@@ -46,10 +46,10 @@ if (!$usuario) {
 
     <div class="container">
 
-        <img src="imagens/perfil.png">
+        <div class="quadro">
+            <img src="imagens/perfil.jpg">
 
-        <div class="lista-textos">
-            <div>
+            <div class="informacao">
                 <h2>Nome de Usuário</h2>
                 <p><?= htmlspecialchars($usuario['nome']) ?></p>
             </div>

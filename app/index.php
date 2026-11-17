@@ -35,7 +35,7 @@ foreach ($objetos as $o) {
 
         <nav class="menu">
             <a href="perfil.php" class="btn-perfil">
-                <img src="imagens/perfil.png" alt="Perfil">
+                <img src="imagens/perfil.jpg" alt="Perfil">
             </a>
             <a href="./sobre.php">Sobre</a>
             <a href="./painelObjetos.php">Objetos guardados</a>

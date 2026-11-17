@@ -42,11 +42,13 @@ header {
     align-items: center;
 }
 
-.logo img {
-    height: 100%;
-    width: 170px;
-    object-fit: contain;
+.menu img {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;   
     display: block;
+    flex-shrink: 0;     
 }
 
 .menu {

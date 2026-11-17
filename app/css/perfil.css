@@ -45,6 +45,9 @@ header {
     width: 32px;
     height: 32px;
     border-radius: 50%;
+    object-fit: cover;   
+    display: block;
+    flex-shrink: 0;     
 }
 
 .menu a {
@@ -65,3 +68,35 @@ header {
      font-family: 'Momo Trust Display', sans-serif;
 }
 
+.btn-perfil{
+    
+}
+
+.quadro{
+    background-color: #d3e2ef;
+    padding: 20px;
+    border-radius: 25px;
+    margin: 0 auto;
+    margin-top: 150px;
+    width: 700px;
+}
+
+.quadro img{
+    width: 100px;
+}
+
+.informacao h2{
+    background-color: #fffefe;
+    border-radius: 10px;
+    text-align: center;
+    padding: 4px;
+    border: solid 3px black;
+}
+
+.informacao p{
+    background-color: #fffefe;
+    border-radius: 10px;
+    text-align: center;
+    padding: 4px;
+    border: solid 2px black;
+}
