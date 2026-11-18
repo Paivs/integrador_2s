@@ -75,4 +75,7 @@ if($usuario != "root"){
         "?>
     <?php endforeach ?>
     </table>
+    <?php if($_SERVER['REQUEST_METHOD'] == "GET" && isset($_GET['erro'])):?>
+        <p>ERRO: ID DE TORNEIO OU EQUIPE NÃO EXISTE</p>
+    <?php endif?>
 </body>
