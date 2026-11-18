@@ -3,7 +3,7 @@
 if(!isset($_SESSION['cadastrado'])){
     $sessao = null;
 }else{
-    $sessao = $_SESSION['cadastrado']['perfil'];
+    $sessao = $_SESSION['cadastrado']['perfil'] ?? null ;
 }
 
 ?>
