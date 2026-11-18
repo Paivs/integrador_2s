@@ -33,6 +33,7 @@
     }
     $somaAreais = $somaA / 0.8;
     $somaBreais = $somaB / 0.8;
+    $contador2 = 0;
 ?>
 <html>
     
@@ -118,12 +119,14 @@
                         <div class="tabelasJuntas">
 
 
-                            <?php foreach($setores as $s): ?>
+                            <?php foreach($setores as $s): $contador2 += 1?>
                             <div class="lucro">
                                 <center>    
                                 
                                     <h2>Lucro - <?= $s['nome'] ?></h2>
                                     <canvas id="<?= $s['nome'] ?>" height="300"></canvas>
+                                    <h3>Gasto: </h3>
+                                    <h3>Meta: R$ <?php if($contador2 == 1): ?><?= print($somaAreais) ?><?php elseif($contador2 == 2): ?><?= print($somaBreais) ?><?php endif ?></h3>
                                 </center>
                             </div>
                             <?php endforeach ?>
@@ -207,7 +210,7 @@
     });
 
     const ctxblocoA = document.getElementById('Bloco A').getContext('2d');
-    let somaAreais = <?php echo json_encode($somaAreais); ?>;
+    let metaAreais = <?php echo json_encode($somaAreais); ?>;
     new Chart(ctxblocoA, {
       type: 'bar',
       data: {
@@ -223,7 +226,7 @@
           },
           {
             label: 'META',
-            data: [somaAreais],
+            data: [metaAreais],
             backgroundColor: '#00e667',
             borderRadius: 4,
             barPercentage: 0.85,
@@ -250,7 +253,7 @@
 
 
     const ctxblocoB = document.getElementById('Bloco B').getContext('2d');
-    let somaBreais = <?php echo json_encode($somaBreais); ?>;
+    let metaBreais = <?php echo json_encode($somaBreais); ?>;
     new Chart(ctxblocoB, {
       type: 'bar',
       data: {
@@ -266,7 +269,7 @@
           },
           {
             label: 'META',
-            data: [somaBreais],
+            data: [metaBreais],
             backgroundColor: '#00e667',
             borderRadius: 4,
             barPercentage: 0.85,
