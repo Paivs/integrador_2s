@@ -25,7 +25,10 @@
                     </a></li>
             </ul>
         </nav>
-        <div class="fotoConta"><a href="perfil.php">
+       <div class="login"><a href="login.php">
+                <div class="loginTitulo">
+                    <p>login</p>
+                </div>
             </a></div>
     </div>
 
@@ -122,6 +125,64 @@
 
     <p class="titulo">Nossos espaços</p>
 
+
+    <div class="espacos">
+        <div class="faixa">
+            <div class="grupo">
+                <div class="cardPrincipal">
+                <img src="./img-giovana/espaco6.png" alt="Imagem" width="200">
+                <p>visite o tokyo café</p>
+                </div>
+
+                <div class="cardPrincipal">
+                <img src="./img-giovana/espaco3.png" alt="Imagem" width="200">
+                <p>visite o italian park</p>
+                </div>
+
+                <div class="cardPrincipal">
+                <img src="./img-giovana/espaco2.png" alt="Imagem" width="300">
+                <p>visite o chill grass garden</p>
+                </div>
+
+                <div class="cardPrincipal">
+                <img src="./img-giovana/espaco1.png" alt="Imagem" width="200">
+                <p>visite o city zen</p>
+                </div>
+
+                <div class="cardPrincipal">
+                <img src="./img-giovana/espaco5.png" alt="Imagem" width="200">
+                <p>visite o cats home</p>
+                </div>
+            </div>
+
+            <div class="grupo" aria-hidden="true">
+                <div class="cardPrincipal">
+                <img src="./img-giovana/espaco6.png" alt="Imagem" width="200">
+                <p>visite o tokyo café</p>
+                </div>
+
+                <div class="cardPrincipal">
+                <img src="./img-giovana/espaco3.png" alt="Imagem" width="200">
+                <p>visite o italian park</p>
+                </div>
+
+                <div class="cardPrincipal">
+                <img src="./img-giovana/espaco2.png" alt="Imagem" width="300">
+                <p>visite o chill grass garden</p>
+                </div>
+
+                <div class="cardPrincipal">
+                <img src="./img-giovana/espaco1.png" alt="Imagem" width="200">
+                <p>visite o city zen</p>
+                </div>
+
+                <div class="cardPrincipal">
+                <img src="./img-giovana/espaco5.png" alt="Imagem" width="200">
+                <p>visite o cats home</p>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
         <div class="rodape">
