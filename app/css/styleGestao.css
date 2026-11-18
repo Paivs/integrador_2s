@@ -113,3 +113,10 @@ body{
 .lucro h2{
     margin-top: 14px;
 }
+.lucro h3{
+    margin-top: 30px;
+}
+
+.lucro canvas{
+    margin-left: 20px;
+}
