@@ -19,6 +19,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST" || isset($_POST)){
                 $usuario_senha = $senha;
                 $id = $u['id'];
                 $username = $u['username_conta'];
+                $perfil = $u['perfil'];
                 break;
             }
         } 
@@ -38,7 +39,8 @@ $_SESSION['cadastrado'] = [
     'email' => $email,
     'senha' => $senha,
     'username' => $username,
-    'id' => $id
+    'id' => $id,
+    'perfil' => $perfil,
 ];
 
 header("Location: entrarConta.php");
