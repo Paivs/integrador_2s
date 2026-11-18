@@ -11,12 +11,14 @@ if($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['setor_id'])) {
     exit;
 }
 
+$andar_existe = false;
 $setor_existe = false;
 
 ?>
 
 <html>
     <head>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <title>Setores e Ambientes</title>
         <link rel="stylesheet" href="./css/styleMenu.css">
         <link rel="stylesheet" href="./css/styleAmbientes.css">
@@ -39,7 +41,7 @@ $setor_existe = false;
                     $setor_existe = true;
                     echo "
 
-                    <div class='info'>
+                    <div class='info_pagina'>
 
                     <h1>Setor 0" . $setor['id'] . "</h1>
 
@@ -51,6 +53,9 @@ $setor_existe = false;
 
                     ";
                 }
+                
+                
+
             }
 
             if($setor_existe): ?> 
@@ -63,17 +68,26 @@ $setor_existe = false;
                         if($ambiente['setor_id'] == $_GET['id'] && $ambiente['andar'] == "Térreo"){
                             $area_andar += $ambiente['area_m2'];
                             $qtd_equipamentos += $ambiente['qtd_equipamentos'];
+                            $nome_andar = $ambiente['andar'];
                         } 
                     }
                     
                     ?>
-                        <div class="titulo_andar"><h2>Térreo</h2> <p class="area">Área total monitorada: <span class="dados"><?php echo $area_andar; ?> m²</span></p> <p class="area">Quantidade de equipamentos:  <span class="dados"><?php echo $qtd_equipamentos ?></span></p> </div>
+                        
+                        <div class="titulo_e_link">
+                            <div class="titulo_andar">
+                                <h2>Andar: <?php echo $nome_andar ?></h2> <p class="area">Área total monitorada: <span class="dados"><?php echo $area_andar; ?> m²</span></p> <p class="area">Quantidade de equipamentos:  <span class="dados"><?php echo $qtd_equipamentos ?></span></p>
+                            </div> 
+
+                            <div class="ver_dados"><a href="setores_ambientes.php?id=<?= $_GET['id'] ?>&andar=Térreo">Ver dados</a></div>
+                        </div>
+
                             <br>
 
 
                         <div class="info_andar">
                             <div class="ambientes">
-                                <h4>Ambientes: </h4>
+                                <h4>Ambientes: </h4> <hr>
 
                                 <table>
                                     <?php  
@@ -108,20 +122,29 @@ $setor_existe = false;
                         if($ambiente['setor_id'] == $_GET['id'] && $ambiente['andar'] == 1){
                             $area_andar += $ambiente['area_m2'];
                             $qtd_equipamentos += $ambiente['qtd_equipamentos'];
+                            $nome_andar = $ambiente['andar'];
                         } 
                     }
                     
                     ?>
-                        <div class="titulo_andar"><h2>Andar 1</h2> <p class="area">Área total monitorada: <span class="dados"><?php echo $area_andar; ?> m²</span></p> <p class="area">Quantidade de equipamentos:  <span class="dados"><?php echo $qtd_equipamentos ?></span></p> </div>
-                            <br>
+                        <div class="titulo_e_link">
+                            <div class="titulo_andar">
+                                <h2>Andar: <?php echo $nome_andar ?></h2> <p class="area">Área total monitorada: <span class="dados"><?php echo $area_andar; ?> m²</span></p> <p class="area">Quantidade de equipamentos:  <span class="dados"><?php echo $qtd_equipamentos ?></span></p>
+                            </div> 
 
+                            <div class="ver_dados"><a href="setores_ambientes.php?id=<?= $_GET['id'] ?>&andar=1">Ver dados</a></div>
+
+                        </div>
+                                            <br>
 
                         <div class="info_andar">
                             <div class="ambientes">
-                                <h4>Ambientes: </h4>
+                                <h4>Ambientes: </h4> <hr>
 
                                 <table>
                                     <?php  
+                                    
+
                                     foreach($ambientes as $ambiente): 
                                         if($ambiente['setor_id'] == $_GET['id'] && $ambiente['andar'] == 1): ?>
                                             
@@ -143,12 +166,285 @@ $setor_existe = false;
                         </div>
                             
                 </div> 
+                
+                <?php
+                if(isset($_GET['andar'])){
+                    if($_GET['andar'] == 'Térreo' || $_GET['andar'] == '1'){
+                        $andar_existe = true;
+                    }else{
+                    echo 
+                    "
 
-            
+                        <br>
 
-            <?php endif; ?>
+                        <div class='erro'>
+                            
+                        <h1>⛔ ERRO: Andar não encontrado dentro do banco.</h1> <br>
+
+                        <h2>Tente ver os dados novamente...</h2>
+
+                        </div>
+
+                        "; 
+        
+                    }; 
+                                            
+                }
+
+                if($andar_existe){
+
+                    $area_andar = 0;
+                        foreach ($ambientes as $ambiente) {
+                            if ($ambiente['andar'] == $_GET['andar'] && $ambiente['setor_id'] == $_GET['id']) {
+                                $area_andar += $ambiente['area_m2'];
+                            }
+                        }                        
+
+                    $total_kwh = 0;
+                        foreach ($ambientes as $ambiente) {
+                            foreach ($leituras as $leitura) {
+                                if ($leitura['ambiente_id'] == $ambiente['id'] && $ambiente['andar'] == $_GET['andar'] && $ambiente['setor_id'] == $_GET['id']) {
+                                    $total_kwh += $leitura['leitura_acumulada_kwh'];
+                                }
+                            }
+                        } 
+                        
+                    $meta_andar = 0;
+                        foreach ($metas as $meta) {
+                            foreach ($ambientes as $ambiente) {     
+                                if($meta['ambiente_id'] == $ambiente['id'] && $ambiente['andar'] == $_GET['andar'] && $ambiente['setor_id'] == $_GET['id']) {
+                                    $meta_andar += $meta['meta_kwh'];
+                                }
+                            }
+                        } 
+
+                    if($total_kwh <= 0 || $meta_andar <= 0 || !isset($total_kwh) && !isset($meta_andar)){    
+                        $porcentagem_meta = 0;
+                    } else {
+                        $porcentagem_meta = ($total_kwh / $meta_andar) * 100;
+                    };
+
+                    $porcentagem_meta = number_format($porcentagem_meta, 2);
+
+                        if ($porcentagem_meta > 100) {
+                            $cor_meta = 'vermelho';
+                        } elseif ($porcentagem_meta > 80) {
+                            $cor_meta = 'amarelo';
+                        } else {
+                            $cor_meta = 'verde';
+                        }
+                    
+                    ?>
+
+                        <div class="card_resumo_andar">
+
+                            <div class="resumo_andar_title">
+                                <div>
+                                    <h2>Andar: <?php echo $_GET['andar']; ?></h2>  <! Setor com seu id > 
+                                </div>
+                                
+
+                                <div class="info">
+                                    <h2>
+                                        <?php 
+                                        
+                                        if($cor_meta == 'vermelho'){ 
+                                            echo "<b>Alerta 🔴</b>"; 
+                                        } elseif($cor_meta == 'amarelo'){ 
+                                            echo "<b>Atenção 🟡</b>";
+                                        } else {
+                                            echo "<b>Suave 🟢</b>";
+                                        }
+                        
+                                        ?>
+                                    </h2>
+                                </div>
+                            </div>
+                                    
+                            <br>
+
+                            <div class="kwh_real_efic">
+                                <div class="total_kwh_andar">
+                                    <h2>Gasto de energia</h2>
+                                    <h4>Em quilowatt-hora (kWh)</h4> <br>
+                                    <?php
+                                        
+                                        echo "<h1>" . $total_kwh . " kWh</h1><br>";
+                                
+                                        echo "<h4>Meta: " . $meta_andar . " kWh | <b class='meta_" . $cor_meta . "'>" . $porcentagem_meta . " % da meta</b></h4>";
+                                        
+                                    ?> <br> <hr>
+
+                                    <canvas id="grafico1"></canvas>
+
+                                </div>
+
+                                <div>
+                                    <div class="titulo_andar">
+
+                                        <div class="total_reais_andar">
+                                            <h2>Custo estimado</h2>
+                                            <h4>Em reais (R$)</h4> <br>
+                                            <?php
+                                                $tarifa_media = 0.8;
+
+                                                $total_reais = $total_kwh * $tarifa_media;
+
+                                                echo "<h1>R$ " . $total_reais . " </h1><br>";
+                                            
+                                                echo "<h4>Tarifa média: R$ " . $tarifa_media . " p/ kWh</h4>";
+                                            ?> 
+
+                                        </div>
+
+                                        <div class="eficiencia_andar">
+
+                                            <h2>Eficiência energética</h2>
+                                            <h4>Em quilowatt-hora por metro quadrado</h4> <br>
+                                            <?php
+                                                if($total_kwh <= 0 || $area_andar <= 0 || !isset($total_kwh) || !isset($area_andar)){
+                                                    $eficiencia = 0;
+                                                } else {
+                                                    $eficiencia = $total_kwh / $area_andar;
+                                                }
+                                                $eficiencia = number_format($eficiencia, 2);
+
+                                                echo "<h1>" . $eficiencia . " kWh/m²</h1><br>";
+
+                                                echo "<h4>Área total: " . $area_andar . " m²"
+                                            
+                                            ?> 
+                                        </div>
+
+                                    </div> 
+                                    
+                                    <div class="projecao">
+                                        
+                                        <?php
+
+                                        $kwh_lidos = [];
+                                        $data_leitura = [];
+
+                                        try{
+
+                                            $consulta = $pdo->prepare('
+                                                SELECT * FROM leituras ORDER BY data_hora ASC
+                                            ');
+                                            $consulta->execute();
+                                            $leituras = $consulta->fetchAll();
+
+                                        } catch(PDOException $erro) {
+                                            error_log($erro->getMessage());
+                                            exit("Falha ao ler as leituras.");
+                                        }
+
+                                        foreach($leituras as $l){
+                                            foreach($ambientes as $a){
+                                                if($l['ambiente_id'] == $a['id'] && $a['andar'] == $_GET['andar'] && $a['setor_id'] == $_GET['id']){
+                                                $kwh_lidos[] = $l['leitura_acumulada_kwh'];
+
+                                                $data = new DateTimeImmutable($l['data_hora']);
+
+                                                $diaMes = $data->format('d/m');
+                                            
+                                                $data_leitura[] = $diaMes;
+                                                }
+                                            }
+                                        } 
+                                        
+                                        ?>
+
+                                        <div>
+                                            <h2>Projeção para o fim do mês</h2> <br>
+                                            <h4>Com a média de consumo das últimas leituras: </h4> 
+                                            <?php
+                                            
+                                                if($total_kwh <= 0 || !isset($total_kwh)){
+                                                    $media_consumo = 0;
+                                                    $consumo_final = 0;
+                                                } else {
+                                                    $media_consumo = $total_kwh / count($data_leitura);
+                                                    $consumo_final = $media_consumo * 30;
+                                                }
+
+                                                
+                                                echo "<h1>" . $media_consumo . " kWh p/ dia</h1></div><br>";
+                                        
+                                                echo "
+
+                                                <div class='consumo_final'>
+
+
+                                                <h4>No final do mês teremos um consumo de: </h4>
+                                                
+                                                <h1>" . $consumo_final . " kWh</h1>
+                                                
+                                                </div>
+                                                
+                                                "
+                                                
+                                            ?>
+
+                                    </div>
+
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                        
+                    
+                    <script>
+                        const gfc = document.getElementById('grafico1');
+                        let info = <?php echo json_encode($kwh_lidos); ?>;
+                        let data = <?php echo json_encode($data_leitura); ?>;
+                        new Chart(gfc, {
+                        type: 'line',
+                        label: ["Gastos"],
+                        data: {
+                            labels: data,
+                            datasets: [{
+                            label: ["Gastos"],
+                            data: info,
+                            borderColor: '#7bd798',
+                            backgroundColor: '#7bd798',
+                            barThickness: 160
+                        }]
+                        },
+                            options: {
+                            responsive: true,
+                        }
+                        });
+                    </script>
+
+                <?php } ?>
+                
+            <?php else: ?>
+
+                <?php
+                
+                echo 
+                "
+
+                <br>
+
+                <div class='erro'>
+                    
+                <h1>⛔ ERRO: Setor não encontrado dentro do banco.</h1> <br>
+
+                <h2>Retorne aos setores clicando <a href='estrutura_medidores.php'>AQUI</a></h2>
+
+                </div>
+
+                "; 
+                
+                ?>
+
+            <?php endif;?>
 
             </div>
         </div>
+        
     </body>
 </html>

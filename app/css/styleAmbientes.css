@@ -2,16 +2,16 @@ body{
     background-color: #090b0c;
 }
 
-.info{
+.info_pagina{
     display: flex;
     margin-bottom: 20px;
 }
 
-.info h1{
+.info_pagina h1{
     margin-right: 50px;
 }
 
-.info h2{
+.info_pagina h2{
     color: #c2e9a0;
     margin-top: 5px;
     margin-right: 50px;
@@ -41,6 +41,15 @@ body{
     width: 220px;
 }
 
+hr {
+    border: none;
+    height: 1px;
+    background-color: #7bd798;
+    margin-bottom: 15px;
+    margin-top: 10px;
+}
+
+
 .ambientes td{
     margin-right: 70px;
     margin-bottom: 20px;
@@ -52,6 +61,11 @@ body{
     color: #7bd798;
     margin-top: 4px;
     margin-left: 20px;
+}
+
+.titulo_e_link{
+    display: flex;
+    justify-content: space-between;
 }
 
 .titulo_andar{
@@ -88,3 +102,170 @@ body{
     margin-left: 8px;
 }
 
+.erro{
+    color: rgb(250, 81, 81);
+}
+
+.erro h2{
+    margin-left: 80px;
+}
+
+.erro h2 a{
+    margin-left: 5px;
+    text-decoration: none;
+    color: rgb(252, 51, 51);
+    background-color: rgb(255, 124, 124);
+    padding: 5px;
+    border-radius: 10px;
+}
+
+.erro h2 a:hover{
+    margin-left: 4px;
+    text-decoration: none;
+    color: rgb(253, 28, 28);
+    background-color: rgb(255, 124, 124);
+    padding: 7px;
+    border-radius: 10px;
+    transition-duration: 0.3s;
+    transform: scale(1.20);
+    opacity: 100%;
+    z-index: 100;
+
+}
+
+.ver_dados a{
+    margin-right: 10px;
+    text-decoration: none;
+    font-size: 23px;
+    font-weight: bold;
+    padding: 5px;
+    border-radius: 10px;
+    background-color: #c2e9a0;
+    color: #2b8d76;
+}
+
+.ver_dados a:hover{
+    text-decoration: none;
+    font-size: 23px;
+    font-weight: bold;
+    padding: 7px;
+    border-radius: 10px;
+    background-color: #c2e9a0;
+    color: #3d694e;
+    transition-duration: 0.8s;
+    transform: scale(1.05);
+    opacity: 100%;
+    z-index: 100;
+}
+
+.card_resumo_andar{
+    background-color: #151a1c;
+    padding: 20px;
+    border: 1px solid #7bd798;
+    border-radius: 20px;
+    margin-bottom: 50px;
+    width: 1633px;
+}
+
+.resumo_andar_title{
+    margin-bottom: 5px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.info b{
+    padding: 5px;
+    border: 1px solid #7bd798;
+    border-radius: 20px;
+}
+
+.total_kwh_andar{
+    background-color: #090b0c;
+    padding: 20px;
+    border-radius: 20px;
+    height: 200px;
+    width: 500px;
+    margin-right: 20px;
+    height: fit-content;
+}
+
+.total_kwh_andar h4{
+    color: #3d694e;
+    font-size: 20px;
+}
+
+.total_reais_andar{
+    background-color: #090b0c;
+    padding: 20px;
+    border-radius: 20px;
+    height: 200px;
+    width: 500px;
+    margin-right: 20px;
+}
+
+.total_reais_andar h4{
+    color: #3d694e;
+    font-size: 20px;
+}
+
+.eficiencia_andar{
+    background-color: #090b0c;
+    padding: 20px;
+    border-radius: 20px;
+    height: 200px;
+    width: 500px;
+}
+
+.eficiencia_andar h4{
+    color: #3d694e;
+    font-size: 20px;
+}
+
+.kwh_real_efic{
+    display: flex;
+    margin-top: 5px;
+    margin-left: 20px;
+}
+
+.projecao{
+    margin-top: 20px;
+    background-color: #090b0c;
+    padding: 30px;
+    border-radius: 20px;
+    height: 200px;
+    width: 100%;
+    margin-right: 20px;
+    height: 256px;
+    display: flex;
+}
+
+.projecao h4{
+    color: #3d694e;
+    font-size: 20px;
+}
+
+.consumo_final{
+    margin-left: 70px;
+    margin-top: 130px;
+}
+
+.meta_verde{
+    color: #2b8d76;
+    background-color: #7bd798;
+    padding: 5px;
+    border-radius: 10px;
+}
+
+.meta_vermelho{
+    color: #ff0013;
+    background-color: #ffabb1;
+    padding: 5px;
+    border-radius: 10px;
+}
+
+.meta_amarelo{
+    color: #ffb800;
+    background-color: #fff0b3;
+    padding: 5px;
+    border-radius: 10px;
+}
