@@ -11,6 +11,14 @@ $placa = '';
 $ano = '';
 $quilometragem = '';
 
+$carroExemplo = [
+    'placa' => 'BRA2E19',
+    'marca' => 'Volkswagen',
+    'modelo' => 'Gol 1.6 MSI',
+    'ano' => 2020,
+    'quilometragem' => 45820
+];
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $marca = trim($_POST['marca'] ?? '');
     $modelo = trim($_POST['modelo'] ?? '');
@@ -86,8 +94,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
       <form action="cadastro-veiculo.php" method="post">
         <div class="colunas">
-          <label>Marca<input name="marca" value="<?php echo textoSeguro($marca); ?>" placeholder="Volkswagen" required></label>
-          <label>Modelo<input name="modelo" value="<?php echo textoSeguro($modelo); ?>" placeholder="Gol 1.6 MSI" required></label>
+          <label>Marca<input name="marca" value="<?php echo textoSeguro($marca); ?>" placeholder="Chevrolet" required></label>
+          <label>Modelo<input name="modelo" value="<?php echo textoSeguro($modelo); ?>" placeholder="SUV" required></label>
         </div>
 
         <div class="colunas">
@@ -104,5 +112,33 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       </form>
     </div>
   </div>
+
+  <script>
+    const carroExemplo = <?php echo json_encode($carroExemplo, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_AMP | JSON_HEX_QUOT); ?>;
+    const placa = document.querySelector('input[name="placa"]');
+    const marca = document.querySelector('input[name="marca"]');
+    const modelo = document.querySelector('input[name="modelo"]');
+    const ano = document.querySelector('input[name="ano"]');
+    const quilometragem = document.querySelector('input[name="quilometragem"]');
+    let preenchidoAutomaticamente = false;
+
+    placa.addEventListener('input', function () {
+      this.value = this.value.toUpperCase().replace(/[^A-Z0-9]/g, '');
+
+      if (carroExemplo && this.value === carroExemplo.placa) {
+        marca.value = carroExemplo.marca;
+        modelo.value = carroExemplo.modelo;
+        ano.value = carroExemplo.ano;
+        quilometragem.value = carroExemplo.quilometragem;
+        preenchidoAutomaticamente = true;
+      } else if (preenchidoAutomaticamente) {
+        marca.value = '';
+        modelo.value = '';
+        ano.value = '';
+        quilometragem.value = '';
+        preenchidoAutomaticamente = false;
+      }
+    });
+  </script>
 </body>
 </html>
