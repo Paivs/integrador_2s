@@ -1,4 +1,5 @@
 @import url('https://fonts.google.com/');
+@import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&display=swap');
 
 body{
     background-color: #090b0c;
@@ -18,12 +19,12 @@ body{
     color: #31c166;
     margin-bottom: 30px;
     margin-left: 20px;
-    font-family: 'Crete Round', sans-serif;
+    font-family: 'Inconsolata';
 }
 .form-manual label {
     color: #ffffff;
     margin-left: 30px;
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Inconsolata';
 }
 .form-manual select {
     margin-left: 30px;
@@ -34,7 +35,7 @@ body{
     width: 600px;
     height: 50px;
     font-size: 20px;
-    font-family: 'Crete Round', sans-serif;
+    font-family: 'Inconsolata';
 }
 .form-manual input{
     margin-left: 30px;
@@ -45,7 +46,7 @@ body{
     width: 600px;
     height: 50px;
     font-size: 20px;
-    font-family: 'Crete Round', sans-serif;
+    font-family: 'Inconsolata';
 }
 .form-manual button {
     margin-left: 160px;
@@ -56,15 +57,19 @@ body{
     width: 300px;
     height: 50px;
     font-size: 16px;
-    font-family: 'Crete Round', sans-serif;
+    font-family: 'Inconsolata';
     
 }
+.form-manual label b{
+    font-family: 'Inconsolata';
+}
+
 
 .conteudo h1 {
     color: #31c166;
     margin-bottom: 20px;
     margin-left: 10px;
-    font-family: 'Crete Round', sans-serif;
+    font-family: 'Inconsolata';
 }
 .coneiner-conteudo {
     display: flex;
@@ -87,20 +92,20 @@ body{
     
 }
 .form-registro b{
-    font-family: 'Crete Round', sans-serif;
+    font-family: 'Inconsolata';
 }
 .form-registro table thead tr {
     background-color: #4fbe71;
     border-radius: 20px;
     margin-bottom: 20px;
-    font-family: 'Crete Round', sans-serif;
+    font-family: 'Inconsolata';
 }
 .form-registro table thead tr th {
     color: #000000;
     padding: 10px;
     border-radius: 10px;
     width: 230px;
-    font-family: 'Crete Round', sans-serif;
+    font-family: 'Inconsolata';
 }
 .form-registro table tbody tr td {
     background-color: #c2e9a0;
@@ -109,7 +114,7 @@ body{
     padding-right: 20px;
     border-radius: 10px;
     width: 250px;
-    font-family: 'Crete Round', sans-serif;
+    font-family: 'Inconsolata';
 }
 .excluir{
     color: #ffffff;
@@ -117,7 +122,7 @@ body{
     border: 10px solid #971b1b;
     background-color: #971b1b;
     border-radius: 10px;
-    font-family: 'Crete Round', sans-serif;
+    font-family: 'Inconsolata';
     display: flex;
     margin-left: 8px;
     margin-bottom: 3px;
@@ -129,7 +134,7 @@ body{
     border: 10px solid #4fbe71;
     background-color: #4fbe71;
     border-radius: 10px;
-    font-family: 'Crete Round', sans-serif;
+    font-family: 'Inconsolata';
     display: flex;
     margin-left:10px;
     margin-bottom: 3px;
@@ -143,17 +148,18 @@ body{
     border: 1px solid #073c23;
     border-radius: 100px;
     background-color: #073c23;
-    width: 260px;
+    width: 300px;
     height: 60px;
     margin-left: 1300px;
     margin-bottom: 20px;
-    
 }
 .status p {
     color: #00ff73;
     margin-left: 26px;
-    margin-top: 19px;
-    font-family: 'Crete Round', sans-serif;
+    margin-top: 17px;
+    font-family: 'Inconsolata';
+    font-size: 20px;
+
 }
  
 .box-historico {
@@ -187,12 +193,12 @@ body{
     font-size: 25px;
     margin-top: 10px;
     margin-left: 10px;
-    font-family: 'Crete Round', sans-serif;
+    font-family: 'Inconsolata';
 }
 .total-registros p {
     margin-left: 10px;
     font-size: 50px;
-    font-family: 'Crete Round', sans-serif;
+    font-family: 'Inconsolata';
 }
 .medidores-ativos {
     border: 1px solid #073c23;
@@ -207,12 +213,12 @@ body{
     font-size: 25px;
     margin-top: 10px;
     margin-left: 10px;
-    font-family: 'Crete Round', sans-serif;
+    font-family: 'Inconsolata';
 }
 .medidores-ativos p{
     margin-left: 10px;
     font-size: 50px;
-    font-family: 'Crete Round', sans-serif;
+    font-family: 'Inconsolata';
 }
 .ultima-leitura{
     border: 1px solid #073c23;
@@ -228,12 +234,12 @@ body{
     font-size: 25px;
     margin-top: 10px;
     margin-left: 10px;
-    font-family: 'Crete Round', sans-serif;
+    font-family: 'Inconsolata';
 }
 .ultima-leitura p{
     margin-left: 10px;
     font-size: 30px;
-    font-family: 'Crete Round', sans-serif;
+    font-family: 'Inconsolata';
 }
 .ultimo-lancamento{
     border: 1px solid #073c23;
@@ -248,12 +254,12 @@ body{
     font-size: 25px;
     margin-top: 10px;
     margin-left: 10px;
-    font-family: 'Crete Round', sans-serif;
+    font-family: 'Inconsolata';
 }
 .ultimo-lancamento p {
     margin-left: 10px;
     font-size: 30px;
-    font-family: 'Crete Round', sans-serif;
+    font-family: 'Inconsolata';
 }
 
 .coluna{
