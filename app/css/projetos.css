@@ -1,37 +1,147 @@
-* {
-     margin: 0;
-     padding: 0;
-     box-sizing: border-box;
- }
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
- body {
-     font-family: 'Open Sans', sans-serif;
-     color: rgb(0, 0, 0);
-     padding-top: 120px;
- }
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    color: #000;
+    padding-top: 90px;
+}
+
 
 .pag {
-    color: black;
-    min-height: 100vh;
-    justify-content: center;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 30px 20px 50px;
+    background: #fff;
+}
+
+
+/* Botão "+ Novo Projeto" no canto direito */
+.topo {
+    text-align: right;
+}
+
+
+.botao-novo {
+    display: inline-block;
+    padding: 12px 20px;
+    background: #4a6fc4;
+    border-radius: 12px;
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+
+.botao-novo:hover {
+    background: #3d5ca6;
+}
+
+
+/* Título */
+.titulo-projetos {
+    margin: 10px 0 40px 0;
+    font-size: 22px;
+    font-weight: 400;
+    text-align: left;
+}
+
+
+/* Cartão de cada projeto */
+.projeto {
+    display: flex;
     align-items: flex-start;
-    padding: 50px 20px 80px;
-    background-color: #eef1fa;
-}
-
-.pag h1{
-    text-align: center;
-}
-
-.card {
-    width: 100%;
-    max-width: 1200px;
-    background-color: #fff;
-    border-radius: 48px;
-    padding: 60px 80px 70px;
+    gap: 25px;
+    margin-bottom: 45px;
+    padding-right: 30px;
+    background: #fff;
     color: #000;
+    border: 1px solid #ddd;
+    border-radius: 16px;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25);
+    overflow: hidden;
 }
 
-.secaoCards {
-    margin-left: 340px;
+
+/* Imagem à esquerda */
+.projeto-imagem {
+    width: 260px;
+    height: 160px;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+
+/* Quadro azul quando o projeto não tem imagem */
+.sem-imagem {
+    background: #cfe8fb;
+}
+
+
+.projeto-texto {
+    flex: 1;
+    padding: 15px 0;
+}
+
+
+.projeto-texto h2 {
+    margin-bottom: 14px;
+    font-size: 32px;
+}
+
+
+.projeto-texto p {
+    max-width: 450px;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+
+/* "Por: João Silva" */
+.projeto-autor {
+    margin-top: 18px;
+    font-size: 16px;
+    white-space: nowrap;
+}
+
+
+/* Paginação */
+.paginacao {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+}
+
+
+.pagina {
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    line-height: 32px;
+    text-align: center;
+    background: #f1f1f1;
+    border-radius: 6px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    color: #000;
+    text-decoration: none;
+}
+
+
+.pagina-ativa {
+    background: #fff;
+    border: 1px solid #aaa;
+}
+
+
+/* Garante texto preto, mesmo que o nav ou o footer mudem a cor */
+.pag h1,
+.projeto-texto h2,
+.projeto-texto p,
+.projeto-autor,
+.projeto-autor b {
+    color: #000;
 }
