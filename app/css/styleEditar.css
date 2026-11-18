@@ -1,7 +1,7 @@
 body{
     background-color: #090b0c;
 }
-.form-manual {
+.form-editar {
     width: 1200px;
     background-color: #151a1c;
     padding: 20px;
@@ -9,43 +9,44 @@ body{
     border: 2px solid #007e39;
     margin-bottom: 20px;
     margin-left: 200px;
-    height: 850px;
+    height: 600px;
+    margin-top: 100px;
     
 }
-.form-manual h2 {
+.form-editar h2 {
     color: #31c166;
     margin-bottom: 30px;
-    margin-left: 20px;
+    margin-left: 200px;
     font-family: 'Crete Round', sans-serif;
 }
-.form-manual label {
+.form-editar label {
     color: #ffffff;
     margin-left: 30px;
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Create Round', sans-serif;
 }
-.form-manual select {
+.form-editar select {
     margin-left: 30px;
     border-radius: 20px;
     border: 2px solid  #c2e9a0;
     background-color: #c2e9a0;
     margin-top: 20px;
-    width: 600px;
+    width: 500px;
     height: 50px;
     font-size: 20px;
     font-family: 'Crete Round', sans-serif;
 }
-.form-manual input{
+.form-editar input{
     margin-left: 30px;
     border-radius: 20px;
     border: 2px solid  #c2e9a0;
     background-color: #c2e9a0;
     margin-top: 20px;
-    width: 600px;
+    width: 500px;
     height: 50px;
     font-size: 20px;
     font-family: 'Crete Round', sans-serif;
 }
-.form-manual button {
+.form-editar button {
     margin-left: 160px;
     border-radius: 20px;
     border: 2px solid  #31c166;
@@ -53,7 +54,7 @@ body{
     margin-top: 20px;
     width: 300px;
     height: 50px;
-    font-size: 16px;
+    font-size: 20px;
     font-family: 'Crete Round', sans-serif;
     
 }
@@ -61,10 +62,17 @@ body{
 .conteudo h1 {
     color: #31c166;
     margin-bottom: 20px;
-    margin-left: 10px;
+    margin-top: 30px;
+    margin-left: 550px;
     font-family: 'Crete Round', sans-serif;
-}
-.coneiner-conteudo {
     display: flex;
-    margin-left: 10px;
+}
+.box-formulario {
+    display: flex;
+}
+.formulario{
+    margin-top: 80px;
+}
+.selecionar{
+    margin-top: 80px;
 }
