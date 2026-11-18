@@ -4,9 +4,14 @@ require_once __DIR__ . "/init.php";
 
 $usuarios = readAll($pdo, "usuarios");
 
+$email = null;
+
 if ($_SERVER['REQUEST_METHOD'] == "GET" || isset($_GET['erro'])) {
     $erro = $_GET['erro'] ?? null;
+    $email = $_SESSION['erro']['email'] ?? null; 
 }
+
+unset($_SESSION['erro']);
 
 ?>
 
@@ -30,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET" || isset($_GET['erro'])) {
             <h1 class="titulo"><span class="texto-laranja">Entrar</span> conta</h1>
             <div class="campo">
                 <label for="email"><span class="texto-laranja">E-mail</span></label>
-                <input type="text" name="email" id="email" placeholder="E-mail">
+                <input type="text" name="email" id="email" placeholder="E-mail" value="<?= $email ?>">
             </div>
 
             <div class="campo">
@@ -55,7 +60,6 @@ if ($_SERVER['REQUEST_METHOD'] == "GET" || isset($_GET['erro'])) {
             <a class="entrar" href="sair_conta.php">SAIR DA CONTA?</a>
         </div>
         <?php endif ?>
-
     </div>
 </body>
 
