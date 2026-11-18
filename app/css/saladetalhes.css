@@ -338,3 +338,38 @@ nav ul li a{
     margin-bottom: 60px;
     margin-top: 40px;
 }
+
+.status{
+    display: flex;
+    justify-content: left;
+    gap: 25px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.status label {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 22px;
+}
+
+.status input{
+    width: 30px;
+    height: 30px;
+    accent-color: #796761;
+    cursor: pointer;
+}
+
+.status input:disabled {
+    opacity: 1;
+    cursor: default;
+}
+
+.erro{
+    color: red;
+    font-size: 20px;
+}
+.erro p{
+    font-size: 20px;
+}

@@ -99,10 +99,10 @@
                 <li><a href="selecionar-sala.php?user=<?= $user ?>">
                         <p>Grupos de Estudo</p>
                     </a></li>
-                <li><a href="login.php">
+                <li><a href="social.php">
                         <p>Social</p>
                     </a></li>
-                <li><a href="login.php">
+                <li><a href="progesso.php">
                         <p>Progresso</p>
                     </a></li>
             </ul>

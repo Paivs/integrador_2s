@@ -234,7 +234,11 @@ nav ul li a{
     justify-content: center;
 }
 
-.exibirSalas p {
+.exibirSalas > form {
+    display: contents;
+}
+
+.exibirSalas p{
     display: flex;
     justify-content: center;
     height: 100%;

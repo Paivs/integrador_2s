@@ -1,3 +1,35 @@
+<?php
+    require_once __DIR__ . "/banco/crud.php"; 
+    require_once __DIR__ . "/banco/database.php";
+    require_once __DIR__ . "/locais.php";
+
+    $user = $_GET['user'];
+    
+
+    $grupos = readAll(database(), "grupos_estudos");
+    $areaConhecimento = readAll(database(), "area_conhecimento");
+    $materias = readAll(database(), "materias");
+    
+    if($_SERVER['REQUEST_METHOD'] == 'POST'){
+        $gruposelecionado = $_POST['id'];
+        $grupo = database()->prepare('
+        SELECT * FROM grupos_estudos WHERE id_grupo = :id');
+        $grupo->execute(['id' => $gruposelecionado]);
+        $grupo = $grupo->fetch(PDO::FETCH_ASSOC);
+    }
+
+    //if($grupo['status_grupo'] == "privado"){
+    //    if(empty($_POST['senha'])){
+    //        header("Location: saladetalhes.php?user=" . urlencode($user) . "&erro=" . urlencode("Este grupo é privado, só é possível acessar com senha"));
+    //        exit;
+    //    }
+    //    if($_POST['senha'] != $grupo['senha']){
+    //        header("Location: saladetalhes.php?user=" . urlencode($user) . "&erro=" . urlencode("Senha incorreta"));
+    //        exit;
+    //    }
+    //}
+?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
     <head>
@@ -36,30 +68,59 @@
 
 
         <div class="titulo">
-        <p>Você acessou o nome_grupo!</p>
+        <p>Você acessou o <?= $grupo['nome_grupo'] ?>!</p>
         <p>Confire as informações a seguir antes de entrar na sala.</p>
         </div>
 
 
     <div class="principal">
         <div class="bloco1">
-            <img src="./img-giovana/espaco1.png" alt="Imagem" width="700" height="440">
+            <img src="<?= $locais[$grupo['id_imagem']]?>" alt="Imagem" width="700" height="440">
             <div class="quebra">
                 <div class="titulo2">
-                <p>nome_grupo</p>
+                <p><?= $grupo['nome_grupo'] ?></p>
                 </div>
                 <div class="info">
-                <p>Área de conhecimento: nome_area</p>
-                <p>Matéria: nome_materia</p>
-                <p>Criador(a): nome_usuario</p>
-                <p>Data de criação: data_criacao</p>
-                <p>Quantidade máxima de alunos: quantidade_alunos</p>
+                <p>Área de conhecimento: <?= $grupo['nome_area'] ?></p>
+                <p>Matéria: <?= $grupo['nome_materia'] ?></p>
+                <p>Criador(a): <?= $grupo['criador'] ?></p>
+                <p>Data de criação: <?= $grupo['data_criacao'] ?></p>
+                <div class="status">
+                    <label>
+                        <input 
+                            type="radio" 
+                            name="status" 
+                            value="privado"
+                            disabled
+                            <?= strtolower($grupo['status_grupo']) == 'privado' ? 'checked' : '' ?>
+                        >
+                        Privado
+                    </label>
+
+                    <label>
+                        <input 
+                            type="radio" 
+                            name="status" 
+                            value="publico"
+                            disabled
+                            <?= strtolower($grupo['status_grupo']) == 'publico' ? 'checked' : '' ?>
+                        >
+                        Público
+                    </label>
+                </div>
                 </div>
             </div>
         </div>
         <div class="form">
             <form action="">
-            <input type="password" placeholder="Digite a senha fornecida pelo(a) criador(a):">
+            <input type="password" name="senha" placeholder="Digite a senha fornecida pelo(a) criador(a):">
+            <div class="erro">
+                <?php
+                if(isset($_GET['erro']) && $_GET['erro'] != ""){
+                    echo "<p>{$_GET['erro']}</p>";
+                }
+                ?>
+            </div>
             <button type="submit" class="button"><p>Entrar</p></button>
             </form>
         </div>
