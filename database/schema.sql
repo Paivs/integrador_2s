@@ -20,6 +20,7 @@ CREATE TABLE IF NOT EXISTS Usuarios (
     instituicao VARCHAR(100),
     telefone VARCHAR(20),
     perfil ENUM('normal', 'admin') NOT NULL DEFAULT 'normal',
+    imagens_usuario VARCHAR(255),
     data_criacao DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -54,6 +55,11 @@ CREATE TABLE IF NOT EXISTS Ferramentas (
     id_ferramenta INT AUTO_INCREMENT PRIMARY KEY,
     nome_ferramenta VARCHAR(100) NOT NULL,
     area VARCHAR(50),
+    status_ferramenta ENUM(
+        'disponivel',
+        'manutencao',
+        'indisponivel'
+    ) NOT NULL DEFAULT 'disponivel',
     estoque INT NOT NULL DEFAULT 0,
     id_bancada INT,
 
