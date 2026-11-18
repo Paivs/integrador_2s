@@ -25,9 +25,8 @@ if (!$usuario) {
     <link rel="stylesheet" href="css/perfil.css">
 </head>
 
-<body class="pagina-perfil">
+<body>
 
-    <!-- Header idêntico ao padrão do seu sistema -->
     <header>
         <div class="logo">
             <a href="./index.php"><img src="imagens/findit-white.png" alt="findIt."></a>
@@ -45,68 +44,66 @@ if (!$usuario) {
         </nav>
     </header>
 
-    <!-- Conteúdo Principal -->
-    <main class="container">
+    <main>
 
-        <!-- Cartão de Destaque (Hero Card) -->
-        <section class="profile-card">
-            <div class="avatar-circle">
-                <img src="imagens/perfil.jpg" alt="Foto de <?= htmlspecialchars($usuario['nome']) ?>" class="avatar-img">
+
+        <div class="quadros">
+            <div class="foto">
+                <img src="imagens/perfil.jpg" alt="Foto de <?= htmlspecialchars($usuario['nome']) ?>">
             </div>
 
-            <h1 class="profile-name"><?= htmlspecialchars($usuario['nome']) ?></h1>
-            <p class="profile-subtitle">Conta &amp; Configurações</p>
+            <h1><?= htmlspecialchars($usuario['nome']) ?></h1>
 
-            <div class="stats-grid">
-                <div class="stat-item">
-                    <span class="stat-value"><?= htmlspecialchars($usuario['email']) ?></span>
-                    <span class="stat-label">E-mail cadastrado</span>
+            <div class="resumoDados">
+                <div class="dados">
+                    <p><?= htmlspecialchars($usuario['email']) ?></p>
+                    <h2>E-mail cadastrado</h2>
                 </div>
-                <div class="stat-item">
-                    <span class="stat-value"><?= htmlspecialchars($usuario['telefone'] ?? 'Não informado') ?></span>
-                    <span class="stat-label">Telefone</span>
+                <div class="dados">
+                    <p><?= htmlspecialchars($usuario['telefone'] ?? 'Não informado') ?></p>
+                    <h2>Telefone</h2>
                 </div>
             </div>
-        </section>
+        </div>
+
 
         <!-- Lista de Dados da Conta -->
-        <section class="settings-list">
-            <div class="setting-row">
-                <div class="setting-info">
-                    <span class="setting-label">Nome</span>
-                    <span class="setting-value"><?= htmlspecialchars($usuario['nome']) ?></span>
+        <div class="div-pai">
+            <div class="informacao">
+                <div class="quadroInfo">
+                    <h2>Nome</h2>
+                    <p><?= htmlspecialchars($usuario['nome']) ?></p>
                 </div>
                 <a href="editaPerfil.php?campo=nome" class="btn-edit">Editar</a>
             </div>
 
-            <div class="setting-row">
-                <div class="setting-info">
-                    <span class="setting-label">E-mail</span>
-                    <span class="setting-value"><?= htmlspecialchars($usuario['email']) ?></span>
+            <div class="informacao">
+                <div class="quadroInfo">
+                    <h2>E-mail</h2>
+                    <p><?= htmlspecialchars($usuario['email']) ?></p>
                 </div>
                 <a href="editaPerfil.php?campo=email" class="btn-edit">Editar</a>
             </div>
 
-            <div class="setting-row">
-                <div class="setting-info">
-                    <span class="setting-label">Telefone</span>
-                    <span class="setting-value"><?= htmlspecialchars($usuario['telefone'] ?? 'Não informado') ?></span>
+            <div class="informacao">
+                <div class="quadroInfo">
+                    <h2>Telefone</h2>
+                    <p><?= htmlspecialchars($usuario['telefone'] ?? 'Não informado') ?></p>
                 </div>
                 <a href="editaPerfil.php?campo=telefone" class="btn-edit">Editar</a>
             </div>
 
-            <div class="setting-row">
-                <div class="setting-info">
-                    <span class="setting-label">Tema</span>
-                    <span class="setting-value"><?= htmlspecialchars($usuario['tema'] ?? 'Padrão') ?></span>
+            <div class="informacao">
+                <div class="quadroInfo">
+                    <h2>Tema</h2>
+                    <p><?= htmlspecialchars($usuario['tema'] ?? 'Padrão') ?></p>
                 </div>
-                <a href="editaPerfil.php?campo=tema" class="btn-edit">Editar</a>
+                <a href="editaPerfil.php?campo=tema">Editar</a>
             </div>
-        </section>
+        </div>
 
-        <!-- Botão de ação principal -->
-        <div class="acao-geral">
-            <a href="editaPerfil.php" class="btn-editar-tudo">Editar perfil</a>
+        <div class="editarTudo">
+            <a href="editaPerfil.php">Editar perfil</a>
         </div>
 
     </main>
