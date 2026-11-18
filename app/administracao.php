@@ -3,7 +3,12 @@
 require_once __DIR__ . "/init.php";
 
 $torneios = readAll($pdo, "torneios");
-$equipes = readAll($pdo, "equipes")
+$equipes = readAll($pdo, "equipes");
+
+$usuario = $_SESSION['cadastrado']['perfil'] ?? null;
+if($usuario != "root"){
+    header("Location: index.php");
+}
 
 ?>
 
