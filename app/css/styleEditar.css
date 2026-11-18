@@ -1,0 +1,70 @@
+body{
+    background-color: #090b0c;
+}
+.form-manual {
+    width: 1200px;
+    background-color: #151a1c;
+    padding: 20px;
+    border-radius: 45px;
+    border: 2px solid #007e39;
+    margin-bottom: 20px;
+    margin-left: 200px;
+    height: 850px;
+    
+}
+.form-manual h2 {
+    color: #31c166;
+    margin-bottom: 30px;
+    margin-left: 20px;
+    font-family: 'Crete Round', sans-serif;
+}
+.form-manual label {
+    color: #ffffff;
+    margin-left: 30px;
+    font-family: 'Open Sans', sans-serif;
+}
+.form-manual select {
+    margin-left: 30px;
+    border-radius: 20px;
+    border: 2px solid  #c2e9a0;
+    background-color: #c2e9a0;
+    margin-top: 20px;
+    width: 600px;
+    height: 50px;
+    font-size: 20px;
+    font-family: 'Crete Round', sans-serif;
+}
+.form-manual input{
+    margin-left: 30px;
+    border-radius: 20px;
+    border: 2px solid  #c2e9a0;
+    background-color: #c2e9a0;
+    margin-top: 20px;
+    width: 600px;
+    height: 50px;
+    font-size: 20px;
+    font-family: 'Crete Round', sans-serif;
+}
+.form-manual button {
+    margin-left: 160px;
+    border-radius: 20px;
+    border: 2px solid  #31c166;
+    background-color: #31c166;
+    margin-top: 20px;
+    width: 300px;
+    height: 50px;
+    font-size: 16px;
+    font-family: 'Crete Round', sans-serif;
+    
+}
+
+.conteudo h1 {
+    color: #31c166;
+    margin-bottom: 20px;
+    margin-left: 10px;
+    font-family: 'Crete Round', sans-serif;
+}
+.coneiner-conteudo {
+    display: flex;
+    margin-left: 10px;
+}
