@@ -52,7 +52,11 @@ $metas = readAll(database(), "metas");
                             }
                         }
                         
+                        if($total_kwh <= 0 || $meta_setor <= 0 || !isset($total_kwh) || !isset($meta_setor)){    
+                        $porcentagem_meta = 0;
+                        } else {
                         $porcentagem_meta = ($total_kwh / $meta_setor) * 100;
+                        };
                         $porcentagem_meta = number_format($porcentagem_meta, 2);
 
                         if ($porcentagem_meta > 100) {
@@ -95,48 +99,48 @@ $metas = readAll(database(), "metas");
                         </div>  <br>
                         
                         <div class="kwh_e_reais">
-                        <div class="total_kwh">
-                            <h2>Gasto de energia</h2>
-                            <h4>Em quilowatt-hora (kWh)</h4> <br>
-                            <?php
+                            <div class="total_kwh">
+                                <h2>Gasto de energia</h2>
+                                <h4>Em quilowatt-hora (kWh)</h4> <br>
+                                <?php
+                                    
+                                    echo "<h1>" . $total_kwh . " kWh</h1><br>";
+                            
+                                    echo "<h4>Meta: " . $meta_setor . " kWh | <b class='meta_" . $cor_meta . "'>" . $porcentagem_meta . " % da meta</b></h4>";
                                 
-                                echo "<h1>" . $total_kwh . " kWh</h1><br>";
-                          
-                                echo "<h4>Meta: " . $meta_setor . " kWh | <b class='meta_" . $cor_meta . "'>" . $porcentagem_meta . " % da meta</b></h4>";
-                            
-                            ?> 
+                                ?> 
 
 
-                        </div>
+                            </div>
 
-                        <div class="total_reais">
-                            <h2>Custo estimado</h2>
-                            <h4>Em reais (R$)</h4> <br>
-                            <?php
-                                $tarifa_media = 0.7;
+                            <div class="total_reais">
+                                <h2>Custo estimado</h2>
+                                <h4>Em reais (R$)</h4> <br>
+                                <?php
+                                    $tarifa_media = 0.7;
 
-                                $total_reais = $total_kwh * $tarifa_media;
+                                    $total_reais = $total_kwh * $tarifa_media;
 
-                                echo "<h1>R$ " . $total_reais . " </h1><br>";
-                            
-                                echo "<h4>Tarifa média: R$ " . $tarifa_media . " p/ kWh</h4>";
-                            ?> 
+                                    echo "<h1>R$ " . $total_reais . " </h1><br>";
+                                
+                                    echo "<h4>Tarifa média: R$ " . $tarifa_media . " p/ kWh</h4>";
+                                ?> 
 
-                        </div>
+                            </div>
 
-                        <div class="eficiencia">
+                            <div class="eficiencia">
 
-                            <h2>Eficiência energética</h2>
-                            <h4>Em quilowatt-hora por metro quadrado</h4> <br>
-                            <?php
-                                $eficiencia = $total_kwh / $area_total;
-                                $eficiencia = number_format($eficiencia, 2);
+                                <h2>Eficiência energética</h2>
+                                <h4>Em quilowatt-hora por metro quadrado</h4> <br>
+                                <?php
+                                    $eficiencia = $total_kwh / $area_total;
+                                    $eficiencia = number_format($eficiencia, 2);
 
-                                echo "<h1>" . $eficiencia . " kWh/m²</h1><br>";
-                            
-                            ?> 
+                                    echo "<h1>" . $eficiencia . " kWh/m²</h1><br>";
+                                
+                                ?> 
 
-                        </div>
+                            </div>
 
                         </div>
 
