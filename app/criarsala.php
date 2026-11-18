@@ -28,7 +28,7 @@
         "Exatas"            => ["Matemática", "Física", "Química"],
         "Ciências Naturais" => ["Biologia", "Geologia", "Astronomia", "Ecologia"],
         "Ciências Humanas"  => ["História", "Geografia", "Filosofia", "Sociologia"],
-        "Linguagens"        => ["Língua Português", "Língua Estrangeiras", "Literatura"]
+        "Linguagens"        => ["Língua Português", "Línguas Estrangeiras", "Literatura"]
         ];
 
         if(!isset($_POST['ambiente']) || $_POST['ambiente'] == "" ||
@@ -70,7 +70,7 @@
             "id_imagem" => $ambiente,
             "criador" => $criador,
         ]);
-        header("selecionar-sala.php?user=<?= $user ?>");
+        header("Location: selecionar-sala.php?user=" . urlencode($user));
         exit;
     }
 

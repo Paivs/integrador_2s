@@ -10,8 +10,8 @@
     $materias = readAll(database(), "materias");
 
     if($_SERVER['REQUEST_METHOD'] == 'POST'){
-        $area = $_POST['areaConhecimento'];
-        $materia = $_POST['materias'];
+        $area = $_POST['areaConhecimento'] ?? '';
+        $materia = $_POST['materias'] ?? '';
 
         if(empty($grupos)){
             header("Location: selecionar-sala.php?user=" . urlencode($user) . "&erro=" . urlencode("Nenhuma sala criada"));
@@ -27,7 +27,7 @@
         "Exatas"            => ["Matemática", "Física", "Química"],
         "Ciências Naturais" => ["Biologia", "Geologia", "Astronomia", "Ecologia"],
         "Ciências Humanas"  => ["História", "Geografia", "Filosofia", "Sociologia"],
-        "Linguagens"        => ["Língua Português", "Língua Estrangeiras", "Literatura"]
+        "Linguagens"        => ["Língua Português", "Línguas Estrangeiras", "Literatura"]
         ];
 
 
@@ -37,9 +37,19 @@
         }
 
         if (!empty($materia)) {
-            $grupos = read(database(), "grupos_estudos", $area, $materia);
+            $grupos = readAll(
+            database(),
+            "grupos_estudos",
+            "nome_area = ? AND nome_materia = ?",
+            [$area, $materia]
+        );
         } else {
-            $grupos = read(database(), "grupos_estudos", $area);
+            $grupos = readAll(
+            database(),
+            "grupos_estudos",
+            "nome_area = ?",
+            [$area]
+        );
         }
     }
 
@@ -122,16 +132,19 @@
     <div class="exibirSalas">
 
         <?php foreach($grupos as $g): ?>
-        <div class="boxLocal">
+            <div class="boxLocal">
             <div class="imagemLocal">
                 <img src="<?= $locais[$g['id_imagem']]?>" alt="">
             </div>
 
-            <p><?= $g['nome_grupo'] ?>-<?= $g['nome_area'] ?>-<?= $g['nome_materia'] ?></p>
+            <p>
+                <?= $g['nome_grupo'] ?> -
+                <?= $g['nome_area'] ?> -
+                <?= $g['nome_materia'] ?>
+            </p>
 
             <button type="button">Ver mais informações.</button>
-
-        </div>  
+            </div>
         <?php endforeach; ?>
         <?php if(empty($grupos)): ?>
             <p>Nenhum Grupo Aberto</p>
