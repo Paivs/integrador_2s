@@ -1,0 +1,435 @@
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Arial', sans-serif;
+}
+
+body {
+  background-color: #ffffff;
+  color: #333333;
+}
+
+
+.cabecalho-principal {
+  background-color: #f1a80a;
+  padding: 20px 30px;
+  width: 100%;
+}
+
+.container-cabecalho {
+  max-width: 100%;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.logo-cabecalho img {
+  height: 95px;
+  width: auto;
+  display: block;
+}
+
+/* Barra de pesquisa arredondada com borda branca */
+.barra-pesquisa {
+  display: flex;
+  align-items: center;
+  background-color: transparent;
+  border: 1.5px solid #ffffff;
+  border-radius: 20px;
+  padding: 4px 12px;
+  width: 320px;
+}
+
+.barra-pesquisa input {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #ffffff;
+  width: 100%;
+  font-size: 13px;
+}
+
+.barra-pesquisa input::placeholder {
+  color: #ffffff;
+}
+
+.barra-pesquisa .botao-pesquisa {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+/* Links do menu */
+.menu-navegacao {
+  display: flex;
+  gap: 20px;
+}
+
+.menu-navegacao a {
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+/* Ações do usuário (Coração e Botão Cadastro) */
+.acoes-usuario {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.icone-favorito {
+  display: flex;
+  align-items: center;
+}
+
+.botao-cadastro {
+  border: 1.5px solid #ffffff;
+  color: #ffffff;
+  padding: 5px 18px;
+  border-radius: 15px;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+/* ==========================================================================
+   2. BANNER PRINCIPAL
+   ========================================================================== */
+.secao-banner-principal {
+  padding: 20px 40px;
+  display: flex;
+  justify-content: center;
+}
+
+.container-banner-principal {
+  max-width: 1200px;
+  width: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  background-color: #f7b233;
+  border-radius: 45px;
+  padding: 10px;
+  overflow: hidden;
+}
+
+.selo-circular-banner {
+  width: 140px;
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.selo-circular-banner img {
+  width: 110px;
+  height: 110px;
+}
+
+.imagem-banner-promocional {
+  flex-grow: 1;
+}
+
+.imagem-banner-promocional img {
+  width: 100%;
+  border-radius: 35px;
+  display: block;
+  object-fit: cover;
+}
+
+/* ==========================================================================
+   3. SEÇÃO ENCONTRE SEU MAIS NOVO AMIGO AQUI
+   ========================================================================== */
+.secao-encontre-amigo {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+.titulo-secao-laranja {
+  color: #f1a80a;
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 25px;
+}
+
+.grid-cards-animais {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.card-animal {
+  background-color: #cbd5e1;
+  border-radius: 35px;
+  padding: 15px;
+  width: 23%;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.container-foto-animal {
+  width: 100%;
+  height: 180px;
+  border-radius: 25px;
+  overflow: hidden;
+  margin-bottom: 12px;
+}
+
+.container-foto-animal img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.nome-animal {
+  font-size: 14px;
+  font-weight: bold;
+  color: #000000;
+  margin-bottom: 5px;
+  letter-spacing: 0.5px;
+}
+
+.local-animal {
+  font-size: 12px;
+  font-weight: bold;
+  color: #000000;
+}
+
+.pin-local {
+  color: #d97706;
+}
+
+
+.secao-cards-paisagem {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+.container-cards-paisagem {
+  background-color: #f7b233;
+  border-radius: 40px;
+  padding: 30px 40px;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.card-paisagem-item {
+  width: 30%;
+  border-radius: 25px;
+  overflow: hidden;
+  background-color: #b0e0e6;
+}
+
+.card-paisagem-item img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+
+.secao-porque-adotar {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 0 20px;
+  text-align: left;
+  font-family: "Bree Serif", serif;
+  font-weight: 400;
+  font-style: normal;
+
+}
+
+.grid-motivos-adocao {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.box-motivo {
+  border: 2.5px solid #000000;
+  border-radius: 25px;
+  padding: 30px;
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 140px;
+}
+
+.box-motivo p {
+  font-size: 15px;
+  line-height: 1.4;
+  color: #000000;
+  text-align: center;
+}
+
+.box-silhueta img {
+  max-height: 300px;
+  width: auto;
+}
+
+/* Link centralizado abaixo */
+.container-link-encontrar {
+  text-align: center;
+  margin: 25px 0 35px 0;
+}
+
+.link-sublinhado-laranja {
+  color: #f1a80a;
+  font-size: 20px;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+/* Logo PetConnect do centro */
+.logo-central-adocao {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.logo-central-adocao img {
+  height: 70px;
+}
+
+.secao-acompanhe {
+  position: relative;
+  width: 100%;
+  padding: 100px 20px 120px 20px;
+  margin-top: 40px;
+  background-color: transparent;
+  
+ 
+}
+
+.concavo {
+  width: 100%;
+  background-image: url(img/concavo\ transparente.png);
+ background-size: 100% 100%; 
+  background-repeat: no-repeat;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+}
+
+.faixa-curva-amarela {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.titulo-acompanhe {
+  color: #d00000;
+  font-size: 28px;
+  font-style: italic;
+  font-weight: 900;
+  margin-bottom: 40px;
+  text-transform: none;
+}
+
+.grid-produtos-destaque {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+
+}
+
+.card-produto-destaque {
+  flex: 1;
+  max-width: 380%;
+  text-align: center;
+}
+
+.imagem-produto-destaque {
+  width: 100%;
+  max-height: 100%;
+  border-radius: 40px;
+  overflow: hidden;
+  box-shadow: 0px 12px 20px rgba(0, 0, 0, 0.35);
+  margin-bottom: 15px;
+}
+
+.imagem-produto-destaque img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  
+}
+
+.card-produto-destaque h3 {
+  color: #ffffff;
+  font-size: 22px;
+  font-weight: bold;
+  line-height: 1.2;
+}
+
+
+.rodape-principal {
+  background-color: #f1a80a;
+  padding: 40px 40px 50px 40px;
+}
+
+.container-rodape {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.coluna-logo-rodape img {
+  height: 80px;
+}
+
+.coluna-rodape {
+  display: flex;
+  flex-direction: column;
+}
+
+.titulo-coluna-rodape {
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: bold;
+  margin-bottom: 12px;
+}
+
+.coluna-rodape ul {
+  list-style: none;
+}
+
+.coluna-rodape ul li {
+  margin-bottom: 8px;
+}
+
+.coluna-rodape ul li a {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 13px;
+}
+
+/* Icones das redes sociais */
+.icones-redes-sociais {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  width: 70px;
+}
+
+.icones-redes-sociais img {
+  width: 24px;
+  height: 24px;
+}
