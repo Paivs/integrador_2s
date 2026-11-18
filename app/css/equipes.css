@@ -1,7 +1,7 @@
 .funcao{
      display: flex;
      margin-bottom: 50px;
-     margin-left: 350px;
+     margin-left: 400px;
 }
 
 .funcao a{
@@ -79,7 +79,7 @@
 }
 
 .fundo-equipes {
-    background-image: url('/app/img/preto2.jpg');
+    background-image: url('./img/preto2.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -91,7 +91,7 @@
 
 .conteudo-equipes {
     max-width: 1100px;
-    margin-left: 350px ;
+    margin-left: 370px ;
 }
 
 
@@ -134,6 +134,8 @@
     padding: 12px 16px;
     border-bottom: 1px solid #333333;
     text-align: left;
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 20px;
 }
 
 .tabela-equipes th {
@@ -343,3 +345,57 @@
 
 
 
+
+
+
+.escolha-logo{
+    position: fixed;
+    margin: auto;
+    inset: 0;
+    padding: 24px;
+    width: 500px;
+    height: 500px;
+    background-color: #000000;
+    border: none;
+    border-radius: 16px;
+}
+
+.escolha-logo button{
+    margin-top: 50px;
+    margin-left: 80px;
+}
+
+.escolha-logo h2{
+    margin-top: 0;
+    margin-bottom: 25px;
+    font-size: 60px;
+    font-family: "Bebas Neue", sans-serif;
+    font-style: italic;
+    color: #ffffff;
+    text-align: center;
+}
+
+.escolha-logo h2 span{
+      color: #f4892f;
+}
+
+.escolha-logo a{
+    position: relative;
+    margin: auto;
+    inset: 0;
+    padding: 24px;
+    width: 300px;
+    height: 300px;
+    background-color: #000000;
+    border: none;
+    border-radius: 16px;
+}
+
+.escolha-logo img{
+    background-color: #000000;
+    width: 105px;
+    height: 100px;
+    border-radius: 16px;
+    border: solid ;
+    color: #f4892f;
+}

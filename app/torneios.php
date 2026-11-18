@@ -12,13 +12,13 @@ $torneios = readAll($pdo, "torneios");
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Torneios</title>
-    <link rel="stylesheet" href="/app/css/torneios.css">
+    <link rel="stylesheet" href="./css/torneios.css">
 </head>
 
 <body>
 
     <section class="Banner">
-        <img class="banner-torneios" src="/app/img/banner-torneios.png" alt="">
+        <img class="banner-torneios" src="./img/banner-torneios.png" alt="">
         <div class="texto">
             <h1>SEU PRÓXIMO<br><span>TORNEIO</span><br>COMEÇA <span>AQUI</span></h1>
             <p>CRIE CAMPEONATOS, REÚNA EQUIPES<br>DISPUTE PARTIDAS E CONQUISTE O TOPO DO RANKING.</p>
@@ -27,10 +27,10 @@ $torneios = readAll($pdo, "torneios");
     </section>
 
     <section class="fundo">
-        <img class="img-fundo" src="/app/img/preto.jpg" alt="">
+        <img class="img-fundo" src="./img/preto.jpg" alt="">
 
         <div class="titulo">
-            <img src="/app/img/coroa.png" alt="">
+            <img src="./img/coroa.png" alt="">
             <h1>NOSSOS <span>TORNEIOS</span><BR> <span>INSCRIÇÕES</span> ABERTAS!</h1>
         </div>
     </section>
@@ -53,7 +53,7 @@ $torneios = readAll($pdo, "torneios");
                         <a href="#" class="inscrever">INSCREVER-SE</a>
                     </div>
                     <div class="card-img">
-                        <img src="/app/img/<?= $slug ?>.jpg" alt="<?= htmlspecialchars($t['nome_torneio']) ?>">
+                        <img src="./img/<?= $slug ?>.jpg" alt="<?= htmlspecialchars($t['nome_torneio']) ?>">
                     </div>
                 </article>
             <?php endif ?>
@@ -72,7 +72,7 @@ $torneios = readAll($pdo, "torneios");
                 <?php $slug = strtolower(str_replace(' ', '-', $t['nome_torneio'])); ?>
                 <article class="card-comunidade">
                     <img class="card-comunidade-img"
-                        src="/app/img/<?= $slug ?>.jpg"
+                        src="./img/<?= $slug ?>.jpg"
                         alt="<?= htmlspecialchars($t['nome_torneio']) ?>">
 
                     <div class="card-comunidade-info">

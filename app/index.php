@@ -10,7 +10,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/app/css/index.css">
+    <link rel="stylesheet" href="./css/index.css">
     <title>GameHub</title>
 </head>
     <body>
@@ -22,7 +22,7 @@
         <img src="./img/cs2_banner.png" alt="Counter-Strike 2">
         </div>
         <div class="texto-sobreposto">
-            <h1><i><b>MASTERS LEAGUE</b></i></h1>
+            <h1><i><b>MASTER LEAGUE</b></i></h1>
         </div>
         <div class="texto-sobreposto2">
             <h2><i><b>INSCRIÇÕES ABERTAS!</b></i></h2>

@@ -2,9 +2,18 @@
 
 require_once __DIR__ . "/init.php";
 
+    $email = null;
+    $senha = null;
+    $username = null;
+
 if ($_SERVER['REQUEST_METHOD'] == "GET" || isset($_GET['erro'])) {
     $erro = $_GET['erro'] ?? null;
+    $email = $_SESSION['erro']['email'] ?? null; 
+    $senha = $_SESSION['erro']['senha'] ?? null;
+    $username = $_SESSION['erro']['username'] ?? null;
 }
+
+unset($_SESSION['erro']);
 
 ?>
 
@@ -14,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET" || isset($_GET['erro'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/app/css/criarConta.css">
+    <link rel="stylesheet" href="./css/criarConta.css">
     <title>Cadastrar</title>
 </head>
 
@@ -27,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET" || isset($_GET['erro'])) {
             <div class="campo">
     <label for="email"><span class="texto-laranja">E-mail</span></label>
     <input type="email" name="email" id="email" placeholder="E-mail"
-           maxlength="100" required>
+           maxlength="100" required value="<?= $email ?>">
     <?php if ($erro == "EMAIL"): ?>
         <p class="erro">E-MAIL SÓ PODE CONTER NO MÁXIMO 100 CARACTERES</p>
     <?php elseif ($erro == "EMAIL_ERRADO"): ?>
@@ -37,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET" || isset($_GET['erro'])) {
             <br>
             <div class="campo">
             <label for="username"><span class="texto-laranja">Username</span></label>
-            <input type="text" name="username" id="username" placeholder="Username">
+            <input type="text" name="username" id="username" placeholder="Username" value="<?= $username ?>">
             </div>
             <?php if ($erro == "USERNAME"): ?>
                 <p class="erro">USERNAME SÓ PODE CONTER NO MAXIMO 20 CARACTERIES</p>
@@ -49,14 +58,14 @@ if ($_SERVER['REQUEST_METHOD'] == "GET" || isset($_GET['erro'])) {
             <br>
             <div class="campo">
             <label for="senha"><span class="texto-laranja">Senha</span></label>
-            <input type="text" name="senha" id="senha" placeholder="Senha">
+            <input type="text" name="senha" id="senha" placeholder="Senha" value="<?= $senha ?>">
             </div>
             <?php if ($erro == "SENHA"): ?>
                 <p class="erro">SENHA SÓ PODE CONTER NO MAXIMO 50 CARACTERIES</p>
             <?php elseif ($erro == "SENHA_ERRADO"): ?>
                 <p class="erro">SENHA TEM QUE CONTER NO MINIMO 8 CARACTERIES</p>
             <?php endif ?>
-            <a class="entrar" href="/app/entrarConta.php">Entrar na conta</a>
+            <a class="entrar" href="./entrarConta.php">Entrar na conta</a>
             <br>
             <div class="separador">OU</div>
             <button type="submit">Criar</button>

@@ -30,7 +30,7 @@ $usuario = $consulta->fetch(PDO::FETCH_ASSOC);
     <h2>Equipe:</h2>
 
     <?php if (isset($usuario['nome_equipe'])): ?>
-        <img src="img/equipes/<?= $usuario['img_equipe'] ?>">
+        <img src="./img/equipes/<?= $usuario['img_equipe'] ?>">
         <h3><?= $usuario['nome_equipe'] ?></h3>
         <p><?= $usuario['jogo_equipe'] ?></p>
     <?php else: ?>
