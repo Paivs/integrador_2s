@@ -43,6 +43,7 @@ if($usuario['imagens_usuario'] == "padrao"){
 }
 
 $reservaUsuario = readAll(database(), "Reservas", "id_usuario = ?", [$_SESSION['id']]);
+$_SESSION['reservaUsuario'] = readAll(database(), "Reservas", "id_usuario = ?", [$_SESSION['id']]);
 $bancada = readAll(database(), "Bancadas", "id_bancada", []);
 
 
@@ -54,7 +55,7 @@ $bancada = readAll(database(), "Bancadas", "id_bancada", []);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meu perfil</title>
+    <title>MakerLab - Meu Perfil</title>
     <link rel="stylesheet" href="./css/perfil.css">
 </head>
 
@@ -134,8 +135,8 @@ $bancada = readAll(database(), "Bancadas", "id_bancada", []);
                 </thead>
                 <tbody>
                     <div class="caixa-tabela">
-                        <?php if (!empty($reservaUsuario)): ?>
-                            <?php foreach ($reservaUsuario as $reserva): ?>
+                        <?php if (!empty($_SESSION['reservaUsuario'])): ?>
+                            <?php foreach ($_SESSION['reservaUsuario'] as $reserva): ?>
                                 <tr>
                                     <td><?= $reserva['data_reserva'] ?></td>
                                     <td><?= $reserva['horas_reservadas'] ?></td>
