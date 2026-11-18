@@ -1,16 +1,78 @@
 <?php
     require_once __DIR__ . "/banco/crud.php"; 
     require_once __DIR__ . "/banco/database.php"; 
+    require_once __DIR__ . "/locais.php";
 
-    $user = $_GET['user'];
+    $user = $_GET['user'] ?? $_POST['user'] ?? '';
     $materias = readAll(database(), "materias");
     $area = readAll(database(), "area_conhecimento");
+    $grupo = readAll(database(), "grupos_estudos");
 
     $dadosUser = database()->prepare('
     SELECT * FROM usuarios WHERE nome_usuario = :user');
     $dadosUser->execute(['user' => $user]);
 
     $usuario = $dadosUser->fetch(PDO::FETCH_ASSOC);
+
+    if($_SERVER['REQUEST_METHOD'] == 'POST'){
+        $area = $_POST['area'];
+        $materia = $_POST['materias'];
+        $ambiente = $_POST['ambiente'];
+        $nome_sala = $_POST['nome_sala'];
+        $status = $_POST['status'];
+        $senha = $_POST['senha'];
+        $criador = $_POST['criador'];
+        $data = $_POST['data'];
+
+        $materiasPorArea = [
+        "Exatas"            => ["Matemática", "Física", "Química"],
+        "Ciências Naturais" => ["Biologia", "Geologia", "Astronomia", "Ecologia"],
+        "Ciências Humanas"  => ["História", "Geografia", "Filosofia", "Sociologia"],
+        "Linguagens"        => ["Língua Português", "Língua Estrangeiras", "Literatura"]
+        ];
+
+        if(!isset($_POST['ambiente']) || $_POST['ambiente'] == "" ||
+        !isset($_POST['nome_sala']) || $_POST['nome_sala'] == "" ||
+        !isset($_POST['area']) || $_POST['area'] == "" ||
+        !isset($_POST['materias']) || $_POST['materias'] == "" ||
+        !isset($_POST['status']) || $_POST['status'] == ""){
+            header("Location: criarsala.php?user=" . urlencode($user) . "&erro=" . urlencode("Espaço vazio"));
+            exit;
+        }
+
+        if($_POST['status'] == "privado" && $_POST['senha'] == ""){
+            header("Location: criarsala.php?user=" . urlencode($user) . "&erro=" . urlencode("Espaço vazio"));
+            exit;
+        }
+
+        if(strlen($_POST['senha']) > 20){
+            header("Location: criarsala.php?user=" . urlencode($user) . "&erro=" . urlencode("Senha grande demais (máx. 20)"));
+            exit;
+        }
+
+        if (!empty($materia) && !in_array($materia, $materiasPorArea[$area] ?? [], true)){
+            header("Location: criarsala.php?user=" . urlencode($user) . "&erro=" . urlencode("A máteria selecionada não faz parte dessa área de conhecimento"));
+            exit;
+        }
+
+        if($_POST['status'] == "publico" && $_POST['senha'] != ""){
+            header("Location: criarsala.php?user=" . urlencode($user) . "&erro=" . urlencode("Só é possível cadastrar uma senha caso o grupo seja privado"));
+            exit;
+        }
+
+        create(database(), "grupos_estudos", [
+            "nome_grupo" => $nome_sala,
+            "data_criacao" => $data,
+            "nome_area" => $area,
+            "nome_materia" => $materia,
+            "senha" => $senha,
+            "status_grupo" => $status,
+            "id_imagem" => $ambiente,
+            "criador" => $criador,
+        ]);
+        header("selecionar-sala.php?user=<?= $user ?>");
+        exit;
+    }
 
 
 ?>
@@ -45,8 +107,8 @@
                     </a></li>
             </ul>
         </nav>
-        <div class="fotoConta"><a href="perfil.php">
-            </a></div>
+        <a href="perfil.php?user=<?= $user ?>"><div class="fotoConta"></div></a>
+        </div>
     </div>
 
     <div class="bloco1">
@@ -56,25 +118,26 @@
 
 <div class="principal">
     <div class="form">
-        <form class="form2">
 
+<form class="form2" method="post">
+    <input type="hidden" name="user" value="<?= htmlspecialchars($user) ?>">
         <p>Escolha um ambiente:</p>
 
         <div class="caixa1">
 
             <div class="card">
-            <img src="./img-giovana/espaco1.png" alt="Imagem" width="400">
-            <input type="radio" class="checkbox" name="ambiente">
+            <img src="<?= $locais['1']?>" alt="Imagem" width="400">
+            <input type="radio" class="checkbox" name="ambiente" value="1">
             </div>
 
             <div class="card">
-            <img src="./img-giovana/espaco2.png" alt="Imagem" width="400">
-            <input type="radio" class="checkbox" name="ambiente">
+            <img src="<?= $locais['2']?>" alt="Imagem" width="400">
+            <input type="radio" class="checkbox" name="ambiente" value="2">
             </div>
 
             <div class="card">
-            <img src="./img-giovana/espaco3.png" alt="Imagem" width="400">
-            <input type="radio" class="checkbox" name="ambiente">
+            <img src="<?= $locais['3']?>" alt="Imagem" width="400">
+            <input type="radio" class="checkbox" name="ambiente" value="3">
             </div>
 
         </div>
@@ -83,18 +146,18 @@
         <div class="caixa2">
 
             <div class="card">
-            <img src="img-giovana/espaco4.png" alt="Imagem" width="400">
-            <input type="radio" class="checkbox" name="ambiente">
+            <img src="<?= $locais['4']?>" alt="Imagem" width="400">
+            <input type="radio" class="checkbox" name="ambiente" value="4">
             </div>
 
             <div class="card">
-            <img src="img-giovana/espaco5.png" alt="Imagem" width="400">
-            <input type="radio" class="checkbox" name="ambiente">
+            <img src="<?= $locais['5']?>" alt="Imagem" width="400">
+            <input type="radio" class="checkbox" name="ambiente" value="5">
             </div>
 
             <div class="card">
-            <img src="img-giovana/espaco6.png" alt="Imagem" width="400">
-            <input type="radio" class="checkbox" name="ambiente">
+            <img src="<?= $locais['6']?>" alt="Imagem" width="400">
+            <input type="radio" class="checkbox" name="ambiente" value="6">
             </div>
 
        </div>
@@ -103,8 +166,8 @@
 
         <div class="campos">
     
-            <input type="text" placeholder="Nome da sala">
-            <input type="text" value="<?=  $usuario['nome_usuario'] ?>" readonly> 
+            <input type="text" name="nome_sala" placeholder="Nome da sala">
+            <input type="text" name="criador" value="<?= htmlspecialchars($usuario['nome_usuario'] ?? '') ?>" readonly> 
             <input type="date" name="data" value="<?= date('Y-m-d') ?>" readonly>
             <select name="area">
                 <option value="">Área de conhecimento</option>
@@ -128,12 +191,18 @@
             <label><input type="radio" class="checkbox" name="status" value="publico">Público</label>
             </div>
             <div class="campos">
-            <input type="password" placeholder="Senha da sala (Privado)"></div>
+            <input type="password" name="senha" placeholder="Senha da sala (Privado)"></div>
     </div>
+            <div class="erro">
+                <?php
+                if(isset($_GET['erro']) && $_GET['erro'] != ""){
+                    echo "<p>{$_GET['erro']}</p>";
+                }
+                ?>
+            </div>
 
             <button type="submit" class="button">Criar Sala</button>
-        </form>
-
+</form>
 
 
 </div>

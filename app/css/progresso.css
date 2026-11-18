@@ -1,0 +1,126 @@
+body{
+    background-color:#f6eeea;
+    margin: 0;
+   padding: 0;
+   font-family: "Arima", system-ui;
+   font-optical-sizing: auto;
+   font-weight: weight;
+   font-style: normal;
+}
+
+.cabecalho{
+    display: flex;
+    width: 100%;
+    height: 140px;
+    background-color: #796761;
+    justify-content: left;
+    align-items: center;
+}
+
+.cabecalho a{
+    text-decoration: none;
+}
+
+.cabecalho p{
+    color: white;
+    font-size: 30px;
+}
+img-cabecalho a img{
+    list-style: none;
+    margin-right: 700px;
+}
+
+.img-rodape a img{
+    list-style: none;
+    margin-right: 500px;
+}
+
+img {
+    display: block;
+}
+
+.rodape{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    height: 190px;
+    background-color: #796761;
+    justify-content: left;
+    align-items: center;
+}
+
+.rodape table{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.rodape table tr td a p{
+    color: white;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.rodape table tr td a{
+    text-decoration: none;
+}
+
+.espacamentoRodape{
+    width: 5px;
+    height: 100px;
+    background-color: white;
+}
+
+.redesSociais{
+    display: flex;
+    padding-left: 0;
+    margin-left: 250px;
+}
+
+.redesSociais nav ul li{
+    list-style: none;
+    margin-right: 50px;
+}
+
+.redesSociais nav ul li a{
+    text-decoration: none;
+}
+
+
+nav ul{
+    display: flex;
+    padding-left: 0;
+    margin-top: 25px;
+}
+
+nav ul li{
+    list-style: none;
+    margin-right: 130px;
+}
+
+nav ul li a{
+    text-decoration: none;
+}
+
+.card{
+    
+    background-color: #edd4c6;
+    width: 900px;
+    height: 500px;
+    padding: 350px;
+    margin: 100px;
+    margin-left:150px;
+    border-radius: 15px;
+   
+}
+
+.atividade{
+    position: absolute;
+    text-align: center;
+    font-size: 70px;
+    color: #6b4e32;
+   
+
+    margin-left: 550px;
+   
+}

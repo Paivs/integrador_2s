@@ -169,8 +169,8 @@ nav ul li a{
 }
 
 .boxLocal{
-    width: 600px;
-    height: 600px;
+    width: 400px;
+    height: 400px;
     background-color: #eec8bc;
     border-radius: 40px;
     margin: 20px;
@@ -179,18 +179,18 @@ nav ul li a{
 
 }
 
-.imagemLocal{
-    height: 400px;
-    width: 530px;
+.imagemLocal img{
+    height: 230px;
+    width: 350px;
     background-color: #FFFFFF;
-    border-radius: 50px;
+    border-radius: 40px;
     justify-self: center;
     margin-top: 20px;
 }
 
 .boxLocal p{
     justify-self: center;
-    font-size: 30px;
+    font-size: 20px;
 }
 
 .boxLocal button{
