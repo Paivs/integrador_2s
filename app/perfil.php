@@ -7,14 +7,14 @@ $usuario = read(database(), "Usuarios", "id_usuario = ?", [$_SESSION['id']]);
 if (empty($_SESSION['id'])) {
     header("Location: loginUsuario.php");
     exit;
-    }
+}
 
-    $imagemPerfil = glob(__DIR__ . "/img/pfp/*.{png, jpg, jpeg.}", GLOB_BRACE);
+$imagemPerfil = glob(__DIR__ . "/img/pfp/*.{png, jpg, jpeg.}", GLOB_BRACE);
 
 if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['id'])) {
 
-    if (!isset($_POST['imagem_selecionada']) || $_POST['imagem_selecionada'] == ""){
-        $_POST['imagem_selecionada'] = $usuario['imagens_usuario']; 
+    if (!isset($_POST['imagem_selecionada']) || $_POST['imagem_selecionada'] == "") {
+        $_POST['imagem_selecionada'] = $usuario['imagens_usuario'];
     }
 
     update(database(), "Usuarios", [
@@ -38,7 +38,7 @@ if (!$usuario) {
 }
 
 
-if($usuario['imagens_usuario'] == "padrao"){
+if ($usuario['imagens_usuario'] == "padrao") {
     $usuario['imagens_usuario'] = "img/cabecalho/usuario.png";
 }
 
@@ -72,7 +72,7 @@ $bancada = readAll(database(), "Bancadas", "id_bancada", []);
             </header>
 
             <section class="perfil-usuario">
-                <img class="perfil-foto" src="<?= $usuario['imagens_usuario']?>" alt="Foto do usuário">
+                <img class="perfil-foto" src="<?= $usuario['imagens_usuario'] ?>" alt="Foto do usuário">
                 <div class="perfil-dados">
                     <b>User:</b>
                     <span><?= $usuario['nome_usuario'] ?></span>
@@ -105,14 +105,14 @@ $bancada = readAll(database(), "Bancadas", "id_bancada", []);
                         <label for="instituicao">Instituição</label>
                         <input type="text" id="instituicao" name="instituicao" value="<?= $usuario['instituicao'] ?? '' ?>">
                     </div>
-        
+
                     <details class='trocarImagem'>
                         <summary>Imagem de perfil</summary>
-                        <?php foreach ($imagemPerfil as $imagem):?>
-                            <button type="radio" class="menuImagem" name="imagem_selecionada" value="img/pfp/<?php echo basename($imagem)?>">
-                                <img src="img/pfp/<?php echo basename($imagem)?>" alt="">
+                        <?php foreach ($imagemPerfil as $imagem): ?>
+                            <button type="radio" class="menuImagem" name="imagem_selecionada" value="img/pfp/<?php echo basename($imagem) ?>">
+                                <img src="img/pfp/<?php echo basename($imagem) ?>" alt="">
                             </button>
-                        <?php endforeach;?>
+                        <?php endforeach; ?>
                     </details>
                     <button type="submit" class="botao-salvar">Salvar alterações</button>
                 </form>
@@ -144,9 +144,16 @@ $bancada = readAll(database(), "Bancadas", "id_bancada", []);
                                     <td><?php $bancadaUser = read(database(), "Bancadas", "id_bancada = ?", [$reserva['id_bancada']]);
                                         echo $bancadaUser['nome_bancada'];
                                         ?></td>
-                                    <td><?php $projetoUser = read(database(), "Projetos", "id_projeto = ?", [$reserva['id_projeto']]);
-                                        echo $projetoUser['nome_projeto'];
-                                        ?></td>
+                                    <td>
+                                        <?php
+                                        if (!empty($reserva['id_projeto'])) {
+                                            $projetoUser = read(database(), "Projetos", "id_projeto = ?", [$reserva['id_projeto']]);
+                                            echo $projetoUser['nome_projeto'];
+                                        } else {
+                                            echo "Sem projetos.";
+                                        }
+                                        ?>
+                                    </td>
                                 </tr>
                             <?php endforeach; ?>
                         <?php else: ?>
