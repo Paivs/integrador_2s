@@ -252,6 +252,7 @@
 
  .passo-intro {
      width: 480px;
+     font-size: 25px;
      flex-shrink: 0;
      text-align: center;
      padding-top: 20px;
