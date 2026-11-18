@@ -31,7 +31,7 @@ if (isset($_SESSION['user'])) {
           <li><a href="./index.php">Início</a></li>
 
           <li class="tem-submenu">
-            <a href="">Reservas ▾</a>
+            <a href="./reservas.php">Reservas ▾</a>
             <ul class="submenu">
               <li><a href="">Impressora 3D</a></li>
               <li><a href="">Corte a laser</a></li>
