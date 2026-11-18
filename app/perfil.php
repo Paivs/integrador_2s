@@ -9,10 +9,6 @@ if (empty($_SESSION['id'])) {
     exit;
 }
 
-<<<<<<< HEAD
-=======
-$imagemPerfil = glob(__DIR__ . "/img/pfp/*.{png, jpg, jpeg.}", GLOB_BRACE);
->>>>>>> aaa8ea1c38ff5690f7dfb39ad00d14a176d7f5e9
 
 $imagemPerfil = glob(__DIR__ . "/img/pfp/*.{png, jpg, jpeg.}", GLOB_BRACE);
 
@@ -49,12 +45,11 @@ if (!$usuario) {
 }
 
 
-<<<<<<< HEAD
-=======
+
+
 if ($usuario['imagens_usuario'] == "padrao") {
     $usuario['imagens_usuario'] = "img/cabecalho/usuario.png";
 }
->>>>>>> aaa8ea1c38ff5690f7dfb39ad00d14a176d7f5e9
 
 $reservaUsuario = readAll(database(), "Reservas", "id_usuario = ?", [$_SESSION['id']]);
 $_SESSION['reservaUsuario'] = readAll(database(), "Reservas", "id_usuario = ?", [$_SESSION['id']]);
@@ -122,15 +117,9 @@ $bancada = readAll(database(), "Bancadas", "id_bancada", []);
 
                     <details class='trocarImagem'>
                         <summary>Imagem de perfil</summary>
-<<<<<<< HEAD
                         <?php foreach ($imagemPerfil as $imagem):?>
                             <button type="submit" class="menuImagem" name="imagem_selecionada" value="img/pfp/<?php echo basename($imagem)?>">
                                 <img src="img/pfp/<?php echo basename($imagem)?>" alt="">
-=======
-                        <?php foreach ($imagemPerfil as $imagem): ?>
-                            <button type="radio" class="menuImagem" name="imagem_selecionada" value="img/pfp/<?php echo basename($imagem) ?>">
-                                <img src="img/pfp/<?php echo basename($imagem) ?>" alt="">
->>>>>>> aaa8ea1c38ff5690f7dfb39ad00d14a176d7f5e9
                             </button>
                         <?php endforeach; ?>
                     </details>
