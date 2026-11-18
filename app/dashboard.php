@@ -20,7 +20,7 @@
 <html lang="pt-BR">
     <head>
         <meta charset="UTF-8">
-        <title>Dashboard</title>
+        <title>MakerLab - Dashboard</title>
         <link rel="stylesheet" href="css/navAdm.css">
         <link rel="stylesheet" href="css/dashboard.css">
     </head>
