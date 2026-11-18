@@ -22,7 +22,7 @@
         <img src="./img/cs2_banner.png" alt="Counter-Strike 2">
         </div>
         <div class="texto-sobreposto">
-            <h1><i><b>MASTERS LEAGUE</b></i></h1>
+            <h1><i><b>MASTER LEAGUE</b></i></h1>
         </div>
         <div class="texto-sobreposto2">
             <h2><i><b>INSCRIÇÕES ABERTAS!</b></i></h2>

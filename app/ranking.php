@@ -142,7 +142,7 @@ usort($ranking, function ($a, $b) {
                                         <?php if (!empty($jogador['img_equipe'])): ?>
 
                                             <img
-                                                src="/app/img/logos/<?= htmlspecialchars($jogador['img_equipe'], ENT_QUOTES, 'UTF-8') ?>"
+                                                src="./img/logos/<?= htmlspecialchars($jogador['img_equipe'], ENT_QUOTES, 'UTF-8') ?>"
                                                 alt="Logo da equipe"
                                                 class="logo-equipe"
                                             >

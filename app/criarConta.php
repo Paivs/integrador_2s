@@ -56,7 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET" || isset($_GET['erro'])) {
             <?php elseif ($erro == "SENHA_ERRADO"): ?>
                 <p class="erro">SENHA TEM QUE CONTER NO MINIMO 8 CARACTERIES</p>
             <?php endif ?>
-            <a class="entrar" href="/app/entrarConta.php">Entrar na conta</a>
+            <a class="entrar" href="./entrarConta.php">Entrar na conta</a>
             <br>
             <div class="separador">OU</div>
             <button type="submit">Criar</button>
