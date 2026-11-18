@@ -1,6 +1,30 @@
 <?php
 session_start();
 
+$senha_admin = "1234"; 
+$erro_senha = false;
+
+
+
+// Define a página inicial padrão (precisa estar aqui antes da linha 19)
+$page = isset($_GET['page']) ? $_GET['page'] : 'home';
+// Verifica o envio da senha no modal
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'login_admin') {
+    if (isset($_POST['pin_admin']) && $_POST['pin_admin'] === $senha_admin) {
+        $_SESSION['admin_logado'] = true;
+        header("Location: index.php?page=admin");
+        exit;
+    } else {
+        $erro_senha = true;
+    }
+}
+
+// Bloqueia acesso direto à URL ?page=admin caso não tenha digitado a senha
+if ($page === 'admin' && empty($_SESSION['admin_logado'])) {
+    header("Location: index.php?page=home#admin-pin-modal");
+    exit;
+}
+
 // Define a página inicial padrão
 $page = isset($_GET['page']) ? $_GET['page'] : 'home';
 
@@ -64,12 +88,80 @@ if (!isset($_SESSION['cardapio'])) {
     ];
 }
 
+// INICIALIZAÇÃO DO CARRINHO NA SESSÃO
+if (!isset($_SESSION['carrinho'])) {
+    $_SESSION['carrinho'] = [];
+}
+
 // 2. INICIALIZAÇÃO DO STATUS DO PEDIDO
 if (!isset($_SESSION['status_pedido'])) {
     $_SESSION['status_pedido'] = 2;
 }
 
-// 3. PROCESSAMENTO DE AÇÕES (CADASTRAR, EDITAR, REMOVER E MUDAR STATUS)
+// 3. PROCESSAMENTO DE AÇÕES DO CARRINHO E ENTREGA
+
+// Ação: Adicionar produto ao carrinho ao clicar no "+"
+if (isset($_GET['action']) && $_GET['action'] === 'add_carrinho' && isset($_GET['id'])) {
+    $id_prod = (int)$_GET['id'];
+    if (isset($_SESSION['cardapio'][$id_prod])) {
+        if (isset($_SESSION['carrinho'][$id_prod])) {
+            $_SESSION['carrinho'][$id_prod]++;
+        } else {
+            $_SESSION['carrinho'][$id_prod] = 1;
+        }
+    }
+    header("Location: index.php?page=carrinho");
+    exit;
+}
+
+// Ação: Aumentar quantidade no carrinho
+if (isset($_GET['action']) && $_GET['action'] === 'mais_qtd' && isset($_GET['id'])) {
+    $id_prod = (int)$_GET['id'];
+    if (isset($_SESSION['carrinho'][$id_prod])) {
+        $_SESSION['carrinho'][$id_prod]++;
+    }
+    header("Location: index.php?page=carrinho");
+    exit;
+}
+
+// Ação: Diminuir quantidade no carrinho
+if (isset($_GET['action']) && $_GET['action'] === 'menos_qtd' && isset($_GET['id'])) {
+    $id_prod = (int)$_GET['id'];
+    if (isset($_SESSION['carrinho'][$id_prod])) {
+        $_SESSION['carrinho'][$id_prod]--;
+        if ($_SESSION['carrinho'][$id_prod] <= 0) {
+            unset($_SESSION['carrinho'][$id_prod]);
+        }
+    }
+    header("Location: index.php?page=carrinho");
+    exit;
+}
+
+// Ação: Remover item completamente do carrinho
+if (isset($_GET['action']) && $_GET['action'] === 'del_carrinho' && isset($_GET['id'])) {
+    $id_prod = (int)$_GET['id'];
+    unset($_SESSION['carrinho'][$id_prod]);
+    header("Location: index.php?page=carrinho");
+    exit;
+}
+
+// Ação: Finalizar Pedido (Salvar Entrega e ir para Status)
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'finalizar_pedido') {
+    $_SESSION['dados_entrega'] = [
+        'tipo' => $_POST['tipo_entrega'] ?? 'local',
+        'rua' => trim($_POST['rua'] ?? ''),
+        'bairro' => trim($_POST['bairro'] ?? ''),
+        'numero' => trim($_POST['numero'] ?? ''),
+        'complemento' => trim($_POST['complemento'] ?? ''),
+        'referencia' => trim($_POST['referencia'] ?? '')
+    ];
+    $_SESSION['status_pedido'] = 1; // Pedido Recebido
+    $_SESSION['carrinho'] = []; // Limpa o carrinho após finalizar
+    header("Location: index.php?page=status&pedido_ok=1");
+    exit;
+}
+
+// 4. PROCESSAMENTO DE AÇÕES ADMINISTRATIVAS
 
 // Ação: Mudar Status do Pedido
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'mudar_status') {
@@ -140,6 +232,16 @@ $status_info = [
 
 $current_status = $_SESSION['status_pedido'];
 $cardapio_items = $_SESSION['cardapio'];
+
+// Cálculo de totais do carrinho
+$total_itens_carrinho = 0;
+$subtotal_carrinho = 0;
+foreach ($_SESSION['carrinho'] as $id_c => $qtd_c) {
+    if (isset($cardapio_items[$id_c])) {
+        $total_itens_carrinho += $qtd_c;
+        $subtotal_carrinho += ($cardapio_items[$id_c]['preco'] * $qtd_c);
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -184,6 +286,29 @@ $cardapio_items = $_SESSION['cardapio'];
         }
         .modal-target { display: none; }
         .modal-target:target { display: flex !important; }
+
+        /* CSS para seleção interativa das opções de entrega sem JavaScript */
+        .delivery-radio:checked + .delivery-card {
+            border-color: #D87A8C;
+            background-color: #FFF9FA;
+            box-shadow: 0 10px 25px -5px rgba(216, 122, 140, 0.25);
+            transform: translateY(-2px);
+        }
+        .delivery-radio:checked + .delivery-card .check-badge {
+            opacity: 1;
+        }
+        /* Exibe os campos de endereço apenas quando Delivery estiver marcado */
+        .delivery-form-box {
+            display: none;
+        }
+        #opt-delivery:checked ~ .delivery-form-box {
+            display: block;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
     </style>
 
     <script>
@@ -239,8 +364,16 @@ $cardapio_items = $_SESSION['cardapio'];
                         </a>
 
                         <a href="index.php?page=cardapio" class="text-doce-cream hover:text-doce-gold transition-colors py-1 font-semibold">Cardápio (<?php echo count($cardapio_items); ?>)</a>
+                        
+                        <a href="index.php?page=carrinho" class="text-doce-cream hover:text-doce-gold transition-colors py-1 flex items-center gap-1.5 font-semibold">
+                            <i class="fa-solid fa-bag-shopping"></i> Seu Pedido 
+                            <?php if ($total_itens_carrinho > 0): ?>
+                                <span class="bg-doce-pink-dark text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow"><?php echo $total_itens_carrinho; ?></span>
+                            <?php endif; ?>
+                        </a>
+
                         <a href="index.php?page=status" class="text-doce-cream hover:text-doce-gold transition-colors py-1 flex items-center gap-1.5">
-                            <i class="fa-solid fa-clock-rotate-left text-xs"></i> Status do Pedido
+                            <i class="fa-solid fa-clock-rotate-left text-xs"></i> Status
                         </a>
                         <a href="index.php?page=sobre" class="text-doce-cream hover:text-doce-gold transition-colors py-1">Sobre Nós</a>
                         <a href="index.php?page=contato" class="text-doce-cream hover:text-doce-gold transition-colors py-1">Contato</a>
@@ -316,7 +449,8 @@ $cardapio_items = $_SESSION['cardapio'];
                                         <span class="text-[10px] uppercase tracking-wider bg-doce-pink-base/30 text-doce-pink-dark px-2.5 py-1 rounded-md font-semibold">
                                             <?php echo htmlspecialchars($item['tag']); ?>
                                         </span>
-                                        <a href="index.php?page=status" class="text-xs bg-doce-mint-base hover:bg-doce-mint-dark text-white px-3.5 py-1.5 rounded-full font-semibold flex items-center gap-1 transition">
+                                        <!-- BOTÃO + PEDIR AGORA ADICIONA AO CARRINHO E ABRE A TELA "SEU PEDIDO" -->
+                                        <a href="index.php?action=add_carrinho&id=<?php echo $item['id']; ?>" class="text-xs bg-doce-mint-base hover:bg-doce-mint-dark text-white px-3.5 py-1.5 rounded-full font-semibold flex items-center gap-1 transition shadow-sm">
                                             <i class="fa-solid fa-plus text-[10px]"></i> Pedir
                                         </a>
                                     </div>
@@ -328,10 +462,248 @@ $cardapio_items = $_SESSION['cardapio'];
                 </div>
             </section>
 
+            <?php elseif ($page === 'carrinho'): ?>
+            <!-- PÁGINA 1 ADICIONADA: SEU PEDIDO (CARRINHO DE COMPRAS) -->
+            <section class="py-12">
+                <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+                    
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-8 gap-4">
+                        <div>
+                            <span class="text-doce-pink-dark font-semibold text-xs uppercase tracking-widest">Sacola Doce Encontro</span>
+                            <h1 class="font-serif text-3xl sm:text-4xl font-bold text-doce-text mt-1">Seu Pedido</h1>
+                        </div>
+                        <a href="index.php?page=cardapio" class="text-xs font-bold text-doce-mint-deep hover:text-doce-pink-dark transition flex items-center gap-1.5 bg-white px-4 py-2.5 rounded-full border border-doce-mint-base/40 shadow-sm w-fit">
+                            <i class="fa-solid fa-arrow-left"></i> Adicionar mais delícias
+                        </a>
+                    </div>
+
+                    <?php if (empty($_SESSION['carrinho']) || $total_itens_carrinho === 0): ?>
+                        <div class="bg-white p-12 rounded-3xl text-center shadow-md border-2 border-dashed border-doce-mint-base/40 max-w-xl mx-auto">
+                            <i class="fa-solid fa-basket-shopping text-5xl text-doce-pink-dark mb-4"></i>
+                            <h3 class="font-serif text-2xl font-bold text-doce-text">Sua sacola está vazia</h3>
+                            <p class="text-xs text-doce-text/70 mt-2 mb-6">Explore nosso cardápio e clique em "+ Pedir" nos seus itens favoritos!</p>
+                            <a href="index.php?page=cardapio" class="bg-doce-mint-base hover:bg-doce-mint-dark text-white px-6 py-3 rounded-full font-bold text-xs uppercase shadow transition inline-block">
+                                Ver Cardápio
+                            </a>
+                        </div>
+                    <?php else: ?>
+                        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                            
+                            <!-- LISTA DE PRODUTOS NO PEDIDO -->
+                            <div class="lg:col-span-7 space-y-4">
+                                <?php foreach ($_SESSION['carrinho'] as $id_c => $qtd_c): ?>
+                                    <?php if (!isset($cardapio_items[$id_c])) continue; ?>
+                                    <?php 
+                                        $prod = $cardapio_items[$id_c]; 
+                                        $total_item = $prod['preco'] * $qtd_c;
+                                    ?>
+                                    <div class="bg-white p-5 rounded-2xl border-2 border-doce-mint-base/30 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-4">
+                                        <div class="flex items-center gap-4 w-full sm:w-auto">
+                                            <img src="<?php echo htmlspecialchars($prod['imagem']); ?>" alt="<?php echo htmlspecialchars($prod['nome']); ?>" class="w-20 h-20 rounded-xl object-cover border border-doce-mint-base/20 flex-shrink-0">
+                                            <div>
+                                                <h3 class="font-serif text-lg font-bold text-doce-text"><?php echo htmlspecialchars($prod['nome']); ?></h3>
+                                                <p class="text-xs text-doce-text/70 mt-0.5">Quantidade: <strong><?php echo $qtd_c; ?></strong></p>
+                                                <p class="text-xs text-doce-mint-dark font-medium">Preço unitário: R$ <?php echo number_format($prod['preco'], 2, ',', '.'); ?></p>
+                                            </div>
+                                        </div>
+
+                                        <div class="flex sm:flex-col items-center sm:items-end justify-between w-full sm:w-auto pt-3 sm:pt-0 border-t sm:border-t-0 border-doce-pink-light gap-2">
+                                            <span class="font-serif text-xl font-bold text-doce-text">
+                                                R$ <?php echo number_format($total_item, 2, ',', '.'); ?>
+                                            </span>
+                                            
+                                            <!-- CONTROLES DE QUANTIDADE (- / + / LIXEIRA) -->
+                                            <div class="flex items-center gap-2 bg-doce-pink-light px-2.5 py-1 rounded-full border border-doce-pink-base">
+                                                <a href="index.php?action=menos_qtd&id=<?php echo $prod['id']; ?>" class="w-6 h-6 rounded-full bg-white text-doce-text hover:bg-doce-pink-dark hover:text-white flex items-center justify-center text-xs font-bold shadow-sm transition">-</a>
+                                                <span class="text-xs font-bold px-1.5"><?php echo $qtd_c; ?></span>
+                                                <a href="index.php?action=mais_qtd&id=<?php echo $prod['id']; ?>" class="w-6 h-6 rounded-full bg-white text-doce-text hover:bg-doce-mint-base hover:text-white flex items-center justify-center text-xs font-bold shadow-sm transition">+</a>
+                                                <a href="index.php?action=del_carrinho&id=<?php echo $prod['id']; ?>" title="Remover item" class="ml-1 text-red-400 hover:text-red-600 text-xs transition">
+                                                    <i class="fa-solid fa-trash"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <?php endforeach; ?>
+                            </div>
+
+                            <!-- RESUMO DO PEDIDO -->
+                            <div class="lg:col-span-5 bg-doce-cream p-6 sm:p-8 rounded-3xl border-4 border-doce-mint-base shadow-xl">
+                                <h2 class="font-serif text-2xl font-bold text-doce-text border-b-2 border-dashed border-doce-mint-base/40 pb-4 mb-5">
+                                    Resumo do Pedido
+                                </h2>
+
+                                <div class="space-y-3 text-sm mb-6">
+                                    <div class="flex justify-between text-doce-text/80">
+                                        <span>Subtotal (<?php echo $total_itens_carrinho; ?> <?php echo $total_itens_carrinho === 1 ? 'item' : 'itens'; ?>)</span>
+                                        <span class="font-semibold">R$ <?php echo number_format($subtotal_carrinho, 2, ',', '.'); ?></span>
+                                    </div>
+                                    <div class="flex justify-between text-doce-text/80">
+                                        <span>Embalagem especial</span>
+                                        <span class="font-bold text-doce-mint-deep uppercase text-xs bg-doce-mint-light px-2.5 py-0.5 rounded-full">Grátis</span>
+                                    </div>
+                                </div>
+
+                                <div class="border-t-2 border-doce-mint-base/30 pt-4 mb-6 flex justify-between items-center">
+                                    <span class="font-serif text-lg font-bold text-doce-text uppercase">TOTAL:</span>
+                                    <span class="font-serif text-3xl font-bold text-doce-pink-dark">
+                                        R$ <?php echo number_format($subtotal_carrinho, 2, ',', '.'); ?>
+                                    </span>
+                                </div>
+
+                                <a href="index.php?page=entrega" class="w-full bg-doce-mint-base hover:bg-doce-mint-dark text-white font-bold py-4 px-6 rounded-full transition shadow-lg uppercase tracking-wider text-xs flex items-center justify-center gap-2">
+                                    <span>Escolher forma de Entrega</span>
+                                    <i class="fa-solid fa-arrow-right"></i>
+                                </a>
+                            </div>
+
+                        </div>
+                    <?php endif; ?>
+
+                </div>
+            </section>
+
+                                    <?php elseif ($page === 'entrega'): ?>
+            <!-- PÁGINA: FORMA DE ENTREGA -->
+            <section class="py-12">
+                <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="mb-6">
+                        <a href="index.php?page=carrinho" class="text-xs font-bold text-doce-mint-deep hover:text-doce-pink-dark transition inline-flex items-center gap-1.5">
+                            <i class="fa-solid fa-arrow-left"></i> Voltar para Seu Pedido
+                        </a>
+                    </div>
+
+                    <div class="text-center max-w-2xl mx-auto mb-10">
+                        <span class="text-doce-pink-dark font-semibold text-xs uppercase tracking-widest">Última Etapa</span>
+                        <h1 class="font-serif text-3xl sm:text-4xl font-bold text-doce-text mt-1">Como você quer receber o pedido?</h1>
+                        <p class="text-xs text-doce-text/70 mt-2">Selecione uma das opções abaixo para concluirmos com todo carinho</p>
+                    </div>
+
+                    <form action="index.php" method="POST" class="space-y-8">
+                        <input type="hidden" name="action" value="finalizar_pedido">
+
+                        <!-- CARDS CLICÁVEIS DAS OPÇÕES DE ENTREGA -->
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-8">
+                            
+                            <!-- OPÇÃO 1: COMER NO LOCAL -->
+                            <label onclick="selecionarEntrega('local')" id="card-local" class="cursor-pointer block bg-white p-6 rounded-3xl border-4 border-doce-pink-dark shadow-lg text-center transition-all h-full flex flex-col items-center justify-center relative">
+                                <input type="radio" name="tipo_entrega" value="Comer no Local" class="sr-only" checked>
+                                <span id="badge-local" class="absolute top-3 right-3 text-doce-pink-dark text-lg"><i class="fa-solid fa-circle-check"></i></span>
+                                <div class="w-16 h-16 rounded-full bg-doce-mint-base text-white flex items-center justify-center text-2xl mb-4 shadow-md">
+                                    <i class="fa-solid fa-utensils"></i>
+                                </div>
+                                <h3 class="font-serif text-xl font-bold text-doce-text">Comer no Local</h3>
+                                <p class="text-xs text-doce-text/70 mt-2">Mesa reservada com atendimento carinhoso</p>
+                            </label>
+
+                            <!-- OPÇÃO 2: RETIRADA NO BALCÃO -->
+                            <label onclick="selecionarEntrega('balcao')" id="card-balcao" class="cursor-pointer block bg-white p-6 rounded-3xl border-2 border-doce-mint-base/40 text-center transition-all h-full flex flex-col items-center justify-center relative">
+                                <input type="radio" name="tipo_entrega" value="Retirada no Balcão" class="sr-only">
+                                <span id="badge-balcao" class="hidden absolute top-3 right-3 text-doce-pink-dark text-lg"><i class="fa-solid fa-circle-check"></i></span>
+                                <div class="w-16 h-16 rounded-full bg-doce-mint-base text-white flex items-center justify-center text-2xl mb-4 shadow-md">
+                                    <i class="fa-solid fa-store"></i>
+                                </div>
+                                <h3 class="font-serif text-xl font-bold text-doce-text">Retirada no Balcão</h3>
+                                <p class="text-xs text-doce-text/70 mt-2">Pronto em até 20 minutos</p>
+                            </label>
+
+                            <!-- OPÇÃO 3: DELIVERY ENTREGA -->
+                            <label onclick="selecionarEntrega('delivery')" id="card-delivery" class="cursor-pointer block bg-white p-6 rounded-3xl border-2 border-doce-mint-base/40 text-center transition-all h-full flex flex-col items-center justify-center relative">
+                                <input type="radio" name="tipo_entrega" value="Delivery Entrega" class="sr-only">
+                                <span id="badge-delivery" class="hidden absolute top-3 right-3 text-doce-pink-dark text-lg"><i class="fa-solid fa-circle-check"></i></span>
+                                <div class="w-16 h-16 rounded-full bg-doce-mint-base text-white flex items-center justify-center text-2xl mb-4 shadow-md">
+                                    <i class="fa-solid fa-motorcycle"></i>
+                                </div>
+                                <h3 class="font-serif text-xl font-bold text-doce-text">Delivery Entrega</h3>
+                                <p class="text-xs text-doce-text/70 mt-2">Entregamos fresquinho na sua casa</p>
+                            </label>
+
+                        </div>
+
+                        <!-- ENDEREÇO PARA ENTREGA (INICIA OCULTO E SÓ ABRE NO DELIVERY) -->
+                        <div id="box-endereco-delivery" class="hidden bg-doce-cream p-6 sm:p-8 rounded-3xl border-4 border-doce-mint-base shadow-xl">
+                            <h3 class="font-serif text-2xl font-bold text-doce-text mb-5 flex items-center gap-2 border-b border-doce-mint-base/30 pb-3">
+                                <i class="fa-solid fa-location-dot text-doce-pink-dark"></i> Endereço para entrega
+                            </h3>
+                            <div class="grid grid-cols-1 sm:grid-cols-12 gap-4 text-xs">
+                                <div class="sm:col-span-8">
+                                    <label class="block font-semibold text-doce-text mb-1">Rua / Avenida *</label>
+                                    <input type="text" name="rua" id="input-rua" placeholder="Ex: Rua das Flores" class="w-full px-4 py-3 rounded-xl border border-doce-mint-base/40 bg-white focus:border-doce-pink-dark outline-none">
+                                </div>
+                                <div class="sm:col-span-4">
+                                    <label class="block font-semibold text-doce-text mb-1">Número *</label>
+                                    <input type="text" name="numero" id="input-numero" placeholder="Ex: 123" class="w-full px-4 py-3 rounded-xl border border-doce-mint-base/40 bg-white focus:border-doce-pink-dark outline-none">
+                                </div>
+                                <div class="sm:col-span-6">
+                                    <label class="block font-semibold text-doce-text mb-1">Bairro *</label>
+                                    <input type="text" name="bairro" id="input-bairro" placeholder="Ex: Jardim Doce" class="w-full px-4 py-3 rounded-xl border border-doce-mint-base/40 bg-white focus:border-doce-pink-dark outline-none">
+                                </div>
+                                <div class="sm:col-span-6">
+                                    <label class="block font-semibold text-doce-text mb-1">Complemento / Ap</label>
+                                    <input type="text" name="complemento" placeholder="Ex: Apto 42, Bloco B" class="w-full px-4 py-3 rounded-xl border border-doce-mint-base/40 bg-white focus:border-doce-pink-dark outline-none">
+                                </div>
+                                <div class="sm:col-span-12">
+                                    <label class="block font-semibold text-doce-text mb-1">Ponto de referência</label>
+                                    <input type="text" name="referencia" placeholder="Ex: Próximo à praça central" class="w-full px-4 py-3 rounded-xl border border-doce-mint-base/40 bg-white focus:border-doce-pink-dark outline-none">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="text-center pt-2">
+                            <button type="submit" class="bg-doce-pink-dark hover:bg-doce-mint-deep text-white font-bold py-4 px-10 rounded-full transition shadow-xl uppercase tracking-wider text-xs inline-flex items-center gap-2">
+                                <i class="fa-solid fa-heart"></i> Confirmar Pedido (R$ <?php echo number_format($subtotal_carrinho, 2, ',', '.'); ?>)
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <script>
+                    function selecionarEntrega(tipo) {
+                        const opcoes = ['local', 'balcao', 'delivery'];
+                        
+                        opcoes.forEach(op => {
+                            const card = document.getElementById('card-' + op);
+                            const badge = document.getElementById('badge-' + op);
+                            const radio = card.querySelector('input[type="radio"]');
+                            
+                            if (op === tipo) {
+                                radio.checked = true;
+                                card.classList.remove('border-2', 'border-doce-mint-base/40');
+                                card.classList.add('border-4', 'border-doce-pink-dark', 'shadow-lg', 'bg-[#FFF9FA]');
+                                badge.classList.remove('hidden');
+                            } else {
+                                radio.checked = false;
+                                card.classList.remove('border-4', 'border-doce-pink-dark', 'shadow-lg', 'bg-[#FFF9FA]');
+                                card.classList.add('border-2', 'border-doce-mint-base/40');
+                                badge.classList.add('hidden');
+                            }
+                        });
+
+                        const boxEndereco = document.getElementById('box-endereco-delivery');
+                        const camposObrigatorios = ['input-rua', 'input-numero', 'input-bairro'];
+
+                        if (tipo === 'delivery') {
+                            boxEndereco.classList.remove('hidden');
+                            camposObrigatorios.forEach(id => document.getElementById(id).required = true);
+                        } else {
+                            boxEndereco.classList.add('hidden');
+                            camposObrigatorios.forEach(id => document.getElementById(id).required = false);
+                        }
+                    }
+                </script>
+            </section>
+
+
             <?php elseif ($page === 'status'): ?>
             <!-- PÁGINA: STATUS DO PEDIDO -->
             <section class="py-12">
                 <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+                    
+                    <?php if (isset($_GET['pedido_ok'])): ?>
+                        <div class="mb-6 p-4 rounded-2xl text-xs font-bold text-white bg-doce-mint-deep shadow-md text-center">
+                            🎉 Pedido confirmado com sucesso! Acompanhe abaixo o preparo da sua encomenda.
+                        </div>
+                    <?php endif; ?>
+
                     <div class="text-center max-w-2xl mx-auto mb-8">
                         <h1 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-doce-text">
                             Status do seu <span class="italic font-garamond text-doce-pink-dark">Pedido Doce</span>
@@ -343,6 +715,14 @@ $cardapio_items = $_SESSION['cardapio'];
                             <div>
                                 <span class="text-[11px] font-bold uppercase text-doce-mint-dark">Código da Encomenda</span>
                                 <h2 class="font-serif text-2xl font-bold text-doce-text">#DE-8492</h2>
+                                <?php if (isset($_SESSION['dados_entrega'])): ?>
+                                    <p class="text-xs text-doce-text/80 mt-1">
+                                        <strong>Modalidade:</strong> <?php echo htmlspecialchars($_SESSION['dados_entrega']['tipo']); ?>
+                                        <?php if ($_SESSION['dados_entrega']['tipo'] === 'Delivery Entrega' && !empty($_SESSION['dados_entrega']['rua'])): ?>
+                                            — <?php echo htmlspecialchars($_SESSION['dados_entrega']['rua'] . ', ' . $_SESSION['dados_entrega']['numero'] . ' - ' . $_SESSION['dados_entrega']['bairro']); ?>
+                                        <?php endif; ?>
+                                    </p>
+                                <?php endif; ?>
                             </div>
                             <span class="px-4 py-2 rounded-full text-xs font-bold uppercase shadow-sm <?php echo $status_info[$current_status]['cor']; ?>">
                                 <?php echo $status_info[$current_status]['badge']; ?>
@@ -517,11 +897,9 @@ $cardapio_items = $_SESSION['cardapio'];
                                                         <td class="p-3 uppercase text-[10px] text-doce-mint-dark font-bold"><?php echo htmlspecialchars($item['categoria']); ?></td>
                                                         <td class="p-3 font-serif font-bold text-doce-text">R$ <?php echo number_format($item['preco'], 2, ',', '.'); ?></td>
                                                         <td class="p-3 text-center space-x-1">
-                                                            <!-- BOTÃO EDITAR -->
-                                                            <a href="index.php?page=admin&edit_id=<?php echo $item['id']; ?>" class="bg-doce-mint-light hover:bg-doce-mint-base text-doce-mint-deep hover:text-white px-2.5 py-1 rounded.md text-[11px] font-bold transition inline-block">
+                                                            <a href="index.php?page=admin&edit_id=<?php echo $item['id']; ?>" class="bg-doce-mint-light hover:bg-doce-mint-base text-doce-mint-deep hover:text-white px-2.5 py-1 rounded-md text-[11px] font-bold transition inline-block">
                                                                 <i class="fa-solid fa-pen-to-square"></i>
                                                             </a>
-                                                            <!-- BOTÃO REMOVER -->
                                                             <a href="index.php?page=admin&action=remover_item&id=<?php echo $item['id']; ?>" onclick="return confirm('Deseja remover <?php echo htmlspecialchars($item['nome']); ?>?');" class="bg-red-50 hover:bg-red-100 text-red-500 px-2.5 py-1 rounded-md text-[11px] font-bold transition inline-block">
                                                                 <i class="fa-solid fa-trash"></i>
                                                             </a>
@@ -557,7 +935,7 @@ $cardapio_items = $_SESSION['cardapio'];
     </div>
 
     <!-- MODAL DE PIN DO ADMIN -->
-    <div id="admin-pin-modal" class="modal-target fixed inset-0 z-50 bg-black/50 backdrop-blur-sm items-center justify-center p-4">
+    <div id="admin-pin-modal" class="modal-target fixed inset-0 z-50 bg-black/50 backdrop-blur-sm items-center justify-center p-4" <?php echo $erro_senha ? 'style="display:flex;"' : ''; ?>>
         <div class="bg-doce-cream border-4 border-doce-mint-base rounded-3xl p-6 sm:p-8 max-w-sm w-full shadow-2xl relative text-center">
             <a href="index.php?page=home" class="absolute top-3 right-4 text-gray-400 hover:text-doce-text text-xl">
                 <i class="fa-solid fa-xmark"></i>
@@ -568,15 +946,24 @@ $cardapio_items = $_SESSION['cardapio'];
             </div>
 
             <h3 class="font-serif text-2xl font-bold text-doce-text">Acesso Gerencial</h3>
-            <p class="text-xs text-doce-text/70 mt-1 mb-4">Clique abaixo para acessar o painel:</p>
+            <p class="text-xs text-doce-text/70 mt-1 mb-4">Digite a senha de administrador:</p>
 
-            <form action="index.php" method="GET" class="space-y-4">
-                <input type="hidden" name="page" value="admin">
+            <?php if ($erro_senha): ?>
+                <div class="mb-3 p-2 rounded-lg bg-red-100 text-red-600 text-xs font-bold">
+                    Senha incorreta! Tente novamente.
+                </div>
+            <?php endif; ?>
+
+            <form action="index.php" method="POST" class="space-y-4">
+                <input type="hidden" name="action" value="login_admin">
+                <input type="password" name="pin_admin" required placeholder="••••" autofocus
+                    class="w-full px-4 py-3 rounded-xl border-2 border-doce-mint-base/50 bg-white text-center text-lg tracking-widest font-bold text-doce-text focus:border-doce-pink-dark outline-none">
                 <button type="submit" class="w-full bg-doce-mint-base hover:bg-doce-mint-dark text-white font-bold py-3 rounded-xl transition shadow text-xs uppercase tracking-wider block text-center">
                     Entrar no Painel
                 </button>
             </form>
         </div>
+    </div>
     </div>
 
     <footer class="bg-doce-mint-base text-white py-8 border-t-4 border-doce-mint-dark mt-16 text-center">
