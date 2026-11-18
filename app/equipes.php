@@ -29,7 +29,7 @@ if (!empty($busca)) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Equipes</title>
-    <link rel="stylesheet" href="/app/css/equipes.css">
+    <link rel="stylesheet" href="./css/equipes.css">
 </head>
 
 <body>

@@ -12,13 +12,13 @@ $torneios = readAll($pdo, "torneios");
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Torneios</title>
-    <link rel="stylesheet" href="/app/css/torneios.css">
+    <link rel="stylesheet" href="./css/torneios.css">
 </head>
 
 <body>
 
     <section class="Banner">
-        <img class="banner-torneios" src="/app/img/banner-torneios.png" alt="">
+        <img class="banner-torneios" src="./img/banner-torneios.png" alt="">
         <div class="texto">
             <h1>SEU PRÓXIMO<br><span>TORNEIO</span><br>COMEÇA <span>AQUI</span></h1>
             <p>CRIE CAMPEONATOS, REÚNA EQUIPES<br>DISPUTE PARTIDAS E CONQUISTE O TOPO DO RANKING.</p>

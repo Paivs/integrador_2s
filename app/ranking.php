@@ -69,7 +69,7 @@ usort($ranking, function ($a, $b) {
 
     <title>Ranking</title>
 
-    <link rel="stylesheet" href="/app/css/ranking.css">
+    <link rel="stylesheet" href="./css/ranking.css">
 
 </head>
 
