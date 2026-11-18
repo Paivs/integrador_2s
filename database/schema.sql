@@ -1,4 +1,3 @@
-
 -- ==========================================
 -- BANCO DE DADOS: MAKERLAB
 -- ==========================================
@@ -73,26 +72,16 @@ CREATE TABLE IF NOT EXISTS Ferramentas (
 -- 4. TABELA: PROJETOS
 -- ==========================================
 
-CREATE TABLE IF NOT EXISTS Reservas (
-    id_reserva INT AUTO_INCREMENT PRIMARY KEY,
-    data_reserva DATETIME NOT NULL,
-    horas_reservadas INT NOT NULL,
-    preco_total DECIMAL(10, 2) NOT NULL,
-    id_usuario INT NOT NULL,
-    id_bancada INT NOT NULL,
-    id_projeto INT NULL,
+CREATE TABLE IF NOT EXISTS Projetos (
+    id_projeto INT AUTO_INCREMENT PRIMARY KEY,
+    nome_projeto VARCHAR(100) NOT NULL,
+    descricao_projeto TEXT,
+    data_criacao DATETIME DEFAULT CURRENT_TIMESTAMP,
+    id_criador INT NOT NULL,
 
-    CONSTRAINT fk_reserva_usuario
-        FOREIGN KEY (id_usuario)
-        REFERENCES Usuarios(id_usuario),
-
-    CONSTRAINT fk_reserva_bancada
-        FOREIGN KEY (id_bancada)
-        REFERENCES Bancadas(id_bancada),
-
-    CONSTRAINT fk_reserva_projeto
-        FOREIGN KEY (id_projeto)
-        REFERENCES Projetos(id_projeto)
+    CONSTRAINT fk_projeto_criador
+        FOREIGN KEY (id_criador)
+        REFERENCES Usuarios(id_usuario)
 );
 
 
@@ -129,7 +118,7 @@ CREATE TABLE IF NOT EXISTS Reservas (
     preco_total DECIMAL(10,2) NOT NULL DEFAULT 0.00,
     id_usuario INT NOT NULL,
     id_bancada INT NOT NULL,
-    id_projeto INT NOT NULL,
+    id_projeto INT NULL,
     criado_em DATETIME DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT fk_reservas_usuarios
