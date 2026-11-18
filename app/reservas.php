@@ -42,7 +42,8 @@ $bancadasDisponiveis = readAll($pdo, 'Bancadas', 'status_bancada = ?', ['disponi
                 <p><i class="bi bi-check-circle-fill"></i> <?= $b['segunda_vantagem'] ?></p>
                 <br>
                 <h1>R$<?= $b['preco_bancada']?> / hora</h1>
-                <button class="botao-salvar">Reservar ></button>
+                <a href="./processaReserva.php?id=<?= $b['id_bancada'] ?>"><button class="botao-salvar">Reservar ></button></a>
+                
             </div>
             <br>
         <?php endforeach; ?>
