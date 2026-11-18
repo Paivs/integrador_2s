@@ -15,7 +15,7 @@ $mensagem = trim($_POST['mensagem'] ?? '');
 
 $erros = [];
  
-if (strlen($telefone) < 11 || strlen($telefone) > 12) {
+if (strlen($telefone) < 11 || strlen($telefone) > 11) {
     $erros[] = 'Telefone inválido. Informe o DDD e o número.';
 }
  
