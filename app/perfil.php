@@ -9,6 +9,10 @@ if (empty($_SESSION['id'])) {
     exit;
 }
 
+<<<<<<< HEAD
+=======
+$imagemPerfil = glob(__DIR__ . "/img/pfp/*.{png, jpg, jpeg.}", GLOB_BRACE);
+>>>>>>> aaa8ea1c38ff5690f7dfb39ad00d14a176d7f5e9
 
 $imagemPerfil = glob(__DIR__ . "/img/pfp/*.{png, jpg, jpeg.}", GLOB_BRACE);
 
@@ -19,8 +23,8 @@ $_SESSION['imagem'] = $usuario['imagens_usuario'];
     
 if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['id'])) {
 
-    if (!isset($_POST['imagem_selecionada']) || $_POST['imagem_selecionada'] == ""){
-        $_POST['imagem_selecionada'] = $usuario['imagens_usuario']; 
+    if (!isset($_POST['imagem_selecionada']) || $_POST['imagem_selecionada'] == "") {
+        $_POST['imagem_selecionada'] = $usuario['imagens_usuario'];
     }
 
     update(database(), "Usuarios", [
@@ -45,6 +49,12 @@ if (!$usuario) {
 }
 
 
+<<<<<<< HEAD
+=======
+if ($usuario['imagens_usuario'] == "padrao") {
+    $usuario['imagens_usuario'] = "img/cabecalho/usuario.png";
+}
+>>>>>>> aaa8ea1c38ff5690f7dfb39ad00d14a176d7f5e9
 
 $reservaUsuario = readAll(database(), "Reservas", "id_usuario = ?", [$_SESSION['id']]);
 $_SESSION['reservaUsuario'] = readAll(database(), "Reservas", "id_usuario = ?", [$_SESSION['id']]);
@@ -76,7 +86,7 @@ $bancada = readAll(database(), "Bancadas", "id_bancada", []);
             </header>
 
             <section class="perfil-usuario">
-                <img class="perfil-foto" src="<?= $usuario['imagens_usuario']?>" alt="Foto do usuário">
+                <img class="perfil-foto" src="<?= $usuario['imagens_usuario'] ?>" alt="Foto do usuário">
                 <div class="perfil-dados">
                     <b>User:</b>
                     <span><?= $usuario['nome_usuario'] ?></span>
@@ -109,14 +119,20 @@ $bancada = readAll(database(), "Bancadas", "id_bancada", []);
                         <label for="instituicao">Instituição</label>
                         <input type="text" id="instituicao" name="instituicao" value="<?= $usuario['instituicao'] ?? '' ?>">
                     </div>
-        
+
                     <details class='trocarImagem'>
                         <summary>Imagem de perfil</summary>
+<<<<<<< HEAD
                         <?php foreach ($imagemPerfil as $imagem):?>
                             <button type="submit" class="menuImagem" name="imagem_selecionada" value="img/pfp/<?php echo basename($imagem)?>">
                                 <img src="img/pfp/<?php echo basename($imagem)?>" alt="">
+=======
+                        <?php foreach ($imagemPerfil as $imagem): ?>
+                            <button type="radio" class="menuImagem" name="imagem_selecionada" value="img/pfp/<?php echo basename($imagem) ?>">
+                                <img src="img/pfp/<?php echo basename($imagem) ?>" alt="">
+>>>>>>> aaa8ea1c38ff5690f7dfb39ad00d14a176d7f5e9
                             </button>
-                        <?php endforeach;?>
+                        <?php endforeach; ?>
                     </details>
                     <button type="submit" class="botao-salvar">Salvar alterações</button>
                 </form>
@@ -148,9 +164,16 @@ $bancada = readAll(database(), "Bancadas", "id_bancada", []);
                                     <td><?php $bancadaUser = read(database(), "Bancadas", "id_bancada = ?", [$reserva['id_bancada']]);
                                         echo $bancadaUser['nome_bancada'];
                                         ?></td>
-                                    <td><?php $projetoUser = read(database(), "Projetos", "id_projeto = ?", [$reserva['id_projeto']]);
-                                        echo $projetoUser['nome_projeto'];
-                                        ?></td>
+                                    <td>
+                                        <?php
+                                        if (!empty($reserva['id_projeto'])) {
+                                            $projetoUser = read(database(), "Projetos", "id_projeto = ?", [$reserva['id_projeto']]);
+                                            echo $projetoUser['nome_projeto'];
+                                        } else {
+                                            echo "Sem projetos.";
+                                        }
+                                        ?>
+                                    </td>
                                 </tr>
                             <?php endforeach; ?>
                         <?php else: ?>

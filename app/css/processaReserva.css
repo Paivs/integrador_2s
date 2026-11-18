@@ -1,0 +1,168 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+@font-face {
+    font-family: 'Montaser Arabic';
+    src: url('../fonts/MontaserArabic-Regular.woff2') format('woff2'),
+         url('../fonts/MontaserArabic-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    color: #000000 !important;
+}
+
+.card {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    max-width: 1500px;
+    margin: 135px auto;
+    padding: 30px;
+    border: 2px solid #e7e4e4;
+    border-radius: 30px;
+    font-family: 'Montaser Arabic', Arial, sans-serif;
+}
+
+.card-fotos {
+    width: 480px;
+}
+
+.foto-principal {
+    width: 100%;
+    height: 290px;
+    border: 3px solid #000000;
+    border-radius: 25px;
+}
+
+.miniaturas {
+    display: flex;
+    gap: 15px;
+    margin-top: 40px;
+}
+
+.miniaturas img {
+    width: 150px;
+    height: 128px;
+    border: 3px solid #000000;
+    border-radius: 20px;
+}
+
+.card-info {
+    width: 520px;
+}
+
+.card-info h1 {
+    font-size: 73px;
+    font-weight: normal;
+    margin-bottom: 20px;
+}
+
+.card-info p {
+    font-size: 25px;
+}
+
+.descricao {
+    font-size: 20px;
+    text-align: justify;
+    margin-bottom: 30px;
+}
+
+.vantagem {
+    font-size: 25px;
+    color: #928f8f;
+    margin-bottom: 14px;
+}
+
+.card-reserva {
+    width: 320px;
+    margin-left: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.preco {
+    text-align: right;
+    font-weight: bold;
+    font-size: 25px;
+}
+
+.preco span {
+    color: #b5b5b5;
+}
+
+.linha-horas {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.linha-horas label {
+    font-size: 30px;
+}
+
+.contador {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 10px;
+    background-color: #c8c7cc;
+    border-radius: 10px;
+}
+
+.contador button {
+    background: none;
+    border: none;
+    font-size: 22px;
+    color: #8a898f;
+}
+
+.contador input {
+    width: 50px;
+    text-align: center;
+    font-size: 22px;
+    border: none;
+    border-radius: 8px;
+}
+
+.botao-salvar {
+    display: block;
+    width: fit-content;
+    margin: 12px auto;
+    padding: 8px 96px;
+    font-family: inherit;
+    font-size: 23px;
+    font-weight: 600;
+    color: #fff !important;
+    background-color: #3866f5;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.botao-salvar:hover {
+    background-color: #2954d4;
+}
+
+.linha-valor {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.rotulo-valor {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.campo-numero {
+    width: 50px;
+    font-size: 25px;
+    margin-right: 1000px;
+}

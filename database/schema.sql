@@ -1,4 +1,3 @@
-
 -- ==========================================
 -- BANCO DE DADOS: MAKERLAB
 -- ==========================================
@@ -119,7 +118,7 @@ CREATE TABLE IF NOT EXISTS Reservas (
     preco_total DECIMAL(10,2) NOT NULL DEFAULT 0.00,
     id_usuario INT NOT NULL,
     id_bancada INT NOT NULL,
-    id_projeto INT NOT NULL,
+    id_projeto INT NULL,
     criado_em DATETIME DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT fk_reservas_usuarios
