@@ -40,15 +40,6 @@ if (isset($_SESSION['user'])) {
             </ul>
           </li>
 
-          <li class="tem-submenu">
-            <a href="">Vendas ▾</a>
-            <ul class="submenu">
-              <li><a href="">Peças impressas</a></li>
-              <li><a href="">Componentes</a></li>
-              <li><a href="">Kits</a></li>
-            </ul>
-          </li>
-
           <li><a href="">Quem Somos</a></li>
           <li><a href="./projetos.php">Projetos</a></li>
 
