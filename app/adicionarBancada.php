@@ -130,119 +130,105 @@
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="css/navAdm.css">
-    <link rel="stylesheet" href="css/dashboard.css">
-</head>
-<body>
-    <header>    
-        
-        <nav class="sidebar">
-            <div class="sidebar-content">
-                
-                <div class="logo">
-                    <a href="index.php"><img src="img/cabecalho/logo.png" alt=""></a>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>MakerLab - Adicionar Bancada</title>
+        <link rel="stylesheet" href="css/navAdm.css">
+        <link rel="stylesheet" href="css/dashboard.css">
+    </head>
+    <body>
+        <header>    
+            
+            <nav class="sidebar">
+                <div class="sidebar-content">
+                    
+                    <div class="logo">
+                        <a href="index.php"><img src="img/cabecalho/logo.png" alt=""></a>
+                    </div>
+                    
+                    <a href="./dashboard.php" class="item">
+                        <img src="./img/icons/pen_branco.png" alt="" class="icone">
+                        <span>Dashboard</span>
+                    </a>
+                    
+                    <a href="./adicionarFerramenta.php" class="item">
+                        <img src="./img/icons/plus_branco.png" alt="" class="icone">
+                        <span>Ferramenta</span>
+                    </a>
+                    
+                    <a href="./adicionarBancada.php" class="item ativo">
+                        <img src="./img/icons/plus_roxo.png" alt="" class="icone">
+                        <span>Bancada</span>
+                    </a>
+                    
+                    <a href="./historicoReservas.php" class="item">
+                        <img src="./img/icons/folder_branco.png" alt="" class="icone">
+                        <span>Reservas</span>
+                    </a>
                 </div>
-                
-                <a href="./dashboard.php" class="item">
-                    <img src="./img/icons/pen_branco.png" alt="" class="icone">
-                    <span>Dashboard</span>
-                </a>
-                
-                <a href="./adicionarFerramenta.php" class="item">
-                    <img src="./img/icons/plus_branco.png" alt="" class="icone">
-                    <span>Ferramenta</span>
-                </a>
-                
-                <a href="./adicionarBancada.php" class="item ativo">
-                    <img src="./img/icons/plus_roxo.png" alt="" class="icone">
-                    <span>Bancada</span>
-                </a>
-                
-                <a href="./historicoReservas.php" class="item">
-                    <img src="./img/icons/folder_branco.png" alt="" class="icone">
-                    <span>Reservas</span>
-                </a>
-            </div>
-        </nav>
-    </header>
-    <main class="conteudo">
-    
-    <?php if (isset($erros)): ?>
-        <div class="erros">
-            <p>Corrija os campos abaixo:</p>
-            <ul>
-                <?php foreach ($erros as $mensagem): ?>
-                    <li><?= ($mensagem) ?></li>
-                <?php endforeach; ?>
-            </ul>
-        </div>
-    <?php endif; ?>
+            </nav>
+        </header>
+        <main class="conteudo pagina-formulario">
 
-    <form action="" method="POST">
-        <label for="nome">Nome da bancada:</label>
-        <br>
-        <input type="text" name="nomeBancada" id="nomeBancada" required>
-        <br>
+            <h1 class="titulo-formulario">Adicionar Bancada</h1>
 
+            <?php if (isset($erros)): ?>
+                <div class="erros">
+                    <p>Corrija os campos abaixo:</p>
+                    <ul>
+                        <?php foreach ($erros as $mensagem): ?>
+                            <li><?= ($mensagem) ?></li>
+                        <?php endforeach; ?>
+                    </ul>
+                </div>
+            <?php endif; ?>
 
-        <label for="descricao">Escreva uma descrição da bancada</label>
-        <br>
-        <textarea name="descricao" id="descricao" required></textarea>
-        <br>
-        <label for="nome">Será para quantas pessoas?</label>
-        <br>
-        <input type="number" name="quantidade" id="quantidade">
-        <br>
+            <form class="formulario" action="" method="POST">
 
+                <div class="coluna">
+                    <label class="rotulo" for="nomeBancada">Nome da bancada:</label>
+                    <input class="campo" type="text" name="nomeBancada" id="nomeBancada" required>
 
-        <p>Digite em forma listada as vantagens para aparecer no card:</p>
+                    <label class="rotulo" for="quantidade">Será para quantas pessoas?</label>
+                    <input class="campo campo-numero" type="number" name="quantidade" id="quantidade">
 
-        <ol>
-            <li><input type="text" name="vantagem1" placeholder="Ex: Arduino e sensores..."></li>
-            <li><input type="text" name="vantagem2" placeholder="Ex: Pc's e notebooks..."></li>
-        </ol>
+                    <p class="rotulo">Digite em forma listada as vantagens para aparecer no card:</p>
+                    <ol class="lista-vantagens">
+                        <li><input class="campo" type="text" name="vantagem1" placeholder="Ex: Arduino e sensores..."></li>
+                        <li><input class="campo" type="text" name="vantagem2" placeholder="Ex: Pc's e notebooks..."></li>
+                    </ol>
 
+                    <label class="rotulo" for="area">Escreva a área da bancada:</label>
+                    <input class="campo" type="text" name="area" id="area" required>
+                </div>
 
-        <p>Digite o valor por hora:</p>
+                <div class="coluna">
+                    <label class="rotulo" for="descricao">Escreva uma descrição da bancada</label>
+                    <textarea class="campo campo-descricao" name="descricao" id="descricao" required></textarea>
 
+                    <p class="rotulo">Digite o valor por hora:</p>
+                    <div class="linha-valor">
+                        <label class="rotulo-valor" for="valorHora">R$:</label>
+                        <input class="campo campo-numero" type="number" name="valorHora" id="valorHora" step="0.50" placeholder="Use virgula ao digitar" required>
+                    </div>
 
-        <label for="valorHora">R$:</label>
-        <input type="number" name="valorHora" id="valorHora" step="0.50" placeholder="Use virgula ao digitar"required>
-        
-        <br>
-        <br>
+                    <p class="rotulo">Escolha o status da bancada: </p>
+                    <div class="opcoes-status">
+                        <input class="radio" type="radio" id="disponivel" name="statusBancada" value="disponivel">
+                        <label class="opcao" for="disponivel">Disponível</label>
 
-        <p>Escolha o status da bancada: </p>
+                        <input class="radio" type="radio" id="indisponivel" name="statusBancada" value="indisponivel">
+                        <label class="opcao" for="indisponivel">Indisponível</label>
+                    </div>
 
-        <input type="radio" id="statusBancada" name="statusBancada" value="disponivel">
-        <label for="opcao1">Disponível</label>
-        
-        <input type="radio" id="statusBancada" name="statusBancada" value="indisponivel">
-        <label for="opcao2">Indisponível</label>
+                    <label class="rotulo" for="imagem">Cole o link da imagem</label>
+                    <input class="campo campo-imagem" type="text" name="imagem" id="imagem" required>
 
-        <br>
-        <br>
+                    <button class="botao-registrar" type="submit">Registrar</button>
+                </div>
 
-        <label for="area">Escreva a área da bancada:</label>
-        <br>
-        <input type="text" name="area" id="area" required>
-        <br>
-        <br>
-
-        <label for="imagem">Cole o link da imagem</label>
-        <br>
-        <input type="text" name="imagem" id="imagem" required>
-
-        <br>
-        <br>
-
-        <button type="submit">Registrar</button>
-
-    </form>
-</main>
-</body>
+            </form>
+        </main>
+    </body>
 </html>

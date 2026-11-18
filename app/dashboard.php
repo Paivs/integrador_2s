@@ -20,7 +20,7 @@
 <html lang="pt-BR">
     <head>
         <meta charset="UTF-8">
-        <title>Dashboard</title>
+        <title>MakerLab - Dashboard</title>
         <link rel="stylesheet" href="css/navAdm.css">
         <link rel="stylesheet" href="css/dashboard.css">
     </head>
@@ -85,6 +85,8 @@
                                             <span class="etiqueta vermelha">Indisponível</span>
                                         <?php elseif ($p['status_bancada'] == "disponivel"): ?>
                                             <span class="etiqueta verde">Disponível</span>
+                                        <?php elseif ($p['status_bancada'] != "indisponivel" && $p['status_bancada'] != "disponivel"): ?>
+                                            <span class="etiqueta amarela">Manutenção</span>
                                         <?php else: ?>
                                             <?= $p['status_bancada'] ?>
                                         <?php endif; ?>

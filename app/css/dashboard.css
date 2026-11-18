@@ -106,3 +106,151 @@ tr:last-child td {
 .verde {
     background: #198754;
 }
+
+.amarela {
+    background: #ffc107;
+    color: #212529;
+}
+
+.pagina-formulario {
+    padding: 60px 30px 30px 30px;
+}
+
+.titulo-formulario {
+    text-align: center;
+    font-size: 40px;
+    font-weight: 600;
+    color: #000;
+    margin-bottom: 30px;
+}
+
+.formulario {
+    display: flex;
+    gap: 60px;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 40px;
+    box-sizing: border-box;
+    background: #fff;
+    border: 1px solid #e1e5ea;
+    border-radius: 30px;
+}
+
+.coluna {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.rotulo {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #000;
+}
+
+.campo {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 8px 12px;
+    background: #c8c8c8;
+    border: none;
+    border-radius: 15px;
+    font-size: 12px;
+}
+
+.campo::placeholder {
+    color: #666;
+}
+
+.campo-numero {
+    width: 120px;
+    font-size: 16px;
+}
+
+.campo-descricao {
+    height: 34px;
+    min-height: 34px;
+    resize: vertical;
+    font-family: inherit;
+}
+
+.lista-vantagens {
+    list-style: none;
+}
+
+.lista-vantagens li {
+    margin-bottom: 8px;
+}
+
+.linha-valor {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.rotulo-valor {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.opcoes-status {
+    display: flex;
+    width: fit-content;
+    background: #c8c8c8;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.radio {
+    display: none;
+}
+
+.opcao {
+    padding: 8px 16px;
+    color: #888;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.radio:checked + .opcao {
+    background: #eef0f6;
+    color: #000;
+}
+
+.campo-imagem {
+    height: 220px;
+    border: 3px solid #888;
+    border-radius: 12px;
+    text-align: center;
+}
+
+.botao-registrar {
+    align-self: flex-end;
+    margin-top: 10px;
+    padding: 12px 28px;
+    background: #4a5af0;
+    border: 1px solid #3340c8;
+    border-radius: 6px;
+    color: #fff;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.botao-registrar:hover {
+    background: #3d4cd6;
+}
+
+.botao-deletar {
+    background: #dc3545;
+    border-color: #bb2d3b;
+}
+
+.botao-deletar:hover {
+    background: #bb2d3b;
+}
+
+.campo-select {
+    font-size: 14px;
+    cursor: pointer;
+}

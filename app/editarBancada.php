@@ -155,7 +155,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>MakerLab - Editar Bancada</title>
     <link rel="stylesheet" href="css/navAdm.css">
     <link rel="stylesheet" href="css/dashboard.css">
 </head>
@@ -192,81 +192,71 @@
         </nav>
     </header>
     
-    <main class="conteudo">
-    <?php if ($erros !== null): ?>
-        <div class="erros">
-            <p>Corrija os campos abaixo:</p>
-            <ul>
-                <?php foreach ($erros as $mensagem): ?>
-                    <li><?= ($mensagem) ?></li>
-                <?php endforeach; ?>
-            </ul>
-        </div>
-    <?php endif; ?>
-    
-    <form action="" method="POST">
+    <main class="conteudo pagina-formulario">
+
+        <h1 class="titulo-formulario">Editar Bancada</h1>
+
+        <?php if (isset($erros)): ?>
+            <div class="erros">
+                <p>Corrija os campos abaixo:</p>
+                <ul>
+                    <?php foreach ($erros as $mensagem): ?>
+                        <li><?= ($mensagem) ?></li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+        <?php endif; ?>
 
         <?php foreach($bancadaSelecionada as $bancadas): ?>
 
-            <label for="nome">Nome da bancada:</label>
-            <br>
-            <input type="text" name="nomeBancada" id="nomeBancada" value=" <?= $bancadas['nome_bancada'] ?>" required>
-            <br>
+            <form class="formulario" action="" method="POST">
 
-            <label for="descricao">Escreva uma descrição da bancada</label>
-            <br>
-            <textarea name="descricao" id="descricao" required><?= $bancadas['descricao_bancada'] ?></textarea>
-            <br>
-            <label for="nome">Será para quantas pessoas?</label>
-            <br>
-            <input type="number" name="quantidade" id="quantidade" value="<?= $bancadas['quantidade_bancada']?>">
-            <br>
-        
-            <p>Digite em forma listada as vantagens para aparecer no card:</p>
-    
-            <ol>
-                <li><input type="text" name="vantagem1" placeholder="Ex: Arduino e sensores..." value="<?= $bancadas['primeira_vantagem'] ?>"> </li>
-                <li><input type="text" name="vantagem2" placeholder="Ex: Pc's e notebooks..." value="<?= $bancadas['segunda_vantagem'] ?>"></li>
-            </ol>
-            
-            <p>Digite o valor por hora:</p>
-    
-    
-            <label for="valorHora">R$:</label>
-            <input type="number" name="valorHora" id="valorHora" step="0.50" placeholder="Use virgula ao digitar" value="<?= $bancadas['preco_bancada'] ?>" required>
-            
-            <br>
-            <br>
-    
-            <p>Escolha o status da bancada: </p>
-    
-            <input type="radio" id="statusBancada" name="statusBancada" value="disponivel">
-            <label for="opcao1">Disponível</label>
-            
-            <input type="radio" id="statusBancada" name="statusBancada" value="indisponivel">
-            <label for="opcao2">Indisponível</label>
-    
-            <br>
-            <br>
-    
-            <label for="area">Escreva a área da bancada:</label>
-            <br>
-            <input type="text" name="area" id="area" value="<?= $bancadas['area_bancada']?>" required>
-            <br>
-            <br>
+                <div class="coluna">
+                    <label class="rotulo" for="nomeBancada">Nome da bancada:</label>
+                    <input class="campo" type="text" name="nomeBancada" id="nomeBancada" value="<?= $bancadas['nome_bancada'] ?>" required>
 
+                    <label class="rotulo" for="quantidade">Será para quantas pessoas?</label>
+                    <input class="campo campo-numero" type="number" name="quantidade" id="quantidade" value="<?= $bancadas['quantidade_bancada'] ?>">
 
-            <label for="imagem">Cole o link da imagem</label>
-            <br>
-            <input type="text" name="imagem" id="imagem" value="<?= $bancadas['imagens_bancada']?>" required>
-    
-            <br>
-            <br>
-    
-            <button type="submit">Registrar</button>
-    
-        </form>
-    
+                    <p class="rotulo">Digite em forma listada as vantagens para aparecer no card:</p>
+                    <ol class="lista-vantagens">
+                        <li><input class="campo" type="text" name="vantagem1" placeholder="Ex: Arduino e sensores..." value="<?= $bancadas['primeira_vantagem'] ?>"></li>
+                        <li><input class="campo" type="text" name="vantagem2" placeholder="Ex: Pc's e notebooks..." value="<?= $bancadas['segunda_vantagem'] ?>"></li>
+                    </ol>
+
+                    <label class="rotulo" for="area">Escreva a área da bancada:</label>
+                    <input class="campo" type="text" name="area" id="area" value="<?= $bancadas['area_bancada'] ?>" required>
+                </div>
+
+                <div class="coluna">
+                    <label class="rotulo" for="descricao">Escreva uma descrição da bancada</label>
+                    <textarea class="campo campo-descricao" name="descricao" id="descricao" required><?= $bancadas['descricao_bancada'] ?></textarea>
+
+                    <p class="rotulo">Digite o valor por hora:</p>
+                    <div class="linha-valor">
+                        <label class="rotulo-valor" for="valorHora">R$:</label>
+                        <input class="campo campo-numero" type="number" name="valorHora" id="valorHora" step="0.50" placeholder="Use virgula ao digitar" value="<?= $bancadas['preco_bancada'] ?>" required>
+                    </div>
+
+                    <p class="rotulo">Escolha o status da bancada: </p>
+                    <div class="opcoes-status">
+                        <input class="radio" type="radio" id="disponivel" name="statusBancada" value="disponivel"
+                            <?php if ($bancadas['status_bancada'] == "disponivel") { echo "checked"; } ?>>
+                        <label class="opcao" for="disponivel">Disponível</label>
+
+                        <input class="radio" type="radio" id="indisponivel" name="statusBancada" value="indisponivel"
+                            <?php if ($bancadas['status_bancada'] == "indisponivel") { echo "checked"; } ?>>
+                        <label class="opcao" for="indisponivel">Indisponível</label>
+                    </div>
+
+                    <label class="rotulo" for="imagem">Cole o link da imagem</label>
+                    <input class="campo campo-imagem" type="text" name="imagem" id="imagem" value="<?= $bancadas['imagens_bancada'] ?>" required>
+
+                    <button class="botao-registrar" type="submit">Registrar</button>
+                </div>
+
+            </form>
+
         <?php endforeach; ?>
     </main>
 </body>

@@ -45,11 +45,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Deletar Bancada</title>
+    <title>MakerLab - Deletar Bancada</title>
     <link rel="stylesheet" href="css/navAdm.css">
     <link rel="stylesheet" href="css/dashboard.css">
 </head>
-<body style="left: 50px;">
+<body>
     <header>    
         
         <nav class="sidebar">
@@ -82,40 +82,50 @@
         </nav>
     </header>
 
-    <main class="conteudo">
-    <form action="" method="POST">
-        <input type="text" name="id" value="<?= $idBancada?>" hidden>
-        <?php //foreach($bancadaAtual as $chave => $chave): ?>
+    <main class="conteudo pagina-formulario">
 
-            <label>Nome da bancada:</label>
-            <br>
-            <input value="<?= $bancadaAtual['nome_bancada'] ?>" readonly>
-            <br>
+        <h1 class="titulo-formulario">Deletar Bancada</h1>
 
-            <label for="descricao">Descrição:</label>
-            <br>
-            <textarea readonly><?= $bancadaAtual['descricao_bancada'] ?></textarea>
-            <br>
-            <label>Quantidade de pessoas:</label>
-            <br>
-            <input value="<?= $bancadaAtual['quantidade_bancada'] ?>" readonly>
-            <br>
-            <p>vantagens da bancada:</p>
-            <ol>
-                <li><input value="<?= $bancadaAtual['primeira_vantagem'] ?>" readonly></li>
-                <li><input value="<?= $bancadaAtual['segunda_vantagem'] ?>" readonly></li>
-            </ol>
-            <label for="valorHora">R$:</label>
-            <input value="<?= $bancadaAtual['preco_bancada'] ?>" readonly>
-            <br>
-            <label>Área da bancada:</label>
-            <br>
-            <input value="<?= $bancadaAtual['area_bancada'] ?>" readonly>
-            <br>
-            <p>EU NAO SEI COMO VAI FICAR A IMAGEM</p>
-        <?php //endforeach;?>
-        <button type="submit">Deletar Bancada</button>
-    </form>
-</main>   
+        <form class="formulario" action="" method="POST">
+            <input type="hidden" name="id" value="<?= $idBancada ?>">
+
+            <div class="coluna">
+                <label class="rotulo">Nome da bancada:</label>
+                <input class="campo" value="<?= $bancadaAtual['nome_bancada'] ?>" readonly>
+
+                <label class="rotulo">Quantidade de pessoas:</label>
+                <input class="campo campo-numero" value="<?= $bancadaAtual['quantidade_bancada'] ?>" readonly>
+
+                <p class="rotulo">Vantagens da bancada:</p>
+                <ol class="lista-vantagens">
+                    <li><input class="campo" value="<?= $bancadaAtual['primeira_vantagem'] ?>" readonly></li>
+                    <li><input class="campo" value="<?= $bancadaAtual['segunda_vantagem'] ?>" readonly></li>
+                </ol>
+
+                <label class="rotulo">Área da bancada:</label>
+                <input class="campo" value="<?= $bancadaAtual['area_bancada'] ?>" readonly>
+            </div>
+
+            <div class="coluna">
+                <label class="rotulo">Descrição:</label>
+                <textarea class="campo campo-descricao" readonly><?= $bancadaAtual['descricao_bancada'] ?></textarea>
+
+                <p class="rotulo">Valor por hora:</p>
+                <div class="linha-valor">
+                    <label class="rotulo-valor">R$:</label>
+                    <input class="campo campo-numero" value="<?= $bancadaAtual['preco_bancada'] ?>" readonly>
+                </div>
+
+                <label class="rotulo">Status da bancada:</label>
+                <input class="campo" value="<?= $bancadaAtual['status_bancada'] ?>" readonly>
+
+                <label class="rotulo">Link da imagem:</label>
+                <input class="campo campo-imagem" value="<?= $bancadaAtual['imagens_bancada'] ?>" readonly>
+
+                <button class="botao-registrar botao-deletar" type="submit">Deletar Bancada</button>
+            </div>
+
+        </form>
+    </main>  
 </body>
 </html>

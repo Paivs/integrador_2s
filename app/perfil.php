@@ -39,7 +39,7 @@ $bancada = readAll(database(), "Bancadas", "id_bancada", []);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meu perfil</title>
+    <title>MakerLab - Meu Perfil</title>
     <link rel="stylesheet" href="./css/perfil.css">
 </head>
 

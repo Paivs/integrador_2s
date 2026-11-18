@@ -3,57 +3,54 @@
     require_once __DIR__ . "/init.php";
 
     if (isset($_SESSION['id'])) {
-            $userAtual = read(database(), "Usuarios", "id_usuario = {$_SESSION['id']}");
-            if($userAtual['perfil'] != "admin" || !isset($userAtual)){
-                header("Location: index.php");
-                exit;
-            }
-        }else{
+        $userAtual = read(database(), "Usuarios", "id_usuario = {$_SESSION['id']}");
+        if($userAtual['perfil'] != "admin" || !isset($userAtual)){
             header("Location: index.php");
             exit;
-        };
+        }
+    }else{
+        header("Location: index.php");
+        exit;
+    };
 
-    $reservas = readAll(database(), "Reservas", "1 ORDER BY data_reserva DESC")
-    
+    $reservas = readAll(database(), "Reservas", "1 ORDER BY data_reserva DESC");
 
 ?>
 
-
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Histórico de Reservas</title>
+    <title>MakerLab - Reservas</title>
     <link rel="stylesheet" href="css/navAdm.css">
-    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/historicoReservas.css">
 </head>
-<body style="left: 50px;">
-    <header>    
-        
+<body>
+    <header>
+
         <nav class="sidebar">
             <div class="sidebar-content">
-                
+
                 <div class="logo">
                     <a href="index.php"><img src="img/cabecalho/logo.png" alt=""></a>
                 </div>
-                
+
                 <a href="./dashboard.php" class="item">
                     <img src="./img/icons/pen_branco.png" alt="" class="icone">
                     <span>Dashboard</span>
                 </a>
-                
+
                 <a href="./adicionarFerramenta.php" class="item">
                     <img src="./img/icons/plus_branco.png" alt="" class="icone">
                     <span>Ferramenta</span>
                 </a>
-                
+
                 <a href="./adicionarBancada.php" class="item">
                     <img src="./img/icons/plus_branco.png" alt="" class="icone">
                     <span>Bancada</span>
                 </a>
-                
+
                 <a href="./historicoReservas.php" class="item ativo">
                     <img src="./img/icons/folder_roxo.png" alt="" class="icone">
                     <span>Reservas</span>
@@ -63,33 +60,39 @@
     </header>
 
     <main class="conteudo">
-        <h1>Histórico de reservas</h1>
-        <br>
-        <br>
+
+        <h1 class="titulo-pagina">Histórico de Reservas</h1>
+
         <?php foreach($reservas as $p): ?>
-            <div>
-                <div>
-                    <p>Data:<?= $p['data_reserva'] ?></p>
-                    <br>
-                    <p>Tempo: <?= $p['horas_reservadas'] ?> hora(s)</p>
-                    <br>
-                    <p>
-                        Reserva de: <?php $bancadaAtual = read(database(), "Bancadas", "id_bancada = ?", [$p['id_bancada']]); 
-                        echo $bancadaAtual['nome_bancada']; ?>
-                    </p>
-                    <br>
-                    <p>
-                        Autor da reserva: <?php $userAtual = read(database(), "Usuarios", "id_usuario = ?", [$p['id_usuario']]); 
-                        echo $userAtual['nome_usuario']; ?>
-                    </p>
-                    <p>-----------------------------------------------------------------------------------------</p>
+
+            <?php
+                // Busca a bancada e o autor desta reserva
+                $bancada = read(database(), "Bancadas", "id_bancada = ?", [$p['id_bancada']]);
+                $autor = read(database(), "Usuarios", "id_usuario = ?", [$p['id_usuario']]);
+            ?>
+
+            <div class="reserva">
+
+                <img class="reserva-imagem" src="<?= $bancada['imagens_bancada'] ?>" alt="">
+
+                <div class="reserva-bancada">
+                    <p class="reserva-titulo"><b>Reserva de:</b> <?= $bancada['nome_bancada'] ?></p>
+                    <p class="reserva-autor">Autor da reserva: <?= $autor['nome_usuario'] ?></p>
                 </div>
+
+                <div class="reserva-data">
+                    <p class="reserva-titulo"><b>Data:</b> <?= date('d/m/Y H:i', strtotime($p['data_reserva'])) ?></p>
+                    <p class="reserva-tempo"><b>Tempo:</b> <?= $p['horas_reservadas'] ?> hora(s)</p>
+                </div>
+
             </div>
-            <br>
-            <br>
+
         <?php endforeach; ?>
 
-        <h1>FAZER CSS DESSA PAGINA</h1>
-    </main>   
+        <?php if (empty($reservas)): ?>
+            <p class="sem-reservas">Nenhuma reserva encontrada.</p>
+        <?php endif; ?>
+
+    </main>
 </body>
 </html>
