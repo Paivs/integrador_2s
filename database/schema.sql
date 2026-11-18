@@ -118,32 +118,29 @@ WHERE NOT EXISTS (SELECT id FROM servicos WHERE nome = 'Revisão preventiva');
 
 INSERT INTO servicos (nome, descricao, valor)
 SELECT 'Alinhamento e balanceamento', 'Ajuste de direção e balanceamento das rodas', 160.00
-<<<<<<< HEAD
-WHERE NOT EXISTS (SELECT id FROM servicos WHERE nome = 'Alinhamento e balanceamento');
-=======
-WHERE NOT EXISTS (SELECT id FROM servicos WHERE nome = 'Alinhamento e balanceamento');
->>>>>>> ec1d8616acc96e7f5ac3933493762a9f21ea8044
 
-CREATE TABLE codigos_falha (
+WHERE NOT EXISTS (SELECT id FROM servicos WHERE nome = 'Alinhamento e balanceamento');
+
+SET NAMES utf8mb4;
+
+CREATE TABLE IF NOT EXISTS codigos_falha (
   id INT AUTO_INCREMENT PRIMARY KEY,
-  codigo VARCHAR(10) NOT NULL,
+  codigo VARCHAR(10) NOT NULL UNIQUE,
   componente VARCHAR(150) NOT NULL,
   descricao_falha VARCHAR(150) NOT NULL
-);
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
-CREATE TABLE veiculo_diagnosticos (
+CREATE TABLE IF NOT EXISTS veiculo_diagnosticos (
   id INT AUTO_INCREMENT PRIMARY KEY,
   veiculo_id INT NOT NULL,
   codigo_falha_id INT NOT NULL,
   funcionario_id INT NULL,
   situacao VARCHAR(30) NOT NULL DEFAULT 'Com problema',
   atualizado_em DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  UNIQUE KEY uk_veiculo_codigo (veiculo_id, codigo_falha_id),
-  FOREIGN KEY (veiculo_id) REFERENCES veiculos(id) ON DELETE CASCADE,
-  FOREIGN KEY (codigo_falha_id) REFERENCES codigos_falha(id) ON DELETE CASCADE
+  UNIQUE KEY uk_veiculo_codigo (veiculo_id, codigo_falha_id)
 );
 
-INSERT INTO codigos_falha (codigo, componente, descricao_falha) VALUES
+INSERT IGNORE INTO codigos_falha (codigo, componente, descricao_falha) VALUES
 ('12', 'Sensor de rotação e PMS', 'Sem sinal'),
 ('13', 'Sonda lambda', 'Circuito aberto'),
 ('14', 'Sensor de temperatura da água', 'Baixa tensão'),

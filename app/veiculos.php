@@ -246,7 +246,7 @@ $urlFechar = $busca !== '' ? 'veiculos.php?busca=' . urlencode($busca) : 'veicul
                   <table class="tabela-diagnostico">
                     <thead>
                       <tr>
-                        <th>Código</th>
+                        <th>Código</th>                          
                         <th>Componente</th>
                         <th>Descrição da falha</th>
                         <th>Situação</th>
@@ -301,7 +301,9 @@ $urlFechar = $busca !== '' ? 'veiculos.php?busca=' . urlencode($busca) : 'veicul
                 <table class="tabela-diagnostico">
                   <thead>
                     <tr>
-                      <th>Código</th>
+                      <?php if ($ehFuncionario): ?>
+                        <th>Código</th>
+                      <?php endif; ?>
                       <th>Componente</th>
                       <th>Descrição da falha</th>
                       <th>Situação</th>
@@ -310,7 +312,6 @@ $urlFechar = $busca !== '' ? 'veiculos.php?busca=' . urlencode($busca) : 'veicul
                   <tbody>
                     <?php foreach ($itensDiagnostico as $item): ?>
                       <tr class="linha-com-problema">
-                        <td class="centro"><?php echo textoSeguro($item['codigo']); ?></td>
                         <td><?php echo textoSeguro($item['componente']); ?></td>
                         <td><?php echo textoSeguro($item['descricao_falha']); ?></td>
                         <td class="centro"><span class="texto-problema">Com problema</span></td>
