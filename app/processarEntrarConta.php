@@ -6,6 +6,11 @@ if($_SERVER['REQUEST_METHOD'] == "POST" || isset($_POST)){
     $email = $_POST['email'];
     $senha = $_POST['senha'];
 
+    $_SESSION['erro'] = [
+        'email' => $email,
+        'senha' => $senha,
+    ];
+
     $usuarios = readAll($pdo, "usuarios");
     $id = null;
 
@@ -43,4 +48,6 @@ $_SESSION['cadastrado'] = [
     'perfil' => $perfil,
 ];
 
-header("Location: entrarConta.php");
+unset($_SESSION['erro']);
+
+header("Location: index.php");
