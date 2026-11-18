@@ -127,29 +127,28 @@
     <div class="plus"></div>
     
     </div>
-    
-
-    <div class="exibirSalas">
-
+        <div class="exibirSalas">
         <?php foreach($grupos as $g): ?>
-            <div class="boxLocal">
-            <div class="imagemLocal">
-                <img src="<?= $locais[$g['id_imagem']]?>" alt="">
-            </div>
-
-            <p>
-                <?= $g['nome_grupo'] ?> -
-                <?= $g['nome_area'] ?> -
-                <?= $g['nome_materia'] ?>
-            </p>
-
-            <button type="button">Ver mais informações.</button>
-            </div>
+            <form action="saladetalhes.php?user=<?= urlencode($user) ?>" method="post" class="formSala">
+                <input type="hidden" name="id" value="<?= $g['id_grupo'] ?>">
+                <div class="boxLocal">
+                    <div class="imagemLocal">
+                        <img src="<?= $locais[$g['id_imagem']] ?>" alt="">
+                    </div>
+                    <p>
+                        <?= $g['nome_grupo'] ?> -
+                        <?= $g['nome_area'] ?> -
+                        <?= $g['nome_materia'] ?>
+                    </p>
+                    <button type="submit">
+                        Ver mais informações.
+                    </button>
+                </div>
+            </form>
         <?php endforeach; ?>
         <?php if(empty($grupos)): ?>
             <p>Nenhum Grupo Aberto</p>
         <?php endif; ?>
-        
     </div>
     <div class="rodape">
         <div class="img-rodape"><a href="homelogin.php"><img src="/img-yasmin/logo.png" alt=""></a></div>
