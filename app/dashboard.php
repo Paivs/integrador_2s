@@ -110,6 +110,7 @@
                                 <th>Nome</th>
                                 <th>Área</th>
                                 <th>Estoque</th>
+                                <th>Status</th>
                                 <th>Ações</th>
                             </tr>
                         </thead>
@@ -124,6 +125,15 @@
                                             <span class="etiqueta vermelha">Sem estoque</span>
                                         <?php else: ?>
                                             <span class="etiqueta verde"><?= $p['estoque'] ?></span>
+                                        <?php endif; ?>
+                                    </td>
+                                    <td>
+                                        <?php if ($p['status_ferramenta'] == "indisponivel"): ?>
+                                            <span class="etiqueta vermelha">Indisponível</span>
+                                        <?php elseif ($p['status_ferramenta'] == "disponivel"): ?>
+                                            <span class="etiqueta verde">Disponível</span>
+                                        <?php else: ?>
+                                            <?= $p['status_ferramenta'] ?>
                                         <?php endif; ?>
                                     </td>
                                     <td>
