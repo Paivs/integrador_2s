@@ -1,0 +1,598 @@
+body{
+   margin: 0;
+   padding: 0;
+   font-family: "Arima", system-ui;
+   font-optical-sizing: auto;
+   font-weight: weight;
+   font-style: normal;
+   background-color: #f0d3c394;
+}
+
+img {
+  display: block;
+}
+
+.cabecalho{
+    display: flex;
+    width: 100%;
+    height: 150px;
+    background-color: #796761;
+    justify-content: left;
+    align-items: center;
+}
+
+.cabecalho a{
+    text-decoration: none;
+}
+
+.cabecalho p{
+    color: white;
+    font-size: 30px;
+}
+
+.fotoConta{
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background-color: #ffffff;
+}
+
+.loginTitulo p{
+    color: #796761;
+    font-size: 30px;
+}
+
+nav ul{
+    display: flex;
+    padding-left: 0;
+    margin-top: 25px;
+}
+
+nav ul li{
+    list-style: none;
+    margin-right: 130px;
+}
+
+nav ul li a{
+    text-decoration: none;
+}
+
+.login{
+    display: flex;
+    width: 90px;
+    height: 50px;
+    background-color: #edd4c6;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+}
+
+.img-cabecalho a img{
+    list-style: none;
+    margin-right: 700px;
+}
+
+.direitos {
+    width: 100%;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.733);
+    font-size: 11px;
+    margin-top: 20px;
+}
+
+.img-rodape a img{
+    list-style: none;
+    margin-right: 500px;
+}
+
+.center{
+    text-align: center;}
+
+.fundo{
+    background-image: url("../imgs/background-perfil.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 100%;
+    padding: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.perfilbox{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    background-color: rgba(240, 211, 195, 0.6);
+    min-height: 700px;
+    width: min(800px, 100%);
+    box-sizing: border-box;
+}
+
+.bannerperfil{
+    background-color: #ffd998;
+    width: 100%;
+    height: 250px;
+}
+
+.fotoperfil{
+    margin-top: -200px;
+    width: 370px;
+    height: 370px;
+    border-radius: 50%;
+    background-color: #ffffff;
+}
+
+.editarfoto{
+    margin-top: -80px;
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background-image: url("../imgs/7e57751c-5e8f-434e-9a72-0b0e23de43ec.png");
+    background-size: cover;
+    margin-left: 170px;
+}
+
+.infoperfil{
+    width: 100%;
+}
+
+.infoperfil .form{
+    margin: 50px auto 30px;
+    width: 70%;
+    max-width: none;
+    padding-left: 0;
+}
+
+.infoperfil form{
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
+}
+
+.infoperfil form br{
+    display: none;
+}
+
+
+.infoperfil .form input{
+    display: block;
+    width: 100%;
+    height: 70px;
+    margin: 0;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+    font-size: 24px;
+    font-family: "Arima", system-ui;
+    border-radius: 50px;
+    border-width: 4px;
+    border-color: #927c78;
+    padding-left: 30px;
+
+}
+
+
+.infoperfil .form button{
+    background-color: #d9b27d;
+    border-style:hidden;
+    border-radius: 50px;
+    padding: 10px;
+    font-family: "Arima", system-ui;
+    color: #752325;
+    width: 40%;
+    height: 80px;
+    font-size:30px;
+    align-self: center;
+}
+
+#nomeEx,
+#email{
+    width: 100%;
+}
+
+#nomeUs{
+    width: 100%;
+    
+}
+
+#data{
+    width: 45%;
+}
+
+#telefone{
+    width: 60%;
+}
+
+.rodape{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    height: 190px;
+    background-color: #796761;
+    justify-content: left;
+    align-items: center;
+}
+
+
+.rodape table{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.rodape table tr td a p{
+    color: white;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.rodape table tr td a{
+    text-decoration: none;
+}
+
+.espacamentoRodape{
+    width: 5px;
+    height: 100px;
+    background-color: white;
+}
+
+.redesSociais{
+    display: flex;
+    padding-left: 0;
+    margin-left: 250px;
+}
+
+.redesSociais nav ul li{
+    list-style: none;
+    margin-right: 50px;
+}
+
+.redesSociais nav ul li a{
+    text-decoration: none;
+}
+
+.direitos {
+    width: 100%;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.733);
+    font-size: 11px;
+    margin-top: 20px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+.banner{
+    width: 100%;
+    height: 400px;
+    
+}
+
+.bannerimg{
+    background-image: url("../imgs/bannerhomepageresize.png");
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 500px;
+   
+}
+
+.bolhaSaudacao{
+    width:350px;
+    height: 300px;
+    background-image: url("../imgs/bolhaverde.png");
+    background-repeat: no-repeat;
+    margin-top: -50px;
+    margin-left: 30px;
+    
+
+}
+
+.saudacao{
+    width:300px;
+    height: 250px;
+}
+
+.saudacao p {
+    margin-top: -230px;
+    font-size: 30px;
+    color:white;
+    margin-left: 120px;
+}
+
+
+.bloco1{
+    display: flex;
+    justify-content: center;
+    gap: 100px;
+    margin-bottom: 150px;
+}
+
+.card{
+    background-color: #f0d3c3;
+    width:  500px;
+    padding: 15px;
+    margin-top: 40px;
+    margin-left: 20px;
+    margin-right: 10px;
+    border-radius: 30px;
+}
+
+.card img{
+    width: 100%;
+    height: 340px;
+    border-radius: 30px;
+}
+
+.card p{
+    text-align: center;
+    font-size: 30px;
+}
+
+.texto{
+    margin-top: 40px;
+    font-size: 40px;
+}
+
+.titulo{
+    font-size: 40px;
+    text-align: center;
+    margin-bottom: 100px;
+}
+
+.tituloMaterias p{
+    margin-top: 200px;
+    justify-self: center;
+    font-size: 50px;
+    color:#796761;
+}
+
+.listaMaterias{
+    display: flex;
+}
+
+.blocoExatas {
+    background-color: #E0AF59;
+    border-radius: 40px;
+    height: 350px;
+    width: 400px;
+    margin-right: 60px;
+    margin-left: 60px;
+   
+}
+
+.iconMateriaE{
+    background-image: url("../imgs/iconexatas.png");
+    background-repeat: no-repeat;
+    height: 250px;
+    width: 300px;
+    
+    margin-top: -330px;
+    margin-left: 50px;
+    
+}
+
+.iconMateriaN{
+    background-image: url("../imgs/iconnaturais.png");
+    background-repeat: no-repeat;
+    height: 250px;
+    width: 300px;
+    
+    margin-top: -330px;
+    margin-left: 50px;
+    
+}
+
+.iconMateriaL{
+    background-image: url("../imgs/iconlinguagens.png");
+    background-repeat: no-repeat;
+    height: 250px;
+    width: 300px;
+    
+    margin-top: -330px;
+    margin-left: 50px;
+    
+}
+.iconMateriaH{
+    background-image: url("../imgs/iconhumanas.png");
+    background-repeat: no-repeat;
+    height: 250px;
+    width: 300px;
+    
+    margin-top: -330px;
+    margin-left: 50px;
+    
+}
+
+
+.blocoExatas p{
+    color: white;
+    font-size: 30px;
+    justify-self: center;
+    margin-top: 280px;
+}
+
+.blocoNaturais {
+    background-color: #E0AF59;
+    border-radius: 40px;
+    height: 350px;
+    width: 400px;
+    margin-right: 60px;
+    margin-left: 60px;
+    
+}
+
+.blocoNaturais p{
+    color: white;
+    font-size: 30px;
+    justify-self: center;
+    margin-top: 280px;
+}
+
+.blocoLinguagens {
+    background-color: #E0AF59;
+    border-radius: 40px;
+    height: 350px;
+    width: 400px;
+    margin-right: 60px;
+    margin-left: 60px;
+}
+
+.blocoLinguagens p{
+    color: white;
+    font-size: 30px;
+    justify-self: center;
+    margin-top: 280px;
+}
+
+.blocoHumanas {
+    background-color: #E0AF59;
+    border-radius: 40px;
+    height: 350px;
+    width: 400px;
+    margin-right: 60px;
+    margin-left: 60px;
+   
+}
+
+.blocoHumanas p{
+    color: white;
+    font-size: 30px;
+    justify-self: center;
+    margin-top: 280px;
+}
+
+
+.areaProf{
+    display: flex;
+    background-color: #eccbbc;
+    width: 95%;
+    height: 500px;
+    justify-self: center;
+    margin-top: 100px;
+
+}
+
+.profYas{
+    background-image: url("../imgs/yas.png");
+    height: 250px;
+    width: 100%;
+    background-repeat: no-repeat;
+    
+}
+
+.profLe{
+    background-image: url("../imgs/le.png");
+    height: 250px;
+    width: 100%;
+    background-repeat: no-repeat;
+    margin-left: 70px;
+}
+
+.profMaia{
+    background-image: url("../imgs/maia.png");
+    height: 250px;
+    width: 100%;
+    background-repeat: no-repeat;
+    margin-left: 50px;
+}
+
+.profGi{
+    background-image: url("../imgs/gi.png");
+    height: 250px;
+    width: 100%;
+    background-repeat: no-repeat;
+    margin-left: 50px;
+}
+
+.nomesProf{
+    display: flex;
+    width: 95%;
+    height: 500px;
+    justify-self: center;
+    margin-top: -200px;
+
+}
+
+.nomeYas{
+    width:350px;
+    height: 300px;
+    background-image: url("../imgs/bolhaverde.png");
+    background-repeat: no-repeat;
+    margin-top: -50px;
+    margin-left: 50px;
+    
+}
+
+.nomeYas p{
+    margin-top: 100px;
+    font-size: 40px;
+    color:white;
+    margin-left: 100px;
+
+}
+
+.nomeLe{
+    width:350px;
+    height: 300px;
+    background-image: url("../imgs/bolhaverde.png");
+    background-repeat: no-repeat;
+    margin-top: -50px;
+    margin-left: 100px;
+    
+}
+
+.nomeLe p{
+    margin-top: 100px;
+    font-size: 40px;
+    color:white;
+    margin-left: 100px;
+
+}
+
+.nomeMaia{
+    width:350px;
+    height: 300px;
+    background-image: url("../imgs/bolhaverde.png");
+    background-repeat: no-repeat;
+    margin-top: -50px;
+    margin-left: 100px;
+    
+}
+
+.nomeMaia p{
+    margin-top: 100px;
+    font-size: 40px;
+    color:white;
+    margin-left: 100px;
+
+}
+
+.nomeGi{
+    width:350px;
+    height: 300px;
+    background-image: url("../imgs/bolhaverde.png");
+    background-repeat: no-repeat;
+    margin-top: -50px;
+    margin-left: 100px;
+    
+}
+
+.nomeGi p{
+    margin-top: 100px;
+    font-size: 40px;
+    color:white;
+    margin-left: 100px;
+
+}
