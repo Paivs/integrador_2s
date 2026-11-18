@@ -119,23 +119,23 @@
                     <a href="index.php"><img src="img/cabecalho/logo.png" alt=""></a>
                 </div>
                 
-                <a href="./dashboard.php" class="item ativo">
-                    <img src="./img/icons/pen-roxo.png" alt="" class="icone">
+                <a href="./dashboard.php" class="item">
+                    <img src="./img/icons/pen_branco.png" alt="" class="icone">
                     <span>Dashboard</span>
                 </a>
                 
-                <a href="./adicionarFerramenta.php" class="item">
-                    <img src="./img/icons/plus-branco.png" alt="" class="icone">
+                <a href="./adicionarFerramenta.php" class="item ativo">
+                    <img src="./img/icons/plus_roxo.png" alt="" class="icone">
                     <span>Ferramenta</span>
                 </a>
                 
                 <a href="./adicionarBancada.php" class="item">
-                    <img src="./img/icons/plus-branco.png" alt="" class="icone">
+                    <img src="./img/icons/plus_branco.png" alt="" class="icone">
                     <span>Bancada</span>
                 </a>
                 
                 <a href="./historicoReservas.php" class="item">
-                    <img src="./img/icons/folder-branco.png" alt="" class="icone">
+                    <img src="./img/icons/folder_branco.png" alt="" class="icone">
                     <span>Reservas</span>
                 </a>
             </div>
