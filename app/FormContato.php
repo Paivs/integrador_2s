@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/contato.css">
+    <link rel="stylesheet" href="/css/contato2.css">
     <title>Contato</title>
 </head>
 
@@ -31,12 +31,12 @@
         <h2>Algum problema ou dúvida, entre em contato com nosso suporte</h2>
 
         <form action="processaContato.php" method="post">
-            <label>Telefone:
-                <input type="tel" name="telefone" placeholder="exemplo: (11) 12345-6789" required>
+            <label>Nome:
+                <input type="text" name="nome" placeholder="exemplo: Marcio Henrique" required>
             </label>
 
-            <label>Nome:
-                <input type="text" name="Nome" placeholder="exemplo: Maria José" required>
+            <label>Telefone:
+                <input type="tel" name="telefone" placeholder="exemplo: (11) 12345-6789" required>
             </label>
 
             <label>Email:
@@ -53,6 +53,12 @@
             <label>Mensagem:
                 <textarea name="mensagem" placeholder="Insira a sua mensagem aqui" required></textarea>
             </label>
+
+            <fieldset>
+                <legend></legend>
+                <label class="opcional"><input type="checkbox" name="opcicional" value="suporte">Eu gostaria de receber notificações de promoções e ofertas.</label>
+                <label class="opcional"><input type="checkbox" name="opicional" value="sugestao">Eu gostaria de utilizar estes dados para entrar em contato.</label>
+            </fieldset>
 
             <button type="submit">Enviar</button>
         </form>
