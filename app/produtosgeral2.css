@@ -1,0 +1,405 @@
+/* ==========================================================================
+   CONFIGURAÇÕES GERAIS DA PÁGINA
+   ========================================================================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Arial', sans-serif;
+}
+
+body {
+  background-color: #ffffff;
+}
+
+/* ==========================================================================
+   1. CABEÇALHO / HEADER
+   ========================================================================== */
+.cabecalho-principal {
+  background-color: #f1a80a;
+  padding: 20px 30px;
+  width: 100%;
+}
+
+.container-cabecalho {
+  max-width: 1200px; /* Alinhamento centralizado com o corpo */
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.logo-cabecalho img {
+  height: 95px;
+  width: auto;
+  display: block;
+}
+
+/* Barra de pesquisa arredondada com borda branca */
+.barra-pesquisa {
+  display: flex;
+  align-items: center;
+  background-color: transparent;
+  border: 1.5px solid #ffffff;
+  border-radius: 20px;
+  padding: 6px 12px;
+  width: 320px;
+}
+
+.barra-pesquisa input {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #ffffff;
+  width: 100%;
+  font-size: 13px;
+}
+
+.barra-pesquisa input::placeholder {
+  color: #ffffff;
+}
+
+.barra-pesquisa .botao-pesquisa {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+/* Links do menu */
+.menu-navegacao {
+  display: flex;
+  gap: 20px;
+}
+.menu-navegacao a {
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+/* Ações do usuário */
+.acoes-usuario {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.icone-favorito, .icone-carrinho {
+  display: flex;
+  align-items: center;
+}
+
+.perfil-usuario {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: sans-serif;
+  color: #333;
+  cursor: pointer;
+}
+
+.icone-user {
+  width: 24px;
+  height: 24px;
+  fill: #ffffff;
+  transition: fill 0.3s;
+}
+
+.perfil-usuario:hover .icone-user {
+  fill: #ffffff;
+}
+
+/* ==========================================================================
+   2. BANNER PRINCIPAL
+   ========================================================================== */
+.secao-banner-principal {
+  padding: 20px 40px;
+  display: flex;
+  justify-content: center;
+}
+
+.container-banner-principal {
+  max-width: 1200px;
+  width: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  background-color: #f7b233;
+  border-radius: 45px;
+  padding: 10px;
+  overflow: hidden;
+}
+
+.selo-circular-banner {
+  width: 140px;
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.selo-circular-banner img {
+  width: 110px;
+  height: 110px;
+}
+
+.imagem-banner-promocional {
+  flex-grow: 1;
+}
+
+.imagem-banner-promocional img {
+  width: 100%;
+  border-radius: 35px;
+  display: block;
+  object-fit: cover;
+}
+
+/* Banner */
+.secao-banner {
+  margin-bottom: 40px;
+  border-radius: 30px;
+  overflow: hidden;
+  background-color: #fbd672;
+}
+
+.imagem-banner {
+  width: 100%;
+  display: block;
+}
+
+/* ==========================================================================
+   3. LAYOUT DA LOJA (Centralizado e com espaçamento ajustado)
+   ========================================================================== */
+.container-loja {
+  max-width: 1200px;       /* Limita a largura igual ao banner/cabeçalho */
+  margin: 0 auto;          /* Coloca o bloco inteiro no meio da tela */
+  padding: 0 20px;         /* Respiro nas bordas em telas menores */
+  display: flex;
+  gap: 80px;               /* Distância entre o menu lateral e os produtos */
+  align-items: flex-start;
+}
+
+/* Menu Lateral Esquerdo */
+.menu-lateral {
+  width: 260px;
+  flex-shrink: 0;
+}
+
+.busca-lateral {
+  display: flex;
+  align-items: center;
+  border: 2px solid #f1a80a;
+  border-radius: 20px;
+  padding: 8px 12px;
+  margin-bottom: 30px;
+}
+
+.busca-lateral input {
+  border: none;
+  outline: none;
+  width: 100%;
+  font-size: 14px;
+}
+
+.botao-busca-lateral {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.bloco-filtros {
+  margin-bottom: 20px;
+}
+
+.titulo-filtro {
+  font-size: 18px;
+  color: #333;
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #f1a80a;
+  text-align: center;
+}
+
+.lista-filtros {
+  list-style: none;
+}
+
+.lista-filtros li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.caixa-selecao {
+  width: 18px;
+  height: 18px;
+  accent-color: #ddd;
+}
+
+.lista-filtros label {
+  font-size: 16px;
+  color: #333;
+  cursor: pointer;
+}
+
+/* Grade de Produtos */
+.grade-produtos {
+  flex: 1;                 /* Ocupa o espaço livre ao lado do menu de forma equilibrada */
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 60px;               /* Distância entre os cartões de produto */
+}
+
+.cartao-produto {
+  border: 3px solid #f1a80a;
+  border-radius: 40px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.imagem-produto {
+  max-width: 50%;
+  height: auto;
+  margin-bottom: 20px;
+}
+
+.nome-produto {
+  font-size: 18px;
+  font-weight: 900;
+  color: #000;
+  margin-bottom: 20px;
+  line-height: 1.2;
+  flex-grow: 1; /* Empurra o botão de comprar para baixo */
+}
+
+.botao-comprar {
+  background-color: #f1a80a;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  width: 100%;
+  padding: 10px 0;
+  font-size: 22px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.botao-comprar:hover {
+  background-color: #d99608;
+}
+
+/* ==========================================================================
+   4. PAGINAÇÃO E RODAPÉ
+   ========================================================================== */
+.paginacao {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 50px 0;
+}
+
+.paginacao a {
+  width: 35px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.pagina-ativa {
+  background-color: #f1a80a;
+  color: #ffffff;
+}
+
+.pagina-inativa {
+  border: 2px solid #000;
+  color: #000;
+}
+
+.rodape-principal {
+  background-color: #f1a80a;
+  padding: 40px 40px 50px 40px;
+}
+
+.container-rodape {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.coluna-logo-rodape img {
+  height: 80px;
+}
+
+.coluna-rodape {
+  display: flex;
+  flex-direction: column;
+}
+
+.titulo-coluna-rodape {
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: bold;
+  margin-bottom: 12px;
+}
+
+.coluna-rodape ul {
+  list-style: none;
+}
+
+.coluna-rodape ul li {
+  margin-bottom: 8px;
+}
+
+.coluna-rodape ul li a {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 13px;
+}
+
+.secao-redes {
+  width: fit-content;
+}
+
+.secao-redes h3 {
+  color: #ffffff;
+  font-family: sans-serif;
+  margin-bottom: 10px;
+}
+
+.redes-sociais {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px 50px;
+  width: fit-content;
+}
+
+.social-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s;
+}
+
+.social-btn svg {
+  width: 20px;
+  height: 20px;
+  fill: #ffffff; 
+}
+
+.social-btn:hover {
+  transform: scale(1.1);
+}

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário de Adoção</title>
+    <link rel="stylesheet" href="style-formulario.css">
+</head>
+<body>
+    <header>
+        <div class="logo"><img src="./PetConnect.png" alt="logo-petconnect"></div>
+
+        <div class="search-bar">
+            <span style="margin-right: 5px;">🔍</span>
+            <input type="text" placeholder="para o seu pet, procure aqui">
+        </div>
+
+        <nav>
+            <ul>
+                <li><a href="#">Quero Adotar</a></li>
+                <li><a href="#">Quero Divulgar</a></li>
+                <li><a href="#" style="text-decoration: underline;">Nossos Produtos</a></li>
+                <li><a href="#">PetConnect</a></li>
+            </ul>
+        </nav>
+
+        <div class="header-icons">
+            <span>🤍</span>
+            <span>🛒</span>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="cabecalho">
+                <h1>Quase Lá!!</h1>
+                <p>Finalize o preenchimento dos<br>dados abaixo para enviar uma<br>notificação ao protetor do pet.</p>
+            </div>
+            
+            <div class="card-adocao">
+                <h2>Resumo da Adoção</h2>
+                
+                <div class="imagem-pet">
+                    <img src="kiko-cachorro.png" alt="">
+                </div>
+                
+                <div class="detalhes-pet">
+                    <div class="linha-detalhe">
+                        <span class="rotulo">Nome</span>
+                        <span class="valor">Kiko</span>
+                    </div>
+                    <div class="linha-detalhe">
+                        <span class="rotulo">Sexo</span>
+                        <span class="valor">Macho</span>
+                    </div>
+                    <div class="linha-detalhe">
+                        <span class="rotulo">Porte</span>
+                        <span class="valor">Médio</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="formulario-contato">
+                <div id="sucesso" class="mensagem-sucesso">
+                    Seus dados foram enviados ao protetor do pet!
+                </div>
+                
+                <div class="conteudo-form">
+                    <h3>Deixe seu contato para<br>falar com o protetor do pet</h3>
+                    
+                    <form action="#sucesso" method="GET">
+                        <div class="grupo-campo">
+                            <label for="nome">Seu nome completo:</label>
+                            <input type="text" id="nome" name="nome" required>
+                        </div>
+                        
+                        <div class="grupo-campo">
+                            <label for="telefone">Telefone com DDD</label>
+                            <input type="tel" id="telefone" name="telefone" required>
+                        </div>
+                        
+                        <button type="submit" class="btn-enviar">Enviar para o protetor</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="rodape-principal">
+        <div class="container-rodape">
+            <div class="coluna-logo-rodape">
+                <img src="PetConnect.png" alt="PetConnect Logo">
+            </div>
+
+            <div class="coluna-rodape">
+                <h4 class="titulo-coluna-rodape">Quero Adotar</h4>
+                <ul>
+                    <li><a href="#">Cães</a></li>
+                    <li><a href="#">Gatos</a></li>
+                </ul>
+            </div>
+
+            <div class="coluna-rodape">
+                <h4 class="titulo-coluna-rodape">Produtos</h4>
+                <ul>
+                    <li><a href="#">Cães</a></li>
+                    <li><a href="#">Gatos</a></li>
+                </ul>
+            </div>
+
+            <div class="coluna-rodape">
+                <h4 class="titulo-coluna-rodape">Institucional</h4>
+                <ul>
+                    <li><a href="#">PetConnect</a></li>
+                </ul>
+            </div>
+
+            <div class="coluna-rodape">
+                <h4 class="titulo-coluna-rodape">Atendimento</h4>
+                <ul>
+                    <li><a href="#">Meu Perfil</a></li>
+                    <li><a href="#">Segurança e Privacidade</a></li>
+                </ul>
+            </div>
+
+            <div class="coluna-rodape">
+                <h4 class="titulo-coluna-rodape">Redes Sociais</h4>
+                <div class="icones-redes-sociais">
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
