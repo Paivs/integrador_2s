@@ -11,18 +11,18 @@ USE makerLab;
 -- ==========================================
 
 INSERT INTO Usuarios
-(nome_usuario, email, senha, instituicao, telefone, perfil)
+(nome_usuario, email, senha, instituicao, telefone, perfil, imagens_usuario)
 VALUES
-('João Silva', 'joao@email.com', '123456', 'IFSP', '11999990001', 'admin'),
-('Maria Oliveira', 'maria@email.com', '123456', 'USP', '11999990002', 'normal'),
-('Pedro Santos', 'pedro@email.com', '123456', 'UNICAMP', '11999990003', 'normal'),
-('Ana Costa', 'ana@email.com', '123456', 'IFSP', '11999990004', 'normal'),
-('Lucas Ferreira', 'lucas@email.com', '123456', 'SENAI', '11999990005', 'normal'),
-('Beatriz Lima', 'beatriz@email.com', '123456', 'UNESP', '11999990006', 'normal'),
-('Gabriel Souza', 'gabriel@email.com', '123456', 'USP', '11999990007', 'normal'),
-('Camila Rocha', 'camila@email.com', '123456', 'UFABC', '11999990008', 'admin'),
-('Mateus Alves', 'mateus@email.com', '123456', 'IFSP', '11999990009', 'normal'),
-('Juliana Mendes', 'juliana@email.com', '123456', 'FATEC', '11999990010', 'normal');
+('João Silva', 'joao@email.com', '123456', 'IFSP', '11999990001', 'admin', ''),
+('Maria Oliveira', 'maria@email.com', '123456', 'USP', '11999990002', 'normal', ''),
+('Pedro Santos', 'pedro@email.com', '123456', 'UNICAMP', '11999990003', 'normal', ''),
+('Ana Costa', 'ana@email.com', '123456', 'IFSP', '11999990004', 'normal', ''),
+('Lucas Ferreira', 'lucas@email.com', '123456', 'SENAI', '11999990005', 'normal', ''),
+('Beatriz Lima', 'beatriz@email.com', '123456', 'UNESP', '11999990006', 'normal', ''),
+('Gabriel Souza', 'gabriel@email.com', '123456', 'USP', '11999990007', 'normal', ''),
+('Camila Rocha', 'camila@email.com', '123456', 'UFABC', '11999990008', 'admin', ''),
+('Mateus Alves', 'mateus@email.com', '123456', 'IFSP', '11999990009', 'normal',''),
+('Juliana Mendes', 'juliana@email.com', '123456', 'FATEC', '11999990010', 'normal', '');
 
 
 -- ==========================================

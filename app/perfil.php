@@ -28,7 +28,7 @@ if (!$usuario) {
     exit;
 }
 
-$reservaUsuario = readAll(database(), "Reservas", "id_usuario = ?", [$_SESSION['id']]);
+$_SESSION['reservaUsuario'] = readAll(database(), "Reservas", "id_usuario = ?", [$_SESSION['id']]);
 $bancada = readAll(database(), "Bancadas", "id_bancada", []);
 
 ?>
@@ -112,8 +112,8 @@ $bancada = readAll(database(), "Bancadas", "id_bancada", []);
                 </thead>
                 <tbody>
                     <div class="caixa-tabela">
-                        <?php if (!empty($reservaUsuario)): ?>
-                            <?php foreach ($reservaUsuario as $reserva): ?>
+                        <?php if (!empty($_SESSION['reservaUsuario'])): ?>
+                            <?php foreach ($_SESSION['reservaUsuario'] as $reserva): ?>
                                 <tr>
                                     <td><?= $reserva['data_reserva'] ?></td>
                                     <td><?= $reserva['horas_reservadas'] ?></td>
