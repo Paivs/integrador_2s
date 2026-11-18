@@ -7,10 +7,16 @@ $usuario = read(database(), "Usuarios", "id_usuario = ?", [$_SESSION['id']]);
 if (empty($_SESSION['id'])) {
     header("Location: loginUsuario.php");
     exit;
-    }
+}
 
-    $imagemPerfil = glob(__DIR__ . "/img/pfp/*.{png, jpg, jpeg.}", GLOB_BRACE);
 
+$imagemPerfil = glob(__DIR__ . "/img/pfp/*.{png, jpg, jpeg.}", GLOB_BRACE);
+
+if($usuario['imagens_usuario'] == "padrao"){
+    $usuario['imagens_usuario'] = "img/cabecalho/usuario.png";
+}
+$_SESSION['imagem'] = $usuario['imagens_usuario'];
+    
 if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['id'])) {
 
     if (!isset($_POST['imagem_selecionada']) || $_POST['imagem_selecionada'] == ""){
@@ -26,6 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['id'])) {
     ], "id_usuario = ?", [$_SESSION['id']]);
 
     $_SESSION['user'] = $_POST['nome_usuario'];
+    $_SESSION['imagem'] = $_POST['imagem_selecionada'];
     header("Location: perfil.php");
     exit;
 }
@@ -38,9 +45,6 @@ if (!$usuario) {
 }
 
 
-if($usuario['imagens_usuario'] == "padrao"){
-    $usuario['imagens_usuario'] = "img/cabecalho/usuario.png";
-}
 
 $reservaUsuario = readAll(database(), "Reservas", "id_usuario = ?", [$_SESSION['id']]);
 $_SESSION['reservaUsuario'] = readAll(database(), "Reservas", "id_usuario = ?", [$_SESSION['id']]);
@@ -109,7 +113,7 @@ $bancada = readAll(database(), "Bancadas", "id_bancada", []);
                     <details class='trocarImagem'>
                         <summary>Imagem de perfil</summary>
                         <?php foreach ($imagemPerfil as $imagem):?>
-                            <button type="radio" class="menuImagem" name="imagem_selecionada" value="img/pfp/<?php echo basename($imagem)?>">
+                            <button type="submit" class="menuImagem" name="imagem_selecionada" value="img/pfp/<?php echo basename($imagem)?>">
                                 <img src="img/pfp/<?php echo basename($imagem)?>" alt="">
                             </button>
                         <?php endforeach;?>

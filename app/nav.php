@@ -5,11 +5,24 @@ require_once __DIR__ . '/init.php';
 if (isset($_SESSION['user'])) {
   $user = $_SESSION['user'];
   $perfil = $_SESSION['perfil'] ?? '';
+  
+  if(empty($_SESSION['imagem'])){
+    $usuario = read(database(), "Usuarios", "id_usuario = ?", [$_SESSION['id']]);
+    $_SESSION['imagem'] = $usuario['imagens_usuario'];
+  }
+  
+  
+  $imagemUser = $_SESSION['imagem'];
+  
+  if($_SESSION['imagem'] == 'padrao'){
+    $imagemUser = "img/cabecalho/usuario.png";
+  }
+
 } else {
   $user = "";
   $perfil = "";
+  $imagemUser = "";
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -55,7 +68,7 @@ if (isset($_SESSION['user'])) {
 
       <?php if ($user != ""): ?>
         <a href="./perfil.php" class="usuario">
-          <img src="./img/cabecalho/usuario.png" alt="Usuário" width="56px">
+          <img src="<?= $imagemUser ?>" alt="Usuário" width="56px">
           Olá, <?= $user ?>
         </a>
       <?php else: ?>
