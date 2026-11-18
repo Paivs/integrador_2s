@@ -79,7 +79,7 @@
                                     <td><?= $p['id_bancada'] ?></td>
                                     <td><?= $p['nome_bancada'] ?></td>
                                     <td><?= $p['area_bancada'] ?></td>
-                                    <td><?= $p['preco_bancada'] ?></td>
+                                    <td>R$ <?= $p['preco_bancada'] ?></td>
                                     <td>
                                         <?php if ($p['status_bancada'] == "indisponivel"): ?>
                                             <span class="etiqueta vermelha">Indisponível</span>
