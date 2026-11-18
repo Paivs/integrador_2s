@@ -64,25 +64,6 @@
         <h1 class="titulo-pagina">Histórico de Reservas</h1>
 
         <?php foreach($reservas as $p): ?>
-            <div>
-                <div>
-                    <?php $bancadaAtual = read(database(), "Bancadas", "id_bancada = ?", [$p['id_bancada']]); 
-                    echo $bancadaAtual['imagens_bancada']; ?>
-                    <p>Data:<?= $p['data_reserva'] ?></p>
-                    <br>
-                    <p>Tempo: <?= $p['horas_reservadas'] ?> hora(s)</p>
-                    <br>
-                    <p>
-                        Reserva de: <?php $bancadaAtual = read(database(), "Bancadas", "id_bancada = ?", [$p['id_bancada']]); 
-                        echo $bancadaAtual['nome_bancada']; ?>
-                    </p>
-                    <br>
-                    <p>
-                        Autor da reserva: <?php $userAtual = read(database(), "Usuarios", "id_usuario = ?", [$p['id_usuario']]); 
-                        echo $userAtual['nome_usuario']; ?>
-                    </p>
-                    <p>-----------------------------------------------------------------------------------------</p>
-
             <?php
                 // Busca a bancada e o autor desta reserva
                 $bancada = read(database(), "Bancadas", "id_bancada = ?", [$p['id_bancada']]);
