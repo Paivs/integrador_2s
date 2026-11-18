@@ -20,7 +20,7 @@ CREATE TABLE IF NOT EXISTS Usuarios (
     instituicao VARCHAR(100),
     telefone VARCHAR(20),
     perfil ENUM('normal', 'admin') NOT NULL DEFAULT 'normal',
-    imagens_usuario VARCHAR(255),
+    imagens_usuario VARCHAR(255) NOT NULL DEFAULT 'padrao',
     data_criacao DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 

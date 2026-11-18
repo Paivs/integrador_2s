@@ -69,6 +69,8 @@
         <?php foreach($reservas as $p): ?>
             <div>
                 <div>
+                    <?php $bancadaAtual = read(database(), "Bancadas", "id_bancada = ?", [$p['id_bancada']]); 
+                    echo $bancadaAtual['imagens_bancada']; ?>
                     <p>Data:<?= $p['data_reserva'] ?></p>
                     <br>
                     <p>Tempo: <?= $p['horas_reservadas'] ?> hora(s)</p>

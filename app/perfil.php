@@ -2,18 +2,27 @@
 
 require_once __DIR__ . '/init.php';
 
+$usuario = read(database(), "Usuarios", "id_usuario = ?", [$_SESSION['id']]);
+
 if (empty($_SESSION['id'])) {
     header("Location: loginUsuario.php");
     exit;
-}
+    }
+
+    $imagemPerfil = glob(__DIR__ . "/img/pfp/*.{png, jpg, jpeg.}", GLOB_BRACE);
 
 if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['id'])) {
+
+    if (!isset($_POST['imagem_selecionada']) || $_POST['imagem_selecionada'] == ""){
+        $_POST['imagem_selecionada'] = $usuario['imagens_usuario']; 
+    }
 
     update(database(), "Usuarios", [
         "nome_usuario" => "{$_POST['nome_usuario']}",
         "telefone" => "{$_POST['telefone']}",
         "email" => "{$_POST['email']}",
-        "instituicao" => "{$_POST['instituicao']}"
+        "instituicao" => "{$_POST['instituicao']}",
+        "imagens_usuario" => "{$_POST['imagem_selecionada']}"
     ], "id_usuario = ?", [$_SESSION['id']]);
 
     $_SESSION['user'] = $_POST['nome_usuario'];
@@ -21,15 +30,21 @@ if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['id'])) {
     exit;
 }
 
-$usuario = read(database(), "Usuarios", "id_usuario = ?", [$_SESSION['id']]);
+
 
 if (!$usuario) {
     header("Location: logout.php");
     exit;
 }
 
+
+if($usuario['imagens_usuario'] == "padrao"){
+    $usuario['imagens_usuario'] = "img/cabecalho/usuario.png";
+}
+
 $reservaUsuario = readAll(database(), "Reservas", "id_usuario = ?", [$_SESSION['id']]);
 $bancada = readAll(database(), "Bancadas", "id_bancada", []);
+
 
 ?>
 
@@ -56,7 +71,7 @@ $bancada = readAll(database(), "Bancadas", "id_bancada", []);
             </header>
 
             <section class="perfil-usuario">
-                <img class="perfil-foto" src="./img/cabecalho/usuario.png" alt="Foto do usuário">
+                <img class="perfil-foto" src="<?= $usuario['imagens_usuario']?>" alt="Foto do usuário">
                 <div class="perfil-dados">
                     <b>User:</b>
                     <span><?= $usuario['nome_usuario'] ?></span>
@@ -67,7 +82,6 @@ $bancada = readAll(database(), "Bancadas", "id_bancada", []);
 
             <section class="perfil-secao">
                 <h2>Informações pessoais</h2>
-
                 <form class="perfil-form" action="" method="post">
                     <input type="text" name="id" value="<?= $_SESSION['id'] ?>" hidden>
 
@@ -90,7 +104,15 @@ $bancada = readAll(database(), "Bancadas", "id_bancada", []);
                         <label for="instituicao">Instituição</label>
                         <input type="text" id="instituicao" name="instituicao" value="<?= $usuario['instituicao'] ?? '' ?>">
                     </div>
-
+        
+                    <details class='trocarImagem'>
+                        <summary>Imagem de perfil</summary>
+                        <?php foreach ($imagemPerfil as $imagem):?>
+                            <button type="radio" class="menuImagem" name="imagem_selecionada" value="img/pfp/<?php echo basename($imagem)?>">
+                                <img src="img/pfp/<?php echo basename($imagem)?>" alt="">
+                            </button>
+                        <?php endforeach;?>
+                    </details>
                     <button type="submit" class="botao-salvar">Salvar alterações</button>
                 </form>
             </section>
