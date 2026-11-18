@@ -3,6 +3,7 @@
 require_once __DIR__ . "/init.php";
 
 $torneios = readAll($pdo, "torneios");
+$equipes = readAll($pdo, "equipes")
 
 ?>
 
@@ -42,6 +43,29 @@ $torneios = readAll($pdo, "torneios");
                 <td>$t[img]</td>
                 <td><a href='./editarTorneio.php?id={$t['id']}'>Editar</a>
                 <a href='./deletarTorneio.phpid?={$t['id']}'>Deletar</a></td>
+            </tr>
+        "?>
+    <?php endforeach ?>
+    </table>
+    <br>
+    <br>
+    <table border="1">
+        <tr>
+            <th>Equipes</th>
+            <th>Descrição</th>
+            <th>Privacidade</th>
+            <th>Imagens</th>
+            <th>Ações</th>
+        </tr>
+    <?php foreach($equipes as $e): ?>
+        <?php print"
+            <tr>
+                <td>$e[nome]</td>
+                <td>$e[descricao]</td>
+                <td>$e[privacidade]</td>
+                <td>$e[img]</td>
+                <td><a href='./editarEquipe.php?id={$e['id']}'>Editar</a>
+                <a href='./deletarEquipe.phpid?={$e['id']}'>Deletar</a></td>
             </tr>
         "?>
     <?php endforeach ?>
