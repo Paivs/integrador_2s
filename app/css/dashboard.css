@@ -106,3 +106,8 @@ tr:last-child td {
 .verde {
     background: #198754;
 }
+
+.amarela {
+    background: #ffc107;
+    color: #212529;
+}
