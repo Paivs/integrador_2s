@@ -2,7 +2,7 @@
 
 body {
   font-family: "Momo Trust Display", sans-serif;
-  margin: 0; 
+  margin: 0;
   padding-top: 70px;
 }
 
@@ -18,7 +18,7 @@ header {
   left: 0;
   width: 100%;
   box-sizing: border-box;
-  z-index: 1000; 
+  z-index: 1000;
 }
 
 .logo {
@@ -95,6 +95,7 @@ h3 {
   margin-left: 15px;
   display: flex;
   flex-direction: column;
+  justify-content: center;
 }
 
 .grupo-campo {
@@ -102,9 +103,13 @@ h3 {
 }
 
 .grupo-campo input {
-  width: 400px;
+  width: 50%;
+  max-width: 300px;
+  padding: 10;
   margin-left: 110px;
   height: 25px;
+  border: 2px solid black;
+  border-radius: 15px;
 }
 
 .cadastro {
@@ -112,6 +117,7 @@ h3 {
   display: flex;
   flex-direction: column;
   width: fit-content;
+  margin-left: 140px;
 }
 
 select {
@@ -127,6 +133,8 @@ select {
   color: #2a303a;
   display: block;
   margin-top: 5px;
+  width: 50%;
+  
 }
 
 .circulos-container {
@@ -134,7 +142,7 @@ select {
   flex-direction: column;
   gap: 10px;
   flex-wrap: wrap;
-  padding: 20px;
+  padding-left: 150px;
 }
 
 .oito {
@@ -144,6 +152,7 @@ select {
   flex-wrap: wrap;
   padding: 20px;
 }
+
 
 .circulo {
   width: 55px;
@@ -187,7 +196,7 @@ select {
   cursor: pointer;
   font-family: "Momo Trust Display", sans-serif;
   align-self: center;
-  margin: 10px 0 40px;
+  margin: 10px 0 80px;
 }
 
 .lado-direito {
@@ -196,20 +205,27 @@ select {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  
+
+
+  h2 {
+    padding-left: 85px;
+  }
 }
 
 .prateleira {
   position: absolute;
   right: 0;
-  top: 70px;      
-  bottom: 0;      
+  top: 70px;
+  bottom: 0;
   width: 50vw;
 }
 
 .prateleira img {
   width: 100%;
-  height: 100%;
+  height: 120vh;
   object-fit: cover;
   border-radius: 25px;
   display: block;
+  margin: 0;
 }
