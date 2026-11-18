@@ -6,6 +6,8 @@ $setores = readAll(database(), "setor");
 
 $databaseStatus = 'Conectado';
 
+
+
 try {
     require_once __DIR__ . '/init.php';
     $pdo->query('SELECT 1');
@@ -28,11 +30,11 @@ try {
 
         <div class="conteudo">
             <h1>Central de Lançamento de Dados</h1>
-            
+
             <div class="status">
                 <p>Banco de dados <strong><?= htmlspecialchars($databaseStatus, ENT_QUOTES, 'UTF-8') ?></strong></p>
             </div>
-            
+
             <div class="form-container">
                 <div class=" form-manual">
                     <h2>Lançamento Manual</h2>
@@ -78,10 +80,12 @@ try {
                 </div>
 
 
+                <div class="coluna">
+
 
                 <div class="form-registro">
                     <h2><b>Ultimos Registros Gravados</b></h2>
-                    <table>
+                    <table class="tabela-registros">
                         <thead>
                             <tr>
                                 <th>Data e Hora</th>
@@ -102,14 +106,43 @@ try {
                                     <td><?= $leitura['origem'] ?></td>
                                     <td><?= $leitura['area_m2_leitura'] ?></td>
                                     <td><?= $leitura['estado_medidor_leituras'] ?></td>
-                                    <td>
-                                        <a href="excluir_leitura.php?id=<?= $leitura['id'] ?>" onclick="return confirm('Quer excluir esse dado?')">Excluir</a>
+                                    <td class="botao">
+                                        <a class="excluir" href="excluir_leitura.php?id=<?= $leitura['id'] ?>" onclick="return confirm('Quer excluir esse dado?')">Excluir</a>
+                                        <a class="editar" href="editar_leitura.php?id=<?= $leitura['id'] ?>" >Editar</a>
                                     </td>
 
                                 </tr>
                             <?php endforeach; ?>
                         </tbody>
                     </table>
+                </div>
+
+                    <div class="box-historico">
+                        <div class="historico">
+                            <div class="total-registros">
+                                <h3>Total de Registros Gravados</h3>
+                                <p><?= count($leituras) ?></p>
+                            </div>
+
+                            <div class="medidores-ativos">
+                                <h3>Medidores Ativos</h3>
+                                <p><?= count(array_filter($leituras, function ($leitura) {
+                                        return $leitura['estado_medidor_leituras'] === 'ATIVO';
+                                    })) ?></p>
+                            </div>
+                        </div>
+                        <div class="historico2">
+                            <div class="ultima-leitura">
+                                <h3>Última leitura (kWh)</h3>
+                                <p><?= end($leituras)['leitura_acumulada_kwh'] ?></p>
+                            </div>
+
+                            <div class="ultimo-lancamento">
+                                <h3>Último Lançamento</h3>
+                                <p><?= end($leituras)['data_hora'] ?></p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

@@ -76,14 +76,17 @@ body{
     border-radius: 45px;
     border: 2px solid #007e39;
     margin-bottom: 20px;
-    margin-right: 60px;
-    width: 800px;
+    width: 900px;
     height: 450px;
+
 }
 .form-registro h2 {
     color: #31c166;
     margin-bottom: 50px;
     margin-left: 20px;
+    
+}
+.form-registro b{
     font-family: 'Crete Round', sans-serif;
 }
 .form-registro table thead tr {
@@ -102,21 +105,35 @@ body{
 .form-registro table tbody tr td {
     background-color: #c2e9a0;
     color: #000000;
-    padding: 10px;
+    padding: 0px;
+    padding-right: 20px;
     border-radius: 10px;
     width: 250px;
     font-family: 'Crete Round', sans-serif;
 }
-.form-registro table tbody tr td a {
+.excluir{
     color: #ffffff;
     text-decoration: none;
-    border: 10px solid #ff0000;
-    background-color: rgb(255, 0, 0);
+    border: 10px solid #971b1b;
+    background-color: #971b1b;
     border-radius: 10px;
     font-family: 'Crete Round', sans-serif;
-
+    display: flex;
+    margin-left: 8px;
+    margin-bottom: 3px;
+    margin-top: 3px;
 }
-
+.editar{
+    color: #0c0606;
+    text-decoration: none;
+    border: 10px solid #4fbe71;
+    background-color: #4fbe71;
+    border-radius: 10px;
+    font-family: 'Crete Round', sans-serif;
+    display: flex;
+    margin-left:10px;
+    margin-bottom: 3px;
+}
 .form-container {
     display: flex;
     margin-bottom: 20px;
@@ -139,3 +156,107 @@ body{
     font-family: 'Crete Round', sans-serif;
 }
  
+.box-historico {
+    background-color: #151a1c;
+    padding: 20px;
+    border-radius: 45px;
+    border: 2px solid #007e39;
+    margin-bottom: 20px;
+    margin-right: 100px;
+    width: 800px;
+    height: 360px;
+    margin-top: 20px;
+}
+.historico{
+    display: flex;
+}
+.historico2 {
+    display: flex;
+}
+.total-registros {
+    border: 1px solid #073c23;
+    background-color:#073c23;
+    border-radius: 8px;
+    margin-bottom: 30px;
+    height: 140px;
+    width: 370px;
+    margin-right: 30px;
+}
+.total-registros h3{
+    margin-bottom: 20px;
+    font-size: 25px;
+    margin-top: 10px;
+    margin-left: 10px;
+    font-family: 'Crete Round', sans-serif;
+}
+.total-registros p {
+    margin-left: 10px;
+    font-size: 50px;
+    font-family: 'Crete Round', sans-serif;
+}
+.medidores-ativos {
+    border: 1px solid #073c23;
+    background-color:#073c23;
+    border-radius: 8px;
+    margin-bottom: 30px;
+    height: 140px;
+    width: 370px;
+}
+.medidores-ativos h3 {
+    margin-bottom: 20px;
+    font-size: 25px;
+    margin-top: 10px;
+    margin-left: 10px;
+    font-family: 'Crete Round', sans-serif;
+}
+.medidores-ativos p{
+    margin-left: 10px;
+    font-size: 50px;
+    font-family: 'Crete Round', sans-serif;
+}
+.ultima-leitura{
+    border: 1px solid #073c23;
+    background-color:#073c23;
+    border-radius: 8px;
+    margin-bottom: 30px;
+    height: 140px;
+    width: 370px;
+    margin-right: 30px;
+}
+.ultima-leitura h3{
+    margin-bottom: 20px;
+    font-size: 25px;
+    margin-top: 10px;
+    margin-left: 10px;
+    font-family: 'Crete Round', sans-serif;
+}
+.ultima-leitura p{
+    margin-left: 10px;
+    font-size: 30px;
+    font-family: 'Crete Round', sans-serif;
+}
+.ultimo-lancamento{
+    border: 1px solid #073c23;
+    background-color:#073c23;
+    border-radius: 8px;
+    margin-bottom: 30px;
+    height: 140px;
+    width: 370px;
+}
+.ultimo-lancamento h3 {
+    margin-bottom: 20px;
+    font-size: 25px;
+    margin-top: 10px;
+    margin-left: 10px;
+    font-family: 'Crete Round', sans-serif;
+}
+.ultimo-lancamento p {
+    margin-left: 10px;
+    font-size: 30px;
+    font-family: 'Crete Round', sans-serif;
+}
+
+.coluna{
+    display: flex;
+    flex-direction: column;
+}
