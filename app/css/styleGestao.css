@@ -16,9 +16,15 @@ body{
     margin-top: 10px;
     margin-left: 80px;
 }
+
 .rankingGastos p{
     margin-left: 80px;
     opacity: 80%;
+}
+.rankingGastosConteudo{
+    max-height: 400px;
+    margin-left: 80px;
+    margin-top: 10px;
 }
 .rankingMetaBorder{
     margin-top: 30px;
@@ -80,15 +86,30 @@ body{
 
 .statusSetor{
     margin-top: 80px;
+    margin-left: 120px;
     border: 2px solid #00ff73;
     border-radius: 80px; 
     background-color: #151a1c;
-    width: 250px;
+    width: 225px;
     height: 70px;
     display: flex;
-    margin-right: 40px;
+    margin-right: 110px;
 }
 .statusSetor h2{
     margin-left: 20px;
     margin-top:  18px;
+}
+
+.lucro{
+    margin-top: 70px;
+    border: 2px solid #00ff73;
+    border-radius: 80px;
+    width: 450px;
+    height: 650px;
+    background-color: #151a1c;
+    margin-right: 20px;
+}
+
+.lucro h2{
+    margin-top: 14px;
 }

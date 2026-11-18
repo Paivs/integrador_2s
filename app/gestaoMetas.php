@@ -7,11 +7,17 @@
     $somaA = 0;
     $somaB = 0;
 
+    $nomeSetores = [];
+    foreach($setores as $s){
+        $nome = $s['nome'];
+        $nomeSetores[] = $nome;
+    }
     foreach($ambientesSetorA as $a){
         $ambienteid1 = $a['id'];
 
         $metaA = readAll(database(), "metas", "ambiente_id= {$ambienteid1}");
         $somaA += $metaA[0]['meta_kwh'];
+
     }
     foreach($ambientesSetorB as $b){
         $ambienteid2 = $b['id'];
@@ -19,11 +25,19 @@
         $metaB = readAll(database(), "metas", "ambiente_id= {$ambienteid2}");
         $somaB += $metaB[0]['meta_kwh'];
     }
-
-
+    $somaLista = [$somaA, $somaB];
+    $somaListaReais = [];
+    foreach($somaLista as $soma){
+        $somaM = $soma * 0.8;
+        $somaListaReais[] = $somaM;
+    }
+    $somaAreais = $somaA / 0.8;
+    $somaBreais = $somaB / 0.8;
 ?>
 <html>
+    
     <head>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <link rel="stylesheet" href="./css/styleMenu.css">
         <link rel="stylesheet" href="./css/styleGestao.css">
     </head>
@@ -37,6 +51,9 @@
                     <div class="rankingGastos">
                         <h2>Rankings - Gastos</h2>
                         <p>Em R$</p>
+                    </div>
+                    <div class="rankingGastosConteudo">
+                        <canvas id="grafico1"></canvas>
                     </div>
                 </div>
                     
@@ -63,11 +80,14 @@
                             <h2>Rankings - Gasto p/ Meta</h2>
                             <p>Em R$</p>
                         </div>
+                        <div class="rankingGastosConteudo">
+                            <canvas id="grafico2"></canvas>
+                        </div>
                     </div>
                     
                     <div class="rankingGastosTabela">
                         <div class="rankingGastosTabelaConteudo">
-                            <h2>Meta p/ setor</h2>
+                            <h2>Meta</h2>
                             <?php
                             $contador1 = 0;
                             foreach($setores as $setor):
@@ -80,19 +100,195 @@
                         </div>
                     </div>
                     </div>
+
                     <div class="tabelasJuntas">
                         <?php foreach($setores as $setor): ?>
                             <div class="statusSetor">
                                 <?php if($setor['estado_setor'] == 'Ativo'): ?>
                                 <h2><?= $setor['nome'] ?> 🟢</h2>
+                                <?php elseif ($setor['estado_setor' == 'Interferência']): ?>
+                                <h2><?= $setor['nome'] ?> 🟡</h2>
                                 <?php else: ?>
                                 <h2><?= $setor['nome'] ?> 🔴</h2>
                                 <?php endif ?>
                             </div>
                             <?php endforeach ?>
                         </div>
-            </div>
 
+                        <div class="tabelasJuntas">
+
+
+                            <?php foreach($setores as $s): ?>
+                            <div class="lucro">
+                                <center>    
+                                
+                                    <h2>Lucro - <?= $s['nome'] ?></h2>
+                                    <canvas id="<?= $s['nome'] ?>" height="300"></canvas>
+                                </center>
+                            </div>
+                            <?php endforeach ?>
+                        </div>
+            </div>
         </div>
+        
+        <script>
+        let setores = <?php echo json_encode($nomeSetores); ?>;
+        let somametakwh = <?php echo json_encode($somaLista); ?>;
+        let somareais = <?php echo json_encode($somaListaReais); ?>;
+        const ctx = document.getElementById('grafico1').getContext('2d');
+
+        new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: setores,
+            datasets: [{
+            label: 'Gasto',
+            data: somareais,
+            backgroundColor: '#7bd798',
+            barThickness: 160
+        }]
+        },
+            options: {
+            responsive: true,
+
+      }
+    });
+   const ctx2 = document.getElementById('grafico2');
+
+    new Chart(ctx2, {
+      type: 'bar',
+      data: {
+        labels: setores,
+        datasets: [
+          {
+            label: 'GASTO',
+            data: somareais,
+            backgroundColor: '#fde068',
+            borderRadius: 4,
+            barPercentage: 0.85,
+            categoryPercentage: 0.65
+          },
+          {
+            label: 'META',
+            data: somametakwh,
+            backgroundColor: '#00e667',
+            borderRadius: 4,
+            barPercentage: 0.85,
+            categoryPercentage: 0.65
+          }
+        ]
+      },
+      options: {
+        indexAxis: 'y',
+        responsive: true,
+        plugins: {
+          legend: {
+            position: 'top',
+            labels: {
+              color: '#ffffff',
+              usePointStyle: true,
+              padding: 20
+            }
+          }
+        },
+        scales: {
+          x: {
+            grid: { color: '#2c3035' },
+            ticks: {
+              color: '#ffffff',
+            }
+          },
+          y: {
+            grid: { display: false },
+            ticks: { color: '#ffffff' }
+          }
+        }
+      }
+    });
+
+    const ctxblocoA = document.getElementById('Bloco A').getContext('2d');
+    let somaAreais = <?php echo json_encode($somaAreais); ?>;
+    new Chart(ctxblocoA, {
+      type: 'bar',
+      data: {
+        labels: ['Bloco A'],
+        datasets: [
+          {
+            label: 'GASTO',
+            data: [76],
+            backgroundColor: '#fde068',
+            borderRadius: 4,
+            barPercentage: 0.85,
+            categoryPercentage: 0.65
+          },
+          {
+            label: 'META',
+            data: [somaAreais],
+            backgroundColor: '#00e667',
+            borderRadius: 4,
+            barPercentage: 0.85,
+            categoryPercentage: 0.65
+          }
+        ]
+      },
+      options: {
+        indexAxis: 'x',
+        responsive: true,
+        plugins: {
+          legend: {
+            position: 'top',
+            labels: {
+              color: '#ffffff',
+              usePointStyle: true,
+              padding: 20
+            }
+          }
+        },
+      }
+    });
+
+
+
+    const ctxblocoB = document.getElementById('Bloco B').getContext('2d');
+    let somaBreais = <?php echo json_encode($somaBreais); ?>;
+    new Chart(ctxblocoB, {
+      type: 'bar',
+      data: {
+        labels: ['Bloco B'],
+        datasets: [
+          {
+            label: 'GASTO',
+            data: [54],
+            backgroundColor: '#fde068',
+            borderRadius: 4,
+            barPercentage: 0.85,
+            categoryPercentage: 0.65
+          },
+          {
+            label: 'META',
+            data: [somaBreais],
+            backgroundColor: '#00e667',
+            borderRadius: 4,
+            barPercentage: 0.85,
+            categoryPercentage: 0.65
+          }
+        ]
+      },
+      options: {
+        indexAxis: 'x',
+        responsive: true,
+        plugins: {
+          legend: {
+            position: 'top',
+            labels: {
+              color: '#ffffff',
+              usePointStyle: true,
+              padding: 20
+            }
+          }
+        },
+      }
+    });
+  </script>
     </body>
 </html>
