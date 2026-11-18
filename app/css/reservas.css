@@ -18,6 +18,7 @@ body {
 }
 
 .titulo {
+    margin-top: 20px;
     margin-left: 20px;
     color: #000000 !important;
 }
@@ -36,7 +37,8 @@ body {
     border: 2px solid #e7e4e4; 
     border-radius: 30px;
     overflow: hidden;    
-    font-family: 'Montaser Arabic', Arial, sans-serif !important;      
+    font-family: 'Montaser Arabic', Arial, sans-serif !important;   
+    margin-top: 30px;   
 }
 
 .card * {
