@@ -1,102 +1,30 @@
 <?php
-
-declare(strict_types=1);
-
-/** Protege nomes de tabelas e colunas, que não podem usar placeholders PDO. */
-function identifier(string $name): string
-{
-    if (!preg_match('/^[A-Za-z_][A-Za-z0-9_]*$/D', $name)) {
-        throw new InvalidArgumentException("Identificador SQL inválido: {$name}");
-    }
-
-    return "`{$name}`";
+// Funções genéricas de CRUD. $tabela e as chaves de $dados vêm sempre do código, nunca do usuário.
+function create(PDO $pdo, string $tabela, array $dados): int {
+    $cols = implode(',', array_keys($dados));
+    $ph = implode(',', array_fill(0, count($dados), '?'));
+    $pdo->prepare("INSERT INTO $tabela ($cols) VALUES ($ph)")->execute(array_values($dados));
+    return (int)$pdo->lastInsertId();
 }
 
-/** Insere um registro e devolve seu ID. */
-function create(PDO $pdo, string $table, array $data): string
-{
-    if ($data === []) {
-        throw new InvalidArgumentException('Informe ao menos um campo para inserir.');
-    }
-
-    $table = identifier($table);
-    $columns = implode(', ', array_map('identifier', array_keys($data)));
-    $placeholders = implode(', ', array_fill(0, count($data), '?'));
-    $sql = "INSERT INTO {$table} ({$columns}) VALUES ({$placeholders})";
-
-    $statement = $pdo->prepare($sql);
-    $statement->execute(array_values($data));
-
-    return $pdo->lastInsertId();
+function readAll(PDO $pdo, string $tabela, array $filtro = [], string $ordem = 'id'): array {
+    $where = $filtro ? 'WHERE ' . implode(' AND ', array_map(fn($c) => "$c = ?", array_keys($filtro))) : '';
+    $st = $pdo->prepare("SELECT * FROM $tabela $where ORDER BY $ordem");
+    $st->execute(array_values($filtro));
+    return $st->fetchAll();
 }
 
-/** Lista registros. Use ? no filtro e envie os valores em $params. */
-function readAll(PDO $pdo, string $table, ?string $where = null, array $params = []): array
-{
-    $table = identifier($table);
-    $sql = "SELECT * FROM {$table}";
-
-    if ($where !== null) {
-        $sql .= " WHERE {$where}";
-    }
-
-    $statement = $pdo->prepare($sql);
-    $statement->execute($params);
-
-    return $statement->fetchAll();
+function read(PDO $pdo, string $tabela, int $id): ?array {
+    $st = $pdo->prepare("SELECT * FROM $tabela WHERE id = ?");
+    $st->execute([$id]);
+    return $st->fetch() ?: null;
 }
 
-/** Busca o primeiro registro correspondente. */
-function read(PDO $pdo, string $table, ?string $where = null, array $params = []): array|false
-{
-    $table = identifier($table);
-    $sql = "SELECT * FROM {$table}";
-
-    if ($where !== null) {
-        $sql .= " WHERE {$where}";
-    }
-
-    $statement = $pdo->prepare($sql);
-    $statement->execute($params);
-
-    return $statement->fetch();
+function update(PDO $pdo, string $tabela, int $id, array $dados): bool {
+    $set = implode(',', array_map(fn($c) => "$c = ?", array_keys($dados)));
+    return $pdo->prepare("UPDATE $tabela SET $set WHERE id = ?")->execute([...array_values($dados), $id]);
 }
 
-/** Atualiza registros e devolve a quantidade alterada. */
-function update(PDO $pdo, string $table, array $data, string $where, array $params = []): int
-{
-    if ($data === []) {
-        throw new InvalidArgumentException('Informe ao menos um campo para atualizar.');
-    }
-
-    if (trim($where) === '') {
-        throw new InvalidArgumentException('Informe uma condição para atualizar.');
-    }
-
-    $table = identifier($table);
-    $set = implode(', ', array_map(
-        static fn (string $column): string => identifier($column) . ' = ?',
-        array_keys($data),
-    ));
-
-    $sql = "UPDATE {$table} SET {$set} WHERE {$where}";
-    $statement = $pdo->prepare($sql);
-    $statement->execute([...array_values($data), ...$params]);
-
-    return $statement->rowCount();
-}
-
-/** Exclui registros e devolve a quantidade removida. */
-function delete(PDO $pdo, string $table, string $where, array $params = []): int
-{
-    if (trim($where) === '') {
-        throw new InvalidArgumentException('Informe uma condição para excluir.');
-    }
-
-    $table = identifier($table);
-    $sql = "DELETE FROM {$table} WHERE {$where}";
-    $statement = $pdo->prepare($sql);
-    $statement->execute($params);
-
-    return $statement->rowCount();
+function delete(PDO $pdo, string $tabela, int $id): bool {
+    return $pdo->prepare("DELETE FROM $tabela WHERE id = ?")->execute([$id]);
 }
