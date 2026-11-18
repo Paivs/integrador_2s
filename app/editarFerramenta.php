@@ -108,6 +108,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MakerLab - Editar Ferramenta</title>
     <link rel="stylesheet" href="css/navAdm.css">
+    <link rel="stylesheet" href="css/dashboard.css">
 </head>
 <body>
     <header>    
@@ -141,67 +142,55 @@
             </div>
         </nav>
     </header>
-    
-    <?php if (!empty($erros)): ?>
-        <div class="erros">
-            <p>Corrija os campos abaixo:</p>
-            <ul>
-                <?php foreach ($erros as $mensagem): ?>
-                    <li><?= ($mensagem) ?></li>
-                <?php endforeach; ?>
-            </ul>
-        </div>
-    <?php endif; ?>
 
-    <form action="" method="POST">
+        <main class="conteudo pagina-formulario">
 
-        <?php foreach($ferramentaSelecionada as $campoDaFerramenta): ?>
+            <h1 class="titulo-formulario">Editar Ferramenta</h1>
 
-            <input type="hidden" name="idFerramenta" value="<?= $idFerramenta ?>">
+            <?php if (!empty($erros)): ?>
+                <div class="erros">
+                    <p>Corrija os campos abaixo:</p>
+                    <ul>
+                        <?php foreach ($erros as $mensagem): ?>
+                            <li><?= ($mensagem) ?></li>
+                        <?php endforeach; ?>
+                    </ul>
+                </div>
+            <?php endif; ?>
 
-            <label for="nome">Nome da ferramenta:</label>
-            <br>
-            <input type="text" name="nomeFerramenta" id="nomeFerramenta" value="<?= $campoDaFerramenta['nome_ferramenta']?>" required>
-            <br>
-        
-            <label for="area">Escreva a área da bancada:</label>
-            <br>
-            <input type="text" name="area" id="area" value="<?= $campoDaFerramenta['area']?>" required>
-            
-            <br>
-        
-            <label for="valorEstoque">Quantos temos em estoque?:</label>
-            <br>
-            <input type="number" name="valorEstoque" id="valorEstoque" step="1" value="<?= $campoDaFerramenta['estoque']?>" required>
-            
-            <br>
-            
-            <p>De qual bancada ela pertence?</p>
-        
-            <select name="bancada" required>
+            <?php foreach($ferramentaSelecionada as $campoDaFerramenta): ?>
 
-            <?php foreach ($bancadas as $b): ?>
+                <form class="formulario" action="" method="POST">
+                    <input type="hidden" name="idFerramenta" value="<?= $idFerramenta ?>">
 
-                <option value="<?= $b['id_bancada'] ?>"
-                    <?= $campoDaFerramenta['id_bancada'] == $b['id_bancada'] ? 'selected' : '' ?>>
-                    <?= htmlspecialchars($b['nome_bancada']) ?>
-                </option>
+                    <div class="coluna">
+                        <label class="rotulo" for="nomeFerramenta">Nome da ferramenta:</label>
+                        <input class="campo" type="text" name="nomeFerramenta" id="nomeFerramenta" value="<?= $campoDaFerramenta['nome_ferramenta'] ?>" required>
+
+                        <label class="rotulo" for="area">Escreva a área da bancada:</label>
+                        <input class="campo" type="text" name="area" id="area" value="<?= $campoDaFerramenta['area'] ?>" required>
+                    </div>
+
+                    <div class="coluna">
+                        <label class="rotulo" for="valorEstoque">Quantos temos em estoque?:</label>
+                        <input class="campo campo-numero" type="number" name="valorEstoque" id="valorEstoque" step="1" value="<?= $campoDaFerramenta['estoque'] ?>" required>
+
+                        <label class="rotulo" for="bancada">De qual bancada ela pertence?</label>
+                        <select class="campo campo-select" name="bancada" id="bancada" required>
+                            <?php foreach ($bancadas as $b): ?>
+                                <option value="<?= $b['id_bancada'] ?>"
+                                    <?= $campoDaFerramenta['id_bancada'] == $b['id_bancada'] ? 'selected' : '' ?>>
+                                    <?= htmlspecialchars($b['nome_bancada']) ?>
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
+
+                        <button class="botao-registrar" type="submit">Editar</button>
+                    </div>
+
+                </form>
 
             <?php endforeach; ?>
-
-            </select>
-
-        
-            <br>
-            <br>
-        
-            <button type="submit">Registrar</button>
-
-        <?php endforeach ?>
-
-
-    </form>
-
-</body>
+        </main>
+    </body>
 </html>
-    
