@@ -1,3 +1,14 @@
+<?php
+
+require_once __DIR__ . "/init.php";
+
+$usuario = null;
+if (isset($_SESSION['id_usuario'])) {
+    $usuario = read($pdo, 'usuario', 'idUsuario = ?', [$_SESSION['id_usuario']]);
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -32,15 +43,15 @@
 
         <form action="processaContato.php" method="post">
             <label>Nome:
-                <input type="text" name="nome" placeholder="exemplo: Marcio Henrique" required>
+                <input type="text" name="nome" placeholder="exemplo: Marcio Henrique" value="<?= htmlspecialchars($usuario['nome'] ?? '') ?>" required>
             </label>
 
             <label>Telefone:
-                <input type="tel" name="telefone" placeholder="exemplo: (11) 12345-6789" required>
+                <input type="tel" name="telefone" placeholder="exemplo: (11) 12345-6789" value="<?= htmlspecialchars($usuario['telefone'] ?? '') ?>" required>
             </label>
 
             <label>Email:
-                <input type="email" name="email" placeholder="exemplo: emailcliente@gmail.com" required>
+                <input type="email" name="email" placeholder="exemplo: emailcliente@gmail.com" value="<?= htmlspecialchars($usuario['email'] ?? '') ?>" required>
             </label>
 
             <fieldset>

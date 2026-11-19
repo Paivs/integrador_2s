@@ -83,7 +83,6 @@ main {
     padding: 0 20px;
 }
 
-/* --- CARTÃO DE DESTAQUE (COR #1e222d DO SEU FORM) --- */
 .quadros {
     background-color: #1e222d;
     border-radius: 24px;
@@ -195,13 +194,15 @@ main {
     color: #1e222d;
 }
 
-/* --- BOTÃO DE AÇÃO INFERIOR (VERDE #3ddc84 DO SEU FORM) --- */
-.editarTudo {
+.botoes {
     margin-top: 32px;
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
 }
 
-.editarTudo a {
+.editarTudo {
     display: inline-block;
     background-color: #3fd6e8;
     color: #14181e;
@@ -212,9 +213,25 @@ main {
     transition: filter 0.2s;
 }
 
-.editarTudo a:hover {
+.editarTudo:hover {
     filter: brightness(0.92);
 }
+
+.sairConta {
+    display: inline-block;
+    background-color: #ff0000;
+    color: #edf3f6;
+    text-decoration: none;
+    padding: 12px 45px;
+    border-radius: 12px;
+    font-size: 20px;
+    transition: filter 0.2s;
+}
+
+.sairConta:hover {
+    filter: brightness(0.92);
+}
+
 
 @media (max-width: 768px) {
     .pagina-perfil {

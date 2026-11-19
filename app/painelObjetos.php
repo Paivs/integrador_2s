@@ -2,6 +2,12 @@
 
 require_once __DIR__ . "/init.php";
 
+if (!isset($_SESSION['id_usuario'])) {
+    $_SESSION['voltar_para'] = 'painelObjetos.php';
+    header('Location: login.php?erro[]=' . urlencode('Faça login para ver os objetos guardados.'));
+    exit;
+}
+
 $pesquisa  = trim($_GET['pesquisa'] ?? '');
 $categoria = $_GET['categoria'] ?? '';
 $status = $_GET['status'] ?? '';

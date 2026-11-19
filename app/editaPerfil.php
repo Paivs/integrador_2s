@@ -4,7 +4,7 @@ session_start();
 
 require_once __DIR__ . "/init.php";
 
-$idUsuario = (int) ($_SESSION['id_usuario'] ?? 1);   // TEMPORÁRIO: tirar o ?? 1 quando o login existir
+$idUsuario = (int) ($_SESSION['id_usuario']);
 $usuario   = read($pdo, 'usuario', 'idUsuario = ?', [$idUsuario]);
 
 if (!$usuario) {

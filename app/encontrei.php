@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         create($pdo, 'achado', [
             'idObjeto'        => $id,
-            'idUsuarioAchou'  => 2,  // TEMPORÁRIO: trocar por $_SESSION['id_usuario']
+            'idUsuarioAchou'  => (int) $_SESSION['id_usuario'],
             'estadoObjeto'    => $estado,
             'localEncontrado' => $local,
             'idPontoColeta'   => $idPonto,
