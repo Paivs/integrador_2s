@@ -1,0 +1,75 @@
+:root {
+    --roxo-900: #0b0719;
+    --roxo-800: #190538;
+    --roxo-700: #2e086b;
+    --roxo-500: #5c00e6;
+    --ambar: #ffb703;
+    --ambar-suave: #ffb74d;
+    --texto: #ffffff;
+    --texto-suave: #d1c4e9;
+    --branco: rgb(255, 255, 255);
+}
+
+body {
+    background-color: var(--roxo-900);
+}
+input{
+    background-color: rgba(25, 5, 56, .62);
+   
+}
+input:focus,textarea{
+    border: double #ffb703;
+    color: var(--branco)
+    
+}
+
+.fundo-video {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background: var(--roxo-900);
+}
+.fundo-video video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.fundo-overlay {
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(90deg,
+            rgba(11, 7, 25, .94) 0%,
+            rgba(25, 5, 56, .82) 45%,
+            rgba(25, 5, 56, .58) 100%),
+        linear-gradient(180deg,
+            rgba(11, 7, 25, .45) 0%,
+            rgba(11, 7, 25, 0) 30%,
+            rgba(11, 7, 25, .55) 100%);
+}
+
+a{
+    color: #ffb703;
+}
+
+img{
+    margin-left: 90px;
+}
+.formulario-bloco{
+    display: block;
+    justify-items: center;
+    align-items: center;
+    margin: auto;
+    width: 500px;
+    height: 800px;
+    background-color: #0b0719;
+    color: #d1c4e9;
+
+}
+.corElectro{
+    color: #5c00e6;
+}
+.corSafe{
+    color: #ffb703;
+}
+

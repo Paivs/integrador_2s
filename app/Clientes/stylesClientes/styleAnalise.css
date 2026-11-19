@@ -1,0 +1,442 @@
+
+:root{
+    --fundo:        #0b0812;
+    --cor-texto-principal-elementos:#ffffff;
+
+    --cor-fundo-menu:#1f0060;
+    --cor-pag-selecionada-botes:#fdb42e;
+    --cor-fundo-form:#5900ff;
+    --linha:        #3a2a55;
+}
+
+ * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+     font-family: "Roboto Condensed", sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    background-color: var(--fundo);
+    background-image:
+      radial-gradient(ellipse 70% 40% at 0% 12%, rgba(166, 107, 184, 0.55), transparent 70%),
+      linear-gradient(160deg, var(--fundo) 40%, #17100f 100%);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    color: #ffffff;
+    min-height: 100vh;
+}
+
+/* ===========ESQUELETO===========*/
+
+
+
+/* ===========NAVEGAÇÃO===========*/
+
+.layout-principal {
+    display: flex;
+    min-height: 100vh;
+}
+
+.barra-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 260px;
+    height: 100vh;
+    background-color: #190538;
+    display: flex;
+    flex-direction: column;
+    padding: 17px 3px;
+}
+
+.barra-menu-cabeca,
+.barra-menu-cabeça {
+    display: flex;
+    align-items: center;
+    margin-bottom: 22px;
+    padding: 37px;
+}
+
+img {
+    width: 260px;
+    height: auto;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    font-size: 41px;
+    color: #ffffff;
+}
+.corElectro {
+    color: #5c00e6;
+}
+
+.corSafe {
+    color: #ffb703;
+}
+
+.nav {
+    display: flex;
+    flex-direction: column;
+    gap: 2%; 
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    gap: 1px;
+    margin-bottom: 14px;
+    color: #d1c4e9;
+    text-decoration: none;
+    font-size: 27px; 
+    padding: 10px; 
+    border-radius: 6px;
+    transition: background 0.2s;
+    width: 100%;
+}
+
+.nav-item:hover, 
+.nav-item.active {
+    background-color: #2e086b;
+    color: #ffb703;
+}
+
+.nav-item.active {
+    border-left: 4px solid #ffb703;
+    padding-left: 6px; 
+}
+
+.nav-item i {
+    font-size: 22px;
+    width: 28px; 
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+/* ===========NAVEGAÇÃO===========*/
+
+
+/* ===========CABEÇALHO===========*/
+header{
+    margin-top: 40px;
+    text-align: center;
+    font-weight: bolder;
+}
+header > h1{
+    color: var(--cor-texto-principal-elementos);
+    font-size: 47px;
+    margin-bottom: 45px;
+}
+/* ===========CABEÇALHO===========*/
+
+
+/* ===========CONTEUDO PRINCIPAL===========*/
+main{
+    margin-left: 260px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* ===========CONTEUDO PRINCIPAL===========*/
+
+
+/* ===========FORMULÁRIO===========*/
+#formulario{
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+}
+form{
+    border: 1px solid rgba(255, 183, 3, .45);
+    background: rgba(33, 13, 65, 0.62);
+    height: 1600px;
+    width: 800px;
+    border-radius: 15px;
+    margin-bottom: 50px;
+}
+form > h2{
+    margin-top: 25px;
+    margin-right: auto;
+    margin-bottom: 20px;
+    margin-left: auto;
+    text-align: center;
+    padding: 20px;
+    font-weight: bolder;
+    background: rgba(55, 35, 80, 0.85);
+    border-radius: 10px;
+    width: 75%;
+    align-self: center;
+    font-size: 28px;
+    transition: transform 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+
+    &:hover {
+            transform: translateY(-1px);
+            border-color: var rgba(0, 0, 0, 0.15);
+            box-shadow: 0 10px 30px var rgba(0, 0, 0, 0.555);
+            
+        }
+    
+}
+form > label{
+    padding: 20px;
+}
+form > input {
+    background: rgba(55, 35, 80, 1.85);
+    border-radius: 7px;
+    height: 40px;
+    width: 400px;
+    font-size: 20px;
+    color: white;
+    font-weight: bolder;
+    
+}
+form input:focus{
+    border-color: var(--cor-pag-selecionada-botes);
+}
+form > select{
+        border: 1px solid var(--linha);
+    background: rgba(70, 50, 95, 1.85);
+    border-radius: 7px;
+    font-size: 24px;
+    color: var(--cor-pag-selecionada-botes);
+    font-weight: bolder;
+    height: 47px;
+    width: 400px;
+    text-align: center;
+    transition: transform 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+
+    &:hover {
+            transform: translateY(-6px);
+            border-color: var rgba(0, 0, 0, 0.15);
+            box-shadow: 0 10px 30px var rgba(0, 0, 0, 0.555);
+            
+        }
+}
+form > textarea{
+        border: 1px solid var(--linha);
+    background: rgba(70, 50, 95, 1.85);
+    border-radius: 7px;
+    font-size: 20px;
+    color: white;
+    font-weight: 500;
+    padding: 10px;
+    width: 550px;
+    height: 220px;
+    transition: transform 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+
+    &:hover {
+            transform: translateY(-6px);
+            border-color: var rgba(0, 0, 0, 0.15);
+            box-shadow: 0 10px 30px var rgba(0, 0, 0, 0.555);
+            
+        }
+}
+form textarea:focus,
+form select:focus {
+    outline: none;                               
+    border: 2px solid rgba(255, 183, 3, .45); 
+}
+form > select,
+form > textarea{
+    margin-right: auto;
+    margin-left: auto;
+    display: flex;
+
+}
+.escolha{
+    height: 22px;
+    width: 110px;
+}
+.escolha:checked + .resp {
+    color: var(--cor-pag-selecionada-botes);
+    font-weight: normal;
+}
+
+.perguntas{
+    font-size: 23px;
+    margin-top: 10px;
+    margin-right: auto;
+    margin-left: auto;
+    margin-bottom: 10px;
+    text-align: justify;
+    background: rgba(70, 50, 95, 1.85);
+    padding: 20px;
+    border-radius: 10px;
+    width: 92%;
+    align-self: center;
+    
+}
+.resp{
+    color: lightgray;
+    text-align: center;
+    font-size: 22px;
+    align-items: center;
+    
+}
+.selecao{
+    transition: transform 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+
+    &:hover {
+            transform: translateY(-3.2px);
+            border-color: var rgba(0, 0, 0, 0.15);
+            box-shadow: 0 10px 30px var rgba(0, 0, 0, 0.555);
+            
+        }
+}
+button{
+    display: block;
+    text-align: center;
+    margin-top: 50px;
+    margin-right: auto;
+    margin-left: auto;
+    width: 175px;
+    height: 75px;
+    background-color: #fdb42e;
+    color: white;
+    font-weight: bolder;
+    border: 2px solid #fdb42e;
+    border-radius: 35px;
+    font-size: 30px;
+    transition: transform 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+
+    &:hover {
+            transform: translateY(-7px);
+            text-decoration: underline;
+            border-color: var rgba(0, 0, 0, 0.15);
+            box-shadow: 0 10px 30px var rgba(0, 0, 0, 0.555);
+            
+        }
+    }
+
+
+.resp,
+.escolha{
+    margin: 10px;
+}
+.passo-um{
+    display: block;
+    font-size: 28px;
+    text-align: center;
+    color: lightgray;
+    font-weight: bold;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+
+
+
+/* ===========FORMULÁRIO===========*/
+
+
+
+
+/* =========== MENSAGENS =========== */
+
+
+#fundo {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.85); 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999; 
+}
+
+#perigo, #sucesso {
+    width: 90%;
+    max-width: 650px;
+    text-align: center;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+    font-size: 25px;
+    font-weight: normal;
+}
+
+#perigo {
+    color: #721c24;
+    background-color: #f8d7da;
+    border: 3px solid #f5c6cb;
+}
+
+#sucesso {
+    color: #155724;
+    background-color: #d4edda;
+    border: 3px solid #c3e6cb;
+}
+
+#perigo h2, #sucesso h2 {
+    margin-bottom: 20px;
+    font-size: 29px;
+    font-weight: bolder;
+}
+
+#btn-fechar-alerta {
+    display: inline-block;
+    padding: 15px 35px;
+    background-color: #721c24;
+    color: white;
+    text-decoration: none;
+    font-weight: bolder;
+    border-radius: 5px;
+    font-size: 25px;
+    transition: transform 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+
+    &:hover {
+            transform: translateY(-5px);
+            text-decoration: underline;
+            background-color: #4a1116;
+            
+        }
+
+    }
+
+
+#btn-sucesso {
+    display: inline-block;
+    padding: 17px 37px;
+    margin: 10px;
+    background-color: #0b3013;
+    color: white;
+    text-decoration: none;
+    font-weight: bolder;
+    border-radius: 5px;
+    font-size: 25px;
+    transition: transform 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+
+    &:hover {
+            transform: translateY(-5px);
+            text-decoration: underline;
+            background-color: #155724;
+            
+        }
+}
+
+
