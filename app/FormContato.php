@@ -54,12 +54,6 @@
                 <textarea name="mensagem" placeholder="Insira a sua mensagem aqui" required></textarea>
             </label>
 
-            <fieldset>
-                <legend></legend>
-                <label class="opcional"><input type="checkbox" name="opcicional" value="suporte">Eu gostaria de receber notificações de promoções e ofertas.</label>
-                <label class="opcional"><input type="checkbox" name="opicional" value="sugestao">Eu gostaria de utilizar estes dados para entrar em contato.</label>
-            </fieldset>
-
             <button type="submit">Enviar</button>
         </form>
     </main>
