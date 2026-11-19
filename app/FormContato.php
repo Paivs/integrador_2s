@@ -36,7 +36,7 @@
             </label>
 
             <label>Nome:
-                <input type="text" name="Nome" placeholder="exemplo: Maria José" required>
+                <input type="text" name="nomeUsuario" placeholder="exemplo: Maria José" required>
             </label>
 
             <label>Email:

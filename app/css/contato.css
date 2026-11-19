@@ -1,6 +1,7 @@
 :root {
     --cor-fundo: #ffffff;
     --cor-texto: #14181e;
+    --cor-texto-claro: #c2c2c2;
     --cor-campo: #1e222d;
     --cor-campo-hover: #2c3242;
     --cor-caixa: #e6ecf2;
@@ -103,6 +104,9 @@ form {
     border-radius: 24px;
     background-color: var(--cor-caixa);
     text-align: left;
+    border: solid 1px;
+    border-color: var(--cor-campo);
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
 }
 
 form label {
@@ -119,11 +123,12 @@ textarea {
     border: none;
     border-radius: 30px;
     background-color: var(--cor-campo);
-    color: var(--cor-texto-escuro);
+    color: var(--cor-fundo);
     font-family: inherit;
     font-size: 16px;
     transition: background-color 0.2s, box-shadow 0.2s;
 }
+
 
 input:hover,
 textarea:hover {
@@ -143,8 +148,7 @@ textarea {
 }
 
 ::placeholder {
-    color: var(--cor-texto-escuro);
-    opacity: 0.7;
+    color: var(--cor-texto-claro);
 }
 
 fieldset {
@@ -205,8 +209,9 @@ footer {
     justify-content: center;
     gap: 30px 120px;
     padding: 25px 40px;
-    background-color: var(--cor-rodape);
-    color: var(--cor-texto-escuro);
+    background-color:#000000;
+    color:#eef3f6;
+
 }
 
 footer h3 {
