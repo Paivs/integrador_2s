@@ -27,7 +27,7 @@ $titulos = [
     'telefone' => 'Editar Telefone',
     'senha'    => 'Alterar Senha',
     'tema'     => 'Alterar Tema',
-    'todos'    => 'Editar Perfil Completo'
+    'todos'    => 'Editar Perfil'
 ];
 
 $erros = [];
@@ -100,7 +100,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>findIt. - <?= $titulos[$campo] ?></title>
+    <title>findIt - <?= $titulos[$campo] ?></title>
     <link rel="stylesheet" href="./css/editaPerfil.css">
 </head>
 
@@ -124,7 +124,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <main>
         <h1><?= $titulos[$campo] ?></h1>
-        <h2>Atualize suas informações abaixo</h2>
 
         <?php if ($erros): ?>
             <div class="caixa-erros">
