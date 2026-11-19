@@ -1,9 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Momo+Trust+Display&display=swap');
 
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
 body {
     font-family: "Momo Trust Display", sans-serif;
+    background-color: #ffffff;
+    color: #14181e;
     margin: 0;
     padding-top: 70px;
+    padding-bottom: 60px;
+    min-height: 100vh;
 }
 
 header {
@@ -17,10 +27,8 @@ header {
     top: 0;
     left: 0;
     width: 100%;
-    box-sizing: border-box;
     z-index: 1000;
 }
-
 
 .logo {
     height: 100%;
@@ -65,38 +73,162 @@ header {
     border-radius: 20px;
     cursor: pointer;
     font-size: 15px;
-    font-family: 'Momo Trust Display', sans-serif;
+    font-family: "Momo Trust Display", sans-serif;
 }
 
-.quadro {
-    background-color: #d3e2ef;
-    padding: 20px;
-    border-radius: 25px;
-    margin: 0 auto;
-    margin-top: 150px;
-    width: 700px;
+main {
+    width: 100%;
+    max-width: 580px;
+    margin: 40px auto 0;
+    padding: 0 20px;
 }
 
-.quadro img {
-    width: 100px;
-    margin: 20px;
-    border-radius: 100px;
+/* --- CARTÃO DE DESTAQUE (COR #1e222d DO SEU FORM) --- */
+.quadros {
+    background-color: #1e222d;
+    border-radius: 24px;
+    padding: 40px 24px;
+    text-align: center;
+    margin-bottom: 32px;
 }
 
-.topo{
+.foto {
+    width: 96px;
+    height: 96px;
+    background-color: #edf3f6;
+    border: 3px solid #3fd6e8;
+    border-radius: 50%;
+    margin: 0 auto 20px;
+    overflow: hidden;
     display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.nome p {
-   font-size: 30px;
+.foto img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
-.email p{
+.quadros h1 {
+    font-size: 32px;
+    font-weight: normal;
+    color: #ffffff;
+    margin-bottom: 6px;
+}
+
+.quadro p {
+    font-size: 16px;
+    color: #3fd6e8;
+    margin-bottom: 32px;
+}
+
+.resumoDados {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.dados {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.dados p {
+    font-size: 17px;
+    color: #ffffff;
+    margin-bottom: 4px;
+}
+
+.dados h2 {
+    font-size: 13px;
+    color: #cdd0d3;
+}
+
+.div-pai {
+    display: flex;
+    flex-direction: column;
+}
+
+.informacao {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 0;
+    border-bottom: 1px solid #d9e2e8;
+}
+
+.informacao:last-child {
+    border-bottom: none;
+}
+
+.informacao a {
+    background-color: #edf3f6;
+    color: #14181e;
+    border-radius: 30px;
+    padding: 10px 24px;
+    font-size: 15px;
+    text-decoration: none;
+    transition: background-color 0.2s, box-shadow 0.2s;
+}
+
+.informacao a:hover {
+    background-color: #d9e2e8;
+}
+
+.quadroInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.quadroInfo h2 {
+    font-size: 13px;
+    color: #14181e;
+}
+
+.quadroInfo p {
+    font-size: 18px;
+    color: #1e222d;
+}
+
+/* --- BOTÃO DE AÇÃO INFERIOR (VERDE #3ddc84 DO SEU FORM) --- */
+.editarTudo {
+    margin-top: 32px;
+    text-align: center;
+}
+
+.editarTudo a {
+    display: inline-block;
+    background-color: #3fd6e8;
+    color: #14181e;
+    text-decoration: none;
+    padding: 12px 45px;
+    border-radius: 12px;
     font-size: 20px;
-    color: #989a9c;
-    margin-bottom: 10px;
+    transition: filter 0.2s;
 }
 
-.edita{
-    
+.editarTudo a:hover {
+    filter: brightness(0.92);
+}
+
+@media (max-width: 768px) {
+    .pagina-perfil {
+        padding-top: 120px;
+    }
+    header {
+        height: auto;
+        flex-direction: column;
+        padding: 12px 20px;
+        gap: 10px;
+    }
+    .menu {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 14px;
+    }
 }

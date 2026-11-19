@@ -15,7 +15,6 @@ if (!$usuario) {
 }
 
 ?>
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -27,9 +26,10 @@ if (!$usuario) {
 </head>
 
 <body>
+
     <header>
         <div class="logo">
-            <a href="./index.php"><img src="imagens/findit-white.png"></a>
+            <a href="./index.php"><img src="imagens/findit-white.png" alt="findIt."></a>
         </div>
 
         <nav class="menu">
@@ -40,49 +40,74 @@ if (!$usuario) {
             <a href="./painelObjetos.php">Objetos guardados</a>
             <a href="./faq.php">Dúvidas</a>
             <a href="./FormContato.php">Contato</a>
-            <a href="./cadastraObj.php" class="btn-cadastrar"><button>+ Cadastrar item</button></a>
+            <a href="./cadastraObj.php" class="btn-cadastrar"><button type="button">+ Cadastrar item</button></a>
         </nav>
     </header>
 
-    <div class="container">
+    <main>
 
-        <div class="quadro">
-            <div class="topo">
-                <img src="imagens/perfil.jpg">
 
-                <div class="informacao">
-                    <div class="nome">
-                        <p><?= htmlspecialchars($usuario['nome']) ?></p>
-                    </div>
-                    
-                    <div class="email">
-                        <p><?= htmlspecialchars($usuario['email']) ?></p>
-                    </div>
+        <div class="quadros">
+            <div class="foto">
+                <img src="imagens/perfil.jpg" alt="Foto de <?= htmlspecialchars($usuario['nome']) ?>">
+            </div>
+
+            <h1><?= htmlspecialchars($usuario['nome']) ?></h1>
+
+            <div class="resumoDados">
+                <div class="dados">
+                    <p><?= htmlspecialchars($usuario['email']) ?></p>
+                    <h2>E-mail cadastrado</h2>
                 </div>
-            </div>
-
-            <div class="edita">
-                <h3>Nome</h3>
-                <p><?= htmlspecialchars($usuario['nome']) ?></p>
-            </div>
-
-            <div class="edita">
-                <h3>E-mail</h3>
-                <p><?= htmlspecialchars($usuario['email']) ?></p>
-            </div>
-
-            <div class="edita">
-                <h3>Telefone</h3>
-                <p><?= htmlspecialchars($usuario['telefone']) ?></p>
-            </div>
-
-            <div class="edita">
-                <h3>Tema</h3>
+                <div class="dados">
+                    <p><?= htmlspecialchars($usuario['telefone'] ?? 'Não informado') ?></p>
+                    <h2>Telefone</h2>
+                </div>
             </div>
         </div>
 
-        <a href="editaPerfil.php">edita</a>
-    </div>
+
+        <!-- Lista de Dados da Conta -->
+        <div class="div-pai">
+            <div class="informacao">
+                <div class="quadroInfo">
+                    <h2>Nome</h2>
+                    <p><?= htmlspecialchars($usuario['nome']) ?></p>
+                </div>
+                <a href="editaPerfil.php?campo=nome" class="btn-edit">Editar</a>
+            </div>
+
+            <div class="informacao">
+                <div class="quadroInfo">
+                    <h2>E-mail</h2>
+                    <p><?= htmlspecialchars($usuario['email']) ?></p>
+                </div>
+                <a href="editaPerfil.php?campo=email" class="btn-edit">Editar</a>
+            </div>
+
+            <div class="informacao">
+                <div class="quadroInfo">
+                    <h2>Telefone</h2>
+                    <p><?= htmlspecialchars($usuario['telefone'] ?? 'Não informado') ?></p>
+                </div>
+                <a href="editaPerfil.php?campo=telefone" class="btn-edit">Editar</a>
+            </div>
+
+            <div class="informacao">
+                <div class="quadroInfo">
+                    <h2>Tema</h2>
+                    <p><?= htmlspecialchars($usuario['tema'] ?? 'Padrão') ?></p>
+                </div>
+                <a href="editaPerfil.php?campo=tema">Editar</a>
+            </div>
+        </div>
+
+        <div class="editarTudo">
+            <a href="editaPerfil.php">Editar perfil</a>
+        </div>
+
+    </main>
+
 </body>
 
 </html>
