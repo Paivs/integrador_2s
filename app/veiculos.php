@@ -301,7 +301,7 @@ $urlFechar = $busca !== '' ? 'veiculos.php?busca=' . urlencode($busca) : 'veicul
                 <table class="tabela-diagnostico">
                   <thead>
                     <tr>
-                      <?php if ($ehFuncionario): ?>
+                      <?php if (usuarioEhFuncionario()): ?>
                         <th>Código</th>
                       <?php endif; ?>
                       <th>Componente</th>

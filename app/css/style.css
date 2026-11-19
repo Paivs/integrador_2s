@@ -759,12 +759,8 @@ td small {
   color: #202e36;
 }
 
-.tabela-diagnostico tbody tr:nth-child(odd) {
-  background: #f3f5f8;
-}
-
-.tabela-diagnostico tbody tr:nth-child(even) {
-  background: #ffffff;
+.tabela-diagnostico tbody tr {
+  background: #ffff;
 }
 
 .tabela-diagnostico .centro {
