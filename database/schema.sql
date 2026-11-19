@@ -93,7 +93,7 @@ CREATE TABLE IF NOT EXISTS manutencao_pecas (
     FOREIGN KEY (peca_id) REFERENCES pecas(id)
 );
 
--- Cliente fictício.
+-- Cliente e carro fictícios solicitados pelo grupo.
 INSERT INTO clientes (nome, telefone, email)
 SELECT 'Lucas Andrade Silva', '(11) 99999-0000', 'lucas.exemplo@carcare.local'
 WHERE NOT EXISTS (
@@ -114,7 +114,7 @@ WHERE veiculos.placa = 'BRA2E19'
   AND NOT EXISTS (
       SELECT 1 FROM manutencoes WHERE manutencoes.veiculo_id = veiculos.id
   );
-  
+
 -- Serviços iniciais para o cliente conseguir fazer uma solicitação.
 INSERT INTO servicos (nome, descricao, valor)
 SELECT 'Troca de óleo', 'Troca do óleo e verificação do filtro', 180.00
