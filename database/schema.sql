@@ -1,4 +1,3 @@
-
 CREATE DATABASE IF NOT EXISTS carcare
 CHARACTER SET utf8mb4
 COLLATE utf8mb4_unicode_ci;
@@ -94,7 +93,7 @@ CREATE TABLE IF NOT EXISTS manutencao_pecas (
     FOREIGN KEY (peca_id) REFERENCES pecas(id)
 );
 
--- Cliente fictício 
+-- Cliente e carro fictícios solicitados pelo grupo.
 INSERT INTO clientes (nome, telefone, email)
 SELECT 'Lucas Andrade Silva', '(11) 99999-0000', 'lucas.exemplo@carcare.local'
 WHERE NOT EXISTS (
@@ -127,4 +126,52 @@ WHERE NOT EXISTS (SELECT id FROM servicos WHERE nome = 'Revisão preventiva');
 
 INSERT INTO servicos (nome, descricao, valor)
 SELECT 'Alinhamento e balanceamento', 'Ajuste de direção e balanceamento das rodas', 160.00
+
 WHERE NOT EXISTS (SELECT id FROM servicos WHERE nome = 'Alinhamento e balanceamento');
+
+SET NAMES utf8mb4;
+
+CREATE TABLE IF NOT EXISTS codigos_falha (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  codigo VARCHAR(10) NOT NULL UNIQUE,
+  componente VARCHAR(150) NOT NULL,
+  descricao_falha VARCHAR(150) NOT NULL
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS veiculo_diagnosticos (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  veiculo_id INT NOT NULL,
+  codigo_falha_id INT NOT NULL,
+  funcionario_id INT NULL,
+  situacao VARCHAR(30) NOT NULL DEFAULT 'Com problema',
+  atualizado_em DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  UNIQUE KEY uk_veiculo_codigo (veiculo_id, codigo_falha_id)
+);
+
+INSERT IGNORE INTO codigos_falha (codigo, componente, descricao_falha) VALUES
+('12', 'Sensor de rotação e PMS', 'Sem sinal'),
+('13', 'Sonda lambda', 'Circuito aberto'),
+('14', 'Sensor de temperatura da água', 'Baixa tensão'),
+('15', 'Sensor de temperatura da água', 'Alta tensão'),
+('16', 'Sensor de detonação', 'Sem sinal'),
+('17', 'Eletroinjetor de combustível', 'Falha no circuito'),
+('18', 'Sensor de detonação', 'Sem regulagem do sinal'),
+('19', 'Sensor de rotação e PMS', 'Sinal incorreto'),
+('21', 'Sensor de posição da borboleta', 'Alta tensão'),
+('22', 'Sensor de posição da borboleta', 'Baixa tensão'),
+('24', 'Sensor de velocidade', 'Sem sinal'),
+('25', 'Eletroinjetores', 'Alta tensão'),
+('26', 'Eletroinjetor 2', 'Alta tensão'),
+('27', 'Eletroinjetor 3', 'Alta tensão'),
+('28', 'Eletroinjetor 4 / Relé da bomba', 'Alta tensão / Mau contato'),
+('29', 'Relé da bomba de combustível / Eletroinjetor 5', 'Baixa tensão / Alta tensão'),
+('31', 'Motor de passo / Válvula EGR', 'Sem sinal / Falha no gerenciamento de vácuo'),
+('32', 'Relé da bomba de combustível / Eletroinjetor 6', 'Alta tensão'),
+('33', 'Sensor de pressão absoluta / Eletroválvula EGR', 'Alta tensão / Baixa tensão'),
+('34', 'Sensor de pressão absoluta / Eletroválvula EGR', 'Baixa tensão / Alta tensão'),
+('35', 'Corretor de marcha lenta / Relé de partida a frio', 'Falha / Baixa tensão'),
+('37', 'Relé de partida a frio', 'Alta tensão'),
+('38', 'Sonda lambda', 'Baixa tensão'),
+('39', 'Sonda lambda', 'Alta tensão'),
+('41', 'Bobina de ignição (cilindros 2 e 3)', 'Alta tensão no comando'),
+('42', 'Bobina de ignição (cilindros 1 e 4) / Controle do avanço de ignição', 'Alta tensão / Falha no controle');

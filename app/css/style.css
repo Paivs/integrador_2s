@@ -6,7 +6,7 @@ body {
   margin: 0;
   font-family: "Manrope", Arial, sans-serif;
   color: #202e36;
-  background: white;
+  background: #f3f5f8;
 }
 
 input {
@@ -53,6 +53,13 @@ textarea {
 .perfil strong,
 .perfil span {
   display: block;
+}
+
+.marca .logo {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
 }
 
 .menu {
@@ -673,3 +680,118 @@ td small {
   }
 }
 
+/* Diagnóstico técnico de veículos */
+.link-diagnostico {
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: 2px;
+  background: #202e36;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.link-diagnostico:hover {
+  background: #151d23;
+}
+
+.link-diagnostico.com-pendencia {
+  background: #800c1f;
+}
+
+.link-diagnostico.com-pendencia:hover {
+  background: #3c0007;
+}
+
+.sem-pendencia {
+  color: #5f6d7b;
+  font-size: 12px;
+}
+
+.bloco-diagnostico {
+  margin-top: 28px;
+  padding: 24px;
+  background: #ffffff;
+  border: 1px solid #dde3e9;
+  border-radius: 2px;
+}
+
+.diagnostico-topo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.diagnostico-topo p {
+  margin: 0;
+  color: #5f6d7b;
+  font-size: 13px;
+}
+
+.tabela-diagnostico-box {
+  width: 100%;
+  overflow-x: auto;
+  border: 1px solid #d1d5db;
+}
+
+.tabela-diagnostico {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.tabela-diagnostico thead th {
+  background: #800c1f;
+  color: #ffffff;
+  font-weight: 700;
+  text-align: center;
+  padding: 11px 14px;
+  border: 1px solid #a3162d;
+}
+
+.tabela-diagnostico tbody td {
+  padding: 9px 14px;
+  border: 1px solid #d1d5db;
+  color: #202e36;
+}
+
+.tabela-diagnostico tbody tr {
+  background: #ffff;
+}
+
+.tabela-diagnostico .centro {
+  text-align: center;
+}
+
+.tabela-diagnostico .texto-problema,
+.tabela-diagnostico tr.linha-com-problema .texto-situacao {
+  color: #800c1f;
+  font-weight: 700;
+}
+
+.opcao-diagnostico {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.opcao-diagnostico input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  margin: 0;
+  accent-color: #800c1f;
+  cursor: pointer;
+}
+
+.diagnostico-rodape {
+  margin-top: 16px;
+  display: flex;
+  justify-content: flex-end;
+}

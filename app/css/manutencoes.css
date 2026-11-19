@@ -13,3 +13,209 @@
 #pagina-manutencoes .central p {
   font-size: 15px;
 }
+
+/* Card principal de agendamento do cliente */
+.bloco-manutencao {
+  background-color: #151d23;
+  color-scheme: dark;
+  margin-top: 32px;
+  padding: 28px;
+  display: grid;
+  grid-template-columns: 1.15fr 1fr 1fr;
+  gap: 28px;
+  align-items: center;
+}
+
+.bloco-manutencao h2,
+.bloco-manutencao h3,
+.bloco-manutencao p {
+  color: #ffffff;
+}
+
+.bloco-manutencao .coluna-mapa {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.bloco-manutencao .marca {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.bloco-manutencao .marca .logo {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.bloco-manutencao .marca h2 {
+  font-size: 24px;
+  margin: 0;
+  margin-left: 35px;
+}
+
+#mapa.maps {
+  width: 100%;
+  height: 250px;
+  overflow: hidden;
+}
+
+#mapa .maplibregl-popup-content {
+  color: #0f172a;
+}
+
+.bloco-manutencao .coluna-campos {
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+}
+
+.bloco-manutencao .campo-box {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  background-color: #800c1f;
+  padding: 8px 12px;
+  box-sizing: border-box;
+}
+
+.bloco-manutencao .campo-box span {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #ffffff;
+}
+
+.bloco-manutencao .campo-box select,
+.bloco-manutencao .campo-box input {
+  width: 100%;
+  border: none;
+  background: transparent;
+  font-size: 14px;
+  font-weight: 600;
+  color: #ffffff;
+  outline: none;
+}
+
+.bloco-manutencao .campo-box select option {
+  background-color: #151d23;
+  color: #ffffff;
+}
+
+.bloco-manutencao .campo-box input::placeholder {
+  color: rgba(255, 255, 255, 0.78);
+  opacity: 1;
+}
+
+.bloco-manutencao .campo-box input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+  cursor: pointer;
+}
+
+.bloco-manutencao .campo-box input:-webkit-autofill,
+.bloco-manutencao .campo-box input:-webkit-autofill:hover,
+.bloco-manutencao .campo-box input:-webkit-autofill:focus {
+  -webkit-text-fill-color: #ffffff;
+  -webkit-box-shadow: 0 0 0 1000px #800c1f inset;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+.lista-unidades {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 999;
+  background-color: #151d23;
+  border: 1px solid #800c1f;
+  border-top: none;
+  max-height: 190px;
+  overflow-y: auto;
+  display: none;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.45);
+}
+
+.lista-unidades.aberta {
+  display: block;
+}
+
+.lista-unidades button {
+  width: 100%;
+  text-align: left;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+  padding: 10px 12px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  display: block;
+}
+
+.lista-unidades button:last-child {
+  border-bottom: none;
+}
+
+.lista-unidades button:hover {
+  background-color: #800c1f;
+}
+
+.bloco-manutencao .linha-dupla {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.bloco-manutencao .coluna-preco {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 16px;
+}
+
+.bloco-manutencao .aviso-preco {
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: #e2e8f0;
+  max-width: 260px;
+  margin: 0;
+}
+
+.bloco-manutencao .valor-destaque {
+  font-size: 36px;
+  font-weight: 800;
+  color: #ffffff;
+}
+
+.bloco-manutencao .botao-solicitar {
+  background-color: #800c1f;
+  color: #ffffff;
+  border: none;
+  border-radius: 2px;
+  padding: 14px 26px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s, transform 0.1s;
+}
+
+.bloco-manutencao .botao-solicitar:hover {
+  background-color: #ffffff;
+  color: #800c1f;
+  transform: translateY(-1px);
+}
+
+/* Adaptação para telas menores */
+@media (max-width: 960px) {
+  .bloco-manutencao {
+    grid-template-columns: 1fr;
+  }
+}
