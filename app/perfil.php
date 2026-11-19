@@ -102,7 +102,6 @@ if (!$usuario) {
         </div>
 
         <div class="botoes">
-            <a href="editaPerfil.php" class="editarTudo">Editar perfil</a>
             <a href="logout.php" class="sairConta">Sair da conta</a>
         </div>
 

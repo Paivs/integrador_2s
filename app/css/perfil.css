@@ -202,21 +202,6 @@ main {
     flex-wrap: wrap;
 }
 
-.editarTudo {
-    display: inline-block;
-    background-color: #3fd6e8;
-    color: #14181e;
-    text-decoration: none;
-    padding: 12px 45px;
-    border-radius: 12px;
-    font-size: 20px;
-    transition: filter 0.2s;
-}
-
-.editarTudo:hover {
-    filter: brightness(0.92);
-}
-
 .sairConta {
     display: inline-block;
     background-color: #ff0000;
