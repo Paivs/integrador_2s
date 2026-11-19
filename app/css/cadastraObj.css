@@ -81,9 +81,8 @@ h3 {
 .linha-titulo {
   display: flex;
   align-items: center;
-  margin-left: 105px;
+  margin-left: 3px;
   gap: 8px;
-  margin-top: 15px;
 }
 
 .ordem {
@@ -92,32 +91,23 @@ h3 {
 
 .formulario {
   margin: 5px;
-  margin-left: 15px;
+  margin-left: 5px;
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
 .grupo-campo {
-  margin-bottom: 15px;
+  margin-bottom: 8px;
 }
 
 .grupo-campo input {
-  width: 50%;
-  max-width: 300px;
   padding: 10;
-  margin-left: 110px;
+  margin-left: 8px;
   height: 25px;
+  width: 100%;
   border: 2px solid black;
   border-radius: 15px;
-}
-
-.cadastro {
-  align-items: flex-start;
-  display: flex;
-  flex-direction: column;
-  width: fit-content;
-  margin-left: 140px;
 }
 
 select {
@@ -126,6 +116,10 @@ select {
   font-family: "Momo Trust Display", sans-serif;
   color: black;
   border-width: 2px;
+}
+
+option:hover{
+  background-color: #3fd6e8;
 }
 
 .resposta {
@@ -139,10 +133,9 @@ select {
 
 .circulos-container {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 10px;
   flex-wrap: wrap;
-  padding-left: 150px;
 }
 
 .oito {
@@ -155,13 +148,13 @@ select {
 
 
 .circulo {
-  width: 55px;
-  height: 55px;
+  width: 35px;
+  height: 35px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 36px;
+  font-size: 20px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -205,12 +198,20 @@ select {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  
+  margin-left: 40px;
 
 
-  h2 {
+  /* h2 {
     padding-left: 85px;
-  }
+  } */
+
+.cadastro {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: row;
+  gap: 5rem;
+  width: fit-content;
+}
 }
 
 .prateleira {
