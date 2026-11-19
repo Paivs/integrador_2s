@@ -52,13 +52,13 @@ $objetos = readAll($pdo, 'objetos', $where, $params);
 
         <nav class="menu">
             <a href="perfil.php" class="btn-perfil">
-                <img src="imagens/perfil.png" alt="Perfil">
+                <img src="imagens/perfil.jpg" alt="Perfil">
             </a>
             <a href="./sobre.php">Sobre</a>
             <a href="./painelObjetos.php">Objetos guardados</a>
             <a href="./faq.php">Dúvidas</a>
             <a href="./FormContato.php">Contato</a>
-            <a href="./CadastrarItem.php" class="btn-cadastrar"><button>+ Cadastrar item</button></a>
+            <a href="./cadastraObj.php" class="btn-cadastrar"><button>+ Cadastrar item</button></a>
         </nav>
     </header>
 

@@ -1,0 +1,236 @@
+@import url('https://fonts.googleapis.com/css2?family=Momo+Trust+Display&display=swap');
+
+* {
+    box-sizing: border-box;
+}
+
+.pagina-edita {
+    font-family: "Momo Trust Display", sans-serif;
+    background-color: #ffffff;
+    color: #14181e;
+    margin: 0;
+    padding-top: 70px;
+    padding-bottom: 60px;
+}
+
+header {
+    background-color: #000000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 40px;
+    height: 70px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.logo {
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    height: 100%;
+    width: 170px;
+    object-fit: contain;
+    display: block;
+}
+
+.menu {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.menu img {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+    flex-shrink: 0;
+}
+
+.menu a {
+    text-decoration: none;
+    color: #fffefe;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.menu button {
+    background-color: #eef3f6;
+    color: #000000;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 15px;
+    font-family: 'Momo Trust Display', sans-serif;
+}
+
+main {
+    flex: 1;
+    padding: 20px 16px;
+    text-align: center;
+}
+
+h1 {
+    margin: 20px 0 0;
+    font-size: 42px;
+    color: #14181e;
+}
+
+h2 {
+    margin: 6px 0 0;
+    font-size: 20px;
+    font-weight: normal;
+    color: #1e222d;
+}
+
+.caixa-erros {
+    max-width: 520px;
+    margin: 20px auto 0;
+    padding: 16px 22px;
+    border-radius: 16px;
+    background-color: #ffe5e5;
+}
+
+.texto-erro {
+    margin: 4px 0;
+    color: #b00020;
+    font-size: 16px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    max-width: 520px;
+    margin: 30px auto;
+    padding: 35px;
+    border-radius: 24px;
+    background-color: #1e222d;
+    text-align: left;
+}
+
+form label {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-size: 22px;
+    color: #ffffff;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="password"] {
+    width: 100%;
+    padding: 16px 22px;
+    border: none;
+    border-radius: 30px;
+    background-color: #edf3f6;
+    color: #14181e;
+    font-family: inherit;
+    font-size: 16px;
+    transition: background-color 0.2s, box-shadow 0.2s;
+}
+
+input[type="text"]:hover,
+input[type="email"]:hover,
+input[type="tel"]:hover,
+input[type="password"]:hover {
+    background-color: #d9e2e8;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="tel"]:focus,
+input[type="password"]:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px #3fd6e8;
+}
+
+fieldset {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin: 0;
+    padding: 0;
+    border: none;
+}
+
+legend {
+    margin-bottom: 8px;
+    padding: 0;
+    font-size: 22px;
+    color: #ffffff;
+}
+
+.opcao {
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    font-size: 18px;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+input[type="radio"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 25px;
+    height: 25px;
+    margin: 0;
+    padding: 0;
+    border-radius: 50%;
+    background-color: #edf3f6;
+    cursor: pointer;
+}
+
+input[type="radio"]:checked {
+    background-image: radial-gradient(circle, #3ddc84 38%, transparent 42%);
+}
+
+.botoes-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    margin-top: 10px;
+}
+
+.btn-cancelar {
+    padding: 12px 28px;
+    border-radius: 12px;
+    background-color: #edf3f6;
+    color: #14181e;
+    font-size: 20px;
+    text-decoration: none;
+    transition: background-color 0.2s;
+}
+
+.btn-cancelar:hover {
+    background-color: #d9e2e8;
+}
+
+form button[type="submit"] {
+    padding: 12px 45px;
+    border: none;
+    border-radius: 12px;
+    background-color: #3fd6e8;
+    color: #14181e;
+    font-family: inherit;
+    font-size: 22px;
+    cursor: pointer;
+    transition: filter 0.2s;
+}
+
+form button[type="submit"]:hover {
+    filter: brightness(0.92);
+}

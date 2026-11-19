@@ -1,16 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Momo+Trust+Display&display=swap');
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
 body {
-  background-color: white;
   font-family: "Momo Trust Display", sans-serif;
-  position: relative;
-  min-height: 100vh;
+  margin: 0;
+  padding-top: 70px;
 }
 
 header {
@@ -20,6 +13,12 @@ header {
   align-items: center;
   padding: 0 40px;
   height: 70px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  box-sizing: border-box;
+  z-index: 1000;
 }
 
 .logo {
@@ -42,9 +41,12 @@ header {
 }
 
 .menu img {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;   
+    display: block;
+    flex-shrink: 0;     
 }
 
 .menu a {
@@ -61,13 +63,16 @@ header {
   border: none;
   padding: 10px 18px;
   border-radius: 20px;
-  cursor: pointer;
   font-size: 15px;
+  font-weight: 400;
+  cursor: pointer;
 }
 
-h2 {
+h3 {
   padding: 8px;
   display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
   margin-left: 55px;
   color: black;
   font-size: 20px;
@@ -82,15 +87,15 @@ h2 {
 }
 
 .ordem {
-  margin-left: 10px;
-  font-weight: bold;
+  margin-left: 0;
 }
 
 .formulario {
   margin: 5px;
-  display: flex;
   margin-left: 15px;
+  display: flex;
   flex-direction: column;
+  justify-content: center;
 }
 
 .grupo-campo {
@@ -98,9 +103,13 @@ h2 {
 }
 
 .grupo-campo input {
-  width: 400px;
+  width: 50%;
+  max-width: 300px;
+  padding: 10;
   margin-left: 110px;
   height: 25px;
+  border: 2px solid black;
+  border-radius: 15px;
 }
 
 .cadastro {
@@ -108,6 +117,7 @@ h2 {
   display: flex;
   flex-direction: column;
   width: fit-content;
+  margin-left: 140px;
 }
 
 select {
@@ -123,6 +133,8 @@ select {
   color: #2a303a;
   display: block;
   margin-top: 5px;
+  width: 50%;
+  
 }
 
 .circulos-container {
@@ -130,7 +142,7 @@ select {
   flex-direction: column;
   gap: 10px;
   flex-wrap: wrap;
-  padding: 20px;
+  padding-left: 150px;
 }
 
 .oito {
@@ -140,6 +152,7 @@ select {
   flex-wrap: wrap;
   padding: 20px;
 }
+
 
 .circulo {
   width: 55px;
@@ -183,7 +196,7 @@ select {
   cursor: pointer;
   font-family: "Momo Trust Display", sans-serif;
   align-self: center;
-  margin: 10px 0 40px;
+  margin: 10px 0 80px;
 }
 
 .lado-direito {
@@ -192,20 +205,27 @@ select {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  
+
+
+  h2 {
+    padding-left: 85px;
+  }
 }
 
 .prateleira {
   position: absolute;
   right: 0;
-  top: 70px;      
-  bottom: 0;      
+  top: 70px;
+  bottom: 0;
   width: 50vw;
 }
 
 .prateleira img {
   width: 100%;
-  height: 100%;
+  height: 120vh;
   object-fit: cover;
   border-radius: 25px;
   display: block;
+  margin: 0;
 }

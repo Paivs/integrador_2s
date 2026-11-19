@@ -1,54 +1,113 @@
 <?php
 
+session_start();
+
 require_once __DIR__ . "/init.php";
 
+// TEMPORÁRIO: sem login ainda, usa o usuário 1 (Ana). Quando o login existir, tire o "?? 1".
+$idUsuario = (int) ($_SESSION['id_usuario'] ?? 1);
+
+$usuario = read($pdo, 'usuario', 'idUsuario = ?', [$idUsuario]);
+
+if (!$usuario) {
+    header('Location: login.php');
+    exit;
+}
+
 ?>
-
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Perfil</title>
+    <title>findIt. - Perfil do Usuário</title>
     <link rel="stylesheet" href="css/perfil.css">
 </head>
 
 <body>
+
     <header>
         <div class="logo">
-            <a href="./index.php"><img src="imagens/findit-white.png"></a>
+            <a href="./index.php"><img src="imagens/findit-white.png" alt="findIt."></a>
         </div>
 
         <nav class="menu">
             <a href="perfil.php" class="btn-perfil">
-                <img src="imagens/perfil.png" alt="Perfil">
+                <img src="imagens/perfil.jpg" alt="Perfil">
             </a>
             <a href="./sobre.php">Sobre</a>
             <a href="./painelObjetos.php">Objetos guardados</a>
             <a href="./faq.php">Dúvidas</a>
             <a href="./FormContato.php">Contato</a>
-            <a href="./CadastrarItem.php" class="btn-cadastrar"><button>+ Cadastrar item</button></a>
+            <a href="./cadastraObj.php" class="btn-cadastrar"><button type="button">+ Cadastrar item</button></a>
         </nav>
     </header>
 
-    <br>
-    <br>
-    <br>
-    <div class="container">
+    <main>
 
-        <img src="imagens/perfil.png">
 
-        <div class="lista-textos">
-            <h2>Nome de Usuário</h2>
-            <h3>Telefone</h3>
-            <h3>Email</h3>
-            <h3>Tema</h3>
-            <h3>Endereço</h3>
-            <h3>Forma de Pagamento</h3>
+        <div class="quadros">
+            <div class="foto">
+                <img src="imagens/perfil.jpg" alt="Foto de <?= htmlspecialchars($usuario['nome']) ?>">
+            </div>
+
+            <h1><?= htmlspecialchars($usuario['nome']) ?></h1>
+
+            <div class="resumoDados">
+                <div class="dados">
+                    <p><?= htmlspecialchars($usuario['email']) ?></p>
+                    <h2>E-mail cadastrado</h2>
+                </div>
+                <div class="dados">
+                    <p><?= htmlspecialchars($usuario['telefone'] ?? 'Não informado') ?></p>
+                    <h2>Telefone</h2>
+                </div>
+            </div>
         </div>
-    </div>
+
+
+        <!-- Lista de Dados da Conta -->
+        <div class="div-pai">
+            <div class="informacao">
+                <div class="quadroInfo">
+                    <h2>Nome</h2>
+                    <p><?= htmlspecialchars($usuario['nome']) ?></p>
+                </div>
+                <a href="editaPerfil.php?campo=nome" class="btn-edit">Editar</a>
+            </div>
+
+            <div class="informacao">
+                <div class="quadroInfo">
+                    <h2>E-mail</h2>
+                    <p><?= htmlspecialchars($usuario['email']) ?></p>
+                </div>
+                <a href="editaPerfil.php?campo=email" class="btn-edit">Editar</a>
+            </div>
+
+            <div class="informacao">
+                <div class="quadroInfo">
+                    <h2>Telefone</h2>
+                    <p><?= htmlspecialchars($usuario['telefone'] ?? 'Não informado') ?></p>
+                </div>
+                <a href="editaPerfil.php?campo=telefone" class="btn-edit">Editar</a>
+            </div>
+
+            <div class="informacao">
+                <div class="quadroInfo">
+                    <h2>Tema</h2>
+                    <p><?= htmlspecialchars($usuario['tema'] ?? 'Padrão') ?></p>
+                </div>
+                <a href="editaPerfil.php?campo=tema">Editar</a>
+            </div>
+        </div>
+
+        <div class="editarTudo">
+            <a href="editaPerfil.php">Editar perfil</a>
+        </div>
+
+    </main>
+
 </body>
 
 </html>

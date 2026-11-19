@@ -2,6 +2,8 @@
 
 body {
     font-family: "Momo Trust Display", sans-serif;
+    margin: 0; 
+    padding-top: 70px;
 }
 
 header {
@@ -11,6 +13,12 @@ header {
     align-items: center;
     padding: 0 40px;
     height: 70px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    box-sizing: border-box;
+    z-index: 1000; 
 }
 
 .logo {
@@ -36,6 +44,9 @@ header {
     width: 32px;
     height: 32px;
     border-radius: 50%;
+    object-fit: cover;   
+    display: block;
+    flex-shrink: 0;     
 }
 
 .menu a {

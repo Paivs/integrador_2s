@@ -16,7 +16,9 @@ require_once __DIR__ . "/init.php";
 <body>
     <header class="header-top">
         <div id="logo">
-            <img src="/css/imagens/logoLight.png" alt="Logo findIt">
+            <a href="index.php" class="btn-perfil">
+                <img src="/imagens/logoLight.png" alt="Logo findIt">
+            </a>
         </div>
         <div class="header-badge">
             <span class="pulse-dot"></span>
@@ -72,7 +74,7 @@ require_once __DIR__ . "/init.php";
             </div>
 
             <div class="right-panel">
-                <img src="/css/imagens/imgright.jpg" alt="Perdeu? A gente encontra.">
+                <img src="/imagens/imgright.jpg" alt="Perdeu? A gente encontra.">
             </div>
         </section>
     </main>

@@ -16,13 +16,13 @@
 
         <nav class="menu">
             <a href="perfil.php" class="btn-perfil">
-                <img src="imagens/perfil.png" alt="Perfil">
+                <img src="imagens/perfil.jpg" alt="Perfil">
             </a>
             <a href="./sobre.php">Sobre</a>
             <a href="./painelObjetos.php">Objetos guardados</a>
             <a href="./faq.php">Dúvidas</a>
             <a href="./FormContato.php">Contato</a>
-            <a href="./CadastrarItem.php" class="btn-cadastrar"><button>+ Cadastrar item</button></a>
+            <a href="./cadastraObj.php" class="btn-cadastrar"><button>+ Cadastrar item</button></a>
         </nav>
     </header>
 
@@ -31,12 +31,12 @@
         <h2>Algum problema ou dúvida, entre em contato com nosso suporte</h2>
 
         <form action="processaContato.php" method="post">
-            <label>Telefone:
-                <input type="tel" name="telefone" placeholder="exemplo: (11) 12345-6789" required>
+            <label>Nome:
+                <input type="text" name="nome" placeholder="exemplo: Marcio Henrique" required>
             </label>
 
-            <label>Nome:
-                <input type="text" name="nomeUsuario" placeholder="exemplo: Maria José" required>
+            <label>Telefone:
+                <input type="tel" name="telefone" placeholder="exemplo: (11) 12345-6789" required>
             </label>
 
             <label>Email:

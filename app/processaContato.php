@@ -2,21 +2,24 @@
 
 require_once __DIR__ . "/init.php"; 
 
-$nomeUsuario = trim($_POST['nomeUsuario'] ?? '');
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    header('Location: FormContato.php');
+    exit;
+}
+ 
+$nome = trim($_POST['nome'] ?? '');
+$telefone = ($_POST['telefone'] ?? '');
 $email    = trim($_POST['email'] ?? '');
 $assunto  = $_POST['assunto'] ?? '';
 $mensagem = trim($_POST['mensagem'] ?? '');
- 
+
 $erros = [];
-
-if ($_SERVER['REQUEST_METHOD'] == "POST") {
-    $nomeUsuario = trim($_POST['nomeUsuario'] ?? '');
-    $assunto  = $_POST['assunto'] ?? '';
-    $mensagem = trim($_POST['mensagem'] ?? '');
  
-    $erros = [];
-
-    if ($nomeUsuario === '') {
+if (strlen($telefone) < 11 || strlen($telefone) > 11) {
+    $erros[] = 'Telefone inválido. Informe o DDD e o número.';
+}
+ 
+if ($nome === '') {
     $erros[] = 'Informe o seu nome.';
     }
  
@@ -26,35 +29,19 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
  
     if ($mensagem === '') {
     $erros[] = 'Escreva uma mensagem.';
+}
+
+if (count($erros) === 0) {
+    try {
+ 
+        $sql = $pdo->prepare(
+            'INSERT INTO mensagem (nome, telefone, email, assunto, mensagem) VALUES (:nome, :telefone, :email, :assunto, :mensagem)');
+        $sql->execute(['nome' => $nome, 'telefone' => $telefone, 'email' => $email, 'assunto' => $assunto , 'mensagem' =>$mensagem]);
+    } catch (PDOException $e) {
+        $erros[] = $e->getMessage();
     }
-}
 
-    if (count($erros) === 0){
-
-        try{
-            $consulta = $pdo->prepare(
-                'INSERT INTO mensagem (nomeUsuario, assunto, mensagem) VALUES (:nomeUsuario, :assunto, :mensagem)');
-                $consulta->execute(['nomeUsuario' => $nomeUsuario, 'assunto' => $assunto, 'mensagem' => $mensagem]);
-                header(("Location: formContato.php"));
-                exit;
-        }catch(PDOException $erro){
-            error_log($erro->getMessage());
-            exit;
-        }
 }
- 
-//if (count($erros) === 0) {
-  //  try {
- 
-    //    $sql = 'INSERT INTO contato (nomeUsuario, assunto, mensagem)
-      //          VALUES (?, ?, ?, ?, ?)';
- 
-     //   $stmt = $pdo->prepare($sql);
-     //   $stmt->execute([$nomeUsuario, $email, $assunto, $mensagem]);
-  //  } catch (PDOException $e) {
-   //     $erros[] = $e->getMessage();
-   // }
-//}
 
 ?>
 
@@ -63,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="contato.css">
     <title>Contato</title>
 </head>
 <body>
@@ -76,7 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             <?php endforeach; ?>
         <?php else: ?>
             <h1>Mensagem recebida!</h1>
-            <h2>Obrigado pelo contato, <?= htmlspecialchars($nomeUsuario) ?>.</h2>
+            <h2>Obrigado pelo contato, <?= htmlspecialchars($nome) ?>.</h2>
         <?php endif; ?>
  
         <p><a href="FormContato.php">Voltar ao formulário</a></p>
