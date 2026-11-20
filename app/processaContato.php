@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ . "/init.php";
+require_once __DIR__ . "/init.php"; 
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     header('Location: FormContato.php');
@@ -21,17 +21,13 @@ if (strlen($telefone) < 11 || strlen($telefone) > 11) {
  
 if ($nome === '') {
     $erros[] = 'Informe o seu nome.';
-}
+    }
  
-if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-    $erros[] = 'Email inválido.';
-}
- 
-if ($assunto !== '' && !in_array($assunto, ['suporte', 'sugestao', 'reclamacao'])) {
+    if ($assunto !== '' && !in_array($assunto, ['suporte', 'sugestao', 'reclamacao'])) {
     $erros[] = 'Assunto inválido.';
-}
+    }
  
-if ($mensagem === '') {
+    if ($mensagem === '') {
     $erros[] = 'Escreva uma mensagem.';
 }
 
