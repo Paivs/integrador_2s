@@ -25,6 +25,7 @@ foreach ($objetos as $o) {
     <title>FindIt</title>
 
     <link rel="stylesheet" href="./css/style-index.css">
+    <link rel="icon" type="image/png" href="./imagens/finditDesenho.png">
 </head>
 
 <body>

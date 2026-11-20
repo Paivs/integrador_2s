@@ -233,6 +233,8 @@ header.header-top {
 }
 
 .erro {
+  margin-left: 30px;
+  width: 500px;
   color: var(--perdido);
   font-family: "Google Sans", sans-serif;
 }

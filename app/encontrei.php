@@ -2,6 +2,12 @@
 
 require_once __DIR__ . "/init.php";
 
+if (!isset($_SESSION['id_usuario'])) {
+    $_SESSION['voltar_para'] = 'encontrei.php?idObjeto=' . (int) ($_GET['idObjeto'] ?? 0);
+    header('Location: login.php?erro[]=' . urlencode('Faça login para informar que encontrou um objeto.'));
+    exit;
+}
+
 $id = (int) ($_GET['idObjeto'] ?? 0);
 
 $objeto = read($pdo, 'objetos', 'idObjeto = ?', [$id]);
@@ -50,6 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <title>Encontrou objeto</title>
 
     <link rel="stylesheet" href="./css/style-encontrei.css">
+    <link rel="icon" type="image/png" href="./imagens/finditDesenho.png">
 </head>
 
 <body>
@@ -118,7 +125,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 <div class="botoes">
                     <button type="submit">Enviar</button>
-                    <a href="./FormContato.php">Não é este</a>
                 </div>
             </form>
         </div>

@@ -2,6 +2,11 @@
 
 require_once __DIR__ . "/init.php";
 
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    header('Location: login.php');
+    exit;
+}
+
 $email = trim($_POST['email'] ?? '');
 $senha = $_POST['senha'] ?? '';
 
@@ -12,9 +17,9 @@ if (!$usuario || !password_verify($senha, $usuario['senha'])) {
     exit;
 }
 
-$_SESSION['id_usuario'] = $usuario['idUsuario'];
+session_regenerate_id(true);
+$_SESSION['id_usuario'] = (int) $usuario['idUsuario'];
 
-// Volta para a página que a pessoa queria acessar (se houver)
 $destino = $_SESSION['voltar_para'] ?? 'index.php';
 unset($_SESSION['voltar_para']);
 

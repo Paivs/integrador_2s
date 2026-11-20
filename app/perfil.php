@@ -22,6 +22,7 @@ if (!$usuario) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>findIt. - Perfil do Usuário</title>
     <link rel="stylesheet" href="css/perfil.css">
+    <link rel="icon" type="image/png" href="./imagens/finditDesenho.png">
 </head>
 
 <body>

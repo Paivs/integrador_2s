@@ -15,6 +15,7 @@ header {
     padding: 0 40px;
     height: 70px;
     position: fixed;
+    position: sticky;
     top: 0;
     left: 0;
     width: 100%;
@@ -204,15 +205,16 @@ select{
     border-radius: 10px;
 }
 
-.botoes a{
+.botoes button:hover {
     width: 100px;
-    text-decoration: none;
     font-family: "Momo Trust Display", sans-serif;
-    color: #f2f5f8;
-    border: 1px solid #e85a4f;
-    background-color: #e85a4f;
+    color: #5c656e;
+    font-size: 16px;
+    border: 1px solid #31b96e;
+    background-color: #31b96e;
     padding: 10px;
     border-radius: 10px;
+    transform: scale(1.001);
 }
 
 footer {

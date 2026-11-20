@@ -65,7 +65,10 @@ footer {
   z-index: 10;
 }
 
-#h3, #h1, #p2, #p1 {
+#h3,
+#h1,
+#p2,
+#p1 {
   display: flex;
   justify-content: center;
 }
@@ -133,20 +136,21 @@ input {
 }
 
 input:hover {
-    transform: translateX(5px);
-    box-shadow: 0 0 15px var(--primaria);
+  transform: translateX(5px);
+  box-shadow: 0 0 15px var(--primaria);
 }
 
 input[placeholder] {
-text-align: center;
+  text-align: center;
 }
 
-input:focus-visible{
+input:focus-visible {
   outline: 3px solid var(--primaria);
   outline-offset: 1px;
 }
 
-#bemvindo, #msg {
+#bemvindo,
+#msg {
   display: flex;
   text-align: center;
   flex-direction: column;
@@ -167,13 +171,13 @@ section {
 }
 
 #botao {
-  margin-top: 20px ;
+  margin-top: 20px;
 }
 
 .container-cadastro {
   display: flex;
   align-items: center;
-  gap: 8px; 
+  gap: 8px;
   margin-left: 170px;
 }
 
@@ -184,7 +188,7 @@ section {
 
 .container-sup {
   margin-top: 100px;
- margin-left: -90px; 
+  margin-left: -90px;
 }
 
 .right-panel {
@@ -199,7 +203,7 @@ section {
 .right-panel img {
   width: 100%;
   height: 100%;
-  object-fit: cover; 
+  object-fit: cover;
 }
 
 header.header-top {

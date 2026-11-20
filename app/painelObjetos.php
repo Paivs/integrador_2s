@@ -48,6 +48,7 @@ $objetos = readAll($pdo, 'objetos', $where, $params);
 
 
     <link rel="stylesheet" href="./css/style-painelObjetos.css">
+    <link rel="icon" type="image/png" href="./imagens/finditDesenho.png">
 </head>
 
 <body>
