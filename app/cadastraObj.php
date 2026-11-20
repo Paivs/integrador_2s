@@ -182,8 +182,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         </select>
                     </div>
                 
-
-                
                     <div class="linha-titulo">
                         <p class="ordem">5.</p>
                         <label for="status">
@@ -201,44 +199,41 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <p class="ordem">6.</p>
                         <p>Selecione o ícone do objeto:</p>
                     </div>
-                </div>
-            </div>
 
-            <div class="circulos-container">
-                <div class="oito">
-                    <label class="circulo"><input type="radio" name="emoji_escolhido" value="🍫" required>🍫</label>
-                    <label class="circulo"><input type="radio" name="emoji_escolhido" value="🥤">🥤</label>
-                    <label class="circulo"><input type="radio" name="emoji_escolhido" value="⌚">⌚</label>
-                    <label class="circulo"><input type="radio" name="emoji_escolhido" value="🌂">🌂</label>
-                    <label class="circulo"><input type="radio" name="emoji_escolhido" value="⚽">⚽</label>
-                    <label class="circulo"><input type="radio" name="emoji_escolhido" value="🛼">🛼</label>
-                    <label class="circulo"><input type="radio" name="emoji_escolhido" value="🎮">🎮</label>
-                    <label class="circulo"><input type="radio" name="emoji_escolhido" value="🧸">🧸</label>
-                </div>
+                    <div class="">
 
-                <div class="oito">
-                    <label class="circulo"><input type="radio" name="emoji_escolhido" value="👓">👓</label>
-                    <label class="circulo"><input type="radio" name="emoji_escolhido" value="🧥">🧥</label>
-                    <label class="circulo"><input type="radio" name="emoji_escolhido" value="🧢">🧢</label>
-                    <label class="circulo"><input type="radio" name="emoji_escolhido" value="👜">👜</label>
-                    <label class="circulo"><input type="radio" name="emoji_escolhido" value="💄">💄</label>
-                    <label class="circulo"><input type="radio" name="emoji_escolhido" value="💍">💍</label>
-                    <label class="circulo"><input type="radio" name="emoji_escolhido" value="🎧">🎧</label>
-                    <label class="circulo"><input type="radio" name="emoji_escolhido" value="📱">📱</label>
-                </div>
+                        <div class="circulos-container">
+                            <label class="circulo"><input type="radio" name="emoji_escolhido" value="🍫" required>🍫</label>
+                            <label class="circulo"><input type="radio" name="emoji_escolhido" value="🥤">🥤</label>
+                            <label class="circulo"><input type="radio" name="emoji_escolhido" value="⌚">⌚</label>
+                            <label class="circulo"><input type="radio" name="emoji_escolhido" value="🌂">🌂</label>
+                            <label class="circulo"><input type="radio" name="emoji_escolhido" value="⚽">⚽</label>
+                            <label class="circulo"><input type="radio" name="emoji_escolhido" value="🛼">🛼</label>
+                            <label class="circulo"><input type="radio" name="emoji_escolhido" value="🎮">🎮</label>
+                            <label class="circulo"><input type="radio" name="emoji_escolhido" value="🧸">🧸</label>
+                            <label class="circulo"><input type="radio" name="emoji_escolhido" value="👓">👓</label>
+                            <label class="circulo"><input type="radio" name="emoji_escolhido" value="🧥">🧥</label>
+                            <label class="circulo"><input type="radio" name="emoji_escolhido" value="🧢">🧢</label>
+                            <label class="circulo"><input type="radio" name="emoji_escolhido" value="👜">👜</label>
+                            <label class="circulo"><input type="radio" name="emoji_escolhido" value="💄">💄</label>
+                            <label class="circulo"><input type="radio" name="emoji_escolhido" value="💍">💍</label>
+                            <label class="circulo"><input type="radio" name="emoji_escolhido" value="🎧">🎧</label>
+                            <label class="circulo"><input type="radio" name="emoji_escolhido" value="📱">📱</label>
+                            <label class="circulo"><input type="radio" name="emoji_escolhido" value="💻">💻</label>
+                            <label class="circulo"><input type="radio" name="emoji_escolhido" value="📷">📷</label>
+                            <label class="circulo"><input type="radio" name="emoji_escolhido" value="📚">📚</label>
+                            <label class="circulo"><input type="radio" name="emoji_escolhido" value="📓">📓</label>
+                            <label class="circulo"><input type="radio" name="emoji_escolhido" value="💳">💳</label>
+                            <label class="circulo"><input type="radio" name="emoji_escolhido" value="🖊️">🖊️</label>
+                            <label class="circulo"><input type="radio" name="emoji_escolhido" value="🔑">🔑</label>
+                            <label class="circulo"><input type="radio" name="emoji_escolhido" value="🔨">🔨</label>
+                        </div>
+                        <button class="botao" type="submit">Cadastrar</button>
+                    </div>
+                    </div>
+                    
+            
 
-                <div class="oito">
-                    <label class="circulo"><input type="radio" name="emoji_escolhido" value="💻">💻</label>
-                    <label class="circulo"><input type="radio" name="emoji_escolhido" value="📷">📷</label>
-                    <label class="circulo"><input type="radio" name="emoji_escolhido" value="📚">📚</label>
-                    <label class="circulo"><input type="radio" name="emoji_escolhido" value="📓">📓</label>
-                    <label class="circulo"><input type="radio" name="emoji_escolhido" value="💳">💳</label>
-                    <label class="circulo"><input type="radio" name="emoji_escolhido" value="🖊️">🖊️</label>
-                    <label class="circulo"><input type="radio" name="emoji_escolhido" value="🔑">🔑</label>
-                    <label class="circulo"><input type="radio" name="emoji_escolhido" value="🔨">🔨</label>
-                </div>
-
-                <button class="botao" type="submit">Cadastrar</button>
             </div>
         </form>
     </div>
