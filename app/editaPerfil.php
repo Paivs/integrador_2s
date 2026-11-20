@@ -4,7 +4,7 @@ session_start();
 
 require_once __DIR__ . "/init.php";
 
-$idUsuario = (int) ($_SESSION['id_usuario'] ?? 1);   // TEMPORÁRIO: tirar o ?? 1 quando o login existir
+$idUsuario = (int) ($_SESSION['id_usuario'] ?? 0);
 $usuario   = read($pdo, 'usuario', 'idUsuario = ?', [$idUsuario]);
 
 if (!$usuario) {
@@ -12,22 +12,22 @@ if (!$usuario) {
     exit;
 }
 
-// Identifica qual campo foi clicado na URL (ex: editaPerfil.php?campo=nome)
+// Exige que um campo válido seja passado na URL (ex: editaPerfil.php?campo=nome)
 $camposPermitidos = ['nome', 'email', 'telefone', 'senha', 'tema'];
-$campo = $_GET['campo'] ?? 'todos';
+$campo = $_GET['campo'] ?? '';
 
 if (!in_array($campo, $camposPermitidos, true)) {
-    $campo = 'todos';
+    header('Location: perfil.php');
+    exit;
 }
 
-// Títulos dinâmicos para a página
+// Títulos dinâmicos para cada campo
 $titulos = [
     'nome'     => 'Editar Nome',
     'email'    => 'Editar E-mail',
     'telefone' => 'Editar Telefone',
     'senha'    => 'Alterar Senha',
-    'tema'     => 'Alterar Tema',
-    'todos'    => 'Editar Perfil Completo'
+    'tema'     => 'Alterar Tema'
 ];
 
 $erros = [];
@@ -35,8 +35,7 @@ $erros = [];
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $dados = [];
 
-    // Valida e prepara apenas o(s) campo(s) exibido(s)
-    if ($campo === 'nome' || $campo === 'todos') {
+    if ($campo === 'nome') {
         $nome = trim($_POST['nome'] ?? '');
         if ($nome === '') {
             $erros[] = 'Informe o seu nome.';
@@ -45,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
-    if ($campo === 'email' || $campo === 'todos') {
+    if ($campo === 'email') {
         $email = trim($_POST['email'] ?? '');
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             $erros[] = 'E-mail inválido.';
@@ -54,7 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
-    if ($campo === 'telefone' || $campo === 'todos') {
+    if ($campo === 'telefone') {
         $telefone = preg_replace('/\D/', '', $_POST['telefone'] ?? '');
         if (strlen($telefone) < 10 || strlen($telefone) > 11) {
             $erros[] = 'Telefone inválido. Informe o DDD e o número.';
@@ -63,16 +62,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
-    if ($campo === 'senha' || $campo === 'todos') {
+    if ($campo === 'senha') {
         $senha = $_POST['senha'] ?? '';
-        if ($campo === 'senha' && strlen($senha) < 6) {
+        if (strlen($senha) < 6) {
             $erros[] = 'A nova senha deve ter pelo menos 6 caracteres.';
-        } elseif ($senha !== '') {
+        } else {
             $dados['senha'] = password_hash($senha, PASSWORD_DEFAULT);
         }
     }
 
-    if ($campo === 'tema' || $campo === 'todos') {
+    if ($campo === 'tema') {
         $tema = $_POST['tema'] ?? 'claro';
         $dados['tema'] = in_array($tema, ['claro', 'escuro'], true) ? $tema : 'claro';
     }
@@ -83,7 +82,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             header('Location: perfil.php');
             exit;
         } catch (PDOException $e) {
-            if ((int) ($e->errorInfo[1] ?? 0) === 1062) {   // 1062 = valor repetido (e-mail UNIQUE)
+            if ((int) ($e->errorInfo[1] ?? 0) === 1062) {
                 $erros[] = 'Esse e-mail já está em uso.';
             } else {
                 error_log($e->getMessage());
@@ -100,7 +99,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>findIt. - <?= $titulos[$campo] ?></title>
+    <title>findIt - <?= $titulos[$campo] ?></title>
     <link rel="stylesheet" href="./css/editaPerfil.css">
 </head>
 
@@ -124,7 +123,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <main>
         <h1><?= $titulos[$campo] ?></h1>
-        <h2>Atualize suas informações abaixo</h2>
 
         <?php if ($erros): ?>
             <div class="caixa-erros">
@@ -136,35 +134,35 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         <form action="" method="post">
 
-            <?php if ($campo === 'nome' || $campo === 'todos'): ?>
+            <?php if ($campo === 'nome'): ?>
                 <label for="nome">
                     Nome
                     <input type="text" id="nome" name="nome" value="<?= htmlspecialchars($usuario['nome']) ?>" required>
                 </label>
             <?php endif; ?>
 
-            <?php if ($campo === 'email' || $campo === 'todos'): ?>
+            <?php if ($campo === 'email'): ?>
                 <label for="email">
                     E-mail
                     <input type="email" id="email" name="email" value="<?= htmlspecialchars($usuario['email']) ?>" required>
                 </label>
             <?php endif; ?>
 
-            <?php if ($campo === 'telefone' || $campo === 'todos'): ?>
+            <?php if ($campo === 'telefone'): ?>
                 <label for="telefone">
                     Telefone
                     <input type="tel" id="telefone" name="telefone" value="<?= htmlspecialchars($usuario['telefone'] ?? '') ?>" required>
                 </label>
             <?php endif; ?>
 
-            <?php if ($campo === 'senha' || $campo === 'todos'): ?>
+            <?php if ($campo === 'senha'): ?>
                 <label for="senha">
-                    <?= $campo === 'senha' ? 'Nova senha' : 'Nova senha (deixe vazio para não mudar)' ?>
-                    <input type="password" id="senha" name="senha" <?= $campo === 'senha' ? 'required' : '' ?>>
+                    Nova senha
+                    <input type="password" id="senha" name="senha" required>
                 </label>
             <?php endif; ?>
 
-            <?php if ($campo === 'tema' || $campo === 'todos'): ?>
+            <?php if ($campo === 'tema'): ?>
                 <fieldset>
                     <legend>Tema do sistema</legend>
                     <label class="opcao">

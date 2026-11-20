@@ -4,8 +4,7 @@ session_start();
 
 require_once __DIR__ . "/init.php";
 
-// TEMPORÁRIO: sem login ainda, usa o usuário 1 (Ana). Quando o login existir, tire o "?? 1".
-$idUsuario = (int) ($_SESSION['id_usuario'] ?? 1);
+$idUsuario = (int) ($_SESSION['id_usuario'] ?? 0);
 
 $usuario = read($pdo, 'usuario', 'idUsuario = ?', [$idUsuario]);
 
@@ -102,8 +101,8 @@ if (!$usuario) {
             </div>
         </div>
 
-        <div class="editarTudo">
-            <a href="editaPerfil.php">Editar perfil</a>
+        <div class="botoes">
+            <a href="logout.php" class="sairConta">Sair da conta</a>
         </div>
 
     </main>

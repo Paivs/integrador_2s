@@ -68,6 +68,10 @@ header {
     font-size: 15px;
 }
 
+.busca{
+    margin-top: 100px;
+}
+
 .busca form {
     display: flex;
     font-family: "Momo Trust Display", sans-serif;
@@ -95,6 +99,7 @@ header {
 
 .busca button {
     margin-right: 20px;
+    
     padding: 10px;
     width: 100px;
     background-color: blue;
@@ -192,7 +197,7 @@ header {
 }
 
 .fundo{
-    background-color: #f3f5f7;
+    /* background-color: #f3f5f7; */
     padding: 10px;
     border-radius: 25px;
 }

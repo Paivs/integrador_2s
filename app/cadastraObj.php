@@ -2,6 +2,12 @@
 
 require_once __DIR__ . "/init.php";
 
+if (!isset($_SESSION['id_usuario'])) {
+    $_SESSION['voltar_para'] = 'cadastraObj.php';
+    header('Location: login.php');
+    exit;
+}
+
 $categorias = [
     'acessorios'      => 'Acessórios',
     'bolsas_mochilas' => 'Bolsas e Mochilas',
@@ -72,7 +78,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         try {
             create($pdo, 'objetos', [
-                'nomeUsuario'     => (int) ($_SESSION['id_usuario'] ?? 1), // TEMPORÁRIO: tirar o ?? 1 quando o login existir
+                'nomeUsuario'     => (int) ($_SESSION['id_usuario']),
                 'nome'            => $nome,
                 'descricao'       => $descricao,
                 'localEncontrado' => $local,
