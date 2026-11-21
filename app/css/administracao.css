@@ -119,3 +119,8 @@ body {
 .delBranco {
     color: rgb(255, 255, 255);
 }
+
+.erro {
+    color: red;
+    font-size: 14px;
+}
