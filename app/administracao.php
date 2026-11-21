@@ -16,6 +16,26 @@ $equipes = readAll($pdo, "equipes");
     
     <div class="tudo">
         <?php require_once __DIR__ . "/cabecalho.php" ?>
+
+        <?php if( $_SERVER['REQUEST_METHOD'] == "GET" && isset($_GET['erro'])):?>
+            <div class="erro">
+                <?php if($_GET['erro'] == "HORARIO_PASSADO"): ?>
+                    <p>O horário do torneio não pode ser no passado.</p>
+                <?php elseif($_GET['erro'] == "NOME_INVALIDO"): ?>
+                    <p>O nome do torneio é inválido.</p>
+                <?php elseif($_GET['erro'] == "FORMATO_INVALIDO"): ?>
+                    <p>O formato do torneio é inválido.</p>
+                <?php elseif($_GET['erro'] == "JOGADORES_INVALIDO"): ?>
+                    <p>A quantidade de jogadores deve ser maior que 0.</p>
+                <?php elseif($_GET['erro'] == "TAXA_INVALIDA"): ?>
+                    <p>A taxa do torneio não pode ser negativa.</p>
+                <?php elseif($_GET['erro'] == "ID_NAO_ENCONTRADO"): ?>
+                    <p>ID do torneio não encontrado.</p>
+                <?php elseif($_GET['erro'] == "TORNEIO_JA_PASSOU"): ?>
+                    <p>A data do torneio não pode ser no passado.</p>
+                <?php endif; ?>
+            </div>
+        <?php endif; ?>
         
         <div class="admin-list-container">
             <div class="list-header">
@@ -31,7 +51,8 @@ $equipes = readAll($pdo, "equipes");
                         <span class="detalhes-item">
                             <?= htmlspecialchars($t['data_torneio']) ?> às <?= htmlspecialchars($t['horainit_torneio']) ?> | 
                             <?= htmlspecialchars($t['format_torneio']) ?> | 
-                            <?= htmlspecialchars($t['qnt_jogadores']) ?> Jogadores | 
+                            <?= htmlspecialchars($t['qnt_jogadores']) ?> Jogadores | Jogo:
+                            <?= htmlspecialchars($t['nmjogo_torneio']) ?> | 
                             Taxa: <?= htmlspecialchars($t['taxa']) ?>
                         </span>
                     </div>
