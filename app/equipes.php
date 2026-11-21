@@ -20,6 +20,12 @@ if (!empty($busca)) {
     $equipes = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 }
 
+$temLogo = isset($_SESSION['logoSelecionada']) && !empty($_SESSION['logoSelecionada']);
+$caminhoLogo = "";
+if (!empty($_SESSION['logoSelecionada'])) {
+    $caminhoLogo = "./img/logos/" . $_SESSION['logoSelecionada'];
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -60,8 +66,15 @@ if (!empty($busca)) {
             <div class="linha-superior">
                 
                 <button type="button" popovertarget="popup-logos" class="logo" id="btn-abrir-logos">
-                    <span id="texto-logo">ESCOLHA UMA LOGO</span>
-                    <img id="preview-logo" src="" alt="Logo selecionada" style="display: none; width: 70%; height: 100%; object-fit: cover;">
+                    <?php if (empty($caminhoLogo)): ?>
+                        <span id="texto-logo">ESCOLHA UMA LOGO</span>
+                    <?php else: ?>
+                        <img id="preview-logo" class="logoEscolhida"
+                        src="<?= htmlspecialchars($caminhoLogo) ?>" 
+                        alt="Logo selecionada" 
+                        style="width: 120px; height: 100px; object-fit: contain; display: block;"
+                        > 
+                        <?php endif; ?>
                 </button>
 
                 <div id="popup-logos" popover class="escolha-logo">
@@ -106,6 +119,10 @@ if (!empty($busca)) {
                         ?>
                     <?php endforeach ?>
 
+                    <?php if(isset($_GET['id']) && isset($_SESSION['logoEquipe'][$_GET['id']])){
+                        print($_SESSION['logoequipe'][$_GET['id']]);
+                    } ?>
+
                     <button type="button" popovertarget="popup-logos" popovertargetaction="hide">
                             Fechar
                     </button>
@@ -145,18 +162,22 @@ if (!empty($busca)) {
             <table class="tabela-equipes">
                 <thead>
                     <tr>
-                        <th><i>Escudo</i></th>
-                        <th><i>Nome</i></th>
-                        <th><i>Jogo</i></th>
+                            <th><i>Escudo</i></th>
+                            <th><i>Nome</i></th>
+                            <th><i>Jogo</i></th>
+                            <th><i>Descrição</i></th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php if (!empty($equipes)): ?>
                         <?php foreach ($equipes as $e): ?>
                             <tr>
-                                <td><img src="./img/logos/<?= htmlspecialchars($e['img']) ?>" alt="<?= htmlspecialchars($e['nome']) ?>" class="img-equipe"></td>
-                                <td><?= htmlspecialchars($e['nome']) ?></td>
-                                <td><?= htmlspecialchars($e['jogo_equipe']) ?></td>
+                                <div class="conteudos">
+                                    <td><img src="./img/logos/<?= htmlspecialchars($e['img']) ?>" alt="<?= htmlspecialchars($e['nome']) ?>" class="img-equipe"></td>
+                                    <td><?= htmlspecialchars($e['nome']) ?></td>
+                                    <td><?= htmlspecialchars($e['jogo_equipe']) ?></td>
+                                    <td><span><?= htmlspecialchars($e['descricao']) ?></span></td> 
+                                </div>
                             </tr>
                         <?php endforeach; ?>
                     <?php else: ?>
@@ -167,6 +188,7 @@ if (!empty($busca)) {
                 </tbody>
             </table>
         </div>
+        <?php require_once __DIR__ . "/rodape.php" ?>
     </section>
 </body>
 

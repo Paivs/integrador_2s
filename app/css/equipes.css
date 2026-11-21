@@ -79,7 +79,7 @@
 }
 
 .fundo-equipes {
-    background-image: url('./img/preto2.jpg');
+    background-image: url('/GameHub/app/img/preto.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -127,16 +127,42 @@
     color: #ffffff;
     border-radius: 8px;
     overflow: hidden;
+    table-layout: fixed;
 }
 
-.tabela-equipes th, 
+.tabela-equipes th:nth-child(1),
+.tabela-equipes td:nth-child(1) {
+    width: 10%; 
+}
+
+.tabela-equipes th:nth-child(2),
+.tabela-equipes td:nth-child(2) {
+    width: 15%; 
+}
+
+.tabela-equipes th:nth-child(3),
+.tabela-equipes td:nth-child(3) {
+    width: 18%; 
+}
+
+.tabela-equipes th:nth-child(4),
+.tabela-equipes td:nth-child(4) {
+    width: 57%; 
+}
+
+
 .tabela-equipes td {
-    padding: 12px 16px;
+    padding: 20px 16px;
     border-bottom: 1px solid #333333;
-    text-align: left;
+    text-align: center;
     font-family: "Bebas Neue", sans-serif;
     font-size: 20px;
 }
+
+.tabela-equipes td span{
+    font-size: 20px;
+}
+
 
 .tabela-equipes th {
     background-color: #111111;
@@ -398,4 +424,11 @@
     border-radius: 16px;
     border: solid ;
     color: #f4892f;
+}
+
+.logoEscolhida{
+    background-color: #000000;
+    padding: 8px;
+    border: #f4892f solid 5px;
+    border-radius: 16px;
 }

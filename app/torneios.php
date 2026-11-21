@@ -22,7 +22,7 @@ $torneios = readAll($pdo, "torneios");
         <div class="texto">
             <h1>SEU PRÓXIMO<br><span>TORNEIO</span><br>COMEÇA <span>AQUI</span></h1>
             <p>CRIE CAMPEONATOS, REÚNA EQUIPES<br>DISPUTE PARTIDAS E CONQUISTE O TOPO DO RANKING.</p>
-            <a href="">CRIAR TORNEIO</a>
+            <a href="./criarTorneio.php">CRIAR TORNEIO</a>
         </div>
     </section>
 
