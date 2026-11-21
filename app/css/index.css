@@ -1,0 +1,170 @@
+
+.tudo{
+  background-color: black;
+}
+
+.banner img {
+    width: 100%;
+    image-rendering: crisp-edges;
+    image-rendering: -webkit-optimize-contrast;
+    height: auto;
+    display: block;
+}
+
+.texto-sobreposto {
+  position: absolute; 
+  top: 70%; 
+  right: 60%; 
+  color: rgb(235, 120, 26); 
+  font-size: 3em; 
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; 
+  font-weight: 600; 
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.texto-sobreposto2 {
+  position: absolute; 
+  top: 80%; 
+  right: 62%; 
+  margin-top: 15px;
+  margin-left: 10px;
+  color: rgb(255, 255, 255); 
+  font-size: 2.7em; 
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; 
+  font-weight: 600; 
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.texto-sobreposto3 {
+  position: absolute; 
+  top: 86%; 
+  right: 66%; 
+  margin-top: 50px;
+  margin-trim: 20px;
+  color: rgb(255, 255, 255); 
+  font-size: 2em; 
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; 
+  font-weight: 600; 
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.saiba a {
+position: absolute; 
+top: 91.5%; 
+right: 53%; 
+color: rgb(235, 120, 26); 
+font-size: 2em; 
+font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; 
+font-weight: 600; 
+background: transparent;
+border: none;
+text-decoration: none;
+}
+
+.saiba a:hover {
+  color: #ffffff;
+  transform: scale(1.2);
+  transition: transform 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+.preto {
+  background-color: rgb(0, 0, 0);
+}
+
+.explorar {
+  margin-left: 450px;
+  color: rgb(255, 255, 255); 
+  font-size: 2em; 
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; 
+  font-weight: 600; 
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+  margin-top: -5;
+}
+
+
+.outros {
+  margin-left: 500px;
+  color: rgb(255, 255, 255); 
+  font-size: 2em; 
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; 
+  font-weight: 600; 
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.exploração{
+  color: rgb(235, 120, 26);
+}
+
+.jogos {
+  color: rgb(235, 120, 26);
+}
+
+.video-contentor {
+position: relative; 
+width: 100%;
+max-width: 800px; 
+overflow: hidden; 
+}
+
+.video-contentor video {
+  width: 100%;
+  display: block; 
+}
+
+.seccao-video-fundo {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background: #000;
+  background-color: black;
+}
+
+.seccao-video-fundo video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  transform: translate(-50%, -50%);
+  object-fit: cover;
+  z-index: 1;
+  
+}
+
+.fundoTorneios{
+  background-color: black;
+  margin-top: 75px;
+}
+
+.torneios a {
+
+color: rgb(235, 120, 26); 
+font-size: 4.3em; 
+font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; 
+font-weight: 800; 
+background: transparent;
+border: none;
+text-decoration: none;
+margin-left: 725px;
+
+}
+
+.torneios:hover {
+  color: #ffffff;
+  transform: scale(1.2);
+  transition: transform 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+.torneios a:hover {
+  color: #ffffff;
+}
+
+
+
+
+

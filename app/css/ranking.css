@@ -1,0 +1,204 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #000;
+    color: white;
+    font-family: Arial, sans-serif;
+}
+
+.ranking-container {
+    width: 100%;
+    padding: 45px 20px 80px;
+}
+
+
+
+.barra-pesquisa {
+    display: flex;
+    width: 800px;
+    max-width: 100%;
+    height: 55px;
+    margin: 0 auto 65px;
+    border: 2px solid #ccc;
+    border-radius: 25px;
+    overflow: hidden;
+    background-color: #e5e5e5;
+}
+
+.barra-pesquisa input {
+    flex: 1;
+    min-width: 0;
+    border: none;
+    outline: none;
+    padding: 15px;
+    font-size: 14px;
+    background-color: #e5e5e5;
+}
+
+.barra-pesquisa button {
+    width: 80px;
+    border: none;
+    background-color: #ff5722;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.barra-pesquisa button:hover {
+    background-color: #e94b1b;
+}
+
+
+
+.tabela-ranking {
+    width: 1100px;
+    max-width: 100%;
+    margin: auto;
+    background-color: #111;
+    border-radius: 7px;
+    overflow: hidden;
+}
+
+.tabela-ranking table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+
+.tabela-ranking th {
+    height: 55px;
+    padding: 12px;
+    text-align: left;
+    color: #ff9d24;
+    font-family: "Bebas Neue", "Oswald", Impact, sans-serif;
+    font-size: 25px;
+    font-style: italic;
+    border-bottom: 1px solid #333;
+}
+
+.tabela-ranking th:nth-child(1) {
+    width: 55%;
+}
+
+.tabela-ranking th:nth-child(2) {
+    width: 60%;
+}
+
+.tabela-ranking th:nth-child(3) {
+    width: 50%;
+}
+
+
+
+.tabela-ranking td {
+    height: 68px;
+    padding: 12px;
+    border-bottom: 1px solid #333;
+    font-family: Georgia, serif;
+    font-size: 14px;
+}
+
+.tabela-ranking tr:last-child td {
+    border-bottom: none;
+}
+
+
+
+.coluna-place {
+    padding-left: 25px !important;
+    font-size: 20px !important;
+    font-weight: bold;
+    color: #ff9d24;
+}
+
+
+
+.info-player {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.logo-equipe {
+    width: 44px;
+    height: 44px;
+    object-fit: contain;
+}
+
+.dados-player {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.nome-player {
+    font-weight: bold;
+    color: rgba(255, 255, 255, 0.938);
+    font-family: "Bebas Neue", "Oswald", Impact, sans-serif;
+    font-size: 20px;
+}
+
+.nome-equipe {
+    font-size: 11px;
+    color: #999;
+    font-family: "Bebas Neue", "Oswald", Impact, sans-serif;
+    font-size: 15px;
+}
+
+
+
+.coluna-pontuacao {
+    font-weight: bold;
+    color: white;
+    
+    
+}
+
+.coluna-pontuacao span {
+    color: #ff9d24;
+    font-size: 11px;
+    margin-left: 5px;
+
+}
+
+
+
+.sem-resultados {
+    text-align: center;
+    color: #999;
+    padding: 30px !important;
+}
+
+
+
+@media (max-width: 650px) {
+
+    .ranking-container {
+        padding: 30px 10px;
+    }
+
+    .barra-pesquisa {
+        margin-bottom: 40px;
+    }
+
+    .tabela-ranking th {
+        font-size: 18px;
+    }
+
+    .tabela-ranking td {
+        font-size: 12px;
+        padding: 8px;
+    }
+
+    .logo-equipe {
+        width: 32px;
+        height: 32px;
+    }
+
+}
