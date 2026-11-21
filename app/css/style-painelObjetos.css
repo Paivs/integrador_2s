@@ -68,44 +68,109 @@ header {
     font-size: 15px;
 }
 
-.busca{
-    margin-top: 100px;
+.busca {
+    position: sticky;
+    top: 82px;                     
+    z-index: 900;
+    max-width: 1100px;
+    margin: 24px auto 30px;
+    padding: 14px 18px;
+    box-sizing: border-box;
+    border-radius: 18px;
+    background: rgba(238, 243, 246, 0.55);
+    -webkit-backdrop-filter: blur(14px) saturate(160%);
+    backdrop-filter: blur(14px) saturate(160%);
+    border: 1px solid rgba(255, 255, 255, 0.65);
+    box-shadow: 0 6px 16px rgba(20, 24, 30, 0.18);
+}
+
+/* Navegador sem suporte ao vidro: fundo quase opaco para o texto continuar legível */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .busca {
+        background: rgba(238, 243, 246, 0.96);
+    }
 }
 
 .busca form {
     display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: 14px;
     font-family: "Momo Trust Display", sans-serif;
-    justify-content: space-between;
-    border-radius: 25px;
-    padding: 10px;
-    margin-bottom: 70px;
 }
 
-.busca input {
-    margin-right: 20px;
-    padding: 5px;
-    border-radius: 10px;
-    border: 1px solid rgb(164, 170, 168);
-    background-color: rgb(164, 170, 168);
+.busca .campo {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
 }
 
+.busca .campo-busca {
+    flex: 1 1 220px;
+}
+
+.busca label {
+    font-size: 14px;
+    color: #14181E;
+}
+
+.busca input,
 .busca select {
-    margin-right: 20px;
-    padding: 5px;
-    border-radius: 10px;
-    border: 1px solid rgb(164, 170, 168);
-    background-color: rgb(164, 170, 168);
+    font: inherit;
+    font-size: 15px;
+    color: #14181E;
+    background: #fff;
+    height: 40px;
+    padding: 0 12px;
+    box-sizing: border-box;
+    border: 2px solid #14181E;
+    border-radius: 12px;
+}
+
+.busca input:focus,
+.busca select:focus {
+    outline: 3px solid #3FD6E8;
+    outline-offset: 1px;
+}
+
+.busca option:hover {
+    background-color: #3FD6E8;
+}
+
+.acoes-filtro {
+    display: flex;
+    align-items: center;
+    gap: 12px;
 }
 
 .busca button {
-    margin-right: 20px;
-    
-    padding: 10px;
-    width: 100px;
-    background-color: blue;
-    color: white;
-    border-radius: 10px;
-    border: 1px solid blue;
+    font: inherit;
+    font-size: 15px;
+    height: 40px;
+    padding: 0 22px;
+    background-color: #3FD6E8;
+    color: #14181E;
+    border: 2px solid #14181E;
+    border-radius: 12px;
+    cursor: pointer;
+}
+
+.busca button:hover {
+    background-color: #14181E;
+    color: #EEF3F6;
+}
+
+.limpar {
+    color: #2A303A;
+    font-size: 14px;
+}
+
+/* No celular o filtro fixo ocuparia a tela toda, então ele rola junto */
+@media (max-width: 640px) {
+    .busca {
+        position: static;
+        margin: 16px;
+    }
 }
 
 .telaObjetos {

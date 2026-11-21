@@ -48,7 +48,6 @@ $objetos = readAll($pdo, 'objetos', $where, $params);
 
 
     <link rel="stylesheet" href="./css/style-painelObjetos.css">
-    <link rel="icon" type="image/png" href="./imagens/finditDesenho.png">
 </head>
 
 <body>
@@ -75,33 +74,35 @@ $objetos = readAll($pdo, 'objetos', $where, $params);
 
             <div class="busca">
                 <form action="" method="get">
-                    <div>
+                    <div class="campo campo-busca">
                         <label for="pesquisa">Qual é o objeto perdido?</label>
                         <input type="text" name="pesquisa" id="pesquisa" placeholder="Pesquise aqui..."
                             value="<?= htmlspecialchars($pesquisa) ?>">
+                    </div>
 
+                    <div class="campo">
                         <label for="categoria">Categoria</label>
                         <select name="categoria" id="categoria">
                             <option value="">Todas</option>
-                            <option value="acessórios">Acessórios</option>
-                            <option value="bolsas e mochilas">Bolsas e Mochilas</option>
-                            <option value="documentos">Documentos</option>
-                            <option value="eletrônicos">Eletrônicos</option>
-                            <option value="roupas">Roupas</option>
-                            <option value="outros">Outros</option>
-                        </select>
-
-                        <label for="status">Status do Objeto</label>
-                        <select name="status" id="status">
-                            <option value="">Todos</option>
-                            <option value="perdido">Perdido</option>
-                            <option value="encontrado">Encontrado</option>
-                            <option value="abandonado">Abandonado</option>
+                            <?php foreach (['Acessórios', 'Bolsas e Mochilas', 'Documentos', 'Eletrônicos', 'Roupas', 'Outros'] as $c): ?>
+                                <option value="<?= htmlspecialchars($c) ?>" <?= $categoria === $c ? 'selected' : '' ?>><?= htmlspecialchars($c) ?></option>
+                            <?php endforeach; ?>
                         </select>
                     </div>
 
-                    <div>
+                    <div class="campo">
+                        <label for="status">Status do Objeto</label>
+                        <select name="status" id="status">
+                            <option value="">Todos</option>
+                            <?php foreach (['Perdido', 'Encontrado', 'Doado'] as $s): ?>
+                                <option value="<?= htmlspecialchars($s) ?>" <?= $status === $s ? 'selected' : '' ?>><?= htmlspecialchars($s) ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+
+                    <div class="acoes-filtro">
                         <button type="submit">Buscar</button>
+                        <a href="./painelObjetos.php" class="limpar">Limpar</a>
                     </div>
                 </form>
             </div>
@@ -111,7 +112,16 @@ $objetos = readAll($pdo, 'objetos', $where, $params);
                     <p>Não encontramos nenhum objeto</p>
                 <?php endif; ?>
 
+                <?php
+                $classeStatus = [
+                    'Perdido'    => 'perdido',
+                    'Encontrado' => 'encontrado',
+                    'Doado'      => 'doado',
+                ];
+                ?>
+
                 <?php foreach ($objetos as $o): ?>
+                    <?php $classe = $classeStatus[$o['status_objeto']] ?? ''; ?>
                     <div class="objeto">
                         <div class="emoji">
                             <p><?= htmlspecialchars($o['imagemObjeto']) ?></p>
@@ -119,7 +129,7 @@ $objetos = readAll($pdo, 'objetos', $where, $params);
                         <div class="conteudo">
                             <p>Nome: <?= htmlspecialchars($o['nome']) ?></p>
                             <p>Descrição: <?= htmlspecialchars($o['descricao']) ?></p>
-                            <p>Status: <?= htmlspecialchars($o['status_objeto']) ?></p>
+                             <p>Status: <span class="selo selo-<?= $classe ?>"><?= htmlspecialchars($o['status_objeto']) ?></span></p>
                             <p>Categoria: <?= htmlspecialchars($o['categoria']) ?></p>
                             <?php if ($o['status_objeto'] == 'Perdido'): ?>
                                 <div class="botao">

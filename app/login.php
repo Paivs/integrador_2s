@@ -48,14 +48,16 @@ foreach ($objetos as $o) {
         <section class="displayFlex">
             <div class="left-side">
                 <div class="container-sup">
-                    <div class="erro">
+                    <div>
                         <?php if (isset($_GET['erro']) && is_array($_GET['erro'])): ?>
-                            <h3>Ocorreram os seguintes erros:</h3>
-                            <ul>
-                                <?php foreach (array_filter($_GET['erro'], 'is_string') as $erro): ?>
-                                    <li><?= htmlspecialchars($erro) ?></li>
-                                <?php endforeach; ?>
-                            </ul>
+                            <div class="erro" role="alert">
+                                <h3>Ocorreram os seguintes erros:</h3>
+                                <ul>
+                                    <?php foreach (array_filter($_GET['erro'], 'is_string') as $erro): ?>
+                                        <li><?= htmlspecialchars($erro) ?></li>
+                                    <?php endforeach; ?>
+                                </ul>
+                            </div>
                         <?php endif; ?>
                     </div>
                     <h1 id="bemvindo">Que bom ter você de volta.</h1>

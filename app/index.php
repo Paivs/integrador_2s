@@ -2,6 +2,8 @@
 
 require_once __DIR__ . "/init.php";
 
+$mostrarIntro = true;
+
 $objetos = readAll($pdo, 'objetos');
 
 $i = 0;
@@ -28,7 +30,12 @@ foreach ($objetos as $o) {
     <link rel="icon" type="image/png" href="./imagens/finditDesenho.png">
 </head>
 
-<body>
+<body class="<?= $mostrarIntro ? 'com-intro' : '' ?>">
+    <?php if ($mostrarIntro): ?>
+        <div class="intro" aria-hidden="true">
+            <img src="imagens/findit.png" alt="">
+        </div>
+    <?php endif; ?>
     <header>
         <div class="logo">
             <a href="./index.php"><img src="imagens/findit-white.png"></a>
@@ -102,7 +109,7 @@ foreach ($objetos as $o) {
 
             <div class="bloco">
                 <p>José Britto</p>
-                <p>⭐⭐⭐⭐⭐</p>
+                <p>⭐⭐⭐⭐</p>
                 <div class="comentario">
                     <p>Esqueci meu Notebook na mesa do escritório. Uma menina achou, postou, e em 10 minutos a gente já estava indo buscar. Salvou demais!</p>
                 </div>
@@ -118,7 +125,7 @@ foreach ($objetos as $o) {
 
             <div class="bloco">
                 <p>Paulo César</p>
-                <p>⭐⭐⭐⭐⭐</p>
+                <p>⭐⭐⭐⭐</p>
                 <div class="comentario">
                     <p>Perdi minha joelheira no ginásio depois do treino. Como a busca por palavra-chave funciona certinho, só digitei 'joelheira' e lá estava o aviso. Ferramenta indispensável!</p>
                 </div>
@@ -126,7 +133,7 @@ foreach ($objetos as $o) {
 
             <div class="bloco">
                 <p>Yasmin</p>
-                <p>⭐⭐⭐⭐⭐</p>
+                <p>⭐⭐⭐⭐</p>
                 <div class="comentario">
                     <p>Achei um fone sem fio no banco perto da biblioteca. Cliquei no botão 'Encontrei!' no card e compartilhei direto no grupo da minha sala no Zap. O dono me chamou na hora. O sistema funciona de verdade.</p>
                 </div>

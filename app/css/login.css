@@ -235,3 +235,14 @@ header.header-top {
   box-shadow: 0 0 8px var(--encontrado);
   animation: pulse-glow 2s infinite ease-in-out;
 }
+
+.erro {
+  margin: 0 0 20px 90px;       
+  padding: 12px 16px;
+  background: rgba(232, 90, 79, 0.12);
+  border-left: 4px solid rgba(232, 90, 79, 0.12);
+  border-radius: 10px;
+  text-align: left;
+}
+.erro h3 { margin: 0 0 6px; font-size: 1rem; }
+.erro ul { margin: 0; padding-left: 18px; }
