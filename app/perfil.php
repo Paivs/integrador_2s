@@ -22,6 +22,7 @@ if (!$usuario) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>findIt. - Perfil do Usuário</title>
     <link rel="stylesheet" href="css/perfil.css">
+    <link rel="icon" type="image/png" href="./imagens/finditDesenho.png">
 </head>
 
 <body>
@@ -106,6 +107,16 @@ if (!$usuario) {
         </div>
 
     </main>
+
+    <footer>
+        <div class="rodape-coluna">
+            <p>Sistema de achados e perdidos. Devolvendo pertences de forma rápida e simples.</p>
+        </div>
+
+        <div class="direitos">
+            <p>&copy; 2026 Celeste System. Todos os direitos reservados.</p>
+        </div>
+    </footer>
 
 </body>
 

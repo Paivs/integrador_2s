@@ -1,9 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Momo+Trust+Display&display=swap');
 
+
 body {
-  font-family: "Momo Trust Display", sans-serif;
-  margin: 0;
-  padding-top: 70px;
+    font-family: "Momo Trust Display", sans-serif;
+    margin: 0; 
+    padding-top: 70px;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    min-height: 100dvh;
+    box-sizing: border-box;
+}
+
+main{
+    flex: 1;
 }
 
 header {
@@ -41,12 +51,12 @@ header {
 }
 
 .menu img {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    object-fit: cover;   
-    display: block;
-    flex-shrink: 0;     
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+  flex-shrink: 0;
 }
 
 .menu a {
@@ -118,7 +128,7 @@ select {
   border-width: 2px;
 }
 
-option:hover{
+option:hover {
   background-color: #3fd6e8;
 }
 
@@ -128,7 +138,7 @@ option:hover{
   display: block;
   margin-top: 5px;
   width: 50%;
-  
+
 }
 
 .circulos-container {
@@ -205,13 +215,13 @@ option:hover{
     padding-left: 85px;
   } */
 
-.cadastro {
-  display: flex;
-  align-items: flex-start;
-  flex-direction: row;
-  gap: 5rem;
-  width: fit-content;
-}
+  .cadastro {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: row;
+    gap: 5rem;
+    width: fit-content;
+  }
 }
 
 .prateleira {
@@ -229,4 +239,13 @@ option:hover{
   border-radius: 25px;
   display: block;
   margin: 0;
+}
+
+footer {
+  margin-top: 30px;
+  display: flex;
+  justify-content: space-between;
+  background-color: #1f2d94;
+  padding: 10px;
+  color: rgb(193, 195, 197);
 }

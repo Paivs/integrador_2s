@@ -1,6 +1,23 @@
 <?php
 require_once __DIR__ . "/init.php";
 
+if (isset($_SESSION['id_usuario'])) {
+    header('Location: painelObjetos.php');
+    exit;
+}
+
+$objetos = readAll($pdo, 'objetos');
+
+$i = 0;
+$cont = 0;
+
+foreach ($objetos as $o) {
+    $i++;
+    if ($o['status_objeto'] == 'Encontrado') {
+        $cont++;
+    }
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -11,18 +28,19 @@ require_once __DIR__ . "/init.php";
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login | findIt</title>
     <link rel="stylesheet" href="/css/login.css">
+    <link rel="icon" type="image/png" href="./imagens/finditDesenho.png">
 </head>
 
 <body>
     <header class="header-top">
         <div id="logo">
-            <a href="index.php" class="btn-perfil">
-                <img src="/imagens/logoLight.png" alt="Logo findIt">
+            <a href="index.php">
+                <img src="/imagens/findit.png" alt="Logo findIt" width="170px">
             </a>
         </div>
         <div class="header-badge">
             <span class="pulse-dot"></span>
-            <span>+15 mil resgatados</span>
+            <span>+<?= $cont ?> encontrados</span>
         </div>
     </header>
 
@@ -30,17 +48,17 @@ require_once __DIR__ . "/init.php";
         <section class="displayFlex">
             <div class="left-side">
                 <div class="container-sup">
-                    <div class="erro">
-                        <?php
-                        if (isset($_GET['erro']) && $_GET['erro'] != "") {
-                            echo "<h3> Ocorreram os Seguintes erros:</h3>";
-                            echo "<ul>";
-                            foreach ($_GET['erro'] as $erro) {
-                                echo "<li>" . htmlspecialchars($erro) . "</li>";
-                            }
-                            echo "</ul>";
-                        }
-                        ?>
+                    <div>
+                        <?php if (isset($_GET['erro']) && is_array($_GET['erro'])): ?>
+                            <div class="erro" role="alert">
+                                <h3>Ocorreram os seguintes erros:</h3>
+                                <ul>
+                                    <?php foreach (array_filter($_GET['erro'], 'is_string') as $erro): ?>
+                                        <li><?= htmlspecialchars($erro) ?></li>
+                                    <?php endforeach; ?>
+                                </ul>
+                            </div>
+                        <?php endif; ?>
                     </div>
                     <h1 id="bemvindo">Que bom ter você de volta.</h1>
                     <br>
@@ -79,7 +97,7 @@ require_once __DIR__ . "/init.php";
         </section>
     </main>
     <footer>
-        <p>&copy; 2026 findIt. Todos os direitos reservados.</p>
+        <p>&copy; 2026 Celeste System. Todos os direitos reservados.</p>
     </footer>
 </body>
 

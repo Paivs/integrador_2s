@@ -8,12 +8,17 @@
 
 body {
     font-family: "Momo Trust Display", sans-serif;
-    background-color: #ffffff;
-    color: #14181e;
-    margin: 0;
+    margin: 0; 
     padding-top: 70px;
-    padding-bottom: 60px;
+    display: flex;
+    flex-direction: column;
     min-height: 100vh;
+    min-height: 100dvh;
+    box-sizing: border-box;
+}
+
+main{
+    flex: 1;
 }
 
 header {
@@ -233,4 +238,13 @@ main {
         justify-content: center;
         gap: 14px;
     }
+}
+
+footer {
+  margin-top: 30px;
+  display: flex;
+  justify-content: space-between;
+  background-color: #1f2d94;
+  padding: 10px;
+  color: rgb(193, 195, 197);
 }

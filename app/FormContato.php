@@ -16,6 +16,7 @@ if (isset($_SESSION['id_usuario'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/contato.css">
+    <link rel="icon" type="image/png" href="./imagens/finditDesenho.png">
     <title>Contato</title>
 </head>
 
@@ -69,7 +70,7 @@ if (isset($_SESSION['id_usuario'])) {
         </form>
     </main>
 
-    <footer>
+    <div class="tela">
         <div>
             <h3>Nosso contato:</h3>
             <p><strong>Email:</strong> findit@gmail.com</p>
@@ -81,6 +82,16 @@ if (isset($_SESSION['id_usuario'])) {
             <p>Segunda - Sexta feira: 08:00 às 20:00</p>
             <p>Sábados: 10:00 às 18:00</p>
             <p>Domingos: 10:00 às 16:00</p>
+        </div>
+</div>
+
+    <footer>
+        <div class="rodape-coluna">
+            <p>Sistema de achados e perdidos. Devolvendo pertences de forma rápida e simples.</p>
+        </div>
+
+        <div class="direitos">
+            <p>&copy; 2026 Celeste System. Todos os direitos reservados.</p>
         </div>
     </footer>
 </body>

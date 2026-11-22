@@ -13,7 +13,7 @@ if (!$usuario) {
 }
 
 // Exige que um campo válido seja passado na URL (ex: editaPerfil.php?campo=nome)
-$camposPermitidos = ['nome', 'email', 'telefone', 'senha', 'tema'];
+$camposPermitidos = ['nome', 'email', 'telefone', 'senha'];
 $campo = $_GET['campo'] ?? '';
 
 if (!in_array($campo, $camposPermitidos, true)) {
@@ -26,8 +26,7 @@ $titulos = [
     'nome'     => 'Editar Nome',
     'email'    => 'Editar E-mail',
     'telefone' => 'Editar Telefone',
-    'senha'    => 'Alterar Senha',
-    'tema'     => 'Alterar Tema'
+    'senha'    => 'Alterar Senha'
 ];
 
 $erros = [];
@@ -71,11 +70,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
-    if ($campo === 'tema') {
-        $tema = $_POST['tema'] ?? 'claro';
-        $dados['tema'] = in_array($tema, ['claro', 'escuro'], true) ? $tema : 'claro';
-    }
-
     if (!$erros && !empty($dados)) {
         try {
             update($pdo, 'usuario', $dados, 'idUsuario = ?', [$idUsuario]);
@@ -100,7 +94,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>findIt - <?= $titulos[$campo] ?></title>
+
     <link rel="stylesheet" href="./css/editaPerfil.css">
+    <link rel="icon" type="image/png" href="./imagens/finditDesenho.png">
 </head>
 
 <body class="pagina-edita">
@@ -162,26 +158,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </label>
             <?php endif; ?>
 
-            <?php if ($campo === 'tema'): ?>
-                <fieldset>
-                    <legend>Tema do sistema</legend>
-                    <label class="opcao">
-                        <input type="radio" name="tema" value="claro" <?= ($usuario['tema'] ?? 'claro') === 'claro' ? 'checked' : '' ?>>
-                        Claro
-                    </label>
-                    <label class="opcao">
-                        <input type="radio" name="tema" value="escuro" <?= ($usuario['tema'] ?? '') === 'escuro' ? 'checked' : '' ?>>
-                        Escuro
-                    </label>
-                </fieldset>
-            <?php endif; ?>
-
             <div class="botoes-form">
                 <a href="perfil.php" class="btn-cancelar">Cancelar</a>
                 <button type="submit">Salvar</button>
             </div>
         </form>
     </main>
+
+    <footer>
+        <div class="rodape-coluna">
+            <p>Sistema de achados e perdidos. Devolvendo pertences de forma rápida e simples.</p>
+        </div>
+
+        <div class="direitos">
+            <p>&copy; 2026 Celeste System. Todos os direitos reservados.</p>
+        </div>
+    </footer>
 </body>
 
 </html>
