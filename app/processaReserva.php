@@ -28,6 +28,8 @@ if (isset($userLogado)) {
             $erro = "Quantidade de horas inválida.";
         } elseif ($inicio === null || $inicio < new DateTime()) {
             $erro = "Escolha uma data e hora futuras.";
+        } elseif ($inicio->format('i') !== '00') {
+            $erro = "Escolha uma hora cheia (sem minutos).";
         } elseif ($bancada['status_bancada'] !== 'disponivel') {
             $erro = "Esta bancada não está disponível.";
         } elseif ($idProjeto !== null && !in_array($idProjeto, $idsProjetosDoUsuario)) {
@@ -47,18 +49,19 @@ if (isset($userLogado)) {
 
         $reservas = readAll(database(), "Reservas", " id_bancada = ?", [$_GET['id']]);
 
-        $ocupadas = 0;
+        $ocupada = false;
         foreach ($reservas as $r) {
             $hours = $r['horas_reservadas'];
             $resInicio = new DateTime($r['data_reserva']);
             $resFim = clone $resInicio;
             $resFim->modify("+$hours hours");
             if ($resInicio < $fim && $resFim > $inicio) {
-                $ocupadas++;
+                $ocupada = true;
+                break;
             }
         }
-        if ($ocupadas >= $bancada['quantidade_bancada']) {
-            $msg = urlencode("Não há reservas disponíveis para este horário.");
+        if ($ocupada) {
+            $msg = urlencode("Esta bancada já está reservada neste horário.");
             header("Location: processaReserva.php?id=$idBancada&erro=$msg");
             exit;
         } else {
@@ -110,7 +113,7 @@ if (isset($userLogado)) {
             <p class="descricao">
                 <?= $bancada['descricao_bancada'] ?>
             </p>
-            <p><i class="bi bi-people-fill"></i> Capacidade: <?= $bancada['quantidade_bancada'] ?> bancadas</p>
+            <p><i class="bi bi-people-fill"></i> Capacidade: <?= $bancada['quantidade_bancada'] ?> pessoas</p>
             <p><i class="bi bi-check-circle-fill"></i> <?= $bancada['primeira_vantagem'] ?></p>
             <p><i class="bi bi-check-circle-fill"></i> <?= $bancada['segunda_vantagem'] ?></p>
         </div>
@@ -131,7 +134,7 @@ if (isset($userLogado)) {
 
                 <div class="linha-valor">
                     <label for="data_reserva">Data e Hora:</label>
-                    <input class="campo" type="datetime-local" name="data_reserva" id="data_reserva" required>
+                    <input class="campo" type="datetime-local" name="data_reserva" id="data_reserva" step="3600" required>
                 </div>
 
                 <div class="linha-horas">

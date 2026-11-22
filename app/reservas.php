@@ -2,8 +2,7 @@
 
 require_once __DIR__ . '/init.php';
 
-$reservasUSER = $_SESSION['reservaUsuario'];
-$bancadasDisponiveis = readAll($pdo, 'Bancadas', 'status_bancada = ?', ['disponivel']);
+$bancadasDisponiveis = readAll(database(), 'Bancadas', 'status_bancada = ?', ['disponivel']);
 
 
 ?>
@@ -35,7 +34,7 @@ $bancadasDisponiveis = readAll($pdo, 'Bancadas', 'status_bancada = ?', ['disponi
                 <img src="./img/index/bancadaEX.png" alt="">
                 <h1><?= $b['nome_bancada'] ?></h1>
                 <br>
-                <p><i class="bi bi-grid-fill"></i> Quantidade: <?= $b['quantidade_bancada'] ?> bancadas</p>
+                <p><i class="bi bi-people-fill"></i> Capacidade: <?= $b['quantidade_bancada'] ?> pessoas</p>
                 <br>
                 <p><i class="bi bi-check-circle-fill"></i> <?= $b['primeira_vantagem'] ?></p>
                 <br>
@@ -43,7 +42,6 @@ $bancadasDisponiveis = readAll($pdo, 'Bancadas', 'status_bancada = ?', ['disponi
                 <br>
                 <h1>R$<?= $b['preco_bancada']?> / hora</h1>
                 <a href="./processaReserva.php?id=<?= $b['id_bancada'] ?>"><button class="botao-salvar">Reservar ></button></a>
-                
             </div>
             <br>
         <?php endforeach; ?>
