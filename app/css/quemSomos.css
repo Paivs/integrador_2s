@@ -1,0 +1,289 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    color: #000000 !important;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+.hero-sobre {
+    position: relative;
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    color: white;
+    background-color: black;
+    background-image: url('../img/index/hero.png');
+    background-size: cover;
+    background-position: center;
+}
+
+.hero-conteudo {
+    width: 100%;
+    max-width: 1650px;
+    margin: 0 auto;
+    padding: 0 30px;
+}
+
+.hero-texto {
+    max-width: 720px;
+}
+
+.hero-sobre h1 {
+    font-size: 58px;
+    font-weight: 600;
+    line-height: 1.2;
+    margin-bottom: 24px;
+}
+
+.hero-sobre h1 span {
+    color: #f5a03c;
+}
+
+.hero-sobre p {
+    font-size: 25px;
+    line-height: 1.5;
+}
+
+.hero-sobre::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 270px;
+    height: 270px;
+    background-color: #1f1d5c;
+    clip-path: polygon(100% 0, 100% 100%, 0 100%);
+}
+
+.botao {
+    display: inline-block;
+    background-color: #3d3a94;
+    color: white;
+    font-size: 22px;
+    font-weight: 700;
+    padding: 21px 39px;
+    border-radius: 50px;
+}
+
+.botao:hover {
+    background-color: #4c49b3;
+}
+
+.historia {
+    background-color: white;
+    padding: 90px 30px;
+}
+
+.historia-conteudo {
+    max-width: 1650px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 120px;
+}
+
+.historia-imagem {
+    width: 620px;
+    flex-shrink: 0;
+}
+
+.historia-imagem img {
+    width: 100%;
+    display: block;
+}
+
+.historia-lado {
+    flex: 1;
+}
+
+.historia-lado h2 {
+    font-size: 40px;
+    color: #3d3a94;
+    margin-bottom: 24px;
+}
+
+.historia-lado p {
+    font-size: 24px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    color: #000000 !important;
+}
+
+.valores {
+    background-color: #eef0f8;
+    padding: 60px 30px 70px;
+}
+
+.valores-conteudo {
+    max-width: 1650px;
+    margin: 0 auto;
+}
+
+.valores-titulo,
+.diferenciais-titulo {
+    text-align: center;
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 45px;
+    color: #000000 !important;
+}
+
+.cards-valores {
+    display: flex;
+    gap: 40px;
+}
+
+.card-valor {
+    flex: 1;
+    background-color: white;
+    padding: 35px 30px;
+    border-radius: 20px;
+    border-top: 6px solid #3d3a94;
+}
+
+.card-valor h3 {
+    font-size: 28px;
+    color: #3d3a94;
+    margin-bottom: 14px;
+}
+
+.card-valor p {
+    font-size: 21px;
+    line-height: 1.5;
+    color: #000000 !important;
+}
+
+.numeros {
+    background-color: #3d3a94;
+    color: white;
+    padding: 60px 30px;
+}
+
+.numeros-conteudo {
+    max-width: 1650px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+}
+
+.numero h3 {
+    font-size: 56px;
+    color: #f5a03c;
+}
+
+.numero p {
+    font-size: 22px;
+    color: white;
+}
+
+.diferenciais {
+    background-color: white;
+    padding: 70px 30px;
+}
+
+.diferenciais-conteudo {
+    max-width: 1650px;
+    margin: 0 auto;
+}
+
+.areas {
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+}
+
+.area img {
+    width: 90px;
+    height: 90px;
+    display: block;
+    margin: 0 auto 12px auto;
+}
+
+.area p {
+    font-size: 22px;
+    line-height: 1.4;
+    color: #000000 !important;
+}
+
+.chamada {
+    background-color: #1f1d5c;
+    color: white;
+    text-align: center;
+    padding: 80px 30px;
+}
+
+.chamada h2 {
+    font-size: 40px;
+    margin-bottom: 16px;
+}
+
+.chamada p {
+    font-size: 22px;
+    margin-bottom: 36px;
+}
+
+@media (max-width: 1400px) {
+    .hero-conteudo {
+        max-width: 1100px;
+        padding: 0 20px;
+    }
+
+    .hero-sobre h1 {
+        font-size: 38px;
+    }
+
+    .hero-sobre p {
+        font-size: 17px;
+    }
+
+    .hero-sobre::after {
+        width: 180px;
+        height: 180px;
+    }
+
+    .historia-conteudo {
+        gap: 50px;
+    }
+
+    .historia-imagem {
+        width: 420px;
+    }
+
+    .historia-lado p {
+        font-size: 18px;
+    }
+
+    .botao {
+        font-size: 15px;
+        padding: 14px 26px;
+    }
+}
+
+@media (max-width: 800px) {
+    .historia-conteudo,
+    .cards-valores,
+    .numeros-conteudo,
+    .areas {
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .historia-imagem {
+        width: 100%;
+    }
+
+    .hero-sobre h1 {
+        font-size: 30px;
+    }
+}
