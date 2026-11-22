@@ -35,7 +35,7 @@ $bancadasDisponiveis = readAll($pdo, 'Bancadas', 'status_bancada = ?', ['disponi
                 <img src="./img/index/bancadaEX.png" alt="">
                 <h1><?= $b['nome_bancada'] ?></h1>
                 <br>
-                <p><i class="bi bi-people-fill"></i> Capacidade: <?= $b['quantidade_bancada'] ?> bancadas</p>
+                <p><i class="bi bi-grid-fill"></i> Quantidade: <?= $b['quantidade_bancada'] ?> bancadas</p>
                 <br>
                 <p><i class="bi bi-check-circle-fill"></i> <?= $b['primeira_vantagem'] ?></p>
                 <br>

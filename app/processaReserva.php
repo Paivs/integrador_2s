@@ -2,49 +2,77 @@
 
 require_once __DIR__ . '/init.php';
 
-$pdo = database();
-$bancada = read($pdo, 'Bancadas', 'id_bancada = ?', [$_GET['id']]);
-$idUsuario = $_SESSION['id'];
+$userLogado = $_SESSION['user'] ?? null;
 
-$projetos = readAll(database(), "Projetos", "id_criador = ?", [$_SESSION['id']]);
+if (isset($userLogado)) {
+    $bancada = read(database(), 'Bancadas', 'id_bancada = ?', [$_GET['id']]);
+    $idUsuario = $_SESSION['id'];
 
-if ($_SERVER['REQUEST_METHOD'] == "POST") {
-    $horas = $_POST['valorHora'];
-    $precoTotal = $bancada['preco_bancada'] * $horas; // multiplica para saber o preço total 
-    $inicio = new DateTime($_POST['data_reserva']); // converte o que vem do html para um formato de horas igual ao do sql
-    $dataInicio = $inicio->format('Y-m-d H:i:s'); // formatação
-    $fim = clone $inicio; // clona a hora inicial
-    $fim->modify("+$horas hours");
-    $dataFim = $fim->format('Y-m-d H:i:s');
+    $projetos = readAll(database(), "Projetos", "id_criador = ?", [$_SESSION['id']]);
 
-    $reservas = readAll(database(), "Reservas", " id_bancada = ?", [$_GET['id']]);
-
-    $ocupadas = 0;
-    foreach ($reservas as $r) {
-        $hours = $r['horas_reservadas'];
-        $resInicio = new DateTime($r['data_reserva']);
-        $resFim = clone $resInicio;
-        $resFim->modify("+$hours hours");
-        if ($resInicio < $fim && $resFim > $inicio) {
-            $ocupadas++;
-        }
-    }
-    if ($ocupadas >= $bancada['quantidade_bancada']) {
+    if ($_SERVER['REQUEST_METHOD'] == "POST") {
+        $horas = filter_var($_POST['valorHora'] ?? null, FILTER_VALIDATE_INT, ['options' => ['min_range' => 1, 'max_range' => 12]]);
         $idBancada = $_GET['id'];
-        $msg = urlencode("Não há reservas disponíveis para este horário.");
-        header("Location: processaReserva.php?id=$idBancada&erro=$msg");
-        exit;
-    } else {
+        $erro = null;
+
+        try {
+            $inicio = new DateTime($_POST['data_reserva'] ?? '');
+        } catch (Exception $e) {
+            $inicio = null;
+        }
+
+        $idsProjetosDoUsuario = array_column($projetos, 'id_projeto');
         $idProjeto = !empty($_POST['id_projeto']) ? $_POST['id_projeto'] : null;
 
-        create(database(), "Reservas", [
-            'data_reserva'     => $dataInicio,
-            'horas_reservadas' => $horas,
-            'preco_total'      => $precoTotal,
-            'id_usuario'       => $idUsuario,
-            'id_bancada'       => $_GET['id'],
-            'id_projeto'       => $_POST['id_projeto']
-        ]);
+        if ($horas === false) {
+            $erro = "Quantidade de horas inválida.";
+        } elseif ($inicio === null || $inicio < new DateTime()) {
+            $erro = "Escolha uma data e hora futuras.";
+        } elseif ($bancada['status_bancada'] !== 'disponivel') {
+            $erro = "Esta bancada não está disponível.";
+        } elseif ($idProjeto !== null && !in_array($idProjeto, $idsProjetosDoUsuario)) {
+            $erro = "Projeto inválido.";
+        }
+
+        if ($erro) {
+            header("Location: processaReserva.php?id=$idBancada&erro=" . urlencode($erro));
+            exit;
+        }
+
+        $precoTotal = $bancada['preco_bancada'] * $horas; // multiplica para saber o preço total 
+        $dataInicio = $inicio->format('Y-m-d H:i:s'); // formatação
+        $fim = clone $inicio; // clona a hora inicial
+        $fim->modify("+$horas hours");
+        $dataFim = $fim->format('Y-m-d H:i:s');
+
+        $reservas = readAll(database(), "Reservas", " id_bancada = ?", [$_GET['id']]);
+
+        $ocupadas = 0;
+        foreach ($reservas as $r) {
+            $hours = $r['horas_reservadas'];
+            $resInicio = new DateTime($r['data_reserva']);
+            $resFim = clone $resInicio;
+            $resFim->modify("+$hours hours");
+            if ($resInicio < $fim && $resFim > $inicio) {
+                $ocupadas++;
+            }
+        }
+        if ($ocupadas >= $bancada['quantidade_bancada']) {
+            $msg = urlencode("Não há reservas disponíveis para este horário.");
+            header("Location: processaReserva.php?id=$idBancada&erro=$msg");
+            exit;
+        } else {
+            create(database(), "Reservas", [
+                'data_reserva'     => $dataInicio,
+                'horas_reservadas' => $horas,
+                'preco_total'      => $precoTotal,
+                'id_usuario'       => $idUsuario,
+                'id_bancada'       => $_GET['id'],
+                'id_projeto'       => $idProjeto
+            ]);
+            header("Location: processaReserva.php?id=$idBancada&sucesso=1");
+            exit;
+        }
     }
 }
 
@@ -61,7 +89,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     <link rel="stylesheet" href="./css/processaReserva.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
-
+<?php if(isset($userLogado)){ ?>
 <body>
     <?php require_once __DIR__ . '/nav.php' ?>
     <br>
@@ -110,7 +138,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                     <label>Horas:</label>
                     <div class="linha-valor">
                         <label class="rotulo-valor" for="valorHora"></label>
-                        <input class="campo campo-numero" type="number" name="valorHora" id="valorHora" min="1" step="1" required>
+                        <input class="campo campo-numero" type="number" name="valorHora" id="valorHora" min="1" max="12" step="1" required>
                     </div>
                 </div>
 
@@ -121,10 +149,31 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                     <?= htmlspecialchars($_GET['erro']) ?>
                 </p>
             <?php endif; ?>
+            <?php if (isset($_GET['sucesso'])): ?>
+                <p style="color: #2e9e4f; font-size: 0.9rem; margin-bottom: 10px;">
+                    Reserva realizada com sucesso!
+                </p>
+            <?php endif; ?>
         </div>
 
     </div>
-
+<?php } else { ?>
+<body>
+    <?php require_once __DIR__ . '/nav.php' ?>
+    <br>
+    <br>
+    <br>
+    <div class="naoTemLogin">
+        <div class="card-info">
+            <h1>Faça login para reservar</h1>
+            <p class="descricao">
+                Para reservar uma bancada, você precisa estar logado na sua conta.
+            </p>
+            <a class="botao-salvar" href="./loginUsuario.php">Ir para o login <i class="bi bi-arrow-right"></i></a>
+            <p>Não tem conta? <a href="./cadastroUser.php">Cadastre-se aqui!</a></p>
+        </div>
+    </div>
+<?php } ?>
 </body>
 
 </html>

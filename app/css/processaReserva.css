@@ -166,3 +166,39 @@ body {
     font-size: 25px;
     margin-right: 1000px;
 }
+
+.naoTemLogin {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    max-width: 700px;
+    margin: 135px auto;
+    padding: 40px 30px;
+    border: 2px solid #e7e4e4;
+    border-radius: 30px;
+    font-family: 'Montaser Arabic', Arial, sans-serif;
+}
+
+.naoTemLogin .card-info {
+    width: 100%;
+}
+
+.naoTemLogin .card-info h1 {
+    font-size: 50px;
+    margin-bottom: 20px;
+}
+
+.naoTemLogin .descricao {
+    text-align: center;
+}
+
+.naoTemLogin .botao-salvar {
+    text-decoration: none;
+    margin: 20px auto;
+    padding: 8px 60px;
+}
+
+.naoTemLogin .card-info p a {
+    color: #3866f5;
+}
