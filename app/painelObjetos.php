@@ -102,7 +102,6 @@ $objetos = readAll($pdo, 'objetos', $where, $params);
 
                     <div class="acoes-filtro">
                         <button type="submit">Buscar</button>
-                        <a href="./painelObjetos.php" class="limpar">Limpar</a>
                     </div>
                 </form>
             </div>
@@ -126,10 +125,10 @@ $objetos = readAll($pdo, 'objetos', $where, $params);
                         <div class="emoji">
                             <p><?= htmlspecialchars($o['imagemObjeto']) ?></p>
                         </div>
+                        <p class="selo selo-<?= $classe ?>"><?= htmlspecialchars($o['status_objeto']) ?></p>
+                        <p class="nomeObjeto" ><?= htmlspecialchars($o['nome']) ?></p>
                         <div class="conteudo">
-                            <p>Nome: <?= htmlspecialchars($o['nome']) ?></p>
                             <p>Descrição: <?= htmlspecialchars($o['descricao']) ?></p>
-                             <p>Status: <span class="selo selo-<?= $classe ?>"><?= htmlspecialchars($o['status_objeto']) ?></span></p>
                             <p>Categoria: <?= htmlspecialchars($o['categoria']) ?></p>
                             <?php if ($o['status_objeto'] == 'Perdido'): ?>
                                 <div class="botao">

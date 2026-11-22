@@ -2,7 +2,7 @@
 
 body {
     font-family: "Momo Trust Display", sans-serif;
-    margin: 0; 
+    margin: 0;
     padding-top: 70px;
 }
 
@@ -18,7 +18,7 @@ header {
     left: 0;
     width: 100%;
     box-sizing: border-box;
-    z-index: 1000; 
+    z-index: 1000;
 }
 
 .logo {
@@ -44,9 +44,9 @@ header {
     width: 32px;
     height: 32px;
     border-radius: 50%;
-    object-fit: cover;   
+    object-fit: cover;
     display: block;
-    flex-shrink: 0;     
+    flex-shrink: 0;
 }
 
 .menu a {
@@ -70,7 +70,7 @@ header {
 
 .busca {
     position: sticky;
-    top: 82px;                     
+    top: 82px;
     z-index: 900;
     max-width: 1100px;
     margin: 24px auto 30px;
@@ -78,13 +78,12 @@ header {
     box-sizing: border-box;
     border-radius: 18px;
     background: rgba(238, 243, 246, 0.55);
-    -webkit-backdrop-filter: blur(14px) saturate(160%);
-    backdrop-filter: blur(14px) saturate(160%);
+    -webkit-backdrop-filter: blur(1px) saturate(100%);
+    backdrop-filter: blur(1px) saturate(100%);
     border: 1px solid rgba(255, 255, 255, 0.65);
     box-shadow: 0 6px 16px rgba(20, 24, 30, 0.18);
 }
 
-/* Navegador sem suporte ao vidro: fundo quase opaco para o texto continuar legível */
 @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
     .busca {
         background: rgba(238, 243, 246, 0.96);
@@ -165,7 +164,6 @@ header {
     font-size: 14px;
 }
 
-/* No celular o filtro fixo ocuparia a tela toda, então ele rola junto */
 @media (max-width: 640px) {
     .busca {
         position: static;
@@ -176,10 +174,8 @@ header {
 .telaObjetos {
     display: flex;
     justify-content: center;
-    background-color: #f3f5f7;
     flex-wrap: wrap;
     gap: 60px;
-    border-radius: 25px;
     font-family: "Momo Trust Display", sans-serif;
     padding: 10px;
     margin: 0 auto;
@@ -188,14 +184,30 @@ header {
 .objeto {
     display: flex;
     background-color: #f4f7fa;
+    text-align: center;
+    justify-content: center;
+    flex-direction: column;
     border-radius: 25px;
     padding: 10px;
     font-family: "Momo Trust Display", sans-serif;
     margin: 10px;
-    width: 560px;
+    width: 270px;
     min-height: 255px;
-    transition: transform 0.3s ease;
-    box-shadow: 0px 2px 10px black;
+    transition: transform 0.5s ease;
+}
+
+.nomeObjeto{
+    display: flex;
+    padding: 5px;
+    border-radius: 30px;
+    justify-content: center;
+    font-size: 15px;
+    margin-bottom: 7px;
+    background: rgba(238, 243, 246, 0.55);
+    -webkit-backdrop-filter: blur(14px) saturate(160%);
+    backdrop-filter: blur(14px) saturate(160%);
+    border: 1px solid rgba(255, 255, 255, 0.65);
+    box-shadow: 0 6px 16px rgba(20, 24, 30, 0.18);
 }
 
 .objeto button {
@@ -209,7 +221,8 @@ header {
 }
 
 .objeto:hover {
-    transform: scale(1.001);
+    transform: scale(1.02);
+    box-shadow: 0px 10px 12px black;
 }
 
 .objeto button:hover {
@@ -229,10 +242,16 @@ header {
     border-radius: 25px;
     width: 250px;
     height: 230px;
-    flex-shrink: 0;  
-    display: flex;            
+    flex-shrink: 0;
+    display: flex;
     justify-content: center;
     align-items: center;
+
+    background: rgba(238, 243, 246, 0.55);
+    -webkit-backdrop-filter: blur(14px) saturate(160%);
+    backdrop-filter: blur(14px) saturate(160%);
+    border: 1px solid rgba(255, 255, 255, 0.65);
+    box-shadow: 0 6px 16px rgba(20, 24, 30, 0.18);
 }
 
 .emoji p {
@@ -244,25 +263,47 @@ header {
     line-height: 1;
 }
 
-.conteudo{  
+.conteudo {
     display: flex;
+    margin: 0 auto;
     flex-direction: column;
+    margin-top: 9px;
     flex: 1;
-    margin-left: 20px;
 }
 
 .conteudo p {
-    margin: 0 0 10px;         
+    margin: 0 0 10px;
+}
+
+.selo {
+    padding: 3px 12px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 700;
+    color: #14181E;
+    background: #ccc;
+}
+
+.selo-perdido {
+    background: #E85A4F;
+}
+
+.selo-encontrado {
+    background: #3DDC84;
+}
+
+.selo-doado {
+    background: #F2B93B;
 }
 
 .botao {
     display: flex;
-    gap: 8px;
-    margin-top: auto;    
+    justify-content: center;
+    gap: 25px;
+    margin-top: auto;
 }
 
-.fundo{
-    /* background-color: #f3f5f7; */
+.fundo {
     padding: 10px;
     border-radius: 25px;
 }
