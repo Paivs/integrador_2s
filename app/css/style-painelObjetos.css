@@ -77,20 +77,26 @@ header {
     padding: 14px 18px;
     box-sizing: border-box;
     border-radius: 18px;
-    background: rgba(238, 243, 246, 0.55);
-    -webkit-backdrop-filter: blur(1px) saturate(100%);
-    backdrop-filter: blur(1px) saturate(100%);
-    border: 1px solid rgba(255, 255, 255, 0.65);
-    box-shadow: 0 6px 16px rgba(20, 24, 30, 0.18);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 
+        0 6px 16px rgba(20, 24, 30, 0.18),
+        inset 0 0 12px rgba(255, 255, 255, 0.4);
 }
 
-@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
-    .busca {
-        background: rgba(238, 243, 246, 0.96);
-    }
+.busca::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    background: linear-gradient(135deg, rgba(238, 243, 246, 0.4) 0%, rgba(238, 243, 246, 0.1) 100%);
+    -webkit-backdrop-filter: blur(8px) url(#liquid-glass);
+    backdrop-filter: blur(3px) url(#liquid-glass);
 }
 
 .busca form {
+    position: relative;
+    z-index: 1;
     display: flex;
     flex-wrap: wrap;
     align-items: flex-end;
@@ -188,9 +194,12 @@ header {
     width: 270px;
     min-height: 255px;
     transition: transform 0.5s ease;
+    min-width: 0;
+    overflow: hidden; 
 }
 
 .nomeObjeto{
+    display: -webkit-box;
     display: flex;
     padding: 5px;
     border-radius: 30px;
@@ -240,7 +249,6 @@ header {
     display: flex;
     justify-content: center;
     align-items: center;
-
     background: rgba(238, 243, 246, 0.55);
     -webkit-backdrop-filter: blur(14px) saturate(160%);
     backdrop-filter: blur(14px) saturate(160%);
@@ -259,7 +267,7 @@ header {
 
 .conteudo {
     display: flex;
-    margin: 0 auto;
+    margin: 9px 0 0;
     flex-direction: column;
     margin-top: 9px;
     flex: 1;
@@ -267,6 +275,15 @@ header {
 
 .conteudo p {
     margin: 0 0 10px;
+    overflow-wrap: anywhere;
+}
+
+.conteudo p:first-child {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3; 
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
 .selo {
@@ -295,6 +312,7 @@ header {
     justify-content: center;
     gap: 25px;
     margin-top: auto;
+    flex-wrap: wrap;  
 }
 
 .fundo {

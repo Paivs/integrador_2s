@@ -34,7 +34,7 @@ if ($status !== '') {
 $where   = $condicoes ? implode(' AND ', $condicoes) : null;
 $objetos = readAll($pdo, 'objetos', $where, $params);
 
-
+usort($objetos, fn($a, $b) => $b['idObjeto'] <=> $a['idObjeto']);
 
 ?>
 
@@ -161,4 +161,29 @@ $objetos = readAll($pdo, 'objetos', $where, $params);
             <p>&copy; 2026 Celeste System. Todos os direitos reservados.</p>
         </div>
     </footer>
+
+    <svg style="display: none;">
+      <filter id="liquid-glass">
+        <feTurbulence 
+          type="fractalNoise" 
+          baseFrequency="0.006 0.006" 
+          numOctaves="2" 
+          seed="2"
+          result="noise" 
+        />
+        <feGaussianBlur 
+          in="noise" 
+          stdDeviation="3" 
+          result="smoothedNoise" 
+        />
+        <feDisplacementMap 
+          in="SourceGraphic" 
+          in2="smoothedNoise" 
+          scale="50" 
+          xChannelSelector="R" 
+          yChannelSelector="G" 
+        />
+      </filter>
+    </svg>
+
 </body>

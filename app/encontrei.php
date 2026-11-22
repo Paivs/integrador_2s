@@ -90,9 +90,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <div class="emoji">
                     <p><?= htmlspecialchars($objeto['imagemObjeto']) ?></p>
                 </div>
-
+                
+                <p class="nomeObjeto" ><?= htmlspecialchars($objeto['nome']) ?></p>
                 <div class="conteudo">
-                    <p>Nome: <?= htmlspecialchars($objeto['nome']) ?></p>
                     <p>Descrição: <?= htmlspecialchars($objeto['descricao']) ?></p>
                     <p>Categoria: <?= htmlspecialchars($objeto['categoria']) ?></p>
                     <p>Perdido em: <?= htmlspecialchars($objeto['localEncontrado']) ?></p>
