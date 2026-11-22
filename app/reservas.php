@@ -61,5 +61,5 @@ if($_SERVER['REQUEST_METHOD'] == "GET" && isset($_GET['bancada'])){
     </div>
 
 </body>
-
+<?php require_once __DIR__ . '/footer.php' ?>
 </html>
