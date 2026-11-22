@@ -123,7 +123,7 @@
                                     <td><?= $p['nome_ferramenta'] ?></td>
                                     <td><?= $p['area'] ?></td>
                                     <td>
-                                        <?php if ($p['estoque'] == 0): ?>
+                                        <?php if ($p['estoque'] <= 0): ?>
                                             <span class="etiqueta vermelha">Sem estoque</span>
                                         <?php else: ?>
                                             <span class="etiqueta verde"><?= $p['estoque'] ?></span>

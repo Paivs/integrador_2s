@@ -28,7 +28,7 @@
     if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $idFerramenta = $_POST['idFerramenta'];
         // Zera o estoque: o dashboard mostra "Sem estoque" para ela
-        update(database(), "Ferramentas", ["estoque" => 0], "id_ferramenta={$idFerramenta}");
+        update(database(), "Ferramentas", ["status_ferramenta" => 'indisponivel'], "id_ferramenta={$idFerramenta}");
         header("Location: dashboard.php");
         exit;
     }
