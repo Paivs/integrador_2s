@@ -59,7 +59,10 @@ foreach ($objetos as $o) {
         </div>
 
         <div class="demonstracao">
-            <img src="./imagens/tela-painel.png" alt="Tela do Painel de Objetos" width="900px">
+            <video width="900" height="500" autoplay muted loop>
+                <source src="./imagens/video-findIt.mp4" type="video/mp4">
+                O teu navegador não suporta a etiqueta de vídeo.
+            </video>
         </div>
 
         <div class="conta">

@@ -126,12 +126,6 @@ header {
     border-radius: 12px;
 }
 
-.busca input:focus,
-.busca select:focus {
-    outline: 3px solid #3FD6E8;
-    outline-offset: 1px;
-}
-
 .busca option:hover {
     background-color: #3FD6E8;
 }
@@ -155,7 +149,7 @@ header {
 }
 
 .busca button:hover {
-    background-color: #14181E;
+    background-color: #17bdcf;
     color: #EEF3F6;
 }
 
