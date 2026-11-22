@@ -70,7 +70,7 @@ foreach ($objetos as $o) {
             <a href="./cadastrarConta.php" class="criarConta">Criar Conta</a>
         </div>
 
-        <h2>Como funciona?</h2>
+        <h2 class="subtitulo">Como funciona?</h2>
         <div class="passos">
             <div class="quadro">
                 <h3>1. Cadastro</h3>
@@ -91,62 +91,198 @@ foreach ($objetos as $o) {
             <p> <u><?= $cont ?></u> objetos encontados</p>
         </div>
 
-        <h2>Avaliações</h2>
+        <h2 class="subtitulo">O que dizem sobre o Findit</h2>
 
         <div class="avaliacoes">
-            <div class="bloco">
-                <p>Juliana Pires</p>
-                <p>⭐⭐⭐⭐⭐</p>
-                <div class="comentario">
-                    <p>Esqueci meu Notebook na mesa do escritório. Uma menina achou, postou, e em 10 minutos a gente já estava indo busca. Salvou demais!</p>
-                </div>
-            </div>
 
-            <div class="bloco">
-                <p>Mariana</p>
-                <p>⭐⭐⭐⭐⭐</p>
-                <div class="comentario">
-                    <p>Sempre que o pessoal deixa chaves, capacetes ou guarda-chuvas jogados nos corredores, eu cadestro no sistema pra galera achar rápido. Ficou muito mais organizado do que aquela caixa de papelão no balcão.</p>
-                </div>
-            </div>
+            <div class="carrossel-container">
+                <div class="carrossel-trilha">
 
-            <div class="bloco">
-                <p>José Britto</p>
-                <p>⭐⭐⭐⭐</p>
-                <div class="comentario">
-                    <p>Esqueci meu Notebook na mesa do escritório. Uma menina achou, postou, e em 10 minutos a gente já estava indo buscar. Salvou demais!</p>
-                </div>
-            </div>
+                    <!-- === BLOCO ORIGINAL (7 AVALIAÇÕES) === -->
 
-            <div class="bloco">
-                <p>Vincenzo</p>
-                <p>⭐⭐⭐⭐⭐</p>
-                <div class="comentario">
-                    <p>Faço caminhada na pista do campus de manhã e achei um molho de chaves de carro perto do portão. Um menino da faculdade me ajudou a publicar no site e no mesmo dia o dono apareceu. Fiquei muito feliz em ajudar!</p>
-                </div>
-            </div>
+                    <!-- 1. 5 Estrelas -->
+                    <div class="card-avaliacao">
+                        <div class="cabecalho-avaliacao">
+                            <div class="emoji-mini">📱</div>
+                            <div>
+                                <h4>Carlos Eduardo</h4>
+                                <span class="selo selo-encontrado">Celular Encontrado</span>
+                            </div>
+                        </div>
+                        <div class="estrelas">
+                            <span class="cheia">★</span><span class="cheia">★</span><span class="cheia">★</span><span class="cheia">★</span><span class="cheia">★</span>
+                        </div>
+                        <p>"Achei que tinha perdido meu celular para sempre na biblioteca. Cadastraram no Findit e recuperei no mesmo dia!"</p>
+                    </div>
 
-            <div class="bloco">
-                <p>Paulo César</p>
-                <p>⭐⭐⭐⭐</p>
-                <div class="comentario">
-                    <p>Perdi minha joelheira no ginásio depois do treino. Como a busca por palavra-chave funciona certinho, só digitei 'joelheira' e lá estava o aviso. Ferramenta indispensável!</p>
-                </div>
-            </div>
+                    <!-- 2. 4 Estrelas -->
+                    <div class="card-avaliacao">
+                        <div class="cabecalho-avaliacao">
+                            <div class="emoji-mini">🔑</div>
+                            <div>
+                                <h4>Mariana Silva</h4>
+                                <span class="selo selo-encontrado">Chaves Encontradas</span>
+                            </div>
+                        </div>
+                        <div class="estrelas">
+                            <span class="cheia">★</span><span class="cheia">★</span><span class="cheia">★</span><span class="cheia">★</span><span class="vazia">★</span>
+                        </div>
+                        <p>"Recuperei a chave do carro que deixei no refeitório! Só demorei um pouquinho para achar a categoria certa, mas funciona muito bem."</p>
+                    </div>
 
-            <div class="bloco">
-                <p>Yasmin</p>
-                <p>⭐⭐⭐⭐</p>
-                <div class="comentario">
-                    <p>Achei um fone sem fio no banco perto da biblioteca. Cliquei no botão 'Encontrei!' no card e compartilhei direto no grupo da minha sala no Zap. O dono me chamou na hora. O sistema funciona de verdade.</p>
-                </div>
-            </div>
+                    <!-- 3. 5 Estrelas -->
+                    <div class="card-avaliacao">
+                        <div class="cabecalho-avaliacao">
+                            <div class="emoji-mini">🎒</div>
+                            <div>
+                                <h4>Lucas Mendes</h4>
+                                <span class="selo selo-encontrado">Mochila Encontrada</span>
+                            </div>
+                        </div>
+                        <div class="estrelas">
+                            <span class="cheia">★</span><span class="cheia">★</span><span class="cheia">★</span><span class="cheia">★</span><span class="cheia">★</span>
+                        </div>
+                        <p>"Recuperei minha mochila com todos os cadernos e notebook intactos. Ainda existe muita gente honesta por aqui!"</p>
+                    </div>
 
-            <div class="bloco">
-                <p>Daniel Oliveira</p>
-                <p>⭐⭐⭐⭐⭐</p>
-                <div class="comentario">
-                    <p>Chego correndo do trabalho pra aula e acabei deixando meu Bilhete Único com a carteira de estudante no pátio. Achei no dia seguinte pesquisando na categoria 'Documentos'. Muito simples de mexer.</p>
+                    <!-- 4. 3 Estrelas -->
+                    <div class="card-avaliacao">
+                        <div class="cabecalho-avaliacao">
+                            <div class="emoji-mini">🎧</div>
+                            <div>
+                                <h4>Beatriz Costa</h4>
+                                <span class="selo selo-encontrado">Fone Encontrado</span>
+                            </div>
+                        </div>
+                        <div class="estrelas">
+                            <span class="cheia">★</span><span class="cheia">★</span><span class="cheia">★</span><span class="vazia">★</span><span class="vazia">★</span>
+                        </div>
+                        <p>"Peguei meu fone de volta na secretaria graças ao site. Seria legal se mandasse uma notificação no WhatsApp quando cadastrassem algo parecido."</p>
+                    </div>
+
+                    <!-- 5. 5 Estrelas -->
+                    <div class="card-avaliacao">
+                        <div class="cabecalho-avaliacao">
+                            <div class="emoji-mini">💳</div>
+                            <div>
+                                <h4>Rafael Oliveira</h4>
+                                <span class="selo selo-encontrado">Carteira Encontrada</span>
+                            </div>
+                        </div>
+                        <div class="estrelas">
+                            <span class="cheia">★</span><span class="cheia">★</span><span class="cheia">★</span><span class="cheia">★</span><span class="cheia">★</span>
+                        </div>
+                        <p>"Perdi minha carteira com todos os documentos. Em menos de 3 horas já estava com ela em mãos novamente. Nota 10!"</p>
+                    </div>
+
+                    <!-- 6. 4 Estrelas -->
+                    <div class="card-avaliacao">
+                        <div class="cabecalho-avaliacao">
+                            <div class="emoji-mini">⌚</div>
+                            <div>
+                                <h4>Fernanda Lima</h4>
+                                <span class="selo selo-encontrado">Relógio Encontrado</span>
+                            </div>
+                        </div>
+                        <div class="estrelas">
+                            <span class="cheia">★</span><span class="cheia">★</span><span class="cheia">★</span><span class="cheia">★</span><span class="vazia">★</span>
+                        </div>
+                        <p>"Muito prático poder compartilhar o link do item perdido direto no WhatsApp. Me ajudou demais a divulgar nos grupos."</p>
+                    </div>
+
+                    <!-- 7. 5 Estrelas -->
+                    <div class="card-avaliacao">
+                        <div class="cabecalho-avaliacao">
+                            <div class="emoji-mini">👓</div>
+                            <div>
+                                <h4>Thiago Santos</h4>
+                                <span class="selo selo-encontrado">Óculos Encontrados</span>
+                            </div>
+                        </div>
+                        <div class="estrelas">
+                            <span class="cheia">★</span><span class="cheia">★</span><span class="cheia">★</span><span class="cheia">★</span><span class="cheia">★</span>
+                        </div>
+                        <p>"Sem meus óculos eu não enxergo nada kkk. Ainda bem que encontraram na sala de aula e postaram rápido aqui no sistema."</p>
+                    </div>
+
+                    <!-- === CÓPIA EXATA PARA O LOOP INFINITO (NÃO REMOVER) === -->
+                    <div class="card-avaliacao" aria-hidden="true">
+                        <div class="cabecalho-avaliacao">
+                            <div class="emoji-mini">📱</div>
+                            <div>
+                                <h4>Carlos Eduardo</h4><span class="selo selo-encontrado">Celular Encontrado</span>
+                            </div>
+                        </div>
+                        <div class="estrelas"><span class="cheia">★</span><span class="cheia">★</span><span class="cheia">★</span><span class="cheia">★</span><span class="cheia">★</span></div>
+                        <p>"Achei que tinha perdido meu celular para sempre na biblioteca. Cadastraram no Findit e recuperei no mesmo dia!"</p>
+                    </div>
+
+                    <div class="card-avaliacao" aria-hidden="true">
+                        <div class="cabecalho-avaliacao">
+                            <div class="emoji-mini">🔑</div>
+                            <div>
+                                <h4>Mariana Silva</h4><span class="selo selo-encontrado">Chaves Encontradas</span>
+                            </div>
+                        </div>
+                        <div class="estrelas"><span class="cheia">★</span><span class="cheia">★</span><span class="cheia">★</span><span class="cheia">★</span><span class="vazia">★</span></div>
+                        <p>"Recuperei a chave do carro que deixei no refeitório! Só demorei um pouquinho para achar a categoria certa, mas funciona muito bem."</p>
+                    </div>
+
+                    <div class="card-avaliacao" aria-hidden="true">
+                        <div class="cabecalho-avaliacao">
+                            <div class="emoji-mini">🎒</div>
+                            <div>
+                                <h4>Lucas Mendes</h4><span class="selo selo-encontrado">Mochila Encontrada</span>
+                            </div>
+                        </div>
+                        <div class="estrelas"><span class="cheia">★</span><span class="cheia">★</span><span class="cheia">★</span><span class="cheia">★</span><span class="cheia">★</span></div>
+                        <p>"Recuperei minha mochila com todos os cadernos e notebook intactos. Ainda existe muita gente honesta por aqui!"</p>
+                    </div>
+
+                    <div class="card-avaliacao" aria-hidden="true">
+                        <div class="cabecalho-avaliacao">
+                            <div class="emoji-mini">🎧</div>
+                            <div>
+                                <h4>Beatriz Costa</h4><span class="selo selo-encontrado">Fone Encontrado</span>
+                            </div>
+                        </div>
+                        <div class="estrelas"><span class="cheia">★</span><span class="cheia">★</span><span class="cheia">★</span><span class="vazia">★</span><span class="vazia">★</span></div>
+                        <p>"Peguei meu fone de volta na secretaria graças ao site. Seria legal se mandasse uma notificação no WhatsApp quando cadastrassem algo parecido."</p>
+                    </div>
+
+                    <div class="card-avaliacao" aria-hidden="true">
+                        <div class="cabecalho-avaliacao">
+                            <div class="emoji-mini">💳</div>
+                            <div>
+                                <h4>Rafael Oliveira</h4><span class="selo selo-encontrado">Carteira Encontrada</span>
+                            </div>
+                        </div>
+                        <div class="estrelas"><span class="cheia">★</span><span class="cheia">★</span><span class="cheia">★</span><span class="cheia">★</span><span class="cheia">★</span></div>
+                        <p>"Perdi minha carteira com todos os documentos. Em menos de 3 horas já estava com ela em mãos novamente. Nota 10!"</p>
+                    </div>
+
+                    <div class="card-avaliacao" aria-hidden="true">
+                        <div class="cabecalho-avaliacao">
+                            <div class="emoji-mini">⌚</div>
+                            <div>
+                                <h4>Fernanda Lima</h4><span class="selo selo-encontrado">Relógio Encontrado</span>
+                            </div>
+                        </div>
+                        <div class="estrelas"><span class="cheia">★</span><span class="cheia">★</span><span class="cheia">★</span><span class="cheia">★</span><span class="vazia">★</span></div>
+                        <p>"Muito prático poder compartilhar o link do item perdido direto no WhatsApp. Me ajudou demais a divulgar nos grupos."</p>
+                    </div>
+
+                    <div class="card-avaliacao" aria-hidden="true">
+                        <div class="cabecalho-avaliacao">
+                            <div class="emoji-mini">👓</div>
+                            <div>
+                                <h4>Thiago Santos</h4><span class="selo selo-encontrado">Óculos Encontrados</span>
+                            </div>
+                        </div>
+                        <div class="estrelas"><span class="cheia">★</span><span class="cheia">★</span><span class="cheia">★</span><span class="cheia">★</span><span class="cheia">★</span></div>
+                        <p>"Sem meus óculos eu não enxergo nada kkk. Ainda bem que encontraram na sala de aula e postaram rápido aqui no sistema."</p>
+                    </div>
+
                 </div>
             </div>
         </div>
