@@ -4,6 +4,21 @@ require_once __DIR__ . "/init.php";
 
 ?>
 
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+
 
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -46,3 +61,15 @@ require_once __DIR__ . "/init.php";
         <h2>Missão e Comprometimento</h2>
         <p><strong>Hoje, a nossa plataforma simplifica a devolução de itens esquecidos, conectando parceiros e utilizadores numa rede integrada de apoio. Continuamos a expandir a nossa presença para garantir que cada objeto perdido retorne ao dono o mais rápido possível.</strong></p>
     </main>
+
+    <footer>
+        <div class="rodape-coluna">
+            <p>Sistema de achados e perdidos. Devolvendo pertences de forma rápida e simples.</p>
+        </div>
+
+        <div class="direitos">
+            <p>&copy; 2026 Celeste System. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+</html>

@@ -234,3 +234,12 @@ form button[type="submit"] {
 form button[type="submit"]:hover {
     filter: brightness(0.92);
 }
+
+footer {
+  margin-top: 30px;
+  display: flex;
+  justify-content: space-between;
+  background-color: #1f2d94;
+  padding: 10px;
+  color: rgb(193, 195, 197);
+}

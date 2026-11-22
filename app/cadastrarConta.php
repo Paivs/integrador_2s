@@ -106,7 +106,7 @@ foreach ($objetos as $o) {
         </section>
     </main>
     <footer>
-        <p>&copy; 2026 findIt. Todos os direitos reservados.</p>
+        <p>&copy; 2026 Celeste System. Todos os direitos reservados.</p>
     </footer>
 </body>
 

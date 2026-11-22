@@ -4,6 +4,15 @@ body {
     font-family: "Momo Trust Display", sans-serif;
     margin: 0; 
     padding-top: 70px;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    min-height: 100dvh;
+    box-sizing: border-box;
+}
+
+main{
+    flex: 1;
 }
 
 header {
@@ -181,15 +190,6 @@ header {
     text-align: center;
 }
 
-footer {
-    margin-top: 30px;
-    display: flex;
-    justify-content: space-between;
-    background-color: #1f2d94;
-    padding: 10px;
-    color: rgb(193, 195, 197);
-}
-
 .demonstracao {
     display: flex;
 }
@@ -245,4 +245,13 @@ body.com-intro header { animation: headerEntra 0.4s ease 2s both; }
 @media (prefers-reduced-motion: reduce) {
     .intro { display: none; }
     body.com-intro header { animation: none; }
+}
+
+footer {
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-between;
+    background-color: #1f2d94;
+    padding: 10px;
+    color: rgb(193, 195, 197);
 }

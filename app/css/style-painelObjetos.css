@@ -325,3 +325,12 @@ header {
     color: #5c5757;
     border: 2px solid #f2b93b;
 }
+
+footer {
+  margin-top: 30px;
+  display: flex;
+  justify-content: space-between;
+  background-color: #1f2d94;
+  padding: 10px;
+  color: rgb(193, 195, 197);
+}

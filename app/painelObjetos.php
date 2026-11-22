@@ -151,4 +151,14 @@ $objetos = readAll($pdo, 'objetos', $where, $params);
 
         </div>
     </main>
+
+    <footer>
+        <div class="rodape-coluna">
+            <p>Sistema de achados e perdidos. Devolvendo pertences de forma rápida e simples.</p>
+        </div>
+
+        <div class="direitos">
+            <p>&copy; 2026 Celeste System. Todos os direitos reservados.</p>
+        </div>
+    </footer>
 </body>

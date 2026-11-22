@@ -41,12 +41,12 @@ header {
 }
 
 .menu img {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    object-fit: cover;   
-    display: block;
-    flex-shrink: 0;     
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+  flex-shrink: 0;
 }
 
 .menu a {
@@ -118,7 +118,7 @@ select {
   border-width: 2px;
 }
 
-option:hover{
+option:hover {
   background-color: #3fd6e8;
 }
 
@@ -128,7 +128,7 @@ option:hover{
   display: block;
   margin-top: 5px;
   width: 50%;
-  
+
 }
 
 .circulos-container {
@@ -205,13 +205,13 @@ option:hover{
     padding-left: 85px;
   } */
 
-.cadastro {
-  display: flex;
-  align-items: flex-start;
-  flex-direction: row;
-  gap: 5rem;
-  width: fit-content;
-}
+  .cadastro {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: row;
+    gap: 5rem;
+    width: fit-content;
+  }
 }
 
 .prateleira {
@@ -229,4 +229,13 @@ option:hover{
   border-radius: 25px;
   display: block;
   margin: 0;
+}
+
+footer {
+  margin-top: 30px;
+  display: flex;
+  justify-content: space-between;
+  background-color: #1f2d94;
+  padding: 10px;
+  color: rgb(193, 195, 197);
 }
