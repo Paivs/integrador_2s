@@ -46,10 +46,10 @@ if (isset($_SESSION['user'])) {
           <li class="tem-submenu">
             <a href="./reservas.php">Reservas ▾</a>
             <ul class="submenu">
-              <li><a href="">Impressora 3D</a></li>
-              <li><a href="">Corte a laser</a></li>
-              <li><a href="">Usinagem CNC</a></li>
-              <li><a href="">Bancada de eletrônica</a></li>
+              <li><a href="./reservas.php?bancada=Prototipagem">Bancada de Prototipagem</a></li>
+              <li><a href="./reservas.php?bancada=Corte">Bancada de Corte a Laser</a></li>
+              <li><a href="./reservas.php?bancada=Robotica">Bancada de Robótica</a></li>
+              <li><a href="./reservas.php?bancada=Eletronica">Bancada de eletrônica</a></li>
             </ul>
           </li>
 

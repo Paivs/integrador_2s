@@ -4,7 +4,20 @@ require_once __DIR__ . '/init.php';
 
 $bancadasDisponiveis = readAll(database(), 'Bancadas', 'status_bancada = ?', ['disponivel']);
 
-
+if($_SERVER['REQUEST_METHOD'] == "GET" && isset($_GET['bancada'])){
+    if($_GET['bancada'] == 'Prototipagem'){
+        $bancadasDisponiveis = readAll(database(), 'Bancadas', 'area_bancada= ?',['Prototipagem']);
+    }
+    if($_GET['bancada'] == 'Corte'){
+        $bancadasDisponiveis = readAll(database(), 'Bancadas', 'area_bancada= ?',['Corte e Usinagem']);
+    }
+    if($_GET['bancada'] == 'Robotica'){
+        $bancadasDisponiveis = readAll(database(), 'Bancadas', 'area_bancada= ?',['Robótica']);
+    }
+    if($_GET['bancada'] == 'Eletronica'){
+        $bancadasDisponiveis = readAll(database(), 'Bancadas', 'area_bancada= ?',['Eletrônica']);
+    }
+}
 ?>
 
 <!DOCTYPE html>
