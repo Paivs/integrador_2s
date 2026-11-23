@@ -134,7 +134,3 @@ INSERT INTO mensagem (nome, telefone, email, assunto, mensagem) VALUES
 ('Ana Souza',    '11987654321', 'ana.souza@email.com',    'suporte',    'Não consegui cadastrar o meu objeto.'),
 ('Carla Mendes', '11965432109', 'carla.mendes@email.com', 'sugestao',   'Seria legal receber um aviso quando um objeto parecido com o meu for cadastrado.'),
 ('Diego Santos', '11954321098', 'diego.santos@email.com', 'reclamacao', 'O e-mail de aviso demorou para chegar.');
-
--- ========== CONFERÊNCIA ==========
-
-SELECT status_objeto, COUNT(*) AS total FROM objetos GROUP BY status_objeto;
