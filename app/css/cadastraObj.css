@@ -148,15 +148,6 @@ option:hover {
   flex-wrap: wrap;
 }
 
-.oito {
-  display: flex;
-  flex-direction: row;
-  gap: 10px;
-  flex-wrap: wrap;
-  padding: 20px;
-}
-
-
 .circulo {
   width: 35px;
   height: 35px;
@@ -210,11 +201,6 @@ option:hover {
   align-items: flex-start;
   margin-left: 40px;
 
-
-  /* h2 {
-    padding-left: 85px;
-  } */
-
   .cadastro {
     display: flex;
     align-items: flex-start;
@@ -234,7 +220,7 @@ option:hover {
 
 .prateleira img {
   width: 100%;
-  height: 120vh;
+  height: 85vh;
   object-fit: cover;
   border-radius: 25px;
   display: block;
