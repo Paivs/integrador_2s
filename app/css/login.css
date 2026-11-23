@@ -246,12 +246,3 @@ header.header-top {
 }
 .erro h3 { margin: 0 0 6px; font-size: 1rem; }
 .erro ul { margin: 0; padding-left: 18px; }
-
-footer {
-  margin-top: 30px;
-  display: flex;
-  justify-content: space-between;
-  background-color: #1f2d94;
-  padding: 10px;
-  color: rgb(193, 195, 197);
-}
