@@ -76,36 +76,18 @@ try {
         }
 
         if ($veiculoSelecionado) {
-            if (usuarioEhFuncionario()) {
-                // Funcionário vê todos os códigos para decidir o que precisa arrumar
-                $stmtCodigos = $pdo->query('SELECT * FROM codigos_falha ORDER BY CAST(codigo AS UNSIGNED)');
-                $itensDiagnostico = $stmtCodigos->fetchAll();
+          // Tanto funcionário quanto cliente veem todos os componentes da tabela
+          $stmtCodigos = $pdo->query('SELECT * FROM codigos_falha ORDER BY CAST(codigo AS UNSIGNED)');
+          $itensDiagnostico = $stmtCodigos->fetchAll();
 
-                $stmtMarcados = $pdo->prepare(
-                    "SELECT codigo_falha_id
-                     FROM veiculo_diagnosticos
-                     WHERE veiculo_id = ? AND situacao = 'Com problema'"
-                );
-                $stmtMarcados->execute([$diagnosticoVeiculoId]);
-                $idsComProblema = array_map('intval', $stmtMarcados->fetchAll(PDO::FETCH_COLUMN));
-            } else {
-                // Cliente vê SOMENTE os itens que o funcionário marcou que precisam de reparo
-                $stmtClienteDiag = $pdo->prepare(
-                    "SELECT cf.codigo, cf.componente, cf.descricao_falha, vd.situacao
-                     FROM veiculo_diagnosticos vd
-                     INNER JOIN codigos_falha cf ON cf.id = vd.codigo_falha_id
-                     WHERE vd.veiculo_id = ? AND vd.situacao = 'Com problema'
-                     ORDER BY CAST(cf.codigo AS UNSIGNED)"
-                );
-                $stmtClienteDiag->execute([$diagnosticoVeiculoId]);
-                $itensDiagnostico = $stmtClienteDiag->fetchAll();
-
-                // Se não houver nenhum problema marcado, não exibe a tabela para o cliente
-                if (count($itensDiagnostico) === 0) {
-                    $veiculoSelecionado = null;
-                }
-            }
-        }
+          $stmtMarcados = $pdo->prepare(
+              "SELECT codigo_falha_id
+              FROM veiculo_diagnosticos
+              WHERE veiculo_id = ? AND situacao = 'Com problema'"
+          );
+          $stmtMarcados->execute([$diagnosticoVeiculoId]);
+          $idsComProblema = array_map('intval', $stmtMarcados->fetchAll(PDO::FETCH_COLUMN));
+      }
     }
   } catch (Throwable $e) {
       $contagemProblemas = [];
@@ -188,16 +170,14 @@ $urlFechar = $busca !== '' ? 'veiculos.php?busca=' . urlencode($busca) : 'veicul
                     <td>
                       <?php if (usuarioEhFuncionario()): ?>
                         <a class="link-diagnostico <?php echo $qtdProblemas > 0 ? 'com-pendencia' : ''; ?>"
-                           href="veiculos.php?diagnostico=<?php echo (int) $veiculo['id'] . $queryBusca; ?>#bloco-diagnostico">
+                          href="veiculos.php?diagnostico=<?php echo (int) $veiculo['id'] . $queryBusca; ?>#bloco-diagnostico">
                           <?php echo $qtdProblemas > 0 ? "Avaliar ({$qtdProblemas} pendências)" : 'Avaliar'; ?>
                         </a>
-                      <?php elseif ($qtdProblemas > 0): ?>
-                        <a class="link-diagnostico com-pendencia"
-                           href="veiculos.php?diagnostico=<?php echo (int) $veiculo['id'] . $queryBusca; ?>#bloco-diagnostico">
-                          Ver problemas (<?php echo $qtdProblemas; ?>)
-                        </a>
                       <?php else: ?>
-                        <span class="sem-pendencia">Sem apontamentos</span>
+                        <a class="link-diagnostico <?php echo $qtdProblemas > 0 ? 'com-pendencia' : ''; ?>"
+                          href="veiculos.php?diagnostico=<?php echo (int) $veiculo['id'] . $queryBusca; ?>#bloco-diagnostico">
+                          <?php echo $qtdProblemas > 0 ? "Ver diagnóstico ({$qtdProblemas} pendências)" : 'Ver diagnóstico'; ?>
+                        </a>
                       <?php endif; ?>
                     </td>
 
@@ -232,7 +212,7 @@ $urlFechar = $busca !== '' ? 'veiculos.php?busca=' . urlencode($busca) : 'veicul
                 <p>
                   <?php echo usuarioEhFuncionario()
                       ? 'Selecione apenas os componentes que precisam de reparo e clique em salvar.'
-                      : 'Componentes identificados pela oficina que necessitam de reparo.'; ?>
+                      : 'Situação técnica dos componentes avaliados pela oficina.'; ?>
                 </p>
               </div>
               <a class="botao secundario" href="<?php echo textoSeguro($urlFechar); ?>">Fechar</a>
@@ -301,9 +281,6 @@ $urlFechar = $busca !== '' ? 'veiculos.php?busca=' . urlencode($busca) : 'veicul
                 <table class="tabela-diagnostico">
                   <thead>
                     <tr>
-                      <?php if (usuarioEhFuncionario()): ?>
-                        <th>Código</th>
-                      <?php endif; ?>
                       <th>Componente</th>
                       <th>Descrição da falha</th>
                       <th>Situação</th>
@@ -311,10 +288,17 @@ $urlFechar = $busca !== '' ? 'veiculos.php?busca=' . urlencode($busca) : 'veicul
                   </thead>
                   <tbody>
                     <?php foreach ($itensDiagnostico as $item): ?>
-                      <tr class="linha-com-problema">
+                      <?php $marcado = in_array((int) $item['id'], $idsComProblema, true); ?>
+                      <tr class="<?php echo $marcado ? 'linha-com-problema' : ''; ?>">
                         <td><?php echo textoSeguro($item['componente']); ?></td>
                         <td><?php echo textoSeguro($item['descricao_falha']); ?></td>
-                        <td class="centro"><span class="texto-problema">Com problema</span></td>
+                        <td class="centro">
+                          <?php if ($marcado): ?>
+                            <span class="texto-problema">Com problema</span>
+                          <?php else: ?>
+                            <span>Normal</span>
+                          <?php endif; ?>
+                        </td>
                       </tr>
                     <?php endforeach; ?>
                   </tbody>
