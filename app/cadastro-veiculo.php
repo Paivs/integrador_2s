@@ -11,7 +11,7 @@ $placa = '';
 $ano = '';
 $quilometragem = '';
 
-$carroExemplo = [
+$exemplo = [
     'placa' => 'BRA2E19',
     'marca' => 'Volkswagen',
     'modelo' => 'Gol 1.6 MSI',
@@ -42,24 +42,65 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($consulta->fetch()) {
             $erro = 'Esta placa já está cadastrada.';
         } else {
-            // O proprietário é definido automaticamente pelo usuário conectado.
-            $comando = $pdo->prepare(
-                'INSERT INTO veiculos
-                (cliente_id, marca, modelo, placa, ano, quilometragem)
-                VALUES (?, ?, ?, ?, ?, ?)'
-            );
+            try {
+                $pdo->beginTransaction();
 
-            $comando->execute([
-                $_SESSION['cliente_id'],
-                $marca,
-                $modelo,
-                $placa,
-                $ano,
-                $quilometragem
-            ]);
+                $comando = $pdo->prepare(
+                    'INSERT INTO veiculos
+                    (cliente_id, marca, modelo, placa, ano, quilometragem)
+                    VALUES (?, ?, ?, ?, ?, ?)'
+                );
 
-            header('Location: veiculos.php?mensagem=cadastrado');
-            exit;
+                $comando->execute([
+                    $_SESSION['cliente_id'],
+                    $marca,
+                    $modelo,
+                    $placa,
+                    $ano,
+                    $quilometragem
+                ]);
+
+                $id = $pdo->lastInsertId();
+                $nomes = $pdo->query(
+                    'SELECT DISTINCT componente FROM codigos_falha ORDER BY RAND() LIMIT 3'
+                )->fetchAll(PDO::FETCH_COLUMN);
+                $total = random_int(1, 2);
+                $posicao = 0;
+
+                $buscar = $pdo->prepare(
+                    'SELECT id FROM codigos_falha
+                    WHERE componente = ? ORDER BY RAND() LIMIT 1'
+                );
+
+                $salvar = $pdo->prepare(
+                    'INSERT INTO veiculo_diagnosticos
+                    (veiculo_id, codigo_falha_id, situacao)
+                    VALUES (?, ?, ?)'
+                );
+
+                foreach ($nomes as $nome) {
+                    $buscar->execute([$nome]);
+                    $falha = $buscar->fetchColumn();
+                    $situacao = $posicao < $total ? 'Com problema' : 'Tenha atenção';
+                    $salvar->execute([$id, $falha, $situacao]);
+                    $posicao++;
+
+                    if ($posicao > $total) {
+                        break;
+                    }
+                }
+
+                $pdo->commit();
+
+                header('Location: veiculos.php?mensagem=cadastrado');
+                exit;
+            } catch (Throwable $e) {
+                if ($pdo->inTransaction()) {
+                    $pdo->rollBack();
+                }
+
+                $erro = 'Não foi possível cadastrar o veículo.';
+            }
         }
     }
 }
@@ -114,29 +155,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   </div>
 
   <script>
-    const carroExemplo = <?php echo json_encode($carroExemplo, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_AMP | JSON_HEX_QUOT); ?>;
+    const exemplo = <?php echo json_encode($exemplo, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_AMP | JSON_HEX_QUOT); ?>;
     const placa = document.querySelector('input[name="placa"]');
     const marca = document.querySelector('input[name="marca"]');
     const modelo = document.querySelector('input[name="modelo"]');
     const ano = document.querySelector('input[name="ano"]');
     const quilometragem = document.querySelector('input[name="quilometragem"]');
-    let preenchidoAutomaticamente = false;
+    let automatico = false;
 
     placa.addEventListener('input', function () {
       this.value = this.value.toUpperCase().replace(/[^A-Z0-9]/g, '');
 
-      if (carroExemplo && this.value === carroExemplo.placa) {
-        marca.value = carroExemplo.marca;
-        modelo.value = carroExemplo.modelo;
-        ano.value = carroExemplo.ano;
-        quilometragem.value = carroExemplo.quilometragem;
-        preenchidoAutomaticamente = true;
-      } else if (preenchidoAutomaticamente) {
+      if (exemplo && this.value === exemplo.placa) {
+        marca.value = exemplo.marca;
+        modelo.value = exemplo.modelo;
+        ano.value = exemplo.ano;
+        quilometragem.value = exemplo.quilometragem;
+        automatico = true;
+      } else if (automatico) {
         marca.value = '';
         modelo.value = '';
         ano.value = '';
         quilometragem.value = '';
-        preenchidoAutomaticamente = false;
+        automatico = false;
       }
     });
   </script>

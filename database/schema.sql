@@ -152,7 +152,6 @@ INSERT IGNORE INTO codigos_falha (codigo, componente, descricao_falha) VALUES
 ('12', 'Sensor de rotação e PMS', 'Sem sinal'),
 ('13', 'Sonda lambda', 'Circuito aberto'),
 ('14', 'Sensor de temperatura da água', 'Baixa tensão'),
-('15', 'Sensor de temperatura da água', 'Alta tensão'),
 ('16', 'Sensor de detonação', 'Sem sinal'),
 ('17', 'Eletroinjetor de combustível', 'Falha no circuito'),
 ('18', 'Sensor de detonação', 'Sem regulagem do sinal'),

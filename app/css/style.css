@@ -735,7 +735,7 @@ td small {
 .tabela-diagnostico-box {
   width: 100%;
   overflow-x: auto;
-  border: 1px solid #d1d5db;
+  border: 1px solid #000000;
 }
 
 .tabela-diagnostico {
@@ -750,12 +750,12 @@ td small {
   font-weight: 700;
   text-align: center;
   padding: 11px 14px;
-  border: 1px solid #a3162d;
+  border: 1px solid #000000;
 }
 
 .tabela-diagnostico tbody td {
   padding: 9px 14px;
-  border: 1px solid #d1d5db;
+  border: 1px solid #000000;
   color: #202e36;
 }
 
@@ -767,27 +767,53 @@ td small {
   text-align: center;
 }
 
-.tabela-diagnostico .texto-problema,
-.tabela-diagnostico tr.linha-com-problema .texto-situacao {
-  color: #800c1f;
+.texto-situacao,
+.situacao-select {
+  border: 1px solid transparent;
+  border-radius: 2px;
+  padding: 6px 9px;
   font-weight: 700;
 }
 
-.opcao-diagnostico {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  font-weight: 600;
+.texto-situacao {
+  display: inline-block;
+}
+
+.situacao-select {
   cursor: pointer;
 }
 
-.opcao-diagnostico input[type="checkbox"] {
-  width: 16px;
-  height: 16px;
-  margin: 0;
-  accent-color: #800c1f;
-  cursor: pointer;
+.texto-situacao.normal,
+.situacao-select.normal {
+  color: #245f33;
+  background: #e8f6ec;
+  border-color: #bdd8c4;
+}
+
+.texto-situacao.atencao,
+.situacao-select.atencao {
+  color: #785600;
+  background: #fff5cf;
+  border-color: #ead58a;
+}
+
+.texto-situacao.problema,
+.situacao-select.problema {
+  color: #800c1f;
+  background: #fff1f3;
+  border-color: #e4b9c0;
+}
+
+.tabela-diagnostico tr.linha-normal {
+  background: #f7fcf8;
+}
+
+.tabela-diagnostico tr.linha-atencao {
+  background: #fffdf3;
+}
+
+.tabela-diagnostico tr.linha-problema {
+  background: #fff8f9;
 }
 
 .diagnostico-rodape {
