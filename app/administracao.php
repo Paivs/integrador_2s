@@ -17,24 +17,30 @@ $equipes = readAll($pdo, "equipes");
     <div class="tudo">
         <?php require_once __DIR__ . "/cabecalho.php" ?>
 
-        <?php if( $_SERVER['REQUEST_METHOD'] == "GET" && isset($_GET['erro'])):?>
-            <div class="erro">
-                <?php if($_GET['erro'] == "HORARIO_PASSADO"): ?>
-                    <p>O horário do torneio não pode ser no passado.</p>
-                <?php elseif($_GET['erro'] == "NOME_INVALIDO"): ?>
-                    <p>O nome do torneio é inválido.</p>
-                <?php elseif($_GET['erro'] == "FORMATO_INVALIDO"): ?>
-                    <p>O formato do torneio é inválido.</p>
-                <?php elseif($_GET['erro'] == "JOGADORES_INVALIDO"): ?>
-                    <p>A quantidade de jogadores deve ser maior que 0.</p>
-                <?php elseif($_GET['erro'] == "TAXA_INVALIDA"): ?>
-                    <p>A taxa do torneio não pode ser negativa.</p>
-                <?php elseif($_GET['erro'] == "ID_NAO_ENCONTRADO"): ?>
-                    <p>ID do torneio não encontrado.</p>
-                <?php elseif($_GET['erro'] == "TORNEIO_JA_PASSOU"): ?>
-                    <p>A data do torneio não pode ser no passado.</p>
-                <?php endif; ?>
-            </div>
+        <?php if ($_SERVER['REQUEST_METHOD'] == "GET" && isset($_GET['erro'])): ?>
+    <div class="erro">
+        <?php if ($_GET['erro'] == "HORARIO_PASSADO"): ?>
+            <p>O horário do torneio não pode ser no passado.</p>
+        <?php elseif ($_GET['erro'] == "NOME_INVALIDO"): ?>
+            <p>O nome do torneio ou da equipe é inválido.</p>
+        <?php elseif ($_GET['erro'] == "FORMATO_INVALIDO"): ?>
+            <p>O formato do torneio é inválido.</p>
+        <?php elseif ($_GET['erro'] == "JOGADORES_INVALIDO"): ?>
+            <p>A quantidade de jogadores deve ser maior que 0.</p>
+        <?php elseif ($_GET['erro'] == "TAXA_INVALIDA"): ?>
+            <p>A taxa do torneio não pode ser negativa.</p>
+        <?php elseif ($_GET['erro'] == "ID_NAO_ENCONTRADO"): ?>
+            <p>ID do torneio ou da equipe não encontrado.</p>
+        <?php elseif ($_GET['erro'] == "TORNEIO_JA_PASSOU"): ?>
+            <p>A data do torneio não pode ser no passado.</p>
+        <?php elseif ($_GET['erro'] == "DESCRICAO_INVALIDA"): ?>
+            <p>A descrição da equipe é inválida. Ela deve ter até 100 caracteres.</p>
+        <?php elseif ($_GET['erro'] == "PRIVACIDADE_INVALIDA"): ?>
+            <p>A privacidade da equipe é inválida.</p>
+        <?php elseif ($_GET['erro'] == "JOGO_INVALIDO"): ?>
+            <p>O jogo selecionado é inválido.</p>
+        <?php endif; ?>
+    </div>
         <?php endif; ?>
         
         <div class="admin-list-container">
@@ -44,7 +50,7 @@ $equipes = readAll($pdo, "equipes");
                 <div class="col-acoes">Ações</div>
             </div>
 
-            <?php foreach($torneios as$t): ?>
+            <?php foreach($torneios as $t): ?>
                 <div class="list-item">
                     <div class="col-principal info-group">
                         <span class="nome-item"><?= htmlspecialchars($t['nome_torneio']) ?></span>
@@ -73,11 +79,11 @@ $equipes = readAll($pdo, "equipes");
         <div class="admin-list-container">
             <div class="list-header">
                 <div class="col-principal">Equipes</div>
-                <div class="col-secundaria">Privacidade</div>
+                <div class="col-secundaria">Privacidade e jogo</div>
                 <div class="col-acoes">Ações</div>
             </div>
 
-            <?php foreach($equipes as$e): ?>
+            <?php foreach($equipes as $e): ?>
                 <div class="list-item">
                     <div class="col-principal info-group">
                         <span class="nome-item"><?= htmlspecialchars($e['nome']) ?></span>
@@ -85,7 +91,9 @@ $equipes = readAll($pdo, "equipes");
                     </div>
 
                     <div class="col-secundaria">
-                        <span class="valor2"><?= htmlspecialchars($e['privacidade']) ?></span> 
+                        <span class="valor2"><?= htmlspecialchars($e['privacidade'])?></span>
+                        <br>
+                        <span class="valor2"><?= htmlspecialchars($e['jogo_equipe']) ?></span>
                     </div>
 
                     <div class="col-acoes">
