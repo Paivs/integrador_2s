@@ -129,7 +129,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </header>
 
     <main>
-        <div class="">
+        <div class="container">
             <div style="width: 50%">
                 <div class="borda">
 
@@ -140,7 +140,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <?php endif; ?>
 
                     <form action="" method="POST" class="formulario">
-                        <div class="cadastro">
                             <div class="grupo-campo">
                                 <div class="linha-titulo">
                                     <p class="ordem">1.</p>
@@ -260,7 +259,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                                 </div>
                             </div>
-                        </div>
+                       
 
 
 
