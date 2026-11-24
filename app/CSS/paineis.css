@@ -1,0 +1,423 @@
+/* paineis.css — estilos da página Painéis (menu, formulário e tabela de sistemas) */
+
+/* ===== Base ===== */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f5f7f5;
+  color: #243329;
+}
+
+/* ===== Menu lateral ===== */
+.menu-lateral {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 309px;
+  height: 100vh;
+  padding: 28px 12px 16px;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  background: #16261c;
+  color: #d0dcd3;
+}
+
+/* Nome do projeto: "solar" branco e "control" cinza */
+.marca {
+  margin: 8px 14px 30px;
+  color: #fff;
+  font-size: 32px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.marca span {
+  color: #a4b7aa;
+  font-weight: normal;
+}
+
+/* Títulos "MENU" e "GESTÃO" */
+.titulo-menu {
+  margin: 20px 14px 10px;
+  color: #91a797;
+  font-size: 18px;
+  letter-spacing: 1px;
+}
+
+/* Links do menu */
+.menu-links a {
+  min-height: 44px;
+  margin-bottom: 3px;
+  padding: 12px 14px;
+  display: flex;
+  align-items: center;
+  border-radius: 7px;
+  color: #c1d0c5;
+  font-size: 15px;
+  text-decoration: none;
+}
+
+/* Link com o mouse em cima e link da página atual */
+.menu-links a:hover,
+.menu-links a[aria-current="page"] {
+  background: #284b36;
+  color: #fff;
+}
+
+.menu-links a[aria-current="page"] {
+  font-weight: bold;
+}
+
+/* Parte de baixo do menu (empurrada para o fim) */
+.menu-rodape {
+  margin-top: auto;
+}
+
+/* Usuário: bolinha com a inicial, nome e Sair */
+.usuario {
+  margin-top: 18px;
+  padding: 18px 6px 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-top: 1px solid #314336;
+}
+
+.avatar {
+  width: 34px;
+  height: 34px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #d9ebe0;
+  color: #285438;
+}
+
+.dados-usuario {
+  flex: 1;
+}
+
+.dados-usuario strong,
+.dados-usuario small {
+  display: block;
+}
+
+.dados-usuario strong {
+  color: #fff;
+  font-size: 12px;
+}
+
+.dados-usuario small {
+  margin-top: 4px;
+  color: #a0b3a6;
+  font-size: 12px;
+}
+
+.sair {
+  color: #b5d4be;
+  font-size: 12px;
+  text-decoration: none;
+}
+
+/* ===== Conteúdo ao lado do menu ===== */
+.conteudo {
+  margin-left: 309px;
+  padding: 32px;
+}
+
+/* Título da página (20px embaixo porque esta página não tem subtítulo) */
+.conteudo h1 {
+  margin: 0 0 20px;
+  font-size: 32px;
+}
+
+/* Mensagem de erro (ex.: não deu para excluir) */
+.erro-msg {
+  margin: 0 0 20px;
+  padding: 12px 16px;
+  border-radius: 8px;
+  background: #fdecea;
+  color: #b42318;
+  font-weight: bold;
+}
+
+/* Caixa branca (usada no formulário e na tabela) */
+.caixa {
+  margin-bottom: 20px;
+  padding: 20px;
+  border: 1px solid #dce5df;
+  border-radius: 12px;
+  background: #fff;
+}
+
+.caixa h2 {
+  margin: 0 0 16px;
+  font-size: 18px;
+}
+
+/* ===== Formulário de cadastro ===== */
+/* Os campos se ajustam sozinhos: cabem quantos tiverem 160px ou mais por linha */
+.form {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 14px;
+}
+
+/* Título e botões ocupam a linha inteira */
+.form h2,
+.form h3,
+.form .dica,
+.botoes {
+  grid-column: 1 / -1;
+}
+
+/* Subtítulo "Local do cliente", com uma linha separando dos dados do sistema */
+.form h3 {
+  margin: 6px 0 0;
+  padding-top: 16px;
+  border-top: 1px solid #e9efea;
+  font-size: 16px;
+}
+
+/* Aviso cinza embaixo do subtítulo */
+.form .dica {
+  margin: -6px 0 0;
+  color: #65776a;
+  font-size: 13px;
+}
+
+.form label {
+  display: grid;
+  gap: 6px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.form input,
+.form select {
+  height: 42px;
+  padding: 0 10px;
+  border: 1px solid #cfdad2;
+  border-radius: 8px;
+  background: #fff;
+  color: #243329;
+  font: inherit;
+  font-weight: normal;
+}
+
+/* Borda verde no campo que está sendo preenchido */
+.form input:focus,
+.form select:focus {
+  outline: none;
+  border-color: #2e7d50;
+  box-shadow: 0 0 0 3px #d9ebe0;
+}
+
+/* Botões à direita: Cancelar (só ao editar) e Cadastrar/Salvar */
+.botoes {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 16px;
+}
+
+/* Cancelar e Salvar: mesma altura, mesma borda e mesmo tamanho de letra */
+.botao-cancelar,
+.botao-salvar {
+  height: 44px;
+  padding: 0 22px;
+  display: inline-flex;
+  align-items: center;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: bold;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Cancelar: branco com borda cinza, sem sublinhado */
+.botao-cancelar {
+  border: 1px solid #cfdad2;
+  background: #fff;
+  color: #243329;
+}
+
+.botao-cancelar:hover {
+  border-color: #2e7d50;
+  color: #2e7d50;
+}
+
+/* Salvar / Cadastrar: verde */
+.botao-salvar {
+  border: 1px solid #2e7d50;
+  background: #2e7d50;
+  color: #fff;
+}
+
+.botao-salvar:hover {
+  border-color: #256641;
+  background: #256641;
+}
+
+/* ===== Tabela de sistemas ===== */
+table.caixa {
+  width: 100%;
+  padding: 0;
+  border-spacing: 0;
+  overflow: hidden;
+}
+
+th,
+td {
+  padding: 14px 12px;
+  border-bottom: 1px solid #e9efea;
+  text-align: left;
+}
+
+/* Cabeçalho cinza-claro em letras maiúsculas */
+th {
+  background: #f3f7f4;
+  color: #4f6457;
+  font-size: 13px;
+  text-transform: uppercase;
+}
+
+/* Última linha sem borda embaixo */
+tr:last-child td {
+  border-bottom: 0;
+}
+
+/* CEP em cinza, embaixo da rua */
+.cep {
+  margin-top: 4px;
+  display: block;
+  color: #65776a;
+  font-size: 12px;
+}
+
+/* Linha com o mouse em cima */
+tr:hover td {
+  background: #f8fbf9;
+}
+
+/* ===== Etiquetas de status ===== */
+.status {
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+/* Ativo: verde */
+.ok {
+  background: #e5f2e9;
+  color: #2c6842;
+}
+
+/* Em manutenção: amarelo */
+.meio {
+  background: #fbf0dc;
+  color: #8a5a12;
+}
+
+/* Inativo: vermelho */
+.ruim {
+  background: #fdecea;
+  color: #b42318;
+}
+
+/* ===== Botões Editar e Excluir ===== */
+.col-acoes {
+  white-space: nowrap;
+}
+
+/* O <form> do Excluir fica na mesma linha do Editar */
+.col-acoes form {
+  display: inline;
+}
+
+.col-acoes a,
+.col-acoes button {
+  display: inline-block;
+  padding: 8px 14px;
+  border: 0;
+  border-radius: 6px;
+  color: #fff;
+  font: inherit;
+  font-size: 14px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.col-acoes a {
+  background: #2e7d50;
+}
+
+.col-acoes button {
+  background: #b42318;
+}
+
+.col-acoes a:hover {
+  background: #256641;
+}
+
+.col-acoes button:hover {
+  background: #8f1c13;
+}
+
+/* ===== Telas menores (celular e tablet) ===== */
+@media (max-width: 900px) {
+  /* Menu vai para cima do conteúdo */
+  .menu-lateral {
+    position: static;
+    width: auto;
+    height: auto;
+  }
+
+  .conteudo {
+    margin-left: 0;
+    padding: 20px 14px;
+  }
+
+  /* Tabela pode rolar para o lado */
+  table.caixa {
+    display: block;
+    overflow-x: auto;
+  }
+}
+
+.menu-links a {
+  min-height: 44px;
+  margin-bottom: 3px;
+  padding: 12px 14px;
+  display: flex;
+  align-items: center;
+  border-radius: 7px;
+  color: #c1d0c5;
+  font-size: 15px;
+  text-decoration: none;
+  /* Adiciona transição suave de 0.25s */
+  transition: background-color 0.25s ease, color 0.25s ease, transform 0.2s ease;
+}
+
+.menu-links a:hover {
+  background: #284b36;
+  color: #fff;
+  /* Desliza levemente para a direita */
+  transform: translateX(6px);
+}
+
+.menu-links a[aria-current="page"] {
+  background: #284b36;
+  color: #fff;
+  font-weight: bold;
+}
+
