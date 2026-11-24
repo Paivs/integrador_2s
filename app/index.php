@@ -73,7 +73,7 @@ $atrasadas = intval($resumo['atrasadas'] ?? 0);
           </div>
 
           <?php if (usuarioEhCliente()): ?>
-            <a class="botao primario" href="agendar-manutencao.php">Solicitar manutenção</a>
+            <a class="botao primario" href="manutencoes.php#solicitar-manutencao">Solicitar manutenção</a>
           <?php else: ?>
             <a class="botao primario" href="manutencoes.php">Ver solicitações</a>
           <?php endif; ?>

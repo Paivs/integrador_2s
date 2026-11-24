@@ -8,11 +8,11 @@ if (!usuarioEhFuncionario() || $_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit;
 }
 
-$veiculoId = (int) ($_POST['veiculo_id'] ?? 0);
-$problemas =$_POST['problemas'] ?? [];
-$funcionarioId =$_SESSION['funcionario_id'] ?? null;
+$id = (int) ($_POST['veiculo_id'] ?? 0);
+$dados = $_POST['situacoes'] ?? [];
+$funcionario = $_SESSION['funcionario_id'] ?? null;
 
-if ($veiculoId <= 0) {
+if ($id <= 0) {
     header('Location: veiculos.php');
     exit;
 }
@@ -20,29 +20,32 @@ if ($veiculoId <= 0) {
 try {
     $pdo->beginTransaction();
 
-    $stmtDelete =$pdo->prepare('DELETE FROM veiculo_diagnosticos WHERE veiculo_id = ?');
-    $stmtDelete->execute([$veiculoId]);
+    $excluir = $pdo->prepare('DELETE FROM veiculo_diagnosticos WHERE veiculo_id = ?');
+    $excluir->execute([$id]);
 
-    if (is_array($problemas) && count($problemas) > 0) {
-        $stmtInsert =$pdo->prepare(
+    if (is_array($dados) && count($dados) > 0) {
+        $inserir = $pdo->prepare(
             'INSERT INTO veiculo_diagnosticos (veiculo_id, codigo_falha_id, funcionario_id, situacao)
              VALUES (?, ?, ?, ?)'
         );
 
-        foreach ($problemas as$codigoId) {
-            $codigoId = (int)$codigoId;
-            if ($codigoId > 0) {
-                $stmtInsert->execute([$veiculoId, $codigoId,$funcionarioId, 'Com problema']);
+        foreach ($dados as $codigo => $situacao) {
+            $codigo = (int) $codigo;
+
+            if ($codigo > 0 && in_array($situacao, ['Com problema', 'Tenha atenção'], true)) {
+                $inserir->execute([$id, $codigo, $funcionario, $situacao]);
             }
         }
     }
 
     $pdo->commit();
-    header("Location: veiculos.php?diagnostico={$veiculoId}&mensagem=diagnostico_salvo#bloco-diagnostico");
+    header("Location: veiculos.php?diagnostico={$id}&mensagem=diagnostico_salvo#bloco-diagnostico");
     exit;
-} catch (Throwable $e) {
-    if ($pdo->inTransaction()) {$pdo->rollBack();
+} catch (Throwable $erro) {
+    if ($pdo->inTransaction()) {
+        $pdo->rollBack();
     }
-    header("Location: veiculos.php?diagnostico={$veiculoId}&mensagem=erro#bloco-diagnostico");
+
+    header("Location: veiculos.php?diagnostico={$id}&mensagem=erro#bloco-diagnostico");
     exit;
 }

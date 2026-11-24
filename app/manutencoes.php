@@ -16,6 +16,9 @@ if (($_GET['mensagem'] ?? '') === 'cadastrada') {
 } elseif (($_GET['mensagem'] ?? '') === 'erro') {
     $mensagem = 'Não foi possível atualizar o status.';
     $mensagemErro = true;
+} elseif (($_GET['mensagem'] ?? '') === 'erroAgendar') {
+    $mensagem = 'Preencha corretamente os dados da manutenção.';
+    $mensagemErro = true;
 }
 
 $sql = 'SELECT manutencoes.*,
@@ -189,7 +192,7 @@ if (usuarioEhCliente()) {
         <?php endif; ?>
 
         <?php if (usuarioEhCliente()): ?>
-          <form class="bloco-manutencao" action="agendar-manutencao.php" method="post">
+          <form class="bloco-manutencao" id="solicitar-manutencao" action="agendar-manutencao.php" method="post">
             <!-- Coluna 1: Logo + Mapa -->
             <div class="coluna-mapa">
               <div class="marca">
@@ -423,4 +426,4 @@ if (usuarioEhCliente()) {
     </script>
   <?php endif; ?>
 </body>
-</html> 
+</html>
