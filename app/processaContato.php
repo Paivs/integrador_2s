@@ -50,23 +50,23 @@ if (count($erros) === 0) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="contato.css">
+    <link rel="stylesheet" href="/css/contato.css">
     <title>Contato</title>
 </head>
 <body>
     <main>
         <?php if (count($erros) > 0): ?>
-            <h1>Ops!</h1>
-            <h2>Corrija os itens abaixo:</h2>
+            <h1 class="mensagem">Ops!</h1>
+            <h2 class="mensagem">Corrija os itens abaixo:</h2>
             <?php foreach ($erros as $erro): ?>
                 <p><?= htmlspecialchars($erro) ?></p>
             <?php endforeach; ?>
         <?php else: ?>
-            <h1>Mensagem recebida!</h1>
-            <h2>Obrigado pelo contato, <?= htmlspecialchars($nome) ?>.</h2>
+            <h1 class="mensagem">Mensagem recebida!</h1>
+            <h2 class="mensagem">Obrigado pelo contato, <?= htmlspecialchars($nome) ?>.</h2>
         <?php endif; ?>
  
-        <p><a href="FormContato.php">Voltar ao formulário</a></p>
+        <p><a class="linkRetorno" href="FormContato.php">Voltar ao formulário</a></p>
     </main>
 </body>
 </html>
