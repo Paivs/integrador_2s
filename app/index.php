@@ -29,7 +29,7 @@ try {
           Um espaço maker completo com prototipagem 3D, corte a laser,
           usinagem CNC e bancadas de eletrônica. Tudo isso na palma da sua mão.
         </p>
-        <a href="#" class="botao">Reserve conosco →</a>
+        <a href="./reservas.php" class="botao">Reserve conosco →</a>
       </div>
     </div>
     <span class="marca"><img src="./img/cabecalho/logo.png" alt=""></span>
