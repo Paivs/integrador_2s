@@ -1,0 +1,333 @@
+.tudo {
+    margin: 0;
+    min-height: 100vh;
+    background: linear-gradient(to bottom, #2b2b2b 0%, #6b6b6b 40%, #ffffff 100%);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.formulario {
+    display: flex;
+    justify-content: center;
+    margin: 60px 20px;
+    font-family: 'Bebas Neue', 'Arial Narrow', sans-serif;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    width: 100%;
+    max-width: 480px;
+    box-sizing: border-box;
+    padding: 40px 50px 44px;
+    background: #262626;
+    border-radius: 28px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.form br {
+    display: none;
+}
+
+.titulo {
+    margin: 0;
+    align-self: center;
+    font-size: 44px;
+    font-weight: normal;
+    font-style: italic;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #fff;
+}
+
+.campo {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.campo label {
+    color: #fff;
+    font-size: 20px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    text-align: left;
+}
+
+.campo label .texto-laranja {
+    color: #fff;
+}
+
+.campo input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px 16px;
+    background-color: #222;
+    color: #fff;
+    border: 3px solid #111;
+    border-radius: 10px;
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.6);
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    outline: none;
+}
+
+.campo input::placeholder {
+    color: #666;
+    text-transform: uppercase;
+    font-size: 14px;
+}
+
+.campo input:focus {
+    border-color: #555;
+}
+
+.erro {
+    margin: 0;
+    font-size: 16px;
+    color: #ff5555;
+    text-align: left;
+}
+
+button {
+    padding: 14px;
+    background-color: #333;
+    color: #fff;
+    border: 2px solid #111;
+    border-radius: 10px;
+    font-family: inherit;
+    font-size: 24px;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: rgb(235, 120, 26);
+}
+
+
+.separador {
+    order: 98;
+    margin: 4px 0;
+    text-align: center;
+    font-size: 17px;
+    color: #fff;
+    background:
+        linear-gradient(#666, #666) left center / calc(50% - 22px) 1px no-repeat,
+        linear-gradient(#666, #666) right center / calc(50% - 22px) 1px no-repeat;
+}
+
+.entrar {
+    order: 99;
+    align-self: center;
+    display: inline-block;
+    margin-top: 4px;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.4;
+    color: rgb(240, 140, 60);
+    text-decoration: none;
+    transition: transform 0.3s ease-in-out;
+}
+
+.entrar:hover {
+    transform: scale(1.15);
+}
+
+.texto-laranja {
+    color: rgb(235, 120, 26);
+}
+
+
+.perfil {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+    max-width: 640px;
+    box-sizing: border-box;
+    padding: 40px 44px 36px;
+    background: #262626;
+    border-radius: 28px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+
+.perfil-topo {
+display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.perfil-avatar {
+    flex-shrink: 0;
+    width: 96px;
+    height: 96px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 50%;
+    background: #111;
+    border: 4px solid rgb(235, 120, 26);
+    box-shadow: 0 0 18px rgba(235, 120, 26, 0.35);
+}
+
+.perfil-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.perfil-avatar span {
+    font-size: 48px;
+    color: #fff;
+    line-height: 1;
+}
+
+.perfil-identidade {
+    min-width: 0;
+}
+
+.perfil-rotulo {
+    margin: 0 0 4px;
+    font-size: 16px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: rgb(235, 120, 26);
+}
+
+.perfil-nome {
+    margin: 0;
+    font-size: 44px;
+    font-weight: normal;
+    font-style: italic;
+    text-transform: uppercase;
+    line-height: 1;
+    color: #fff;
+    
+}
+
+.perfil-email {
+    margin: 8px 0 0;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    color: #999;
+    
+}
+
+
+.perfil-stats {
+display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+}
+
+.status {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 16px 8px;
+    background: #1a1a1a;
+    border: 2px solid #111;
+    border-radius: 14px;
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.6);
+}
+
+.status-valor {
+    font-size: 34px;
+    line-height: 1;
+    color: rgb(235, 120, 26);
+}
+
+.status-rotulo {
+    font-size: 15px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: #fff;
+}
+
+
+.perfil-informacoes{
+    margin: 0 0 12px;
+    padding-bottom: 8px;
+    font-size: 24px;
+    font-weight: normal;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: #fff;
+    border-bottom: 1px solid #666;
+}
+
+.perfil-info {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.perfil-info li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    padding: 12px 0;
+    border-bottom: 1px solid #333;
+}
+
+
+.info-1 {
+    font-size: 18px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: #999;
+}
+
+.info-2 {
+    font-size: 22px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: #fff;
+    text-align: right;
+}
+
+
+.perfil-acoes {
+    display: flex;
+    gap: 12px;
+}
+
+.perfil1 {
+    flex: 1;
+    padding: 14px;
+    text-align: center;
+    text-decoration: none;
+    font-family: inherit;
+    font-size: 22px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: #fff;
+    background: #333;
+    border: 2px solid #111;
+    border-radius: 10px;
+    transition: background-color 0.2s, transform 0.2s;
+    
+}
+
+
+
+.sair{
+    background: transparent;
+    color: rgb(240, 140, 60);
+    border-color: rgb(240, 140, 60);
+}
+
+.sair:hover {
+    background: #ff5555;
+    border-color: #ff5555;
+    color: #fff;
+}
+
