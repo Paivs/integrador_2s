@@ -30,9 +30,13 @@ if (isset($userLogado)) {
         $idsProjetosDoUsuario = array_column($projetos, 'id_projeto');
         $idProjeto = !empty($_POST['id_projeto']) ? $_POST['id_projeto'] : null;
 
-        if ($horas === false) {
+        $agora = new DateTime();
+
+        if (!$bancada) {
+            $erro = "Bancada não encontrada.";
+        } elseif ($horas === false) {
             $erro = "Quantidade de horas inválida.";
-        } elseif ($inicio === null || $inicio < new DateTime()) {
+        } elseif ($inicio === null || $inicio < $agora) {
             $erro = "Escolha uma data e hora futuras.";
         } elseif ($inicio->format('i') !== '00') {
             $erro = "Escolha uma hora cheia (sem minutos).";
@@ -57,10 +61,10 @@ if (isset($userLogado)) {
 
         $ocupada = false;
         foreach ($reservas as $r) {
-            $hours = $r['horas_reservadas'];
+            $horasReserva = $r['horas_reservadas'];
             $resInicio = new DateTime($r['data_reserva']);
             $resFim = clone $resInicio;
-            $resFim->modify("+$hours hours");
+            $resFim->modify("+$horasReserva hours");
             if ($resInicio < $fim && $resFim > $inicio) {
                 $ocupada = true;
                 break;
@@ -140,7 +144,7 @@ if (isset($userLogado)) {
 
                 <div class="linha-valor">
                     <label for="data_reserva">Data e Hora:</label>
-                    <input class="campo" type="datetime-local" name="data_reserva" id="data_reserva" min="<?= $minInput ?>" step="3600" required>
+                    <input class="campo" type="datetime-local" name="data_reserva" id="data_reserva" min="<?= $minInput ?>" value="<?= $minInput ?>" step="3600" required>
                 </div>
 
                 <div class="linha-horas">
