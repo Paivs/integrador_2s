@@ -34,7 +34,7 @@ body{
 
 .andar table{
     margin-left: 20px;
-    width: 1550px;  
+    width: 1540px;  
 }
 
 .nome{
@@ -79,6 +79,38 @@ hr {
 
 .dados{
     color: #c2e9a0;
+}
+
+.dados_medidor{
+    position: relative;     
+    display: inline-block;
+    color: #c2e9a0;
+    cursor: default;
+}
+
+.dados_medidor:hover{
+    font-weight: bold;
+    color: #c2e9a0;
+    cursor: default;
+}
+
+.card-info {
+  display: none;
+  position: absolute;
+  bottom: 120%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: max-content;
+  padding: 12px;
+  background: #151a1c;
+  border: 1px solid #2b8d76;
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  z-index: 10;
+}
+
+.dados_medidor:hover .card-info {
+  display: block;
 }
 
 .ambientes{
@@ -164,7 +196,7 @@ hr {
     border: 1px solid #7bd798;
     border-radius: 20px;
     margin-bottom: 50px;
-    width: 1633px;
+    width: 1623px;
 }
 
 .resumo_andar_title{
@@ -235,7 +267,7 @@ hr {
     height: 200px;
     width: 100%;
     margin-right: 20px;
-    height: 256px;
+    height: fit-content;
     display: flex;
 }
 
@@ -246,7 +278,7 @@ hr {
 
 .consumo_final{
     margin-left: 70px;
-    margin-top: 130px;
+    margin-top: 114px;
 }
 
 .meta_verde{
