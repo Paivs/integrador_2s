@@ -1,0 +1,265 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.tudo{
+    background-color: black;
+}
+
+html, body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+body {
+    color: #fff;
+}
+
+.banner-partida {
+    position: relative;
+    width: 100%;
+    height: 820px;          
+    background: #000;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+}
+
+
+.banner-partida__foto {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 65%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 45%);
+            mask-image: linear-gradient(to right, transparent 0%, #000 45%);
+}
+
+
+.banner-partida__titulo {
+    position: relative;
+    z-index: 1;
+    width: 36%;
+    margin-left: 3%;
+    text-align: center;
+    text-transform: uppercase;
+    font-family: "Bebas Neue", "Oswald", Impact, sans-serif;
+    font-style: italic;
+    font-weight: 700;
+    font-size: clamp(1.8rem, 4vw, 3.4rem);
+    line-height: 1.45;
+    letter-spacing: 0.02em;
+    color: #fff;
+}
+
+.banner-partida__titulo .destaque {
+    color: #f0483a;
+}
+
+
+
+h1 {
+    color: #f34039;
+    text-align: center;
+    font-size: clamp(2.2rem, 8vw, 4.4rem);
+    font-family: "Bebas Neue", "Oswald", Impact, sans-serif;
+}
+
+.t1 {
+    text-align: center;
+    background: #000000;
+    padding: 20px 5%;
+}
+
+.t1 h1 {
+    color: #fff;
+    text-transform: uppercase;
+    font-family: "Bebas Neue", "Oswald", Impact, sans-serif;
+    font-style: italic;
+    font-weight: 700;
+    font-size: clamp(2.2rem, 8vw, 4.4rem);
+    line-height: 1.1;
+}
+
+.t1 .destaque {
+    color: #f34039;
+}
+
+.paiCards{
+
+    display: flex;
+
+}
+
+.card{
+    margin-left: 260px;
+    width: 350px;
+    height: 600px;
+    border: solid 1px;
+    padding: 15px;
+    margin-top: 20px;
+    border-radius: 15px;
+    border: solid #f34039;
+
+}
+
+.card img{
+    margin-top: 10px;
+    border-radius: 20px;
+    width: 320px;
+    height: 150px;
+
+}
+
+.card p {
+    margin-top: 30px;
+    margin-left: 20px;
+    font-family: "Bebas Neue", "Oswald", Impact, sans-serif;
+    border-radius: 13px;
+}
+.subP {
+    color: #838383;
+    
+}
+
+
+.subP2 {
+    color: #838383;
+}
+
+.subP3 {
+    color: #838383;
+}
+
+.subP4 {
+    color: #838383;
+    margin-top: -10px;
+}
+
+
+.card2{
+    margin-left: 60px;
+    margin-top: 20px;
+    width: 1000px;
+    height: 600px;
+    border: solid 1px;
+    padding: 50px;
+    border-radius: 15px;
+    border: solid #f34039;
+    
+}
+
+.pCard2{
+    display: flex;
+    justify-content: space-around;
+    font-family: "Bebas Neue", "Oswald", Impact, sans-serif;
+    font-size: 45px;
+    
+    
+}
+
+
+
+.pCard2H {
+    display: flex;
+    justify-content: space-around;
+    font-family: "Bebas Neue", "Oswald", Impact, sans-serif;
+    font-size: 45px;
+    position: relative;
+    top: -20px;
+}
+.pCard2H p {
+    
+    width: 80px;
+    text-align: center;
+    
+
+}
+
+
+
+.cardcinza{
+    display: grid;
+    color: red;
+    font-size: small;
+    background-color: rgba(128, 128, 128, 0.527);
+    border-radius: 13px;
+    width: 80px;
+    height: 80px;
+    padding-top: 4px;
+    padding-left: 4px;
+    
+}
+
+.cardcinza1{
+       display: grid;
+    color: red;
+    font-size: small;
+    background-color: rgba(128, 128, 128, 0.527);
+    border-radius: 13px;
+    width: 80px;
+    height: 80px;
+    padding-top: 4px;
+    padding-left: 4px;
+    margin-top: 17px;
+     
+}
+
+.cardcinza2{
+       display: grid;
+    color: red;
+    font-size: small;
+    background-color: rgba(128, 128, 128, 0.527);
+    border-radius: 13px;
+    width: 80px;
+    height: 80px;
+    padding-top: 4px;
+    padding-left: 4px;
+    margin-top: 17px; 
+}
+
+.cardcinza3{
+    display: grid;
+    color: red;
+    font-size: small;
+    background-color: rgba(128, 128, 128, 0.527);
+    border-radius: 13px;
+    width: 80px;
+    height: 80px;
+    padding-top: 4px;
+    padding-left: 4px;
+    margin-top: 17px; 
+}
+
+
+.cardcinza4 {
+    display: grid;
+    color: red;
+    font-size: small;
+    background-color: rgba(128, 128, 128, 0.527);
+    border-radius: 13px;
+    width: 80px;
+    height: 80px;
+    padding-top: 4px;
+    padding-left: 4px;
+    margin-top: 17px; 
+}
+
+.cardcinza5 {
+    display: grid;
+    color: red;
+    font-size: small;
+    background-color: rgba(128, 128, 128, 0.247);
+    border-radius: 13px;
+    width: 80px;
+    height: 80px;
+    padding-top: 4px;
+    padding-left: 4px;
+    margin-top: 17px; 
+}

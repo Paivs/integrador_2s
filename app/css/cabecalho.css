@@ -47,8 +47,13 @@ nav li a img{
 
 nav li a:hover{
     transform: scale(1.5);
+    color: rgb(235, 120, 26);
+    
 }
 
 .espaco {
     margin-right: 800px;
+}
+.espaco_adm {
+    margin-right: 553px;
 }

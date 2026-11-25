@@ -1,0 +1,434 @@
+.funcao{
+     display: flex;
+     margin-bottom: 50px;
+     margin-left: 400px;
+}
+
+.funcao a{
+    text-decoration: none;
+    border: 1px solid;  
+    padding: 15px 25px;
+    border-radius: 15px;
+    height: 30px;
+    background-color: #ffffff ;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; 
+    font-size: 30px;
+    color: #595959; 
+    padding-bottom: 25px;
+}
+
+.funcao a span{
+    color: #f4892f;
+}
+
+.barra-pesquisa {
+  display: flex;
+  height: 60px;
+  max-width: 700px;
+  width: 100%;
+  border: 2px solid #ccc;
+  border-radius: 24px;
+  overflow: hidden;
+  font-family: Arial, Helvetica, sans-serif;
+  margin-right: 80px;
+}
+
+.pesquisar {
+  flex: 1;
+  padding: 10px 15px;
+  border: none;
+  outline: none;
+  font-size: 16px;
+}
+
+.limpar{
+    border: none;
+    color:#ff5500;
+    background-color:#ff5500;
+    padding-top: 20px;
+}
+
+.limpar a{
+    padding: 8px 15px;
+    background-color:#ff5500;
+    color: #ffffff;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 18px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.limpar :hover{
+    font-size: 18px;
+}
+
+.enviar {
+  background-color: #000000;
+  color: #f4892f;
+  border: none;
+  padding: 0 20px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background 0.2s;
+}
+
+.enviar:hover {
+  background-color: #000000;
+  font-size: 18px;
+}
+
+.fundo-equipes {
+    background-image: url('/GameHub/app/img/preto.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    padding: 40px 20px;
+    box-sizing: border-box;
+}
+
+
+.conteudo-equipes {
+    max-width: 1100px;
+    margin-left: 370px ;
+}
+
+
+
+.barra-pesquisa {
+    display: flex;
+    margin-bottom: 25px;
+}
+
+.pesquisar {
+    padding: 10px 15px;
+    border: 1px solid #ffffff;
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+.enviar {
+    padding: 10px 20px;
+    background-color: #ff5500;
+    color: #ffffff;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.enviar:hover {
+    background-color: #e04b00;
+}
+
+.tabela-equipes {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: rgba(20, 20, 20, 0.85); 
+    color: #ffffff;
+    border-radius: 8px;
+    overflow: hidden;
+    table-layout: fixed;
+}
+
+.tabela-equipes th:nth-child(1),
+.tabela-equipes td:nth-child(1) {
+    width: 10%; 
+}
+
+.tabela-equipes th:nth-child(2),
+.tabela-equipes td:nth-child(2) {
+    width: 15%; 
+}
+
+.tabela-equipes th:nth-child(3),
+.tabela-equipes td:nth-child(3) {
+    width: 18%; 
+}
+
+.tabela-equipes th:nth-child(4),
+.tabela-equipes td:nth-child(4) {
+    width: 57%; 
+}
+
+
+.tabela-equipes td {
+    padding: 20px 16px;
+    border-bottom: 1px solid #333333;
+    text-align: center;
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 20px;
+}
+
+.tabela-equipes td span{
+    font-size: 20px;
+}
+
+
+.tabela-equipes th {
+    background-color: #111111;
+    color: #ffaa00;
+    text-transform: uppercase;
+    font-size: 30px;
+    font-family: "Bebas Neue", sans-serif;
+}
+
+.img-equipe {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+    margin-left: 10px;
+}
+
+
+
+.funcao a span{
+    color: #f4892f;
+}
+
+
+
+
+
+
+
+
+
+.criar-equipe {
+    position: fixed;
+    top: 0; left: 150px; right: 0; bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+}
+
+.criar-equipe:target {
+    visibility: visible;
+    opacity: 1;
+}
+
+.popup-box {
+    background: #282828;
+    padding: 35px 45px;
+    border-radius: 16px;
+    width: 820px; 
+    max-width: 95%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.fechar {
+    position: absolute;
+    top: 20px;
+    right: 20px; 
+    width: 42px; 
+    height: 42px; 
+    background-color: #ffffff;
+    color: #282828;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    font-size: 24px;
+    font-weight: bold;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+.fechar:hover {
+    background-color: #e0e0e0;
+}
+
+.popup-box h1 {
+    margin-top: 0;
+    margin-bottom: 25px;
+    font-size: 60px;
+    font-family: "Bebas Neue", sans-serif;
+    font-style: italic;
+    color: #ffffff;
+    text-align: center;
+}
+
+.popup-box h1 span {
+    color: #f4892f;
+}
+
+.criarConta {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    width: 100%;
+}
+
+
+.linha-superior {
+    display: flex;
+    gap: 18px;
+    width: 100%;
+    align-items: flex-start;
+}
+
+
+.criarConta .logo {
+    background-color: hsl(0, 0%, 100%);
+    color:#8d8d8d;
+    border-radius: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 22px;
+    padding: 70px;
+    cursor: pointer;
+    flex-shrink: 0;
+    box-sizing: border-box;
+}
+
+
+.coluna-input {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    flex: 1.4;
+}
+
+
+.criarConta input[type="text"],
+.criarConta select {
+    width: 100%;
+    height: 45px;
+    padding: 0 20px;
+    border: none;
+    border-radius: 25px;
+    background-color: #ffffff;
+    color: #282828;
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 20px;
+    text-align: center;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.criarConta input::placeholder {
+    color: #8d8d8d;
+}
+
+.privacidade {
+    flex: 0.8;
+}
+
+.privacidade::placeholder{
+    color: #8d8d8d;
+}
+
+
+.criarConta textarea {
+    width: 72%; 
+    height: 170px;
+    padding: 20px;
+    border: none;
+    border-radius: 25px;
+    background-color: #ffffff;
+    color: #282828;
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 20px;
+    text-align: center;
+    resize: none;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.criarConta textarea::placeholder {
+    color: #8d8d8d;
+    line-height: 130px; 
+}
+
+
+.criarConta button {
+    align-self: center;
+    width: 300px;
+    height: 45px;
+    margin-top: 5px;
+    border: none;
+    border-radius: 25px;
+    background-color: #f4892f;
+    color: #ffffff;
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 22px;
+    cursor: pointer;
+    box-sizing: border-box;
+    transition: background-color 0.2s;
+}
+
+
+
+
+
+
+
+.escolha-logo{
+    position: fixed;
+    margin: auto;
+    inset: 0;
+    padding: 24px;
+    width: 500px;
+    height: 500px;
+    background-color: #000000;
+    border: none;
+    border-radius: 16px;
+}
+
+.escolha-logo button{
+    margin-top: 50px;
+    margin-left: 80px;
+}
+
+.escolha-logo h2{
+    margin-top: 0;
+    margin-bottom: 25px;
+    font-size: 60px;
+    font-family: "Bebas Neue", sans-serif;
+    font-style: italic;
+    color: #ffffff;
+    text-align: center;
+}
+
+.escolha-logo h2 span{
+      color: #f4892f;
+}
+
+.escolha-logo a{
+    position: relative;
+    margin: auto;
+    inset: 0;
+    padding: 24px;
+    width: 300px;
+    height: 300px;
+    background-color: #000000;
+    border: none;
+    border-radius: 16px;
+}
+
+.escolha-logo img{
+    background-color: #000000;
+    width: 105px;
+    height: 100px;
+    border-radius: 16px;
+    border: solid ;
+    color: #f4892f;
+}
+
+.logoEscolhida{
+    background-color: #000000;
+    padding: 8px;
+    border: #f4892f solid 5px;
+    border-radius: 16px;
+}
