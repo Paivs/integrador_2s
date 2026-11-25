@@ -8,6 +8,8 @@ body{
     border: 1px solid #7bd798;
     border-radius: 20px;
     margin-bottom: 40px;
+    animation: 0.5s ease-in-out 0s 1 normal none running aparecer;
+    animation: 0.5s ease-in-out 0s 1 normal none running subir;
 } 
 
 .setor_amarelo{
@@ -16,6 +18,8 @@ body{
     border: 1px solid #7bd798;
     border-radius: 20px;
     margin-bottom: 40px;
+    animation: 0.5s ease-in-out 0s 1 normal none running aparecer;
+    animation: 0.5s ease-in-out 0s 1 normal none running subir;
 }
 
 .setor_vermelho{
@@ -24,6 +28,8 @@ body{
     border: 1px solid #ff0013;
     border-radius: 20px;
     margin-bottom: 40px;
+    animation: 0.5s ease-in-out 0s 1 normal none running aparecer;
+    animation: 0.5s ease-in-out 0s 1 normal none running subir;
 }
 
 .total_kwh{
@@ -129,4 +135,23 @@ body{
     background-color: #fff0b3;
     padding: 5px;
     border-radius: 10px;
+}
+
+@keyframes subir {
+  0% {
+    transform: translateY(15px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+@keyframes aparecer {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
