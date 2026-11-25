@@ -221,3 +221,30 @@ th {
     border-radius: 8px;
     display: flex;
  }
+
+ .botao {
+    display: inline-block;
+    padding: 9px 12px;
+    margin-right: 6px;
+    border-radius: 6px;
+    color: #fff;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+.editar {
+    background: #4472c4;
+}
+
+.editar:hover {
+    background: #2c5396;
+    cursor: pointer;
+}
+
+.excluir {
+    background: #dc3545;
+}
+
+.excluir:hover {
+    background: #bb2d3b;
+}
