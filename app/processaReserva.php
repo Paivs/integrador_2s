@@ -110,11 +110,11 @@ if (isset($userLogado)) {
     <br>
     <div class="card">
         <div class="card-fotos">
-            <img class="foto-principal" src="./img/index/bancadaEX.png" alt="">
+            <img class="foto-principal" src="./img/bancadasPADRAO/<?= $bancada['imagens_bancada'] ?>" alt="">
             <div class="miniaturas">
-                <img src="./img/index/bancadaEX.png" alt="">
-                <img src="./img/index/bancadaEX.png" alt="">
-                <img src="./img/index/bancadaEX.png" alt="">
+                <img src="./img/bancadasPADRAO/suporteTEC.jpg" alt="">
+                <img src="./img/bancadasPADRAO/bancadasGeral.jpg" alt="">
+                <img src="./img/bancadasPADRAO/equipamentos.jpg" alt="">
             </div>
         </div>
 
