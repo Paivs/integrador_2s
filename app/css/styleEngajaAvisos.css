@@ -49,6 +49,16 @@ body{
     border: none;
     margin-top: 8px;
 }
+.botao{
+    background-color: #007e39;
+    color: #e0f9b1 ;
+    border-radius: 10px;
+    height: 50px;
+    width: 400px;
+    border: none;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
 
 .card3{
     margin-top: 10px;
@@ -78,16 +88,25 @@ body{
 .ranking table{
     width: 100%;
     height: 80%;
+    border-radius: 12px;
 }
 
-
-.ranking_cabaca{
-    background-color: #4fbe71;
+.ranking th{
+    background-color: #31c166;
     color: #000000;
-    border: none;
+    border-radius: 12px;
 }
+
 
 .ranking td{
     background-color: #e0f9b1;
     color: #000000;
+    border-radius: 12px;
+}
+
+.ranking tr{
+    border-radius: 12px;
+}
+.num{
+    margin-left: 20px;
 }
