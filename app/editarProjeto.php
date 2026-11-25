@@ -7,8 +7,7 @@
         header("Location: loginUsuario.php");
         exit;
     }
-
-    $pdo = database();
+    
     $projetoSelecionado = [];
 
     if (!isset($_GET['id']) || $_GET['id'] == null) {

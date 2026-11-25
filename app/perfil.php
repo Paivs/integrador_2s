@@ -70,7 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['id_reserva_vincular']
 }
 
 $_SESSION['reservaUsuario'] = readAll($pdo, "Reservas", "id_usuario = ?", [$_SESSION['id']]);
-$meusProjetos = readAll($pdo, "Projetos", "id_criador = ?", [$_SESSION['id']]);
+$meusProjetos = readAll($pdo, "Projetos", "id_criador = ? AND nome_projeto <> ''", [$_SESSION['id']]);
 
 ?>
 <!DOCTYPE html>
@@ -173,9 +173,9 @@ $meusProjetos = readAll($pdo, "Projetos", "id_criador = ?", [$_SESSION['id']]);
                                     ?>
                                 </td>
                                 <td>
-                                    <?php if (!empty($reserva['id_projeto'])): ?>
-                                        <?php $projetoUser = read($pdo, "Projetos", "id_projeto = ?", [$reserva['id_projeto']]); ?>
-                                        <?= htmlspecialchars($projetoUser['nome_projeto'] ?? '', ENT_QUOTES, 'UTF-8') ?>
+                                    <?php $projetoUser = !empty($reserva['id_projeto']) ? read($pdo, "Projetos", "id_projeto = ?", [$reserva['id_projeto']]) : null; ?>
+                                    <?php if (!empty($projetoUser['nome_projeto'])): ?>
+                                        <?= $projetoUser['nome_projeto'] ?>
                                     <?php else: ?>
                                         <span>Sem projetos.</span>
 
@@ -238,11 +238,11 @@ $meusProjetos = readAll($pdo, "Projetos", "id_criador = ?", [$_SESSION['id']]);
                                         <img src="<?= htmlspecialchars($proj['imagem_projeto'], ENT_QUOTES, 'UTF-8') ?>" alt="<?= htmlspecialchars($proj['nome_projeto'], ENT_QUOTES, 'UTF-8') ?>" style="max-width: 80px;">
                                     <?php endif; ?>
                                 </td>
-                                <td>    
+                                <td>
                                     <a class="botao editar" href="./editarProjeto.php?id=<?= $proj['id_projeto'] ?>">Editar</a>
                                     <br>
                                     <br>
-                                    <a class="botao excluir" href="">Deletar</a>
+                                    <a class="botao excluir" href="./deletarProjeto.php?id=<?= $proj['id_projeto'] ?>">Deletar</a>
                                 </td>
                             </tr>
                         <?php endforeach; ?>
