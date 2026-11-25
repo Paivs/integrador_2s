@@ -97,7 +97,24 @@ $setor_existe = false;
                                             
                                                 <tr class="ambiente">
                                                     <td class="nome"><?= $ambiente['nome'] ?></td>
-                                                    <td>Medidor: <span class="dados">[<?= $ambiente['codigo_medidor'] ?>]</span></td>
+                                                    <td>Medidor: 
+                                                    <span class="dados_medidor"><?= $ambiente['codigo_medidor'] ?>
+                                                        <div class="card-info">
+                                                            <h4>Ambiente: <?= $ambiente['nome'] ?></h4> <br>
+                                                            <p>
+                                                            <?php
+                                                                $kwh_ambiente = 0;
+                                                                foreach ($leituras as $leitura) {
+                                                                    if ($leitura['ambiente_id'] == $ambiente['id']) {
+                                                                        $kwh_ambiente += $leitura['leitura_acumulada_kwh'];
+                                                                    }
+                                                                }
+                                                                echo "kilowatts gastos: " . $kwh_ambiente . " kWh";
+                                                            ?>
+                                                            </p>
+                                                        </div>
+                                                    </span>
+                                                </td>
                                                     <td>Área total monitorada: <span class="dados"><?= $ambiente['area_m2'] ?></span></td>
                                                     <td>Quantidade de equipamentos: <span class="dados"><?= $ambiente['qtd_equipamentos'] ?></span></td>
                                                     <td>Tempo de uso diário: <span class="dados"><?= $ambiente['tempo_uso_medio_diario'] ?></span></td>
@@ -150,7 +167,24 @@ $setor_existe = false;
                                             
                                             <tr>
                                                 <td class="nome"><?= $ambiente['nome'] ?></td>
-                                                <td>Medidor: <span class="dados">[<?= $ambiente['codigo_medidor'] ?>]</span></td>
+                                                <td>Medidor: 
+                                                    <span class="dados_medidor"><?= $ambiente['codigo_medidor'] ?>
+                                                        <div class="card-info">
+                                                            <h4>Ambiente: <?= $ambiente['nome'] ?></h4> <br>
+                                                            <p>
+                                                            <?php
+                                                                $kwh_ambiente = 0;
+                                                                foreach ($leituras as $leitura) {
+                                                                    if ($leitura['ambiente_id'] == $ambiente['id']) {
+                                                                        $kwh_ambiente += $leitura['leitura_acumulada_kwh'];
+                                                                    }
+                                                                }
+                                                                echo "kilowatts gastos: " . $kwh_ambiente . " kWh";
+                                                            ?>
+                                                            </p>
+                                                        </div>
+                                                    </span>
+                                                </td>
                                                 <td>Área total monitorada: <span class="dados"><?= $ambiente['area_m2'] ?></span></td>
                                                 <td>Quantidade de equipamentos: <span class="dados"><?= $ambiente['qtd_equipamentos'] ?></span></td>
                                                 <td>Tempo de uso diário: <span class="dados"><?= $ambiente['tempo_uso_medio_diario'] ?></span></td>
@@ -160,6 +194,8 @@ $setor_existe = false;
                                         <?php endif; ?>
                                     <?php endforeach; ?>
                                 </table>
+
+                                
 
                             </div>
                         
@@ -218,17 +254,20 @@ $setor_existe = false;
                             }
                         } 
 
-                    if($total_kwh <= 0 || $meta_andar <= 0 || !isset($total_kwh) && !isset($meta_andar)){    
+                    if($total_kwh <= 0){    
                         $porcentagem_meta = 0;
+                    } elseif($meta_andar <= 0) {
+                        $porcentagem_meta = "Acima de 100";
                     } else {
-                        $porcentagem_meta = ($total_kwh / $meta_andar) * 100;
+                        $porcentagem_meta = ($total_kwh / $meta_andar) * 100; 
+                        $porcentagem_meta = number_format($porcentagem_meta, 2);
                     };
 
-                    $porcentagem_meta = number_format($porcentagem_meta, 2);
+                    
 
                         if ($porcentagem_meta > 100) {
                             $cor_meta = 'vermelho';
-                        } elseif ($porcentagem_meta > 80) {
+                        } elseif ($porcentagem_meta > 90) {
                             $cor_meta = 'amarelo';
                         } else {
                             $cor_meta = 'verde';
@@ -253,7 +292,7 @@ $setor_existe = false;
                                         } elseif($cor_meta == 'amarelo'){ 
                                             echo "<b>Atenção 🟡</b>";
                                         } else {
-                                            echo "<b>Suave 🟢</b>";
+                                            echo "<b>Estável 🟢</b>";
                                         }
                         
                                         ?>
@@ -271,7 +310,7 @@ $setor_existe = false;
                                         
                                         echo "<h1>" . $total_kwh . " kWh</h1><br>";
                                 
-                                        echo "<h4>Meta: " . $meta_andar . " kWh | <b class='meta_" . $cor_meta . "'>" . $porcentagem_meta . " % da meta</b></h4>";
+                                        echo "<h4>Meta: " . $meta_andar . " kWh | <b class='meta_" . $cor_meta . "'>" . $porcentagem_meta . "% da meta</b></h4>";
                                         
                                     ?> <br> <hr>
 
@@ -327,11 +366,11 @@ $setor_existe = false;
 
                                         try{
 
-                                            $consulta = $pdo->prepare('
+                                            $leitura = $pdo->prepare('
                                                 SELECT * FROM leituras ORDER BY data_hora ASC
                                             ');
-                                            $consulta->execute();
-                                            $leituras = $consulta->fetchAll();
+                                            $leitura->execute();
+                                            $leituras = $leitura->fetchAll();
 
                                         } catch(PDOException $erro) {
                                             error_log($erro->getMessage());
@@ -354,7 +393,7 @@ $setor_existe = false;
                                         
                                         ?>
 
-                                        <div>
+                                        <div> 
                                             <h2>Projeção para o fim do mês</h2> <br>
                                             <h4>Com a média de consumo das últimas leituras: </h4> 
                                             <?php
