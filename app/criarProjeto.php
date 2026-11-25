@@ -61,32 +61,47 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Adicionar Projeto</title>
-    </head> 
+        <link rel="stylesheet" href="./css/criarProjeto.css">
+    </head>
 
     <body>
-        <h1>Adicionar Projeto</h1>
-        <?php if ($erro !== null): ?>
-            <p>
-                <?= htmlspecialchars($erro, ENT_QUOTES, 'UTF-8') ?>
-            </p>
-        <?php endif; ?>
+        <?php require_once __DIR__ . '/nav.php' ?>
 
-        <form action="" method="POST">
-            <?php if (isset($idReserva)): ?>
-                <input type="hidden" name="id_reserva" value="<?= htmlspecialchars((string) $idReserva, ENT_QUOTES, 'UTF-8') ?>">
+        <main class="pagina-criar">
+
+            <h1 class="titulo-criar">Adicionar Projeto</h1>
+
+            <?php if ($erro !== null): ?>
+                <p class="erro-criar">
+                    <?= htmlspecialchars($erro, ENT_QUOTES, 'UTF-8') ?>
+                </p>
             <?php endif; ?>
 
-                <label for="nomeProjeto">Nome do projeto:</label>
-                <input type="text" name="nomeProjeto" id="nomeProjeto" value="<?= htmlspecialchars($_POST['nomeProjeto'] ?? '', ENT_QUOTES, 'UTF-8') ?>" required>
+            <form class="caixa-criar" action="" method="POST">
+                <?php if (isset($idReserva)): ?>
+                    <input type="hidden" name="id_reserva" value="<?= htmlspecialchars((string) $idReserva, ENT_QUOTES, 'UTF-8') ?>">
+                <?php endif; ?>
 
-                <label class="rotulo" for="descricao">Escreva uma descrição para o projeto:</label>
-                <textarea name="descricao" id="descricao" required><?= htmlspecialchars($_POST['descricao'] ?? '', ENT_QUOTES, 'UTF-8') ?></textarea>
+                <div class="coluna-esquerda">
+                    <div class="linha-titulo">
+                        <label class="rotulo-criar" for="nomeProjeto">Nome do projeto:</label>
+                        <input class="campo-criar" type="text" name="nomeProjeto" id="nomeProjeto" value="<?= htmlspecialchars($_POST['nomeProjeto'] ?? '', ENT_QUOTES, 'UTF-8') ?>" required>
+                    </div>
 
-                <label for="imagem">Cole o link da imagem:</label>
-                <input type="text" name="imagem" id="imagem "value="<?= htmlspecialchars($_POST['imagem'] ?? '', ENT_QUOTES, 'UTF-8') ?>"required>
+                    <label class="rotulo-criar" for="descricao">Escreva uma descrição para o projeto:</label>
+                    <textarea class="campo-criar campo-descricao-criar" name="descricao" id="descricao" required><?= htmlspecialchars($_POST['descricao'] ?? '', ENT_QUOTES, 'UTF-8') ?></textarea>
+                </div>
+
+                <div class="coluna-direita">
+                    <label class="rotulo-criar" for="imagem">Cole o link da imagem:</label>
+                    <input class="campo-criar campo-imagem-criar" type="text" name="imagem" id="imagem" value="<?= htmlspecialchars($_POST['imagem'] ?? '', ENT_QUOTES, 'UTF-8') ?>" required>
+                </div>
 
                 <button class="botao-registrar" type="submit">Registrar</button>
-            </div>
-        </form>
+            </form>
+
+        </main>
+
+        <?php require_once __DIR__ . '/footer.php' ?>
     </body>
 </html>
