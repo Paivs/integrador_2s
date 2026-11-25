@@ -5,25 +5,21 @@ require_once __DIR__ . "/init.php";
 
 $busca = trim($_GET['busca'] ?? '');
 
-
 $sql = "
     SELECT
         r.id,
+        r.id_usuario,
         r.pontuacao,
         u.username_conta,
         e.nome AS equipe,
         e.img AS img_equipe,
         e.jogo_equipe
-
     FROM ranking r
-
     INNER JOIN usuarios u
         ON r.id_usuario = u.id
-
     LEFT JOIN equipes e
         ON u.id_equipe = e.id
 ";
-
 
 if ($busca !== '') {
 
@@ -48,7 +44,6 @@ if ($busca !== '') {
     $stmt = $pdo->query($sql);
 
 }
-
 
 $ranking = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -79,8 +74,6 @@ usort($ranking, function ($a, $b) {
 
     <main class="ranking-container">
 
-        
-
         <form method="GET" class="barra-pesquisa">
 
             <input
@@ -96,9 +89,6 @@ usort($ranking, function ($a, $b) {
 
         </form>
 
-
-      
-
         <div class="tabela-ranking">
 
             <table>
@@ -106,13 +96,9 @@ usort($ranking, function ($a, $b) {
                 <thead>
 
                     <tr>
-
                         <th>PLACE</th>
-
                         <th>PLAYER</th>
-
                         <th>PONTUAÇÃO</th>
-
                     </tr>
 
                 </thead>
@@ -125,16 +111,10 @@ usort($ranking, function ($a, $b) {
 
                             <tr>
 
-                                
-
                                 <td class="coluna-place">
-
                                     <?= $index + 1 ?>º
-
                                 </td>
 
-
-                                
                                 <td class="coluna-player">
 
                                     <div class="info-player">
@@ -151,16 +131,13 @@ usort($ranking, function ($a, $b) {
 
                                         <div class="dados-player">
 
-                                            <span class="nome-player">
-
-                                                <?= htmlspecialchars($jogador['username_conta'], ENT_QUOTES, 'UTF-8') ?>
-
-                                            </span>
+                                            <a
+                                                href="./perfil.php?id=<?= (int) $jogador['id_usuario'] ?>"
+                                                class="nome-player"
+                                            ><?= htmlspecialchars($jogador['username_conta'], ENT_QUOTES, 'UTF-8') ?></a>
 
                                             <span class="nome-equipe">
-
                                                 <?= htmlspecialchars($jogador['equipe'] ?? 'Sem equipe', ENT_QUOTES, 'UTF-8') ?>
-
                                             </span>
 
                                         </div>
@@ -169,11 +146,9 @@ usort($ranking, function ($a, $b) {
 
                                 </td>
 
-
-
                                 <td class="coluna-pontuacao">
 
-                                    <?= number_format($jogador['pontuacao'], 0, ',', '.') ?>
+                                    <?= number_format((float) $jogador['pontuacao'], 0, ',', '.') ?>
 
                                     <span>PTS</span>
 
@@ -188,9 +163,7 @@ usort($ranking, function ($a, $b) {
                         <tr>
 
                             <td colspan="3" class="sem-resultados">
-
                                 Nenhum jogador encontrado.
-
                             </td>
 
                         </tr>
@@ -204,7 +177,9 @@ usort($ranking, function ($a, $b) {
         </div>
 
     </main>
-                        <?php require_once __DIR__ . "/rodape.php" ?>
+
+    <?php require_once __DIR__ . "/rodape.php"; ?>
+
 </body>
 
 </html>
