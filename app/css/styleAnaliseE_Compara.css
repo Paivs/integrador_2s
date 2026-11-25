@@ -76,3 +76,47 @@ h2{
     font-size: 100%;
     margin-bottom: 15px;
 }
+.ranking{
+    background-color: #151a1c;
+    padding: 20px;
+    border-radius: 20px;
+    width: 100%;
+    height: 300px;
+    color: #e0f9b1;
+    margin-top: 10px;
+    border: 1px solid #007e39;
+}
+
+.ranking table{
+    width: 100%;
+    height: 80%;
+    border-radius: 12px;
+}
+
+.ranking th{
+    background-color: #31c166;
+    color: #000000;
+    border-radius: 12px;
+}
+
+
+.ranking td{
+    background-color: #e0f9b1;
+    color: #000000;
+    border-radius: 12px;
+}
+
+.ranking tr{
+    border-radius: 12px;
+}
+.graficos{
+    width: 800px;
+    border: #31c166 2px solid;
+    border-radius: 50px;
+    background-color: #151a1c;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+.graficos canvas{
+    margin-left: 20px;
+}
