@@ -15,7 +15,10 @@
                 <img src="./img/Energy Monitor.png">
                 <br>
             </div>
+            <div class="nome">
+
             <img src="./img/texto.png" width="500">
+            </div>
             <div class="formulario-login">
                 <h2>Insira seu e-mail e senha</h2>
                 <form action="processa-login.php" method="POST">
