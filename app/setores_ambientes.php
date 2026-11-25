@@ -264,7 +264,6 @@ $setor_existe = false;
                         $porcentagem_meta = "Acima de 100";
                     } else {
                         $porcentagem_meta = ($total_kwh / $meta_andar) * 100; 
-                        $porcentagem_meta = number_format($porcentagem_meta, 2);
                     };
 
                         if ($porcentagem_meta == "Acima de 100" || $porcentagem_meta > 100) {
@@ -312,9 +311,13 @@ $setor_existe = false;
                                     <?php
                                         
                                         echo "<h1><span class='contador'>" . $total_kwh . "</span> kWh</h1><br>";
+
+                                        if($porcentagem_meta == "Acima de 100"){
+                                            echo "<h4>Meta: " . $meta_andar . " kWh | <b class='meta_" . $cor_meta . "'>" . $porcentagem_meta . "% da meta</b></h4>";
+                                        } else {
+                                            echo "<h4>Meta: " . $meta_andar . " kWh | <b class='meta_" . $cor_meta . "'><span class='contador'>" . $porcentagem_meta . "</span>% da meta</b></h4>";
+                                        }
                                 
-                                        echo "<h4>Meta: " . $meta_andar . " kWh | <b class='meta_" . $cor_meta . "'><span class='contador'>" . $porcentagem_meta . "</span>% da meta</b></h4>";
-                                        
                                     ?> <br> <hr>
 
                                     <canvas id="grafico1"></canvas>
