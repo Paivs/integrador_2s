@@ -22,7 +22,6 @@ if ($usuario['imagens_usuario'] == "padrao") {
 }
 $_SESSION['imagem'] = $usuario['imagens_usuario'];
 
-// 1. Atualiza dados pessoais do perfil
 if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['id'])) {
 
     if (!isset($_POST['imagem_selecionada']) || $_POST['imagem_selecionada'] === "") {
@@ -43,7 +42,6 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['id'])) {
     exit;
 }
 
-// 2. Vincula um projeto criado pelo usuário a uma reserva sem projeto
 if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['id_reserva_vincular'], $_POST['id_projeto_vincular'])) {
     $idReservaVincular = $_POST['id_reserva_vincular'];
     $idProjetoVincular = $_POST['id_projeto_vincular'];
@@ -186,9 +184,9 @@ $meusProjetos = readAll($pdo, "Projetos", "id_criador = ?", [$_SESSION['id']]);
                                                 <input type="hidden" name="id_reserva_vincular" value="<?= $reserva['id_reserva'] ?>">
                                                 <select name="id_projeto_vincular" required>
                                                     <option value="">Selecionar projeto...</option>
-                                                    <?php foreach ($meusProjetos as $projOpcao): ?>
-                                                        <option value="<?= $projOpcao['id_projeto'] ?>">
-                                                            <?= htmlspecialchars($projOpcao['nome_projeto'], ENT_QUOTES, 'UTF-8') ?>
+                                                    <?php foreach ($meusProjetos as $p): ?>
+                                                        <option value="<?= $p['id_projeto'] ?>">
+                                                            <?= htmlspecialchars($p['nome_projeto'], ENT_QUOTES, 'UTF-8') ?>
                                                         </option>
                                                     <?php endforeach; ?>
                                                 </select>
@@ -226,6 +224,7 @@ $meusProjetos = readAll($pdo, "Projetos", "id_criador = ?", [$_SESSION['id']]);
                         <th>Nome do Projeto:</th>
                         <th>Descrição:</th>
                         <th>Imagem:</th>
+                        <th>Opções:</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -238,6 +237,12 @@ $meusProjetos = readAll($pdo, "Projetos", "id_criador = ?", [$_SESSION['id']]);
                                     <?php if (!empty($proj['imagem_projeto'])): ?>
                                         <img src="<?= htmlspecialchars($proj['imagem_projeto'], ENT_QUOTES, 'UTF-8') ?>" alt="<?= htmlspecialchars($proj['nome_projeto'], ENT_QUOTES, 'UTF-8') ?>" style="max-width: 80px;">
                                     <?php endif; ?>
+                                </td>
+                                <td>    
+                                    <a class="botao editar" href="">Editar</a>
+                                    <br>
+                                    <br>
+                                    <a class="botao excluir" href="">Deletar</a>
                                 </td>
                             </tr>
                         <?php endforeach; ?>
