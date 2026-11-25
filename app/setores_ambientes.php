@@ -276,7 +276,7 @@ $setor_existe = false;
                     
                     ?>
 
-                        <div class="card_resumo_andar">
+                        <div class="card_resumo_andar-<?= $cor_meta ?>">
 
                             <div class="resumo_andar_title">
                                 <div>
