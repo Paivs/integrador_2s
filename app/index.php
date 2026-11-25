@@ -1,6 +1,16 @@
 <?php
     
-    require_once __DIR__ . "/init.php"
+    require_once __DIR__ . "/init.php";
+
+    $sql = "SELECT * FROM torneios ORDER BY premiacao DESC LIMIT 1";
+    $stmt = $pdo->query($sql);
+    $torneio = $stmt->fetch();
+    $img = null;
+    $id = $torneio['id'];
+
+    if($torneio['nmjogo_torneio'] == "Counter-Strike 2"){
+        $img = "./img/cs2_banner.png";
+    }
 
 ?>
 
@@ -19,19 +29,19 @@
     
         <div class="tudo">
         <div class="banner">
-        <img src="./img/cs2_banner.png" alt="Counter-Strike 2">
+        <img src="<?= $img ?>" alt="Counter-Strike 2">
         </div>
         <div class="texto-sobreposto">
-            <h1><i><b>MASTER LEAGUE</b></i></h1>
+            <h1><i><b><?= $torneio['nome_torneio'] ?></b></i></h1>
         </div>
         <div class="texto-sobreposto2">
             <h2><i><b>INSCRIÇÕES ABERTAS!</b></i></h2>
         </div>
         <div class="texto-sobreposto3">
-            <h4><i><b>Mais de R$20.000 em prêmios para equipes!</b></i></h4>
+            <h4><i><b>Mais de R$<?= $torneio['premiacao'] ?> em prêmios para equipes!</b></i></h4>
         </div>
         <div class="saiba">
-            <a href=""><i>SAIBA MAIS...</i></a>
+            <a href="?id=<?= $id ?>"><i>SAIBA MAIS...</i></a>
         </div>
         <div class="preto">
             
