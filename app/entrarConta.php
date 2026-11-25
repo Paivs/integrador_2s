@@ -54,12 +54,60 @@ unset($_SESSION['erro']);
         <?php endif ?>
 
         <?php if (isset($_SESSION['cadastrado'])): ?>
-        <div class="form">
-            <p class="texto-laranja" style="text-align:center; font-size:24px; margin:0;">VOCÊ ESTÁ CADASTRADO COMO:</p>
-            <div class="usuario"> <?= $_SESSION['cadastrado']['username'] ?></div>
-            <a class="entrar" href="sair_conta.php">SAIR DA CONTA?</a>
+<div class="perfil">
+
+    
+    <div class="perfil-topo">
+        <div class="perfil-avatar">
+           
+            <span>J</span>
         </div>
-        <?php endif ?>
+        <div class="perfil-identidade">
+            <p class="perfil-rotulo">Você está cadastrado como</p>
+            <h2 class="perfil-nome">JoaoFPS</h2>
+            <p class="perfil-email">joao@email.com</p>
+        </div>
+    </div>
+
+    
+    <div class="perfil-stats">
+        <div class="status">
+            <span class="status-valor">#12</span>
+            <span class="status-rotulo">Ranking</span>
+        </div>
+        <div class="status">
+            <span class="status-valor">1.850</span>
+            <span class="status-rotulo">Pontos</span>
+        </div>
+
+    </div>
+
+    
+    <div>
+        <h3 class="perfil-informacoes">Informações</h3>
+        <ul class="perfil-info">
+            <li>
+                <span class="info-1">Equipe</span>
+                <span class="info-2">FURIA</span>
+            </li>
+            <li>
+                <span class="info-1">Jogo principal</span>
+                <span class="info-2">Counter-Strike 2</span>
+            </li>
+            <li>
+                <span class="info-1">Torneios disputados</span>
+                <span class="info-2">5</span>
+            </li>
+        </ul>
+    </div>
+
+    
+    <div class="perfil-acoes">
+        <a class="perfil1 sair" href="sair_conta.php">Sair da conta</a>
+    </div>
+
+</div>
+<?php endif ?>
     </div>
 </body>
 
