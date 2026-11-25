@@ -133,7 +133,11 @@ $metas = readAll(database(), "metas");
                                 <h2>Eficiência energética</h2>
                                 <h4>Em quilowatt-hora por metro quadrado</h4> <br>
                                 <?php
-                                    $eficiencia = $total_kwh / $area_total;
+                                    if($total_kwh <= 0 || !isset($total_kwh)){
+                                        $eficiencia = 0;
+                                    }else{
+                                        $eficiencia = $total_kwh / $area_total;
+                                    }
                                     $eficiencia = number_format($eficiencia, 2);
 
                                     echo "<h1>" . $eficiencia . " kWh/m²</h1><br>";
