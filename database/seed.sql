@@ -47,13 +47,13 @@ INSERT INTO torneios (
 
 ('Valorant Masters', '2026-11-20', 3000, 10, 'Pontos corridos', 'Valorant', '16:00', 15.00, 'gamehub'),
 
-('League of Legends Cup', '2026-11-25', 2500, 10, 'Eliminatoria', 'League of Legends', '15:00', 10.00, 'comunidade'),
+('League of Legends Cup', '2026-11-25', 2500, 10, 'Eliminatoria', 'League of Legends', '15:00', 10.00, 'gamehub'),
 
 ('Free Fire Battle', '2026-12-01', 1500, 20, 'Pontos corridos', 'Free Fire', '19:00', 5.00, 'comunidade'),
 
-('CS2 Pro League', '2026-12-05', 7000, 16, 'Eliminatoria', 'Counter-Strike 2', '18:00', 20.00, 'gamehub'),
+('CS2 Pro League', '2026-12-05', 7000, 16, 'Eliminatoria', 'Counter-Strike 2', '18:00', 20.00, 'comunidade'),
 
-('GameHub Open', '2026-12-10', 1000, 8, 'Eliminatoria', 'Valorant', '13:00', 0.00, 'gamehub');
+('GameHub Open', '2026-12-10', 1000, 8, 'Eliminatoria', 'Valorant', '13:00', 0.00, 'comunidade');
 
 -- =========================================
 -- 4. TABELA TORNEIOS_EQUIPES
