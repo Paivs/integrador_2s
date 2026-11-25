@@ -408,8 +408,8 @@ $setor_existe = false;
                                                     $media_consumo = $total_kwh / count($data_leitura);
                                                     $consumo_final = $media_consumo * 30;
                                                 }
+                                                $media_consumo = number_format($media_consumo, 2);
 
-                                                
                                                 echo "<h1><span class='contador'>" . $media_consumo . "</span> kWh p/ dia</h1></div><br>";
                                         
                                                 echo "
