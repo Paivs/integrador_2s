@@ -16,8 +16,6 @@ body {
     padding: 45px 20px 80px;
 }
 
-
-
 .barra-pesquisa {
     display: flex;
     width: 800px;
@@ -53,8 +51,6 @@ body {
     background-color: #e94b1b;
 }
 
-
-
 .tabela-ranking {
     width: 1100px;
     max-width: 100%;
@@ -70,7 +66,6 @@ body {
     table-layout: fixed;
 }
 
-
 .tabela-ranking th {
     height: 55px;
     padding: 12px;
@@ -83,18 +78,16 @@ body {
 }
 
 .tabela-ranking th:nth-child(1) {
-    width: 55%;
+    width: 30%;
 }
 
 .tabela-ranking th:nth-child(2) {
-    width: 60%;
+    width: 45%;
 }
 
 .tabela-ranking th:nth-child(3) {
-    width: 50%;
+    width: 25%;
 }
-
-
 
 .tabela-ranking td {
     height: 68px;
@@ -108,16 +101,12 @@ body {
     border-bottom: none;
 }
 
-
-
 .coluna-place {
     padding-left: 25px !important;
     font-size: 20px !important;
     font-weight: bold;
     color: #ff9d24;
 }
-
-
 
 .info-player {
     display: flex;
@@ -129,49 +118,48 @@ body {
     width: 44px;
     height: 44px;
     object-fit: contain;
+    flex-shrink: 0;
 }
 
 .dados-player {
     display: flex;
     flex-direction: column;
     gap: 5px;
+    min-width: 0;
 }
 
 .nome-player {
+    display: inline-block;
+    width: fit-content;
+    max-width: 100%;
     font-weight: bold;
     color: rgba(255, 255, 255, 0.938);
     font-family: "Bebas Neue", "Oswald", Impact, sans-serif;
     font-size: 20px;
+    text-decoration: none;
+    overflow-wrap: anywhere;
+}
+
+.nome-player:hover {
+    color: #ff9d24;
 }
 
 .nome-equipe {
-    font-size: 11px;
+    font-size: 15px;
     color: #999;
     font-family: "Bebas Neue", "Oswald", Impact, sans-serif;
-    font-size: 15px;
 }
-
-
 
 .coluna-pontuacao {
     font-weight: bold;
     color: white;
-    
-    
 }
 
 .coluna-pontuacao span {
     color: #ff9d24;
     font-size: 11px;
     margin-left: 5px;
-<<<<<<< HEAD
-        
-=======
-
->>>>>>> e678ef5b6b58d5d3fa8e252e0586914535fff835
 }
-
-
 
 .sem-resultados {
     text-align: center;
@@ -179,10 +167,7 @@ body {
     padding: 30px !important;
 }
 
-
-
 @media (max-width: 650px) {
-
     .ranking-container {
         padding: 30px 10px;
     }
@@ -193,6 +178,7 @@ body {
 
     .tabela-ranking th {
         font-size: 18px;
+        padding: 8px;
     }
 
     .tabela-ranking td {
@@ -205,4 +191,19 @@ body {
         height: 32px;
     }
 
+    .info-player {
+        gap: 8px;
+    }
+
+    .nome-player {
+        font-size: 16px;
+    }
+
+    .nome-equipe {
+        font-size: 12px;
+    }
+
+    .coluna-place {
+        padding-left: 12px !important;
+    }
 }
