@@ -203,10 +203,30 @@ hr {
     z-index: 100;
 }
 
-.card_resumo_andar{
+.card_resumo_andar-verde{
     background-color: #151a1c;
     padding: 20px;
     border: 1px solid #7bd798;
+    border-radius: 20px;
+    margin-bottom: 50px;
+    width: 1623px;
+    animation: 0.5s ease-in-out 0s 1 normal none running subir;
+}
+
+.card_resumo_andar-amarelo{
+    background-color: #151a1c;
+    padding: 20px;
+    border: 1px solid #7bd798;
+    border-radius: 20px;
+    margin-bottom: 50px;
+    width: 1623px;
+    animation: 0.5s ease-in-out 0s 1 normal none running subir;
+}
+
+.card_resumo_andar-vermelho{
+    background-color: #151a1c;
+    padding: 20px;
+    border: 1px solid #ff0013;
     border-radius: 20px;
     margin-bottom: 50px;
     width: 1623px;
