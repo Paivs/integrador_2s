@@ -244,7 +244,7 @@
         datasets: [
           {
             label: "Gastos",
-            data: [32, 12, 43, 22, somakhwr],
+            data: [322, 122, 413, 225, somakhwr],
             backgroundColor: ['#ffde59'],
             barPercentage: 0.85,
             categoryPercentage: 0.65,
@@ -253,7 +253,7 @@
           },
           {
             label: "Meta",
-            data: [35, 15, 31, 58, somaTR],
+            data: [375, 125, 361, 508, somaTR],
             backgroundColor: ['#00ff73'],
             barPercentage: 0.85,
             categoryPercentage: 0.65,
