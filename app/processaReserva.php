@@ -4,6 +4,12 @@ require_once __DIR__ . '/init.php';
 
 $userLogado = $_SESSION['user'] ?? null;
 
+$minDateTime = new DateTime();
+if ($minDateTime->format('i') !== '00' || $minDateTime->format('s') !== '00') {
+    $minDateTime->modify('+1 hour');
+}
+$minInput = $minDateTime->format('Y-m-d\TH:00');
+
 if (isset($userLogado)) {
     $bancada = read(database(), 'Bancadas', 'id_bancada = ?', [$_GET['id']]);
     $idUsuario = $_SESSION['id'];
@@ -134,7 +140,7 @@ if (isset($userLogado)) {
 
                 <div class="linha-valor">
                     <label for="data_reserva">Data e Hora:</label>
-                    <input class="campo" type="datetime-local" name="data_reserva" id="data_reserva" step="3600" required>
+                    <input class="campo" type="datetime-local" name="data_reserva" id="data_reserva" min="<?= $minInput ?>" step="3600" required>
                 </div>
 
                 <div class="linha-horas">
