@@ -1,3 +1,4 @@
+<?php 
 $pagina_atual = 'inicio';
 $estilo_css = 'style';
 require_once 'cabecalho.php';
