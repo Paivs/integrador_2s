@@ -33,6 +33,7 @@
     }
     $somaAreais = $somaA / 0.8;
     $somaBreais = $somaB / 0.8;
+    $somaTR = [$somaAreais, $somaBreais];
     $contador2 = 0;
 ?>
 <html>
@@ -66,7 +67,7 @@
                             foreach($setores as $setor):
                                 $contador += 1
                             ?>
-                            <h3><?= $contador ?>. <?= $setor["nome"]?>- </h3>
+                            <h3><?= $contador ?>. <?= $setor["nome"]?>- <?php if($contador == 1):?><?= $somaTR[0] ?><?php else: ?><?= $somaTR[1] ?><?php endif ?></h3>
                             <?php
                             endforeach;
                             ?>
@@ -88,7 +89,7 @@
                     
                     <div class="rankingGastosTabela">
                         <div class="rankingGastosTabelaConteudo">
-                            <h2>Meta</h2>
+                            <h1>Meta</h1>
                             <?php
                             $contador1 = 0;
                             foreach($setores as $setor):
@@ -138,6 +139,7 @@
         let setores = <?php echo json_encode($nomeSetores); ?>;
         let somametakwh = <?php echo json_encode($somaLista); ?>;
         let somareais = <?php echo json_encode($somaListaReais); ?>;
+        let somaF = <?php echo json_encode($somaTR); ?>;
         const ctx = document.getElementById('grafico1').getContext('2d');
 
         new Chart(ctx, {
@@ -146,7 +148,7 @@
             labels: setores,
             datasets: [{
             label: 'Gasto',
-            data: somareais,
+            data: somaF,
             backgroundColor: '#7bd798',
             barThickness: 160
         }]
@@ -218,7 +220,7 @@
         datasets: [
           {
             label: 'GASTO',
-            data: [76],
+            data: [metaAreais * 0.8],
             backgroundColor: '#fde068',
             borderRadius: 4,
             barPercentage: 0.85,
@@ -261,7 +263,7 @@
         datasets: [
           {
             label: 'GASTO',
-            data: [54],
+            data: [metaBreais * 0.8],
             backgroundColor: '#fde068',
             borderRadius: 4,
             barPercentage: 0.85,
