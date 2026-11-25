@@ -26,7 +26,7 @@ $setor_existe = false;
     <body>
         <div class="menu-conf">
             <?php require_once __DIR__ . '/menuLateral.php'; ?>
-            <div class="conteudo"> <! Todo o conteúdo da página vai aqui >
+            <div class="conteudo"> 
 
             <?php foreach ($setores as $setor){
 
@@ -53,14 +53,22 @@ $setor_existe = false;
 
                     ";
                 }
-                
-                
 
             }
 
             if($setor_existe): ?> 
-                
-                <div class="andar">
+
+                <?php
+
+                    if(isset($_GET['andar'])){
+                        $andar_anima = "1";
+                    } else {
+                        $andar_anima = null;
+                    }
+
+                ?>
+
+                <div class="andar<?= $andar_anima ?>">
                     <?php  
                     $area_andar = 0;
                     $qtd_equipamentos = 0;
@@ -82,7 +90,7 @@ $setor_existe = false;
                             <div class="ver_dados"><a href="setores_ambientes.php?id=<?= $_GET['id'] ?>&andar=Térreo">Ver dados</a></div>
                         </div>
 
-                            <br>
+                        <br>
 
 
                         <div class="info_andar">
@@ -94,7 +102,6 @@ $setor_existe = false;
                                     foreach($ambientes as $ambiente): 
                                         if($ambiente['setor_id'] == $_GET['id'] && $ambiente['andar'] == "Térreo"): ?>
                                                 
-                                            
                                                 <tr class="ambiente">
                                                     <td class="nome"><?= $ambiente['nome'] ?></td>
                                                     <td>Medidor: 
@@ -121,17 +128,17 @@ $setor_existe = false;
                                                     <td><span class="status"><?= $ambiente['estado_medidor'] ?></span></td>
                                                 </tr>
                                             
-
                                         <?php endif; ?>
                                     <?php endforeach; ?>
                                 </table>
+
                             </div>
                         
                         </div>
                             
                 </div> 
-
-                <div class="andar">
+                
+                <div class="andar<?= $andar_anima ?>">
                     <?php  
                     $area_andar = 0;
                     $qtd_equipamentos = 0;
@@ -152,7 +159,7 @@ $setor_existe = false;
                             <div class="ver_dados"><a href="setores_ambientes.php?id=<?= $_GET['id'] ?>&andar=1">Ver dados</a></div>
 
                         </div>
-                                            <br>
+                        <br>
 
                         <div class="info_andar">
                             <div class="ambientes">
@@ -161,7 +168,6 @@ $setor_existe = false;
                                 <table>
                                     <?php  
                                     
-
                                     foreach($ambientes as $ambiente): 
                                         if($ambiente['setor_id'] == $_GET['id'] && $ambiente['andar'] == 1): ?>
                                             
@@ -194,8 +200,6 @@ $setor_existe = false;
                                         <?php endif; ?>
                                     <?php endforeach; ?>
                                 </table>
-
-                                
 
                             </div>
                         
@@ -263,9 +267,7 @@ $setor_existe = false;
                         $porcentagem_meta = number_format($porcentagem_meta, 2);
                     };
 
-                    
-
-                        if ($porcentagem_meta > 100) {
+                        if ($porcentagem_meta == "Acima de 100" || $porcentagem_meta > 100) {
                             $cor_meta = 'vermelho';
                         } elseif ($porcentagem_meta > 90) {
                             $cor_meta = 'amarelo';
@@ -279,7 +281,7 @@ $setor_existe = false;
 
                             <div class="resumo_andar_title">
                                 <div>
-                                    <h2>Andar: <?php echo $_GET['andar']; ?></h2>  <! Setor com seu id > 
+                                    <h2>Andar: <?php echo $_GET['andar']; ?></h2> 
                                 </div>
                                 
 
@@ -303,14 +305,15 @@ $setor_existe = false;
                             <br>
 
                             <div class="kwh_real_efic">
+
                                 <div class="total_kwh_andar">
                                     <h2>Gasto de energia</h2>
                                     <h4>Em quilowatt-hora (kWh)</h4> <br>
                                     <?php
                                         
-                                        echo "<h1>" . $total_kwh . " kWh</h1><br>";
+                                        echo "<h1><span class='contador'>" . $total_kwh . "</span> kWh</h1><br>";
                                 
-                                        echo "<h4>Meta: " . $meta_andar . " kWh | <b class='meta_" . $cor_meta . "'>" . $porcentagem_meta . "% da meta</b></h4>";
+                                        echo "<h4>Meta: " . $meta_andar . " kWh | <b class='meta_" . $cor_meta . "'><span class='contador'>" . $porcentagem_meta . "</span>% da meta</b></h4>";
                                         
                                     ?> <br> <hr>
 
@@ -329,7 +332,7 @@ $setor_existe = false;
 
                                                 $total_reais = $total_kwh * $tarifa_media;
 
-                                                echo "<h1>R$ " . $total_reais . " </h1><br>";
+                                                echo "<h1>R$ <span class='contador'>" . $total_reais . "</span> </h1><br>";
                                             
                                                 echo "<h4>Tarifa média: R$ " . $tarifa_media . " p/ kWh</h4>";
                                             ?> 
@@ -348,7 +351,7 @@ $setor_existe = false;
                                                 }
                                                 $eficiencia = number_format($eficiencia, 2);
 
-                                                echo "<h1>" . $eficiencia . " kWh/m²</h1><br>";
+                                                echo "<h1><span class='contador'>" . $eficiencia . "</span> kWh/m²</h1><br>";
 
                                                 echo "<h4>Área total: " . $area_andar . " m²"
                                             
@@ -407,16 +410,15 @@ $setor_existe = false;
                                                 }
 
                                                 
-                                                echo "<h1>" . $media_consumo . " kWh p/ dia</h1></div><br>";
+                                                echo "<h1><span class='contador'>" . $media_consumo . "</span> kWh p/ dia</h1></div><br>";
                                         
                                                 echo "
 
                                                 <div class='consumo_final'>
 
-
                                                 <h4>No final do mês teremos um consumo de: </h4>
                                                 
-                                                <h1>" . $consumo_final . " kWh</h1>
+                                                <h1><span class='contador'>" . $consumo_final . "</span> kWh</h1>
                                                 
                                                 </div>
                                                 
@@ -428,12 +430,11 @@ $setor_existe = false;
 
 
                                 </div>
+
                             </div>
 
                         </div>
 
-                        
-                    
                     <script>
                         const gfc = document.getElementById('grafico1');
                         let info = <?php echo json_encode($kwh_lidos); ?>;
@@ -484,6 +485,25 @@ $setor_existe = false;
 
             </div>
         </div>
-        
+        <script>
+            document.querySelectorAll('.contador').forEach(el => {
+                const final = parseFloat(el.innerText);
+                const casasDecimais = el.innerText.includes('.') ? 2 : 0;
+                
+                let atual = 0;
+                const passo = final / 75;
+
+                const timer = setInterval(() => {
+                    atual += passo;
+
+                    if (atual >= final) {
+                        el.innerText = final.toFixed(casasDecimais);
+                        clearInterval(timer);
+                    } else {
+                        el.innerText = atual.toFixed(casasDecimais);
+                    }
+                }, 20);
+            });
+        </script>
     </body>
 </html>

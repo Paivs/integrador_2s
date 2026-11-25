@@ -24,6 +24,16 @@ body{
     border-radius: 20px;
     margin-bottom: 50px;
     width: fit-content;
+    animation: 0.5s ease-in-out 0s 1 normal none running subir;
+}
+
+.andar1{
+    background-color: #151a1c;
+    padding: 20px;
+    border: 1px solid #7bd798;
+    border-radius: 20px;
+    margin-bottom: 50px;
+    width: fit-content;
 }
 
 .andar h4{
@@ -33,6 +43,11 @@ body{
 }
 
 .andar table{
+    margin-left: 20px;
+    width: 1540px;  
+}
+
+.andar1 table{
     margin-left: 20px;
     width: 1540px;  
 }
@@ -95,22 +110,20 @@ hr {
 }
 
 .card-info {
-  display: none;
-  position: absolute;
-  bottom: 120%;
-  left: 50%;
-  transform: translateX(-50%);
-  width: max-content;
-  padding: 12px;
-  background: #151a1c;
-  border: 1px solid #2b8d76;
-  border-radius: 8px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-  z-index: 10;
+    display: none;
+    position: absolute;
+    bottom: 120%;
+    left: 50%;
+    width: max-content;
+    padding: 12px;
+    background: #151a1c;
+    border: 1px solid #2b8d76;
+    border-radius: 8px;
+    animation: 0.5s ease-in-out 0s 1 normal none running subir;
 }
 
 .dados_medidor:hover .card-info {
-  display: block;
+    display: block;
 }
 
 .ambientes{
@@ -197,6 +210,7 @@ hr {
     border-radius: 20px;
     margin-bottom: 50px;
     width: 1623px;
+    animation: 0.5s ease-in-out 0s 1 normal none running subir;
 }
 
 .resumo_andar_title{
@@ -300,4 +314,19 @@ hr {
     background-color: #fff0b3;
     padding: 5px;
     border-radius: 10px;
+}
+
+@keyframes subir {
+    0% {
+        transform: translateY(15px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0px);
+        opacity: 1;
+    }
+}
+
+.contador{
+    font-variant-numeric: tabular-nums;
 }
