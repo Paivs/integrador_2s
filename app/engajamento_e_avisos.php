@@ -1,13 +1,54 @@
 <?php
     require_once __DIR__ . '/init.php';
-    
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $mensagem = "Relatório de Problema enviado!";
+    }
+    $setores = readAll(database(), "setor");
+    $ambientesSetorA = readAll(database(), "ambientes", "setor_id = 1");
+    $ambientesSetorB = readAll(database(), "ambientes", "setor_id = 2");
+    $metas = readAll(database(), "metas");
+    $somaA = 0;
+    $somaB = 0;
+    $somaLista = [$somaA, $somaB];
+    $somaListaReais = [];
+    foreach($somaLista as $soma){
+        $somaM = $soma * 0.8;
+        $somaListaReais[] = $somaM;
+    }
+    $somaAreais = $somaA / 0.8;
+    $somaBreais = $somaB / 0.8;
+    $nomeSetores = [];
+    foreach($setores as $s){
+        $nome = $s['nome'];
+        $nomeSetores[] = $nome;
+    }
+    foreach($ambientesSetorA as $a){
+        $ambienteid1 = $a['id'];
+
+        $metaA = readAll(database(), "metas", "ambiente_id= {$ambienteid1}");
+        $somaA += $metaA[0]['meta_kwh'];
+
+    }
+    foreach($ambientesSetorB as $b){
+        $ambienteid2 = $b['id'];
+
+        $metaB = readAll(database(), "metas", "ambiente_id= {$ambienteid2}");
+        $somaB += $metaB[0]['meta_kwh'];
+    }
+    if ($somaA > $somaB) {
+        $setorMaisVerde = $nomeSetores[0];
+    } else {
+        $setorMaisVerde = $nomeSetores[1];
+    }
+
 ?>
 
 <html>
 <head>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="./css/styleEngajaAvisos.css">
     <link rel="stylesheet" href="./css/styleMenu.css">
-    <title>Engajamento e avisos</title>
+    <title class="tituloE">Engajamento e avisos</title>
 </head>
 
 <body>
@@ -19,18 +60,20 @@
             
         <div class="supremo"><div class="card">
                 
-                <center><h2>Setor Mais Verde do Mês</h2>
+                <h2>Setor Mais Verde do Mês</h2>
                 <br>
-                <p>Lab. de Química 02</p>
-                <p>Bloco C</p>
-                <p>1° Andar</p></center>
+                <center>
+                <p><b><?= $setorMaisVerde?></b></p>
+                </center>
                 <br>
                 <p>Dentro da Meta</p>
                 <br>
-                <p>graphic</p>
+                <canvas id="grafico"></canvas>
                 <br>
-                <p>Consumo Atual</p>
-                <p>200KWH de 300KWH</p>
+                <center>
+                <p><b>Consumo Atual</b></p>
+                <p><b><?php echo print($somaB); ?> KWh de <?php  print($somaB * 0.8); ?> KWh</b></p>
+            </center>
                 <br>
                 <p><h3>Dicas para esta sala:</h3></p>
                 <p>° Desligue a Capela ao encerramento</p>
@@ -42,8 +85,9 @@
             <div class="card2-3">
            
             <div class="card2">
-            <form action="">
+            <form action="" method="post">
                 <center><h1>Relatar Problemas nas Sala</h1></center>
+
                 <br>
                 <p>Seu Setor de Trabalho</p>
                 <input type="text">
@@ -57,8 +101,12 @@
                 <input type="text">
                 <br>
                 <br>
-                <button type="button">Enviar</button>    
+                <button class="botao" type="submit">Enviar</button>
+                 <?php if(isset($mensagem)): ?>
+                    <p><?php print($mensagem); ?></p>
+                <?php endif; ?>  
             </form></div>
+
 
             <div class="card3">
                 <center><h2>Frase do dia</h2></center>
@@ -67,38 +115,24 @@
         Economizar energia é um gesto simples que gera um futuro mais sustentável para todos.</p></div></center>
     </div>
     </div>
-    <div class="ranking"><center><table>
+    <div class="ranking"><center>
+    <table>
     <h2>Ranking de Consumo do Setor</h2>
-    <tr class="ranking_cabaca">
+    <tr>
         <th>Pos.</th>
         <th>Ambiente/Sala</th>
-        <th>Consumo</th>
+        <th>Área</th>
         <th>Status de Meta</th>
     </tr>
+    <?php foreach($ambientesSetorB as $ambiente): ?>
     <tr>
-        <td class="normal">1</td>
-        <td class="normal">Lab. de Química 02</td>
-        <td class="normal">2.394.2 KWh</td>
-        <td class="status">Excedido -8%</td>
+        <td class="num"><?= $ambiente['id'] ?></td>
+        <td class="num"><?= $ambiente['nome'] ?></td>
+        <td class="num"><?= $ambiente['area_m2'] ?> m2</td>
+        <td class="num">Dentro da Meta</td>
     </tr>
-    <tr>
-        <td class="normal">2</td>
-        <td class="normal">Lab. de Química 01</td>
-        <td class="normal">1.424.5 KWh</td>
-        <td class="status">Atenção</td>
-    </tr> 
-    <tr>
-        <td class="normal">3</td>
-        <td class="normal">Refeitório</td>
-        <td class="normal">1.100.2 KWh</td>
-        <td class="status">Dentro da Meta</td>
-    </tr>
-    <tr>
-        <td class="normal">4</td>
-        <td class="normal">Administração</td>
-        <td class="normal">1.036.8 KWh</td>
-        <td class="status">Dentro da Meta</td>
-    </tr>
+    <?php endforeach ?>
+
 </table>
 </div>
 </center>
@@ -106,6 +140,48 @@
 </div>
 
 </div>
-
+<script>
+    const ctx = document.getElementById('grafico').getContext('2d');
+    let nomesetor = <?php echo json_encode($setorMaisVerde); ?>;
+    let metakwh = <?php echo json_encode($somaB); ?>;
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: [nomesetor],
+        datasets: [
+          {
+            label: 'GASTO',
+            data: [metakwh* 0.8],
+            backgroundColor: '#fde068',
+            borderRadius: 4,
+            barPercentage: 0.85,
+            categoryPercentage: 0.65
+          },
+          {
+            label: 'META',
+            data: [metakwh],
+            backgroundColor: '#00e667',
+            borderRadius: 4,
+            barPercentage: 0.85,
+            categoryPercentage: 0.65
+          }
+        ]
+      },
+      options: {
+        indexAxis: 'x',
+        responsive: true,
+        plugins: {
+          legend: {
+            position: 'top',
+            labels: {
+              color: '#ffffff',
+              usePointStyle: true,
+              padding: 20
+            }
+          }
+        },
+      }
+    });
+</script>
 </body>
 </html>
