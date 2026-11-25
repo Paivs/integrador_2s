@@ -52,12 +52,14 @@ $metas = readAll(database(), "metas");
                             }
                         }
                         
-                        if($total_kwh <= 0 || $meta_setor <= 0 || !isset($total_kwh) || !isset($meta_setor)){    
-                        $porcentagem_meta = 0;
+                        if($total_kwh <= 0){    
+                            $porcentagem_meta = 0;
+                        } elseif($meta_setor <= 0) {
+                            $porcentagem_meta = "Acima de 100";
                         } else {
-                        $porcentagem_meta = ($total_kwh / $meta_setor) * 100;
+                            $porcentagem_meta = ($total_kwh / $meta_setor) * 100; 
+                            $porcentagem_meta = number_format($porcentagem_meta, 2);
                         };
-                        $porcentagem_meta = number_format($porcentagem_meta, 2);
 
                         if ($porcentagem_meta > 100) {
                             $cor_meta = 'vermelho';
@@ -89,7 +91,7 @@ $metas = readAll(database(), "metas");
                                     } elseif($cor_meta == 'amarelo'){ 
                                         echo "<b>Atenção 🟡</b>";
                                     } else {
-                                        echo "<b>Suave 🟢</b>";
+                                        echo "<b>Estável 🟢</b>";
                                     }
                     
                                     ?>
