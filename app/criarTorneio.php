@@ -37,12 +37,6 @@
           <input type="text" id="nome" name="nome" placeholder="Ex.: Meu torneio" maxlength="60" required>
         </div>
 
-        <div class="campo">
-          <label for="descricao">Descrição</label>
-          <textarea id="descricao" name="descricao" rows="4" placeholder="Descreva o seu campeonato!" maxlength="400"></textarea>
-        </div>
-      </fieldset>
-
       
       <fieldset class="bloco bloco--jogos">
         <legend>Jogo</legend>
@@ -93,10 +87,24 @@
             <label for="equipes">Número de equipes</label>
             <select id="equipes" name="equipes" required>
               <option value="" disabled selected>Selecione</option>
+              <option value="2">2 equipes</option>
               <option value="4">4 equipes</option>
               <option value="8">8 equipes</option>
               <option value="16">16 equipes</option>
               <option value="32">32 equipes</option>
+            </select>
+          </div>
+
+        <div class="grade grade--2">
+          <div class="campo">
+            <label for="equipes">Número de jogos</label>
+            <select id="equipes" name="equipes" required>
+              <option value="" disabled selected>Selecione</option>
+              <option value="1">1 jogo</option>
+              <option value="2">2 jogos</option>
+              <option value="4">4 jogos</option>
+              <option value="8">8 jogos</option>
+              <option value="12">12 jogos</option>
             </select>
           </div>
 
@@ -133,31 +141,6 @@
           <input type="date" id="inscricao" name="inscricao_ate">
         </div>
       </fieldset>
-
-      
-      <fieldset class="bloco">
-        <legend>Regras</legend>
-
-        <div class="campo">
-          <label for="regras">Regulamento</label>
-          <textarea id="regras" name="regras" rows="6" placeholder="Escreva as regras, critérios de desempate e proibições."></textarea>
-        </div>
-      </fieldset>
-
-      <fieldset class="bloco">
-        <legend>Capa do torneio</legend>
-
-        <div class="campo">
-          <label for="capa">Imagem de capa</label>
-          <label for="capa" class="upload">
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M12 16V4m0 0L7 9m5-5l5 5M4 20h16"/>
-            </svg>
-            <span>Escolha uma imagem</span>
-            <small></small>
-          </label>
-          <input type="file" id="capa" name="capa" accept="image/png, image/jpeg">
-        </div>
 
         <div class="visibilidade">
           <input type="radio" name="visibilidade" id="vis-publico" value="publico" checked>

@@ -240,7 +240,7 @@ select {
 .jogo--cs2      { --cor: #f58a2a; }
 .jogo--fc       { --cor: #3ddc84; }
 .jogo--fortnite { --cor: #9b6bff; }
-.jogo--siege    { --cor: #f2c230; }
+.jogo--siege    { --cor: #414141; }
 .jogo--lol      { --cor: #c8a24a; }
 
 .jogos input:checked + .jogo {
@@ -261,7 +261,7 @@ select {
 .formulario:has(#jogo-cs2:checked)      { --destaque: #f58a2a; }
 .formulario:has(#jogo-fc27:checked)     { --destaque: #3ddc84; }
 .formulario:has(#jogo-fortnite:checked) { --destaque: #9b6bff; }
-.formulario:has(#jogo-siege:checked)    { --destaque: #f2c230; }
+.formulario:has(#jogo-siege:checked)    { --destaque: #414141; }
 .formulario:has(#jogo-lol:checked)      { --destaque: #c8a24a; }
 
 
