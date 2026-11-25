@@ -78,11 +78,12 @@ body{
 .form-registro {
     background-color: #151a1c;
     padding: 20px;
-    border-radius: 45px;
+    border-radius: 10px;
     border: 2px solid #007e39;
     margin-bottom: 20px;
     width: 900px;
     height: 450px;
+    overflow: hidden;
 
 }
 .form-registro h2 {
@@ -265,4 +266,28 @@ body{
 .coluna{
     display: flex;
     flex-direction: column;
+}
+
+
+.tabela-registros{
+    max-height: 313px;
+    overflow-y: auto;
+    overflow-x: auto;
+    margin-top: 20px;
+}
+
+
+.tabela-registros::-webkit-scrollbar {
+    width: 7px;
+    height: 7px;
+}
+
+.tabela-registros::-webkit-scrollbar-thumb {
+    background: #20c878;
+    border-radius: 30px;
+}
+
+.tabela-registros::-webkit-scrollbar-track {
+    background: #202b27;
+    border-radius: 10px;
 }
