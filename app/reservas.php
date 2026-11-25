@@ -44,7 +44,7 @@ if($_SERVER['REQUEST_METHOD'] == "GET" && isset($_GET['bancada'])){
     <div class="cards">
         <?php foreach ($bancadasDisponiveis as $b): ?>
             <div class="card">
-                <img src="./img/bancadasPADRAO/<?= $b['imagens_bancada'] ?>" alt="">
+                <img src="<?= $b['imagens_bancada'] ?>" alt="">
                 <h1><?= $b['nome_bancada'] ?></h1>
                 <br>
                 <p><i class="bi bi-people-fill"></i> Capacidade: <?= $b['quantidade_bancada'] ?> pessoas</p>
