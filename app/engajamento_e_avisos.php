@@ -41,7 +41,6 @@
         $setorMaisVerde = $nomeSetores[1];
     }
 
-    $metas =[2.384,23, 1.4245, 1.1002, 1.000, 2.394];
 ?>
 
 <html>
