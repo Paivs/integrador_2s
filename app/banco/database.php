@@ -1,29 +1,23 @@
 <?php
+// Conexão PDO usando as variáveis de ambiente do compose.
+$host = getenv('DB_HOST') ?: 'db';
+$port = getenv('DB_PORT') ?: '3306';
+$base = getenv('DB_DATABASE') ?: 'integrador';
+$user = getenv('DB_USERNAME') ?: 'integrador';
+$pass = getenv('DB_PASSWORD') ?: 'Senai123';
 
-declare(strict_types=1);
-
-function database(): PDO
-{
-    static $connection = null;
-
-    if ($connection instanceof PDO) {
-        return $connection;
+$pdo = null;
+for ($i = 0; $i < 15 && !$pdo; $i++) {
+    try {
+        $pdo = new PDO("mysql:host=$host;port=$port;dbname=$base;charset=utf8mb4", $user, $pass, [
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+        ]);
+    } catch (PDOException $e) {
+        sleep(2); // banco ainda iniciando
     }
-
-    $host = getenv('DB_HOST') ?: 'db';
-    $port = getenv('DB_PORT') ?: '3306';
-    $database = getenv('DB_DATABASE') ?: 'integrador';
-    $username = getenv('DB_USERNAME') ?: 'integrador';
-    $password = getenv('DB_PASSWORD') ?: '';
-
-    $dsn = "mysql:host={$host};port={$port};dbname={$database};charset=utf8mb4";
-
-    $connection = new PDO($dsn, $username, $password, [
-        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-        PDO::ATTR_EMULATE_PREPARES => false,
-    ]);
-
-    return $connection;
 }
-
+if (!$pdo) {
+    http_response_code(500);
+    exit('Não foi possível conectar ao banco de dados.');
+}
