@@ -61,7 +61,7 @@ $metas = readAll(database(), "metas");
                             $porcentagem_meta = number_format($porcentagem_meta, 2);
                         };
 
-                        if ($porcentagem_meta > 100) {
+                        if ($porcentagem_meta == "Acima de 100" || $porcentagem_meta > 100) {
                             $cor_meta = 'vermelho';
                         } elseif ($porcentagem_meta > 80) {
                             $cor_meta = 'amarelo';
@@ -106,7 +106,7 @@ $metas = readAll(database(), "metas");
                                 <h4>Em quilowatt-hora (kWh)</h4> <br>
                                 <?php
 
-                                    echo "<h1><span class='contador'>" . $total_kwh . "</span> kWh</h1>";
+                                    echo "<h1><span class='contador'>" . $total_kwh . "</span> kWh</h1><br>";
                             
                                     echo "<h4>Meta: " . $meta_setor . " kWh | <b class='meta_" . $cor_meta . "'><span class='contador'>" . $porcentagem_meta . "</span> % da meta</b></h4>";
                                 
