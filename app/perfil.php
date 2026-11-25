@@ -4,8 +4,7 @@ session_start();
 
 require_once __DIR__ . "/init.php";
 
-// TEMPORÁRIO: sem login ainda, usa o usuário 1 (Ana). Quando o login existir, tire o "?? 1".
-$idUsuario = (int) ($_SESSION['id_usuario'] ?? 1);
+$idUsuario = (int) ($_SESSION['id_usuario'] ?? 0);
 
 $usuario = read($pdo, 'usuario', 'idUsuario = ?', [$idUsuario]);
 
@@ -23,6 +22,7 @@ if (!$usuario) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>findIt. - Perfil do Usuário</title>
     <link rel="stylesheet" href="css/perfil.css">
+    <link rel="icon" type="image/png" href="./imagens/finditDesenho.png">
 </head>
 
 <body>
@@ -102,11 +102,21 @@ if (!$usuario) {
             </div>
         </div>
 
-        <div class="editarTudo">
-            <a href="editaPerfil.php">Editar perfil</a>
+        <div class="botoes">
+            <a href="logout.php" class="sairConta">Sair da conta</a>
         </div>
 
     </main>
+
+    <footer>
+        <div class="rodape-coluna">
+            <p>Sistema de achados e perdidos. Devolvendo pertences de forma rápida e simples.</p>
+        </div>
+
+        <div class="direitos">
+            <p>&copy; 2026 Celeste System. Todos os direitos reservados.</p>
+        </div>
+    </footer>
 
 </body>
 

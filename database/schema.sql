@@ -1,5 +1,16 @@
-CREATE DATABASE integrador CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+SET NAMES utf8mb4;
+
+CREATE DATABASE IF NOT EXISTS integrador CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE integrador;
+
+SET FOREIGN_KEY_CHECKS = 0;
+DROP TABLE IF EXISTS achado;
+DROP TABLE IF EXISTS retirada;      -- tabela antiga, substituída por achado
+DROP TABLE IF EXISTS mensagem;
+DROP TABLE IF EXISTS objetos;
+DROP TABLE IF EXISTS pontoColeta;
+DROP TABLE IF EXISTS usuario;
+SET FOREIGN_KEY_CHECKS = 1;
 
 -- ========== TABELAS ==========
 
@@ -30,7 +41,7 @@ CREATE TABLE objetos(
     localEncontrado VARCHAR(150),
     categoria ENUM('Acessórios', 'Bolsas e Mochilas', 'Documentos', 'Eletrônicos', 'Roupas', 'Outros') NOT NULL,
     imagemObjeto VARCHAR(20),
-    status_objeto ENUM('Encontrado', 'Perdido', 'Abandonado') NOT NULL,
+    status_objeto ENUM('Encontrado', 'Perdido', 'Doado') NOT NULL,
     FOREIGN KEY (nomeUsuario) REFERENCES usuario(idUsuario)
 );
 
@@ -81,7 +92,7 @@ INSERT INTO objetos (nomeUsuario, nome, descricao, localEncontrado, categoria, i
 (2, 'Celular',            'iPhone com capa azul',                          'Sala de reunião 2',     'Eletrônicos',       '📱', 'Encontrado'),
 (3, 'Chave',              'Chaveiro com 3 chaves e um pingente',           'Estacionamento',        'Acessórios',        '🔑', 'Encontrado'),
 (4, 'Mochila',            'Mochila cinza com notebook dentro',             'Refeitório',            'Bolsas e Mochilas', '👜', 'Perdido'),
-(5, 'Guarda-chuva',       'Guarda-chuva preto automático',                 'Portaria',              'Acessórios',        '🌂', 'Abandonado'),
+(5, 'Guarda-chuva',       'Guarda-chuva preto automático',                 'Portaria',              'Acessórios',        '🌂', 'Doado'),
 (1, 'Óculos de grau',     'Óculos com armação preta e estojo azul',        'Sala de reunião 1',     'Acessórios',        '👓', 'Perdido'),
 (2, 'Relógio',            'Relógio de pulso prata com pulseira de metal',  'Vestiário',             'Acessórios',        '⌚', 'Encontrado'),
 (3, 'Bolsa',              'Bolsa marrom de alça longa com zíper dourado',  'Recepção',              'Bolsas e Mochilas', '👜', 'Perdido'),
@@ -93,21 +104,21 @@ INSERT INTO objetos (nomeUsuario, nome, descricao, localEncontrado, categoria, i
 (4, 'Fone de ouvido',     'Fone bluetooth branco na caixinha',             'Sala de reunião 2',     'Eletrônicos',       '🎧', 'Perdido'),
 (5, 'Notebook',           'Notebook cinza de 14 polegadas com capa',       'Sala de treinamento',   'Eletrônicos',       '💻', 'Encontrado'),
 (1, 'Carregador',         'Carregador de celular branco com cabo USB-C',   'Sala de reunião 1',     'Eletrônicos',       '📱', 'Perdido'),
-(2, 'Casaco',             'Casaco de moletom cinza tamanho M',             'Auditório',             'Roupas',            '🧥', 'Abandonado'),
+(2, 'Casaco',             'Casaco de moletom cinza tamanho M',             'Auditório',             'Roupas',            '🧥', 'Doado'),
 (3, 'Boné',               'Boné preto com aba reta',                       'Estacionamento',        'Roupas',            '🧢', 'Perdido'),
-(4, 'Cachecol',           'Cachecol de lã vermelho',                       'Auditório',             'Roupas',            '🧥', 'Abandonado'),
+(4, 'Cachecol',           'Cachecol de lã vermelho',                       'Auditório',             'Roupas',            '🧥', 'Doado'),
 (5, 'Garrafa térmica',    'Garrafa térmica azul de 500 ml',                'Copa',                  'Outros',            '🥤', 'Perdido'),
 (1, 'Bola de futebol',    'Bola de futebol branca e preta',                'Área de lazer',         'Outros',            '⚽', 'Encontrado'),
 (2, 'Patins',             'Patins rosa tamanho 36',                        'Área de lazer',         'Outros',            '🛼', 'Perdido'),
 (3, 'Videogame portátil', 'Videogame portátil preto com capa',             'Área de descanso',      'Outros',            '🎮', 'Encontrado'),
 (4, 'Ursinho de pelúcia', 'Ursinho marrom com laço vermelho',              'Sala de reunião 1',     'Outros',            '🧸', 'Perdido'),
-(5, 'Crachá',             'Crachá de funcionário com cordão azul',         'Corredor do 2º andar',  'Documentos',        '💳', 'Abandonado'),
+(5, 'Crachá',             'Crachá de funcionário com cordão azul',         'Corredor do 2º andar',  'Documentos',        '💳', 'Doado'),
 (1, 'Batom',              'Batom vermelho na necessaire',                  'Banheiro do 2º andar',  'Acessórios',        '💄', 'Perdido'),
 (2, 'Anel',               'Anel dourado com pedra azul',                   'Vestiário',             'Acessórios',        '💍', 'Encontrado'),
 (3, 'Câmera',             'Câmera digital preta com alça',                 'Auditório',             'Eletrônicos',       '📷', 'Perdido'),
 (4, 'Livro',              'Livro de capa azul com marca-página',           'Sala de treinamento',   'Documentos',        '📚', 'Encontrado'),
 (5, 'Agenda',             'Agenda preta com anotações',                    'Sala de reunião 2',     'Documentos',        '📓', 'Perdido'),
-(1, 'Caneta',             'Caneta tinteiro prateada',                      'Sala de reunião 1',     'Documentos',        '🖊', 'Abandonado'),
+(1, 'Caneta',             'Caneta tinteiro prateada',                      'Sala de reunião 1',     'Documentos',        '🖊', 'Doado'),
 (2, 'Martelo',            'Martelo com cabo de madeira',                   'Almoxarifado',          'Outros',            '🔨', 'Perdido');
 
 -- Achados de exemplo: só de objetos Encontrados (ids 2, 3, 7, 9, 11)

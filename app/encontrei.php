@@ -2,6 +2,12 @@
 
 require_once __DIR__ . "/init.php";
 
+if (!isset($_SESSION['id_usuario'])) {
+    $_SESSION['voltar_para'] = 'encontrei.php?idObjeto=' . (int) ($_GET['idObjeto'] ?? 0);
+    header('Location: login.php?erro[]=' . urlencode('Faça login para informar que encontrou um objeto.'));
+    exit;
+}
+
 $id = (int) ($_GET['idObjeto'] ?? 0);
 
 $objeto = read($pdo, 'objetos', 'idObjeto = ?', [$id]);
@@ -27,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         create($pdo, 'achado', [
             'idObjeto'        => $id,
-            'idUsuarioAchou'  => 2,  // TEMPORÁRIO: trocar por $_SESSION['id_usuario']
+            'idUsuarioAchou'  => (int) $_SESSION['id_usuario'],
             'estadoObjeto'    => $estado,
             'localEncontrado' => $local,
             'idPontoColeta'   => $idPonto,
@@ -50,6 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <title>Encontrou objeto</title>
 
     <link rel="stylesheet" href="./css/style-encontrei.css">
+    <link rel="icon" type="image/png" href="./imagens/finditDesenho.png">
 </head>
 
 <body>
@@ -83,9 +90,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <div class="emoji">
                     <p><?= htmlspecialchars($objeto['imagemObjeto']) ?></p>
                 </div>
-
+                
+                <p class="nomeObjeto" ><?= htmlspecialchars($objeto['nome']) ?></p>
                 <div class="conteudo">
-                    <p>Nome: <?= htmlspecialchars($objeto['nome']) ?></p>
                     <p>Descrição: <?= htmlspecialchars($objeto['descricao']) ?></p>
                     <p>Categoria: <?= htmlspecialchars($objeto['categoria']) ?></p>
                     <p>Perdido em: <?= htmlspecialchars($objeto['localEncontrado']) ?></p>
@@ -118,7 +125,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 <div class="botoes">
                     <button type="submit">Enviar</button>
-                    <a href="./FormContato.php">Não é este</a>
                 </div>
             </form>
         </div>

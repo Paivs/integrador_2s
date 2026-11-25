@@ -1,10 +1,6 @@
 <?php
 
-declare(strict_types=1);
-
-require_once __DIR__ . '/init.php';
-require_once __DIR__ . '/banco/crud.php';
-
+require_once __DIR__ . "/init.php";
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     header('Location: cadastrarConta.php');
@@ -12,90 +8,49 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 }
 
 $nome  = trim($_POST['nome'] ?? '');
-$tel   = trim($_POST['tel'] ?? '');
+$tel   = preg_replace('/\D/', '', $_POST['tel'] ?? '');
 $email = trim($_POST['email'] ?? '');
-$senha = trim($_POST['senha']) ?? '';
+$senha = $_POST['senha'] ?? '';
 
 $erros = [];
 
-if (empty($nome)) {
-    $erros[] = 'O Campo "Nome" está vazio';
-    header('Location: cadastrarConta.php?erro=O Campo Nome está vazio.');
+if ($nome === '') {
+    $erros[] = 'Informe o seu nome.';
+}
+if (strlen($tel) < 10 || strlen($tel) > 11) {
+    $erros[] = 'Telefone inválido. Informe o DDD e o número.';
+}
+if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    $erros[] = 'O e-mail informado é inválido.';
+}
+if (strlen($senha) < 6) {
+    $erros[] = 'A senha precisa ter pelo menos 6 caracteres.';
+}
+
+if (!$erros && read($pdo, 'usuario', 'email = ?', [$email])) {
+    $erros[] = 'Esse e-mail já está cadastrado.';
+}
+
+if ($erros) {
+    header('Location: cadastrarConta.php?' . http_build_query(['erro' => $erros]));
     exit;
 }
 
-if (empty($tel)) {
-    $erros[] = 'O Campo "Telefone" está vazio';
-    header('Location: cadastrarConta.php?erro=O Campo Telefone está vazio.');
-    exit;
-}
-
-if (empty($email)) {
-    $erros[] = 'O Campo "E-mail" está vazio';
-    header('Location: cadastrarConta.php?erro=O Campo E-mail está vazio.');
-    exit;
-} 
-
-elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-    $erros[] = 'O E-mail informado é inválido.';
-    header('Location: cadastrarConta.php?erro=O E-mail informado é inválido.');
-    exit;
-}
-
-if (empty($senha)) {
-    $erros[] = 'O Campo "Senha" está vazio';
-    header('Location: cadastrarConta.php?erro=O Campo Senha está vazio.');
-    exit;
-}
-
-if (!empty($erros)) {
-    echo "<h3> Ocorreram os Seguintes erros:</h3>";
-    echo "<ul>";
-    foreach ($erros as $erro) {
-        echo "<li>" . htmlspecialchars($erro) . "</li>";
-    }
-    echo "</ul>";
-    echo '<a href="cadastrarConta.php">Voltar ao cadastro</a>';
-    exit;
-}
-
-try 
-{
-    $senhaHash = password_hash($senha, PASSWORD_DEFAULT);
-
-    $dadosUsuario = [
+try {
+    $idNovo = create($pdo, 'usuario', [
         'nome'     => $nome,
         'telefone' => $tel,
         'email'    => $email,
-        'senha'    => $senhaHash
-    ];
-    if (empty($erros)) 
-    {
-        $create = create($pdo, 'usuario', $dadosUsuario);
-        header('Location: login.php?status=sucesso');
-        exit;
-    }
-} 
-
-catch (PDOException $e) 
-{
-    if($e->getCode() == '23000')
-        {
-            echo 'Erro! Registro Duplicado: ' . htmlspecialchars($e->getMessage());
-            echo '<br><a href="cadastrarConta.php">Tentar novamente</a>';
-            exit;
-        }
-    else
-        {
-            echo 'Erro ao realizar o cadastro: ' . htmlspecialchars($e->getMessage());
-            echo '<br><a href="cadastrarConta.php">Tentar novamente</a>';
-            exit;
-        }
-   
-}
-catch (Exception $e) 
-{
-    echo 'Erro inesperado: ' . htmlspecialchars($e->getMessage());
-    echo '<br><a href="cadastrarConta.php">Tentar novamente</a>';
+        'senha'    => password_hash($senha, PASSWORD_DEFAULT),
+    ]);
+} catch (PDOException $e) {
+    error_log($e->getMessage());
+    header('Location: cadastrarConta.php?' . http_build_query(['erro' => ['Não foi possível criar a conta agora. Tente novamente.']]));
     exit;
 }
+
+session_regenerate_id(true);
+$_SESSION['id_usuario'] = (int) $idNovo;
+
+header('Location: painelObjetos.php');
+exit;

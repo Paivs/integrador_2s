@@ -1,3 +1,14 @@
+<?php
+
+require_once __DIR__ . "/init.php";
+
+$usuario = null;
+if (isset($_SESSION['id_usuario'])) {
+    $usuario = read($pdo, 'usuario', 'idUsuario = ?', [$_SESSION['id_usuario']]);
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -5,6 +16,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/contato.css">
+    <link rel="icon" type="image/png" href="./imagens/finditDesenho.png">
     <title>Contato</title>
 </head>
 
@@ -32,15 +44,15 @@
 
         <form action="processaContato.php" method="post">
             <label>Nome:
-                <input type="text" name="nome" placeholder="exemplo: Marcio Henrique" required>
+                <input type="text" name="nome" placeholder="exemplo: Marcio Henrique" value="<?= htmlspecialchars($usuario['nome'] ?? '') ?>" required>
             </label>
 
             <label>Telefone:
-                <input type="tel" name="telefone" placeholder="exemplo: 123456789" required>
+                <input type="tel" name="telefone" placeholder="exemplo: (11) 12345-6789" value="<?= htmlspecialchars($usuario['telefone'] ?? '') ?>" required>
             </label>
 
             <label>Email:
-                <input type="email" name="email" placeholder="exemplo: emailcliente@gmail.com" required>
+                <input type="email" name="email" placeholder="exemplo: emailcliente@gmail.com" value="<?= htmlspecialchars($usuario['email'] ?? '') ?>" required>
             </label>
 
             <fieldset>
@@ -58,7 +70,7 @@
         </form>
     </main>
 
-    <footer>
+    <div class="tela">
         <div>
             <h3>Nosso contato:</h3>
             <p><strong>Email:</strong> findit@gmail.com</p>
@@ -70,6 +82,16 @@
             <p>Segunda - Sexta feira: 08:00 às 20:00</p>
             <p>Sábados: 10:00 às 18:00</p>
             <p>Domingos: 10:00 às 16:00</p>
+        </div>
+</div>
+
+    <footer>
+        <div class="rodape-coluna">
+            <p>Sistema de achados e perdidos. Devolvendo pertences de forma rápida e simples.</p>
+        </div>
+
+        <div class="direitos">
+            <p>&copy; 2026 Celeste System. Todos os direitos reservados.</p>
         </div>
     </footer>
 </body>

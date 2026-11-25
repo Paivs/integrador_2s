@@ -4,6 +4,15 @@ body {
     font-family: "Momo Trust Display", sans-serif;
     margin: 0; 
     padding-top: 70px;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    min-height: 100dvh;
+    box-sizing: border-box;
+}
+
+main{
+    flex: 1;
 }
 
 header {
@@ -125,15 +134,19 @@ header {
 }
 
 .quadro {
-    background-color: #d3e2ef;
     padding: 10px;
     border-radius: 20px;
     width: 400px;
     transition: transform 0.3s ease;
+
+    background: rgba(238, 243, 246, 0.55);
+    -webkit-backdrop-filter: blur(14px) saturate(160%);
+    backdrop-filter: blur(14px) saturate(160%);
+    border: 1px solid rgba(255, 255, 255, 0.65);
+    box-shadow: 0 6px 16px rgba(20, 24, 30, 0.18);
 }
 
 .quadro:hover {
-    background-color: #b5c2ce;
     transform: translateY(-10px);
 }
 
@@ -149,50 +162,130 @@ header {
 }
 
 .avaliacoes {
-    display: flex;
-    overflow-x: auto;
-    gap: 30px;
+    max-width: 1200px;
+    margin: 70px auto 50px;
+    padding: 0 20px;
+    font-family: "Momo Trust Display", sans-serif;
+}
+
+.secao-avaliacoes h2 {
     text-align: center;
-    align-items: stretch;
+    color: #14181E;
+    font-size: 30px;
+    margin-bottom: 35px;
 }
 
-.bloco {
+/* Janela de visualização do carrossel */
+.carrossel-container {
+    width: 100%;
+    overflow: hidden;
+    padding: 25px 0; /* Espaço extra em cima/baixo para o card expandir sem cortar a sombra */
+    
+    /* Degradê suave nas pontas para os cards surgirem e sumirem com elegância */
+    -webkit-mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent);
+    mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent);
+}
+
+/* A trilha que desliza */
+.carrossel-trilha {
     display: flex;
-    background-color: #d3e2ef;
-    flex-shrink: 0;
-    padding: 10px;
-    border-radius: 20px;
-    width: 400px;
-    flex-direction: column;
+    gap: 30px;
+    width: max-content; /* Garante que todos os 14 cards fiquem lado a lado */
+    animation: rodarCarrossel 35s linear infinite;
 }
 
-.comentario {
-    background-color: white;
-    padding: 10px;
-    border-radius: 20px;
-    flex-grow: 1;
+/* Pausa a animação quando o mouse entra no carrossel */
+.carrossel-container:hover .carrossel-trilha {
+    animation-play-state: paused;
+}
+
+/* Estilo individual do card */
+.card-avaliacao {
+    background-color: #f4f7fa;
+    border-radius: 25px;
+    padding: 25px;
+    width: 310px;
+    flex-shrink: 0; /* Impede que os cards sejam esmagados */
+    box-sizing: border-box;
+    border: 1px solid rgba(255, 255, 255, 0.65);
+    box-shadow: 0 6px 16px rgba(20, 24, 30, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: default;
+}
+
+/* Pequena expansão ao passar o mouse no card */
+.card-avaliacao:hover {
+    transform: scale(1.05);
+    box-shadow: 0 12px 24px rgba(20, 24, 30, 0.16);
+    z-index: 10;
+}
+
+/* Cabeçalho, Emoji e Estrelas */
+.cabecalho-avaliacao {
     display: flex;
     align-items: center;
-    justify-content: center;
-    text-align: center;
+    gap: 15px;
+    margin-bottom: 15px;
 }
 
-footer {
-    margin-top: 30px;
+.emoji-mini {
+    background-color: #a7aaad;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
     display: flex;
-    justify-content: space-between;
-    background-color: #1f2d94;
-    padding: 10px;
-    color: rgb(193, 195, 197);
+    justify-content: center;
+    align-items: center;
+    font-size: 26px;
+    flex-shrink: 0;
+}
+
+.cabecalho-avaliacao h4 {
+    margin: 0 0 5px 0;
+    font-size: 16px;
+    color: #14181E;
+}
+
+.estrelas {
+    font-size: 18px;
+    margin-bottom: 12px;
+    letter-spacing: 2px;
+    display: flex;
+}
+
+.estrelas .cheia {
+    color: #F2B93B;
+}
+
+.estrelas .vazia {
+    color: #CBD5E1;
+}
+
+.card-avaliacao p {
+    font-size: 14px;
+    color: #4a5568;
+    line-height: 1.5;
+    margin: 0;
+    font-style: italic;
+}
+
+/* Animação matemática exata para o loop infinito */
+@keyframes rodarCarrossel {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        /* Move exatamente metade da trilha + metade do gap (30px / 2 = 15px) */
+        transform: translateX(calc(-50% - 15px));
+    }
 }
 
 .demonstracao {
     display: flex;
 }
 
-.demonstracao img {
+.demonstracao video {
     border-radius: 25px;
-    width: 900px;
     box-shadow: 0px 2px 10px black;
     margin: 0 auto;
     transition: transform 0.3s ease;
@@ -204,4 +297,57 @@ footer {
     margin: 0 auto;
     background-color: #b5c2ce;
     transform: translateY(-10px);
+}
+
+.intro {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    background-color: #fff;
+    pointer-events: none;
+    animation: introFundo 0.7s ease 1.3s forwards;
+}
+@keyframes introFundo { to { background-color: rgba(255, 255, 255, 0); } }
+
+.intro img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: min(420px, 80vw);
+    height: min(170px, 32vw);
+    object-fit: contain;
+    transform: translate(-50%, -50%);
+    animation: introLogo 2s cubic-bezier(0.65, 0, 0.35, 1) forwards,
+               introSai 0.4s ease 2s forwards;
+}
+@keyframes introLogo {
+    0%   { opacity: 0; transform: translate(-50%, -50%) scale(0.85); }
+    25%  { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+    60%  { top: 50%; left: 50%; width: min(420px, 80vw); height: min(170px, 32vw); }
+    100% { top: 35px; left: 125px; width: 170px; height: 70px;
+           transform: translate(-50%, -50%) scale(1); opacity: 1; }
+}
+@keyframes introSai { to { opacity: 0; } }
+
+body.com-intro header { animation: headerEntra 0.4s ease 2s both; }
+@keyframes headerEntra { from { opacity: 0; } to { opacity: 1; } }
+
+@media (prefers-reduced-motion: reduce) {
+    .intro { display: none; }
+    body.com-intro header { animation: none; }
+}
+
+footer {
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-between;
+    background-color: #1f2d94;
+    padding: 10px;
+    color: rgb(193, 195, 197);
+}
+
+.subtitulo{
+    margin-left: 10px;
+    font-size: 35px;
+    margin: 40px;
 }

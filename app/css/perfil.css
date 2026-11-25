@@ -8,12 +8,17 @@
 
 body {
     font-family: "Momo Trust Display", sans-serif;
-    background-color: #ffffff;
-    color: #14181e;
-    margin: 0;
+    margin: 0; 
     padding-top: 70px;
-    padding-bottom: 60px;
+    display: flex;
+    flex-direction: column;
     min-height: 100vh;
+    min-height: 100dvh;
+    box-sizing: border-box;
+}
+
+main{
+    flex: 1;
 }
 
 header {
@@ -83,7 +88,6 @@ main {
     padding: 0 20px;
 }
 
-/* --- CARTÃO DE DESTAQUE (COR #1e222d DO SEU FORM) --- */
 .quadros {
     background-color: #1e222d;
     border-radius: 24px;
@@ -195,16 +199,18 @@ main {
     color: #1e222d;
 }
 
-/* --- BOTÃO DE AÇÃO INFERIOR (VERDE #3ddc84 DO SEU FORM) --- */
-.editarTudo {
+.botoes {
     margin-top: 32px;
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
 }
 
-.editarTudo a {
+.sairConta {
     display: inline-block;
-    background-color: #3fd6e8;
-    color: #14181e;
+    background-color: #ff0000;
+    color: #edf3f6;
     text-decoration: none;
     padding: 12px 45px;
     border-radius: 12px;
@@ -212,9 +218,10 @@ main {
     transition: filter 0.2s;
 }
 
-.editarTudo a:hover {
+.sairConta:hover {
     filter: brightness(0.92);
 }
+
 
 @media (max-width: 768px) {
     .pagina-perfil {
@@ -231,4 +238,18 @@ main {
         justify-content: center;
         gap: 14px;
     }
+}
+
+footer {
+  display: flex;
+  justify-content: space-between;
+  background-color: #1f2d94;
+  padding: 10px;
+  color: rgb(193, 195, 197);
+
+  p {
+    margin: 1em 0;
+    font-size: 16px;
+    color: rgb(193, 195, 197);
+  }
 }

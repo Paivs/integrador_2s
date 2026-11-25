@@ -4,6 +4,16 @@ body {
     font-family: "Momo Trust Display", sans-serif;
     margin: 0; 
     padding-top: 70px;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    min-height: 100dvh;
+    box-sizing: border-box;
+}
+
+main{
+    flex: 1;
+    
 }
 
 header {
@@ -18,7 +28,7 @@ header {
     left: 0;
     width: 100%;
     box-sizing: border-box;
-    z-index: 1000; 
+    z-index: 1000;
 }
 
 .logo {
@@ -44,9 +54,9 @@ header {
     width: 32px;
     height: 32px;
     border-radius: 50%;
-    object-fit: cover;   
+    object-fit: cover;
     display: block;
-    flex-shrink: 0;     
+    flex-shrink: 0;
 }
 
 .menu a {
@@ -68,48 +78,114 @@ header {
     font-size: 15px;
 }
 
+.busca {
+    position: sticky;
+    top: 82px;
+    z-index: 900;
+    max-width: 1100px;
+    margin: 24px auto 30px;
+    padding: 14px 18px;
+    box-sizing: border-box;
+    border-radius: 18px;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 
+        0 6px 16px rgba(20, 24, 30, 0.18),
+        inset 0 0 12px rgba(255, 255, 255, 0.4);
+}
+
+.busca::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    background: linear-gradient(135deg, rgba(238, 243, 246, 0.4) 0%, rgba(238, 243, 246, 0.1) 100%);
+    -webkit-backdrop-filter: blur(8px) url(#liquid-glass);
+    backdrop-filter: blur(3px) url(#liquid-glass);
+}
+
 .busca form {
+    position: relative;
+    z-index: 1;
     display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: 14px;
     font-family: "Momo Trust Display", sans-serif;
-    justify-content: space-between;
-    border-radius: 25px;
-    padding: 10px;
-    margin-bottom: 70px;
 }
 
-.busca input {
-    margin-right: 20px;
-    padding: 5px;
-    border-radius: 10px;
-    border: 1px solid rgb(164, 170, 168);
-    background-color: rgb(164, 170, 168);
+.busca .campo {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
 }
 
+.busca .campo-busca {
+    flex: 1 1 220px;
+}
+
+.busca label {
+    font-size: 14px;
+    color: #14181E;
+}
+
+.busca input,
 .busca select {
-    margin-right: 20px;
-    padding: 5px;
-    border-radius: 10px;
-    border: 1px solid rgb(164, 170, 168);
-    background-color: rgb(164, 170, 168);
+    font: inherit;
+    font-size: 15px;
+    color: #14181E;
+    background: #fff;
+    height: 40px;
+    padding: 0 12px;
+    box-sizing: border-box;
+    border: 2px solid #14181E;
+    border-radius: 12px;
+}
+
+.busca option:hover {
+    background-color: #3FD6E8;
+}
+
+.acoes-filtro {
+    display: flex;
+    align-items: center;
+    gap: 12px;
 }
 
 .busca button {
-    margin-right: 20px;
-    padding: 10px;
-    width: 100px;
-    background-color: blue;
-    color: white;
-    border-radius: 10px;
-    border: 1px solid blue;
+    font: inherit;
+    font-size: 15px;
+    height: 40px;
+    padding: 0 22px;
+    background-color: #3FD6E8;
+    color: #14181E;
+    border: 2px solid #14181E;
+    border-radius: 12px;
+    cursor: pointer;
+}
+
+.busca button:hover {
+    background-color: #17bdcf;
+    color: #EEF3F6;
+}
+
+.limpar {
+    color: #2A303A;
+    font-size: 14px;
+}
+
+@media (max-width: 640px) {
+    .busca {
+        position: static;
+        margin: 16px;
+    }
 }
 
 .telaObjetos {
     display: flex;
     justify-content: center;
-    background-color: #f3f5f7;
     flex-wrap: wrap;
     gap: 60px;
-    border-radius: 25px;
     font-family: "Momo Trust Display", sans-serif;
     padding: 10px;
     margin: 0 auto;
@@ -118,14 +194,33 @@ header {
 .objeto {
     display: flex;
     background-color: #f4f7fa;
+    text-align: center;
+    justify-content: center;
+    flex-direction: column;
     border-radius: 25px;
     padding: 10px;
     font-family: "Momo Trust Display", sans-serif;
     margin: 10px;
-    width: 560px;
+    width: 270px;
     min-height: 255px;
-    transition: transform 0.3s ease;
-    box-shadow: 0px 2px 10px black;
+    transition: transform 0.5s ease;
+    min-width: 0;
+    overflow: hidden; 
+}
+
+.nomeObjeto{
+    display: -webkit-box;
+    display: flex;
+    padding: 5px;
+    border-radius: 30px;
+    justify-content: center;
+    font-size: 15px;
+    margin-bottom: 7px;
+    background: rgba(238, 243, 246, 0.55);
+    -webkit-backdrop-filter: blur(14px) saturate(160%);
+    backdrop-filter: blur(14px) saturate(160%);
+    border: 1px solid rgba(255, 255, 255, 0.65);
+    box-shadow: 0 6px 16px rgba(20, 24, 30, 0.18);
 }
 
 .objeto button {
@@ -139,7 +234,8 @@ header {
 }
 
 .objeto:hover {
-    transform: scale(1.001);
+    transform: scale(1.02);
+    box-shadow: 0px 10px 12px black;
 }
 
 .objeto button:hover {
@@ -159,10 +255,15 @@ header {
     border-radius: 25px;
     width: 250px;
     height: 230px;
-    flex-shrink: 0;  
-    display: flex;            
+    flex-shrink: 0;
+    display: flex;
     justify-content: center;
     align-items: center;
+    background: rgba(238, 243, 246, 0.55);
+    -webkit-backdrop-filter: blur(14px) saturate(160%);
+    backdrop-filter: blur(14px) saturate(160%);
+    border: 1px solid rgba(255, 255, 255, 0.65);
+    box-shadow: 0 6px 16px rgba(20, 24, 30, 0.18);
 }
 
 .emoji p {
@@ -174,25 +275,57 @@ header {
     line-height: 1;
 }
 
-.conteudo{  
+.conteudo {
     display: flex;
+    margin: 9px 0 0;
     flex-direction: column;
+    margin-top: 9px;
     flex: 1;
-    margin-left: 20px;
 }
 
 .conteudo p {
-    margin: 0 0 10px;         
+    margin: 0 0 10px;
+    overflow-wrap: anywhere;
+}
+
+.conteudo p:first-child {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3; 
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.selo {
+    padding: 3px 12px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 700;
+    color: #14181E;
+    background: #ccc;
+}
+
+.selo-perdido {
+    background: #E85A4F;
+}
+
+.selo-encontrado {
+    background: #3DDC84;
+}
+
+.selo-doado {
+    background: #F2B93B;
 }
 
 .botao {
     display: flex;
-    gap: 8px;
-    margin-top: auto;    
+    justify-content: center;
+    gap: 25px;
+    margin-top: auto;
+    flex-wrap: wrap;  
 }
 
-.fundo{
-    background-color: #f3f5f7;
+.fundo {
     padding: 10px;
     border-radius: 25px;
 }
@@ -219,4 +352,13 @@ header {
 .botaoCompartilhar {
     color: #5c5757;
     border: 2px solid #f2b93b;
+}
+
+footer {
+  margin-top: 30px;
+  display: flex;
+  justify-content: space-between;
+  background-color: #1f2d94;
+  padding: 10px;
+  color: rgb(193, 195, 197);
 }

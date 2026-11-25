@@ -1,5 +1,6 @@
 <?php
 
+require_once __DIR__ . "/init.php";
 
 ?>
 
@@ -13,6 +14,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FindIt - Perguntas Frequentes</title>
     <link rel="stylesheet" href="./css/faq.css">
+    <link rel="icon" type="image/png" href="./imagens/finditDesenho.png">
 </head>
 
 
@@ -58,10 +60,19 @@
                 <p>Após o prazo máximo ser atingido, enviaremos um e-mail avisando que o objeto será encaminhado para doação.</p>
             </div>
 
+        </div>
     </main>
-    </div>
+
+    <footer>
+        <div class="rodape-coluna">
+            <p>Sistema de achados e perdidos. Devolvendo pertences de forma rápida e simples.</p>
+        </div>
+
+        <div class="direitos">
+            <p>&copy; 2026 Celeste System. Todos os direitos reservados.</p>
+        </div>
+    </footer>
 
 </body>
-
 
 </html>

@@ -2,6 +2,12 @@
 
 require_once __DIR__ . "/init.php";
 
+if (!isset($_SESSION['id_usuario'])) {
+    $_SESSION['voltar_para'] = 'cadastraObj.php';
+    header('Location: login.php');
+    exit;
+}
+
 $categorias = [
     'acessorios'      => 'Acessórios',
     'bolsas_mochilas' => 'Bolsas e Mochilas',
@@ -72,7 +78,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         try {
             create($pdo, 'objetos', [
-                'nomeUsuario'     => (int) ($_SESSION['id_usuario'] ?? 1), // TEMPORÁRIO: tirar o ?? 1 quando o login existir
+                'nomeUsuario'     => (int) ($_SESSION['id_usuario']),
                 'nome'            => $nome,
                 'descricao'       => $descricao,
                 'localEncontrado' => $local,
@@ -99,6 +105,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastrar Item</title>
     <link rel="stylesheet" href="css/cadastraObj.css">
+    <link rel="icon" type="image/png" href="./imagens/finditDesenho.png">
 </head>
 
 <body>
@@ -121,131 +128,163 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </nav>
     </header>
 
-    <div class="lado-direito">
-        <h2>Para realizar o cadastro de um novo objeto são necessárias as seguintes etapas:</h2>
+    <main>
+        <div class="container">
+            <div style="width: 50%">
+                <div class="borda">
 
-        <?php if ($erro !== ''): ?>
-            <p class="erro" style="color:#c0392b;font-weight:bold;"><?= htmlspecialchars($erro) ?></p>
-        <?php endif; ?>
+                    <h2>Para realizar o cadastro de um novo objeto são necessárias as seguintes etapas:</h2>
 
-        <form action="" method="POST" class="formulario">
-            <div class="cadastro">
-                <div class="grupo-campo">
-                    <div class="linha-titulo">
-                        <p class="ordem">1.</p>
-                        <label for="nome">
-                            <p>Nome do objeto:</p>
-                        </label>
-                    </div>
+                    <?php if ($erro !== ''): ?>
+                        <p class="erro" style="color:#c0392b;font-weight:bold;"><?= htmlspecialchars($erro) ?></p>
+                    <?php endif; ?>
 
-                    <input class="resposta" type="text" id="nome" name="nome" required>
-                
+                    <form action="" method="POST" class="formulario">
+                            <div class="grupo-campo">
+                                <div class="linha-titulo">
+                                    <p class="ordem">1.</p>
+                                    <label for="nome">
+                                        <p>Nome do objeto:</p>
+                                    </label>
+                                </div>
 
-               
-                    <div class="linha-titulo">
-                        <p class="ordem">2.</p>
-                        <label for="descricao">
-                            <p>Descrição do objeto:</p>
-                        </label>
-                    </div>
+                                <input class="resposta" type="text" id="nome" name="nome" required>
 
-                    <input class="resposta" type="text" id="descricao" name="descricao" required>
-                
 
-                
-                    <div class="linha-titulo">
-                        <p class="ordem">3.</p>
-                        <label for="local">
-                            <p>Local onde foi perdido ou encontrado:</p>
-                        </label>
-                    </div>
 
-                    <input class="resposta" type="text" id="local" name="local" required>
-                
+                                <div class="linha-titulo">
+                                    <p class="ordem">2.</p>
+                                    <label for="descricao">
+                                        <p>Descrição do objeto:</p>
+                                    </label>
+                                </div>
 
-                
-                    <div class="linha-titulo">
-                        <p class="ordem">4.</p>
-                        <label for="categoria">
-                            <p>Categoria</p>
-                        </label>
+                                <input class="resposta" type="text" id="descricao" name="descricao" required>
 
-                        <select name="categoria" id="categoria" required>
 
-                            <option value="" disabled selected>Selecione...</option>
-                            <option value="acessorios">Acessórios</option>
-                            <option value="bolsas_mochilas">Bolsas e Mochilas</option>
-                            <option value="documentos">Documentos</option>
-                            <option value="eletronicos">Eletrônicos</option>
-                            <option value="roupas">Roupas</option>
-                            <option value="outros">Outros</option>
-                        </select>
-                    </div>
-                
 
-                
-                    <div class="linha-titulo">
-                        <p class="ordem">5.</p>
-                        <label for="status">
-                            <p>Status atual:</p>
-                        </label>
-                        <select name="status" id="status">
-                            <option value="perdido">Perdido</option>
-                            <option value="encontrado">Encontrado</option>
-                        </select>
-                    </div>
-                </div>
+                                <div class="linha-titulo">
+                                    <p class="ordem">3.</p>
+                                    <label for="local">
+                                        <p>Local onde foi perdido ou encontrado:</p>
+                                    </label>
+                                </div>
 
-                <div class="grupo-campo">
-                    <div class="linha-titulo">
-                        <p class="ordem">6.</p>
-                        <p>Selecione o ícone do objeto:</p>
-                    </div>
+                                <input class="resposta" type="text" id="local" name="local" required>
+
+
+
+                                <div class="linha-titulo">
+                                    <p class="ordem">4.</p>
+                                    <label for="categoria">
+                                        <p>Categoria</p>
+                                    </label>
+
+                                    <select name="categoria" id="categoria" required>
+
+                                        <option value="" disabled selected>Selecione...</option>
+                                        <option value="acessorios">Acessórios</option>
+                                        <option value="bolsas_mochilas">Bolsas e Mochilas</option>
+                                        <option value="documentos">Documentos</option>
+                                        <option value="eletronicos">Eletrônicos</option>
+                                        <option value="roupas">Roupas</option>
+                                        <option value="outros">Outros</option>
+                                    </select>
+                                </div>
+
+                                <div class="linha-titulo">
+                                    <p class="ordem">5.</p>
+                                    <label for="status">
+                                        <p>Status atual:</p>
+                                    </label>
+                                    <select name="status" id="status">
+                                        <option value="perdido">Perdido</option>
+                                        <option value="encontrado">Encontrado</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="grupo-campo">
+                                <div class="linha-titulo-1">
+                                    <div class="titulo-6">
+                                        <p>6.</p>
+                                        <p>Selecione o ícone do objeto:</p>
+                                    </div>
+
+
+
+                                    <div class="circulos-container">
+                                        <div class="bloco">
+                                            <label class="circulo"><input type="radio" name="emoji_escolhido" value="🍫" required>🍫</label>
+                                            <label class="circulo"><input type="radio" name="emoji_escolhido" value="🥤">🥤</label>
+                                            <label class="circulo"><input type="radio" name="emoji_escolhido" value="⌚">⌚</label>
+                                            <label class="circulo"><input type="radio" name="emoji_escolhido" value="🌂">🌂</label>
+                                        </div>
+
+                                        <div class="bloco">
+                                            <label class="circulo"><input type="radio" name="emoji_escolhido" value="⚽">⚽</label>
+                                            <label class="circulo"><input type="radio" name="emoji_escolhido" value="🛼">🛼</label>
+                                            <label class="circulo"><input type="radio" name="emoji_escolhido" value="🎮">🎮</label>
+                                            <label class="circulo"><input type="radio" name="emoji_escolhido" value="🧸">🧸</label>
+                                        </div>
+
+                                        <div class="bloco">
+                                            <label class="circulo"><input type="radio" name="emoji_escolhido" value="👓">👓</label>
+                                            <label class="circulo"><input type="radio" name="emoji_escolhido" value="🧥">🧥</label>
+                                            <label class="circulo"><input type="radio" name="emoji_escolhido" value="🧢">🧢</label>
+                                            <label class="circulo"><input type="radio" name="emoji_escolhido" value="👜">👜</label>
+                                        </div>
+
+                                        <div class="bloco">
+                                            <label class="circulo"><input type="radio" name="emoji_escolhido" value="💄">💄</label>
+                                            <label class="circulo"><input type="radio" name="emoji_escolhido" value="💍">💍</label>
+                                            <label class="circulo"><input type="radio" name="emoji_escolhido" value="🎧">🎧</label>
+                                            <label class="circulo"><input type="radio" name="emoji_escolhido" value="📱">📱</label>
+                                        </div>
+
+                                        <div class="bloco">
+                                            <label class="circulo"><input type="radio" name="emoji_escolhido" value="💻">💻</label>
+                                            <label class="circulo"><input type="radio" name="emoji_escolhido" value="📷">📷</label>
+                                            <label class="circulo"><input type="radio" name="emoji_escolhido" value="📚">📚</label>
+                                            <label class="circulo"><input type="radio" name="emoji_escolhido" value="📓">📓</label>
+                                        </div>
+
+                                        <div class="bloco">
+                                            <label class="circulo"><input type="radio" name="emoji_escolhido" value="💳">💳</label>
+                                            <label class="circulo"><input type="radio" name="emoji_escolhido" value="🖊️">🖊️</label>
+                                            <label class="circulo"><input type="radio" name="emoji_escolhido" value="🔑">🔑</label>
+                                            <label class="circulo"><input type="radio" name="emoji_escolhido" value="🔨">🔨</label>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                       
+
+
+
+                        <button class="botao" type="submit">Cadastrar</button>
+                    </form>
                 </div>
             </div>
-
-            <div class="circulos-container">
-                <div class="oito">
-                    <label class="circulo"><input type="radio" name="emoji_escolhido" value="🍫" required>🍫</label>
-                    <label class="circulo"><input type="radio" name="emoji_escolhido" value="🥤">🥤</label>
-                    <label class="circulo"><input type="radio" name="emoji_escolhido" value="⌚">⌚</label>
-                    <label class="circulo"><input type="radio" name="emoji_escolhido" value="🌂">🌂</label>
-                    <label class="circulo"><input type="radio" name="emoji_escolhido" value="⚽">⚽</label>
-                    <label class="circulo"><input type="radio" name="emoji_escolhido" value="🛼">🛼</label>
-                    <label class="circulo"><input type="radio" name="emoji_escolhido" value="🎮">🎮</label>
-                    <label class="circulo"><input type="radio" name="emoji_escolhido" value="🧸">🧸</label>
+            <div style="width: 50%">
+                <div class="prateleira">
+                    <img src="imagens/prateleira.jpg" alt="prateleira com objetos guardados" style="--foto: url('imagens/prateleira.jpg')">
                 </div>
-
-                <div class="oito">
-                    <label class="circulo"><input type="radio" name="emoji_escolhido" value="👓">👓</label>
-                    <label class="circulo"><input type="radio" name="emoji_escolhido" value="🧥">🧥</label>
-                    <label class="circulo"><input type="radio" name="emoji_escolhido" value="🧢">🧢</label>
-                    <label class="circulo"><input type="radio" name="emoji_escolhido" value="👜">👜</label>
-                    <label class="circulo"><input type="radio" name="emoji_escolhido" value="💄">💄</label>
-                    <label class="circulo"><input type="radio" name="emoji_escolhido" value="💍">💍</label>
-                    <label class="circulo"><input type="radio" name="emoji_escolhido" value="🎧">🎧</label>
-                    <label class="circulo"><input type="radio" name="emoji_escolhido" value="📱">📱</label>
-                </div>
-
-                <div class="oito">
-                    <label class="circulo"><input type="radio" name="emoji_escolhido" value="💻">💻</label>
-                    <label class="circulo"><input type="radio" name="emoji_escolhido" value="📷">📷</label>
-                    <label class="circulo"><input type="radio" name="emoji_escolhido" value="📚">📚</label>
-                    <label class="circulo"><input type="radio" name="emoji_escolhido" value="📓">📓</label>
-                    <label class="circulo"><input type="radio" name="emoji_escolhido" value="💳">💳</label>
-                    <label class="circulo"><input type="radio" name="emoji_escolhido" value="🖊️">🖊️</label>
-                    <label class="circulo"><input type="radio" name="emoji_escolhido" value="🔑">🔑</label>
-                    <label class="circulo"><input type="radio" name="emoji_escolhido" value="🔨">🔨</label>
-                </div>
-
-                <button class="botao" type="submit">Cadastrar</button>
             </div>
-        </form>
-    </div>
+        </div>
 
-    <div class="prateleira">
-        <img src="imagens/prateleira.jpg" alt="prateleira com objetos guardados">
-    </div>
+
+    </main>
+    <footer>
+        <div class="rodape-coluna">
+            <p>Sistema de achados e perdidos. Devolvendo pertences de forma rápida e simples.</p>
+        </div>
+
+        <div class="direitos">
+            <p>&copy; 2026 Celeste System. Todos os direitos reservados.</p>
+        </div>
+    </footer>
 </body>
 
 </html>
