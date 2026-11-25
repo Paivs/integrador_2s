@@ -7,7 +7,6 @@ require_once __DIR__ . '/init.php';
 $projetos = readAll(database(), "Projetos");
 
 
-// Paginação: 4 projetos por página
 $porPagina = 4;
 $totalPaginas = max(1, ceil(count($projetos) / $porPagina));
 
@@ -49,8 +48,8 @@ $projetosDaPagina = array_slice($projetos, ($paginaAtual - 1) * $porPagina, $por
             <?php
                 // Busca o nome do autor (se existir)
                 $autor = null;
-                if (!empty($p['id_usuario'])) {
-                    $autor = read(database(), "Usuarios", "id_usuario = ?", [$p['id_usuario']]);
+                if (!empty($p['id_criador'])) {
+                    $autor = read(database(), "Usuarios", "id_usuario = ?", [$p['id_criador']]);
                 }
             ?>
 

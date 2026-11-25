@@ -76,6 +76,7 @@ CREATE TABLE IF NOT EXISTS Projetos (
     id_projeto INT AUTO_INCREMENT PRIMARY KEY,
     nome_projeto VARCHAR(100) NOT NULL,
     descricao_projeto TEXT,
+    imagem_projeto VARCHAR(255),
     data_criacao DATETIME DEFAULT CURRENT_TIMESTAMP,
     id_criador INT NOT NULL,
 

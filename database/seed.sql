@@ -107,56 +107,56 @@ VALUES
 -- ==========================================
 
 INSERT INTO Projetos
-(nome_projeto, descricao_projeto, id_criador)
+(nome_projeto, descricao_projeto, imagem_projeto, id_criador)
 VALUES
 (
  'Robô Seguidor de Linha',
- 'Construção de um robô autônomo capaz de seguir trajetos utilizando sensores e programação.',
+ 'Construção de um robô autônomo capaz de seguir trajetos utilizando sensores e programação.', './img/projetosPADRAO/robo_seguidor.jpg',
  1
 ),
 (
  'Impressão 3D de Miniaturas',
- 'Desenvolvimento de miniaturas personalizadas utilizando modelagem e impressão tridimensional.',
+ 'Desenvolvimento de miniaturas personalizadas utilizando modelagem e impressão tridimensional.', './img/projetosPADRAO/miniaturas_3d.jpg',
  2
 ),
 (
  'Circuito Eletrônico Inteligente',
- 'Criação de um circuito eletrônico utilizando Arduino, sensores e componentes eletrônicos.',
+ 'Criação de um circuito eletrônico utilizando Arduino, sensores e componentes eletrônicos.', './img/projetosPADRAO/circuito_inteligente.jpg',
  3
 ),
 (
  'Móvel Sustentável',
- 'Construção de um pequeno móvel utilizando madeira reaproveitada e ferramentas de marcenaria.',
+ 'Construção de um pequeno móvel utilizando madeira reaproveitada e ferramentas de marcenaria.', './img/projetosPADRAO/movel_sustentavel.jpg',
  4
 ),
 (
  'Estação Meteorológica',
- 'Desenvolvimento de uma estação meteorológica para monitoramento de temperatura e umidade.',
+ 'Desenvolvimento de uma estação meteorológica para monitoramento de temperatura e umidade.', './img/projetosPADRAO/estacao_meteorologica.jpg',
  5
 ),
 (
  'Sistema de Corte a Laser',
- 'Criação de peças personalizadas utilizando equipamentos de corte e gravação a laser.',
+ 'Criação de peças personalizadas utilizando equipamentos de corte e gravação a laser.', './img/projetosPADRAO/sistema_corte_laser.jpg',
  6
 ),
 (
  'Experimentos com Polímeros',
- 'Estudo e desenvolvimento de materiais utilizando resinas, tintas e diferentes polímeros.',
+ 'Estudo e desenvolvimento de materiais utilizando resinas, tintas e diferentes polímeros.', './img/projetosPADRAO/experimentos_polimeros.jpg',
  7
 ),
 (
  'Automação Residencial IoT',
- 'Desenvolvimento de um sistema de automação residencial utilizando módulos Wi-Fi e sensores.',
+ 'Desenvolvimento de um sistema de automação residencial utilizando módulos Wi-Fi e sensores.', './img/projetosPADRAO/automacao_iot.jpg',
  8
 ),
 (
  'Braço Robótico Automatizado',
- 'Montagem e programação de um braço robótico utilizando motores e componentes eletrônicos.',
+ 'Montagem e programação de um braço robótico utilizando motores e componentes eletrônicos.', './img/projetosPADRAO/braco_robotico.jpg',
  9
 ),
 (
  'Mini Protótipo Mecânico',
- 'Construção de um protótipo mecânico para testar soluções de engenharia e mecanismos.',
+ 'Construção de um protótipo mecânico para testar soluções de engenharia e mecanismos.', './img/projetosPADRAO/prototipo_mecanico.jpg',
  10
 );
 
