@@ -32,7 +32,7 @@
         } elseif (strlen($dadosFerramentas['nome_ferramenta']) > 100) {
             $erros['nome'] = 'O campo nome da ferramenta deve ter no máximo 100 caracteres, tente novamente.';
         } elseif (read($pdo, 'Ferramentas', 'nome_ferramenta = ?', [$dadosFerramentas['nome_ferramenta']]) !== false) {
-            $erros['nome'] = 'O nome da bancada já está sendo utilizado, por favor escolha outro.';
+            $erros['nome'] = 'O nome da ferramenta já está sendo utilizado, por favor escolha outro.';
         }
 
         // --------------------------------------------------

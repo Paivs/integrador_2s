@@ -118,7 +118,7 @@
 
         // -----------------------------------------------------
 
-        if ($dados['status'] != 'disponivel' && $dados['status'] != 'indisponivel') {
+        if ($dados['status'] != 'disponivel' && $dados['status'] != 'manutencao') {
             $erros['status'] = 'O campo de status deve ser preenchido corretamente com os valores padrões, tente novamente.';
         }
 
@@ -244,9 +244,9 @@
                             <?php if ($bancadas['status_bancada'] == "disponivel") { echo "checked"; } ?>>
                         <label class="opcao" for="disponivel">Disponível</label>
 
-                        <input class="radio" type="radio" id="indisponivel" name="statusBancada" value="indisponivel"
-                            <?php if ($bancadas['status_bancada'] == "indisponivel") { echo "checked"; } ?>>
-                        <label class="opcao" for="indisponivel">Indisponível</label>
+                        <input class="radio" type="radio" id="manutencao" name="statusBancada" value="manutencao"
+                            <?php if ($bancadas['status_bancada'] == "manutencao") { echo "checked"; } ?>>
+                        <label class="opcao" for="manutencao">Manutenção</label>
                     </div>
 
                     <label class="rotulo" for="imagem">Cole o link da imagem</label>

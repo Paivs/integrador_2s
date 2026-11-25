@@ -94,7 +94,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // -----------------------------------------------------
 
-    if ($dados['status'] != 'disponivel' && $dados['status'] != 'indisponivel') {
+    if ($dados['status'] != 'disponivel' && $dados['status'] != 'manutencao') {
         $erros['status'] = 'O campo de status deve ser preenchido corretamente com os valores padrões, tente novamente.';
     }
 
@@ -228,8 +228,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <input class="radio" type="radio" id="disponivel" name="statusBancada" value="disponivel">
                     <label class="opcao" for="disponivel">Disponível</label>
 
-                    <input class="radio" type="radio" id="indisponivel" name="statusBancada" value="indisponivel">
-                    <label class="opcao" for="indisponivel">Indisponível</label>
+                    <input class="radio" type="radio" id="manutencao" name="statusBancada" value="manutencao">
+                    <label class="opcao" for="manutencao">Manutenção</label>
                 </div>
 
                 <label class="rotulo" for="imagem">Cole o link da imagem</label>
