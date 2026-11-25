@@ -1,0 +1,33 @@
+body{
+    background-color: #090b0c;
+}
+.titulo{
+    margin-left: 40px;
+}
+
+.info{
+    border: 1px solid #00ff73;
+    width: 525px;
+    height: 350px;
+    margin-left: 31px;
+    background-color: #151a1c;
+    border-radius: 20px;
+}
+
+.info-cont{
+
+}
+
+.infoJ{
+    display: flex;
+}
+
+.info2{
+    margin-top: 20px;
+    border: 1px solid #00ff73;
+    width: 500px;
+    height: 80px;
+    margin-left: 50px;
+    background-color: #151a1c;
+    border-radius: 50px;
+}
