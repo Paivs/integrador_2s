@@ -69,8 +69,7 @@ if (isset($_SESSION['id_usuario'])) {
             <button type="submit">Enviar</button>
         </form>
     </main>
-
-
+    
     <footer>
         <div class="rodape-coluna">
             <p>Sistema de achados e perdidos. Devolvendo pertences de forma rápida e simples.</p>
