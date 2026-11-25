@@ -48,7 +48,7 @@ if (isset($_SESSION['id_usuario'])) {
             </label>
 
             <label>Telefone:
-                <input type="tel" name="telefone" placeholder="exemplo: (11) 12345-6789" required>
+                <input type="tel" name="telefone" placeholder="exemplo:123456789" required>
             </label>
 
             <label>Email:
