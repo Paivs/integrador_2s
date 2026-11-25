@@ -1,0 +1,126 @@
+body {
+    margin: 0;
+    background-color: #000000; 
+    font-family: sans-serif;
+}
+
+.tudo {
+    min-height: 100vh;
+}
+
+.admin-list-container {
+    background-color: #121212; 
+    border-radius: 8px;
+    padding: 20px 40px;
+    width: 90%;
+    max-width: 1000px;
+    margin: 50px auto; 
+}
+
+.list-header {
+    display: flex;
+    justify-content: space-between;
+    color: #ff6600; 
+    font-style: italic;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #333333;
+    text-transform: uppercase;
+}
+
+.list-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 1px solid #222222;
+}
+
+.list-item:hover {
+    background-color: #1a1a1a; 
+}
+
+.col-principal { 
+    width: 55%; 
+    text-align: left; 
+    font-family: 'Bebas Neue', 'Arial Narrow', sans-serif; 
+    font-size: 25px;
+}
+
+.col-secundaria { 
+    width: 25%; 
+    text-align: left; 
+    font-family: 'Bebas Neue', 'Arial Narrow', sans-serif; 
+    font-size: 25px; 
+}
+
+.col-acoes { 
+    width: 20%; 
+    text-align: right; 
+    font-family: 'Bebas Neue', 'Arial Narrow', sans-serif; 
+    font-size: 25px; 
+}
+
+.info-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.nome-item {
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 6px;
+    font-family: sans-serif;
+}
+
+.detalhes-item {
+    color: #888888;
+    font-size: 12px;
+    font-family: sans-serif;
+}
+
+.valor {
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 15px;
+    font-family: sans-serif;
+    
+}
+
+.valor2 {
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 15px;
+    font-family: sans-serif;
+    margin-left: 20px;
+}
+
+.moeda {
+    color: #ff6600;
+    font-size: 12px;
+    font-weight: bold;
+    margin-left: 5px;
+    font-family: sans-serif;
+}
+
+.btn-icon {
+    text-decoration: none;
+    font-size: 18px;
+    margin-left: 15px;
+    opacity: 0.7;
+    transition: opacity 0.2s ease;
+    color: #ff6600;
+}
+
+.btn-icon:hover {
+    opacity: 1;
+}
+
+.delBranco {
+    color: rgb(255, 255, 255);
+}
+
+.erro {
+    color: red;
+    font-size: 14px;
+}

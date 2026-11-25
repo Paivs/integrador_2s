@@ -1,25 +1,63 @@
--- seed
-
+-- =========================================
+-- SEED COMPLETO - GAMEHUB
+-- =========================================
 
 USE GameHub;
 
 -- =========================================
--- 1. TABELA EQUIPES
+-- 1. AJUSTAR TAMANHO DA DESCRICAO
 -- =========================================
 
-INSERT INTO equipes (nome, img, jogo_equipe) VALUES
-('FURIA', 'furia.png', 'Counter-Strike 2'),
-('LOUD', 'loud.png', 'Valorant'),
-('Team Liquid', 'liquid.png', 'League of Legends'),
-('MIBR', 'mibr.png', 'Counter-Strike 2'),
-('Fluxo', 'fluxo.png', 'Free Fire'),
-('Pain Gaming', 'pain.png', 'League of Legends');
+ALTER TABLE equipes
+MODIFY COLUMN descricao TEXT NOT NULL;
 
 -- =========================================
--- 2. TABELA USUARIOS
+-- 2. EQUIPES
 -- =========================================
 
-INSERT INTO usuarios (email_conta, senha_conta, username_conta, id_equipe) VALUES
+INSERT INTO equipes (
+    nome,
+    img,
+    jogo_equipe,
+    descricao,
+    privacidade
+) VALUES
+
+('FURIA', 'furia.png', 'Counter-Strike 2',
+'A FURIA é uma organização brasileira de esports reconhecida mundialmente por sua competitividade, dedicação e presença em grandes campeonatos internacionais.',
+'publica'),
+
+('LOUD', 'loud.png', 'Valorant',
+'A LOUD é uma organização brasileira de esports conhecida por sua forte comunidade, jogadores talentosos e destaque no cenário competitivo de Valorant.',
+'publica'),
+
+('Team Liquid', 'liquid.png', 'League of Legends',
+'A Team Liquid é uma organização internacional de esports com tradição competitiva, presença global e equipes de alto nível em diversas modalidades.',
+'publica'),
+
+('MIBR', 'mibr.png', 'Counter-Strike 2',
+'O MIBR é uma tradicional organização brasileira de esports, conhecida por sua história no Counter-Strike e participação em grandes competições mundiais.',
+'publica'),
+
+('Pain Gaming', 'pain.png', 'League of Legends',
+'A paiN Gaming é uma organização brasileira de esports com uma trajetória marcante, torcida apaixonada e forte presença no cenário competitivo de League of Legends.',
+'publica'),
+
+('NAVI', 'navi.png', 'Counter-Strike 2',
+'A NAVI é uma organização internacional de esports conhecida por sua tradição e participação em grandes competições mundiais.',
+'publica');
+
+-- =========================================
+-- 3. USUARIOS
+-- =========================================
+
+INSERT INTO usuarios (
+    email_conta,
+    senha_conta,
+    username_conta,
+    id_equipe
+) VALUES
+
 ('joao@gmail.com', 'senha123', 'JoaoFPS', 1),
 ('pedro@gmail.com', 'senha456', 'PedroGamer', 2),
 ('lucas@gmail.com', 'senha789', 'LucasPro', 3),
@@ -29,7 +67,7 @@ INSERT INTO usuarios (email_conta, senha_conta, username_conta, id_equipe) VALUE
 ('ana@gmail.com', 'ana123', 'AnaGamer', 1);
 
 -- =========================================
--- 3. TABELA TORNEIOS
+-- 4. TORNEIOS
 -- =========================================
 
 INSERT INTO torneios (
@@ -40,26 +78,40 @@ INSERT INTO torneios (
     format_torneio,
     nmjogo_torneio,
     horainit_torneio,
+    img,
+    Chaveamento,
     taxa,
     tipo
 ) VALUES
-('GameHub Championship', '2026-11-15', 5000, 16, 'Eliminatoria', 'Counter-Strike 2', '14:00', 0.00, 'gamehub'),
 
-('Valorant Masters', '2026-11-20', 3000, 10, 'Pontos corridos', 'Valorant', '16:00', 15.00, 'gamehub'),
+('Phantom Tournament', '2026-11-20', 10000, 10,
+'Pontos corridos', 'Valorant', '16:00',
+'phantom.png', 'chaveamento1.png', 15.00, 'gamehub'),
+
+('Rocket Champions', '2026-11-25', 15000, 10,
+'Eliminatoria', 'Rocket League', '15:00',
+'rocket.png', 'chaveamento2.png', 10.00, 'comunidade'),
+
+('Master League', '2026-12-05', 25000, 16,
+'Eliminatoria', 'Counter-Strike 2', '18:00',
+'master.png', 'chaveamento3.png', 20.00, 'gamehub'),
 
 ('League of Legends Cup', '2026-11-25', 2500, 10, 'Eliminatoria', 'League of Legends', '15:00', 10.00, 'gamehub'),
 
-('Free Fire Battle', '2026-12-01', 1500, 20, 'Pontos corridos', 'Free Fire', '19:00', 5.00, 'comunidade'),
+('FN Cup', '2026-12-09',500, 16,
+'Eliminatoria', 'Fortnite', '12:00',
+'fncup.png', 'chaveamento5.png', 10.00, 'gamehub'),
 
 ('CS2 Pro League', '2026-12-05', 7000, 16, 'Eliminatoria', 'Counter-Strike 2', '18:00', 20.00, 'comunidade'),
 
 ('GameHub Open', '2026-12-10', 1000, 8, 'Eliminatoria', 'Valorant', '13:00', 0.00, 'comunidade');
 
 -- =========================================
--- 4. TABELA TORNEIOS_EQUIPES
+-- 5. TORNEIOS_EQUIPES
 -- =========================================
 
 INSERT INTO torneios_equipes (id_torneio, id_equipe) VALUES
+
 (1, 1),
 (1, 4),
 (2, 2),
@@ -71,10 +123,11 @@ INSERT INTO torneios_equipes (id_torneio, id_equipe) VALUES
 (6, 2);
 
 -- =========================================
--- 5. TABELA RANKING
+-- 6. RANKING
 -- =========================================
 
 INSERT INTO ranking (id_usuario, pontuacao) VALUES
+
 (1, 1500),
 (2, 1350),
 (3, 1800),
@@ -82,3 +135,13 @@ INSERT INTO ranking (id_usuario, pontuacao) VALUES
 (5, 950),
 (6, 1600),
 (7, 1750);
+
+-- =========================================
+-- 7. CONFERIR OS DADOS
+-- =========================================
+
+SELECT * FROM equipes;
+SELECT * FROM usuarios;
+SELECT * FROM torneios;
+SELECT * FROM torneios_equipes;
+SELECT * FROM ranking;
