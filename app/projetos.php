@@ -4,7 +4,7 @@
 require_once __DIR__ . '/init.php';
 
 
-$projetos = readAll(database(), "Projetos");
+$projetos = readAll(database(), "Projetos", "nome_projeto <> ''");
 
 
 $porPagina = 4;
