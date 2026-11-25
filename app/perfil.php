@@ -239,7 +239,7 @@ $meusProjetos = readAll($pdo, "Projetos", "id_criador = ?", [$_SESSION['id']]);
                                     <?php endif; ?>
                                 </td>
                                 <td>    
-                                    <a class="botao editar" href="">Editar</a>
+                                    <a class="botao editar" href="./editarProjeto.php?id=<?= $proj['id_projeto'] ?>">Editar</a>
                                     <br>
                                     <br>
                                     <a class="botao excluir" href="">Deletar</a>
