@@ -1,0 +1,134 @@
+@font-face {
+  font-family: 'Alexandria';
+  src: url('/app/fonts/alexandria-woff/Alexandria-VariableFont_wght.woff') format('woff');
+  font-weight: 100 300;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+body {
+    font-family: 'Alexandria', sans-serif;
+    color: #000;
+    padding-top: 90px;
+}
+
+
+.pag {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 30px 20px 50px;
+    background: #fff;
+}
+
+.botao-novo {
+    display: inline-block;
+    padding: 12px 20px;
+    background: #4a6fc4;
+    border-radius: 12px;
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.botao-novo:hover {
+    background: #3d5ca6;
+}
+
+.titulo-projetos {
+    font-family: 'Alexandria', sans-serif;
+    margin: 40px 0 40px 0;
+    font-size: 32px;
+    font-weight: 800;
+    text-align: left;
+}
+
+.projeto {
+    display: flex;
+    align-items: flex-start;
+    gap: 25px;
+    margin-bottom: 45px;
+    padding-right: 30px;
+    background: #fff;
+    color: #000;
+    border: 1px solid #ddd;
+    border-radius: 16px;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25);
+    overflow: hidden;
+}
+
+.projeto-imagem {
+    width: 260px;
+    height: 160px;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.sem-imagem {
+    background: #cfe8fb;
+}
+
+
+.projeto-texto {
+    font-family: 'Alexandria', sans-serif;
+    flex: 1;
+    padding: 15px 0;
+}
+
+
+.projeto-texto h2 {
+    font-family: 'Alexandria', sans-serif;
+    margin-bottom: 14px;
+    font-size: 32px;
+}
+
+
+.projeto-texto p {
+    font-family: 'Alexandria', sans-serif;
+    max-width: 450px;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.projeto-autor {
+    margin-top: 18px;
+    font-family: 'Alexandria', sans-serif;
+    font-size: 16px;
+    white-space: nowrap;
+}
+
+.paginacao {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+}
+
+.pagina {
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    line-height: 32px;
+    text-align: center;
+    background: #f1f1f1;
+    border-radius: 6px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    color: #000;
+    text-decoration: none;
+}
+
+.pagina-ativa {
+    background: #fff;
+    border: 1px solid #aaa;
+}
+
+.pag h1,
+.projeto-texto h2,
+.projeto-texto p,
+.projeto-autor,
+.projeto-autor b {
+    color: #000;
+}

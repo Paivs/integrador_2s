@@ -1,0 +1,80 @@
+body {
+    display: flex;
+    background: #fff;
+    color: #000;
+    font-family: 'Alexandria', Arial, sans-serif;
+}
+
+.sidebar {
+    flex-shrink: 0;
+    position: sticky;
+    top: 0;
+}
+
+.conteudo {
+    flex: 1;
+    padding: 60px 40px 30px 40px;
+    overflow-x: auto;
+}
+
+.titulo-pagina {
+    text-align: center;
+    font-size: 48px;
+    font-weight: 500;
+    margin-bottom: 30px;
+}
+
+.reserva {
+    display: flex;
+    align-items: flex-start;
+    gap: 25px;
+    max-width: 1300px;
+    margin: 0 auto 20px auto;
+    padding: 10px 14px;
+    background: #fff;
+    border: 1px solid #d9d9d9;
+    border-radius: 40px;
+}
+
+.reserva-imagem {
+    width: 210px;
+    height: 130px;
+    object-fit: cover;
+    border-radius: 25px;
+    flex-shrink: 0;
+}
+
+.reserva-bancada {
+    flex: 1;
+}
+
+.reserva-data {
+    flex: 1;
+}
+
+.reserva p {
+    margin: 0;
+}
+
+.reserva-titulo {
+    margin-top: 8px;
+    font-size: 28px;
+}
+
+.reserva-autor {
+    margin-top: 4px;
+    margin-left: 6px;
+    font-size: 18px;
+    font-weight: 600;
+    color: #888;
+}
+
+.reserva-tempo {
+    margin-top: 6px;
+    font-size: 22px;
+}
+
+.sem-reservas {
+    text-align: center;
+    color: #888;
+}

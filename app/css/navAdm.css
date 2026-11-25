@@ -1,0 +1,76 @@
+@font-face {
+  font-family: 'Alexandria';
+  src: url('/app/fonts/alexandria-woff/Alexandria-VariableFont_wght.woff') format('woff');
+  font-weight: 100 300;
+}
+
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
+.sidebar {
+    position: relative;
+    width: 300px;
+    height: 100vh;
+    background: #2D2568;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 10px;
+    box-sizing: border-box;
+}
+
+.logo {
+    position: absolute;
+    top: 30px;
+    left: 50px;
+}
+
+.logo img {
+    display: block;
+    width: 200px;
+    height: auto;
+}
+
+.sidebar-content {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top:-200px;
+}
+
+.item {
+    font-family: 'Alexandria', sans-serif;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 24px;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 16px;
+}
+
+.item:hover {
+    background: #27205a;
+}   
+
+.item.ativo {
+    background: #fff;
+    color: #2d2566;
+}
+
+.item.ativo:hover {
+    background: #dfdfdf;
+}
+
+.item span {
+    flex: 1;
+}
+
+.icone {
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+}
