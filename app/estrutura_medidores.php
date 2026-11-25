@@ -58,7 +58,6 @@ $metas = readAll(database(), "metas");
                             $porcentagem_meta = "Acima de 100";
                         } else {
                             $porcentagem_meta = ($total_kwh / $meta_setor) * 100; 
-                            $porcentagem_meta = number_format($porcentagem_meta, 2);
                         };
 
                         if ($porcentagem_meta == "Acima de 100" || $porcentagem_meta > 100) {
