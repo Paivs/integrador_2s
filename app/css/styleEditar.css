@@ -56,12 +56,11 @@ body{
     border-radius: 20px;
     border: 2px solid  #31c166;
     background-color: #31c166;
-    margin-top: 100px;
     width: 300px;
     height: 50px;
     font-size: 20px;
-    font-family: "Inconsolata"
-    
+    font-family: "Inconsolata";
+    margin-bottom: 20px;
 }
 
 .conteudo h1 {
@@ -82,4 +81,7 @@ body{
 .selecionar{
     margin-top: 80px;
     margin-left: 50px;
+}
+.botao{
+    margin-top: 80px;
 }

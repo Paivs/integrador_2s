@@ -83,39 +83,41 @@ try {
                 <div class="coluna">
 
 
-                <div class="form-registro">
-                    <h2><b>Ultimos Registros Gravados</b></h2>
-                    <table class="tabela-registros">
-                        <thead>
-                            <tr>
-                                <th>Data e Hora</th>
-                                <th>Medidor Sala</th>
-                                <th>Valor do Relógio</th>
-                                <th>Origem</th>
-                                <th>Area m2</th>
-                                <th>Estado</th>
-                                <th>Opções</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php foreach ($leituras as $leitura): ?>
-                                <tr>
-                                    <td><?= $leitura['data_hora'] ?></td>
-                                    <td><?= $leitura['codigo_medidor'] ?></td>
-                                    <td><?= $leitura['leitura_acumulada_kwh'] ?></td>
-                                    <td><?= $leitura['origem'] ?></td>
-                                    <td><?= $leitura['area_m2_leitura'] ?></td>
-                                    <td><?= $leitura['estado_medidor_leituras'] ?></td>
-                                    <td class="botao">
-                                        <a class="excluir" href="excluir_leitura.php?id=<?= $leitura['id'] ?>" onclick="return confirm('Quer excluir esse dado?')">Excluir</a>
-                                        <a class="editar" href="editar_leitura.php?id=<?= $leitura['id'] ?>" >Editar</a>
-                                    </td>
+                    <div class="form-registro">
+                        <h2><b>Ultimos Registros Gravados</b></h2>
+                        <div class="tabela-registros">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Data e Hora</th>
+                                        <th>Medidor Sala</th>
+                                        <th>Valor do Relógio</th>
+                                        <th>Origem</th>
+                                        <th>Area m2</th>
+                                        <th>Estado</th>
+                                        <th>Opções</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php foreach ($leituras as $leitura): ?>
+                                        <tr>
+                                            <td><?= $leitura['data_hora'] ?></td>
+                                            <td><?= $leitura['codigo_medidor'] ?></td>
+                                            <td><?= $leitura['leitura_acumulada_kwh'] ?></td>
+                                            <td><?= $leitura['origem'] ?></td>
+                                            <td><?= $leitura['area_m2_leitura'] ?></td>
+                                            <td><?= $leitura['estado_medidor_leituras'] ?></td>
+                                            <td class="botao">
+                                                <a class="excluir" href="excluir_leitura.php?id=<?= $leitura['id'] ?>" onclick="return confirm('Quer excluir esse dado?')">Excluir</a>
+                                                <a class="editar" href="editar_leitura.php?id=<?= $leitura['id'] ?>">Editar</a>
+                                            </td>
 
-                                </tr>
-                            <?php endforeach; ?>
-                        </tbody>
-                    </table>
-                </div>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
 
                     <div class="box-historico">
                         <div class="historico">

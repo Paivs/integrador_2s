@@ -52,12 +52,14 @@ $metas = readAll(database(), "metas");
                             }
                         }
                         
-                        if($total_kwh <= 0 || $meta_setor <= 0 || !isset($total_kwh) || !isset($meta_setor)){    
-                        $porcentagem_meta = 0;
+                        if($total_kwh <= 0){    
+                            $porcentagem_meta = 0;
+                        } elseif($meta_setor <= 0) {
+                            $porcentagem_meta = "Acima de 100";
                         } else {
-                        $porcentagem_meta = ($total_kwh / $meta_setor) * 100;
+                            $porcentagem_meta = ($total_kwh / $meta_setor) * 100; 
+                            $porcentagem_meta = number_format($porcentagem_meta, 2);
                         };
-                        $porcentagem_meta = number_format($porcentagem_meta, 2);
 
                         if ($porcentagem_meta > 100) {
                             $cor_meta = 'vermelho';
@@ -89,7 +91,7 @@ $metas = readAll(database(), "metas");
                                     } elseif($cor_meta == 'amarelo'){ 
                                         echo "<b>Atenção 🟡</b>";
                                     } else {
-                                        echo "<b>Suave 🟢</b>";
+                                        echo "<b>Estável 🟢</b>";
                                     }
                     
                                     ?>
@@ -103,10 +105,10 @@ $metas = readAll(database(), "metas");
                                 <h2>Gasto de energia</h2>
                                 <h4>Em quilowatt-hora (kWh)</h4> <br>
                                 <?php
-                                    
-                                    echo "<h1>" . $total_kwh . " kWh</h1><br>";
+
+                                    echo "<h1><span class='contador'>" . $total_kwh . "</span> kWh</h1>";
                             
-                                    echo "<h4>Meta: " . $meta_setor . " kWh | <b class='meta_" . $cor_meta . "'>" . $porcentagem_meta . " % da meta</b></h4>";
+                                    echo "<h4>Meta: " . $meta_setor . " kWh | <b class='meta_" . $cor_meta . "'><span class='contador'>" . $porcentagem_meta . "</span> % da meta</b></h4>";
                                 
                                 ?> 
 
@@ -121,7 +123,7 @@ $metas = readAll(database(), "metas");
 
                                     $total_reais = $total_kwh * $tarifa_media;
 
-                                    echo "<h1>R$ " . $total_reais . " </h1><br>";
+                                    echo "<h1>R$ <span class='contador'>" . $total_reais . "</span> </h1><br>";
                                 
                                     echo "<h4>Tarifa média: R$ " . $tarifa_media . " p/ kWh</h4>";
                                 ?> 
@@ -140,12 +142,11 @@ $metas = readAll(database(), "metas");
                                     }
                                     $eficiencia = number_format($eficiencia, 2);
 
-                                    echo "<h1>" . $eficiencia . " kWh/m²</h1><br>";
+                                    echo "<h1><span class='contador'>" . $eficiencia . "</span> kWh/m²</h1><br>";
                                 
                                 ?> 
 
                             </div>
-
                         </div>
 
                     </div> 
@@ -153,5 +154,28 @@ $metas = readAll(database(), "metas");
                     
             </div>
         </div>
+
+        <script>
+            document.querySelectorAll('.contador').forEach(el => {
+                const final = parseFloat(el.innerText);
+                const casasDecimais = el.innerText.includes('.') ? 2 : 0;
+                
+                let atual = 0;
+                const passo = final / 50;
+
+                const timer = setInterval(() => {
+                    atual += passo;
+
+                    if (atual >= final) {
+                        el.innerText = final.toFixed(casasDecimais);
+                        clearInterval(timer);
+                    } else {
+                        el.innerText = atual.toFixed(casasDecimais);
+                    }
+                }, 20);
+            });
+        </script>
+
+
     </body>
 </html>

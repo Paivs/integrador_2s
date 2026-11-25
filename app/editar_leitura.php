@@ -1,75 +1,118 @@
- <?php
-    require_once __DIR__ . '/init.php';
-    $idUsuario = $_GET['id'];
-    $ambientes = readAll(database(), "ambientes");
-    $leituras = readAll(database(), "leituras");
-    $setores = readAll(database(), "setor");
-    $leituraUsuario = read(database(), "leituras", "id = {$idUsuario}");
-    ?>
- <html>
+<?php
+require_once __DIR__ . '/init.php';
 
- <head>
-     <meta charset="utf-8">
-     <link rel="stylesheet" href="./css/styleEditar.css">
-     <link rel="stylesheet" href="./css/styleMenu.css">
-     <title>Lançamento de Dados</title>
- </head>
 
- <body>
-     <div class="menu-conf">
-         <?php require_once __DIR__ . '/menuLateral.php'; ?>
+$idLeitura = isset($_GET['id']) ? (int) $_GET['id'] : 0;
+if ($idLeitura <= 0) {
+    header('Location: lancamento_de_dados.php');
+    exit;
+}
 
-         <div class="conteudo">
-             <h1>Editar Lançamento <?= $leituraUsuario['codigo_medidor'] ?> </h1>
+$ambientes = readAll(database(), "ambientes");
+$setores   = readAll(database(), "setor");
+$leitura   = read(database(), "leituras", "id = {$idLeitura}");
 
-             <div class="form-editar">
+if (!$leitura) {
+    header('Location: lancamento_de_dados.php');
+    exit;
+}
 
-                 <form action="processa-editar.php" method="$_GET" autocomplete="off">
-                     <div class="box-formulario">
-                         <div class="formulario">
-                             <label for="ambiente"><b>Selecione o Ambiente / Medidor:</b></label>
-                             <br>
-                             <select id="ambiente" name="ambiente" required val>
-                                 <?php foreach ($ambientes as $ambiente): ?>
-                                     <option value="<?= $ambiente['id'] ?>"><?= $ambiente['nome'] ?></option>
-                                 <?php endforeach; ?>
-                             </select><br><br>
+$dataHoraInput = date('Y-m-d\TH:i', strtotime($leitura['data_hora']));
 
-                             <label for="data_hora"><b>Data e Hora para a Mudança:</b></label>
-                             <br>
-                             <input type="datetime-local" id="data_hora" name="data_hora" required><br><br>
+function e($v) { return htmlspecialchars((string) $v, ENT_QUOTES, 'UTF-8'); }
+?>
+<!DOCTYPE html>
+<html lang="pt-BR">
 
-                             <label for="valor_relogio"><b>Valor do Relogio para a Alteração em (KWh)</b></label>
-                             <br>
-                             <input type="number" id="valor_relogio" name="valor_relogio" required><br><br>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="./css/styleEditar.css">
+    <link rel="stylesheet" href="./css/styleMenu.css">
+    <title>Editar Lançamento</title>
+</head>
 
-                             <label for="responsalvel"><b>Responsalvel do Registro:</b></label>
-                             <br>
-                             <input type="text" id="responsalvel" name="responsalvel" required><br><br>
-                         </div>
-                         <div class="selecionar">
-                             <label for="setor"><b>Setor:</b></label>
-                             <br>
-                             <select id="setor" name="setor" required>
-                                 <?php foreach ($setores as $s): ?>
-                                     <option value="<?= $s['id'] ?>"><?= $s['nome'] ?></option>
-                                 <?php endforeach; ?>
-                             </select><br><br>
+<body>
+    <div class="menu-conf">
+        <?php require_once __DIR__ . '/menuLateral.php'; ?>
 
-                             <label for="status_bloco"><b>Status do Bloco:</b></label>
-                             <br>
-                             <select id="status_bloco" name="status_bloco" required>
-                                 <option value="ATIVO">Ativo🟢</option>
-                                 <option value="INTERFERÊNCIA">Em Interferência🟡</option>
-                                 <option value="INATIVO">Inativo🔴</option>
-                             </select><br><br>
+        <div class="conteudo">
+            <h1>Editar Lançamento <?= e($leitura['codigo_medidor']) ?></h1>
 
-                             <button type="submit"><b>Editar o Registro</b></button>
-                         </div>
-                     </div>
-                 </form>
-             </div>
-         </div>
- </body>
+            <div class="form-editar">
 
- </html>
+                <form action="processa-editar.php" method="post" autocomplete="off">
+  
+                    <input type="hidden" name="id" value="<?= $idLeitura ?>">
+
+                    <div class="box-formulario">
+                        <div class="formulario">
+                            <label for="ambiente"><b>Selecione o Ambiente / Medidor:</b></label>
+                            <br>
+                            <select id="ambiente" name="ambiente" required>
+                                <?php foreach ($ambientes as $ambiente): ?>
+                                    <option value="<?= e($ambiente['id']) ?>"
+                                        <?= ($ambiente['nome'] == $leitura['codigo_medidor']) ? 'selected' : '' ?>>
+                                        <?= e($ambiente['nome']) ?>
+                                    </option>
+                                <?php endforeach; ?>
+                            </select><br><br>
+
+                            <label for="data_hora"><b>Data e Hora para a Mudança:</b></label>
+                            <br>
+                            <input type="datetime-local" id="data_hora" name="data_hora"
+                                value="<?= e($dataHoraInput) ?>" required><br><br>
+
+                            <label for="valor_relogio"><b>Valor do Relógio para a Alteração em (kWh):</b></label>
+                            <br>
+                            <input type="number" step="any" id="valor_relogio" name="valor_relogio"
+                                value="<?= e($leitura['leitura_acumulada_kwh']) ?>" required><br><br>
+
+                            <label for="responsavel"><b>Responsável do Registro:</b></label>
+                            <br>
+
+                            <input type="text" id="responsavel" name="responsavel"
+                                value="<?= e($leitura['responsavel'] ?? '') ?>" required><br><br>
+                        </div>
+
+                        <div class="selecionar">
+                            <label for="setor"><b>Setor:</b></label>
+                            <br>
+                            <select id="setor" name="setor" required>
+                                <?php foreach ($setores as $s): ?>
+
+                                    <option value="<?= e($s['id']) ?>"
+                                        <?= (($leitura['setor_id'] ?? null) == $s['id']) ? 'selected' : '' ?>>
+                                        <?= e($s['nome']) ?>
+                                    </option>
+                                <?php endforeach; ?>
+                            </select><br><br>
+
+                            <label for="status_bloco"><b>Status do Bloco:</b></label>
+                            <br>
+                            <select id="status_bloco" name="status_bloco" required>
+                                <?php
+                                $statusOpcoes = [
+                                    'ATIVO'         => 'Ativo🟢',
+                                    'INTERFERÊNCIA' => 'Em Interferência🟡',
+                                    'INATIVO'       => 'Inativo🔴',
+                                ];
+                                foreach ($statusOpcoes as $valor => $rotulo): ?>
+                                    <option value="<?= e($valor) ?>"
+                                        <?= ($leitura['estado_medidor_leituras'] === $valor) ? 'selected' : '' ?>>
+                                        <?= $rotulo ?>
+                                    </option>
+                                <?php endforeach; ?>
+                            </select><br><br>
+
+                            <div class="botao">
+                                <button type="submit"><b>Editar o Registro</b></button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
