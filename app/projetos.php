@@ -40,11 +40,6 @@ $projetosDaPagina = array_slice($projetos, ($paginaAtual - 1) * $porPagina, $por
     <main class="pag">
 
 
-        <div class="topo">
-            <a class="botao-novo" href="#">+ Novo Projeto</a>
-        </div>
-
-
         <h1 class="titulo-projetos">Projetos da comunidade:</h1>
 
 

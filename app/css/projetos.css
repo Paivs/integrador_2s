@@ -1,3 +1,9 @@
+@font-face {
+  font-family: 'Alexandria';
+  src: url('/app/fonts/alexandria-woff/Alexandria-VariableFont_wght.woff') format('woff');
+  font-weight: 100 300;
+}
+
 *{
     margin: 0;
     padding: 0;
@@ -6,7 +12,7 @@
 
 
 body {
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Alexandria', sans-serif;
     color: #000;
     padding-top: 90px;
 }
@@ -19,13 +25,6 @@ body {
     background: #fff;
 }
 
-
-/* Botão "+ Novo Projeto" no canto direito */
-.topo {
-    text-align: right;
-}
-
-
 .botao-novo {
     display: inline-block;
     padding: 12px 20px;
@@ -36,22 +35,18 @@ body {
     font-size: 16px;
 }
 
-
 .botao-novo:hover {
     background: #3d5ca6;
 }
 
-
-/* Título */
 .titulo-projetos {
-    margin: 10px 0 40px 0;
-    font-size: 22px;
-    font-weight: 400;
+    font-family: 'Alexandria', sans-serif;
+    margin: 40px 0 40px 0;
+    font-size: 32px;
+    font-weight: 800;
     text-align: left;
 }
 
-
-/* Cartão de cada projeto */
 .projeto {
     display: flex;
     align-items: flex-start;
@@ -66,8 +61,6 @@ body {
     overflow: hidden;
 }
 
-
-/* Imagem à esquerda */
 .projeto-imagem {
     width: 260px;
     height: 160px;
@@ -75,47 +68,44 @@ body {
     flex-shrink: 0;
 }
 
-
-/* Quadro azul quando o projeto não tem imagem */
 .sem-imagem {
     background: #cfe8fb;
 }
 
 
 .projeto-texto {
+    font-family: 'Alexandria', sans-serif;
     flex: 1;
     padding: 15px 0;
 }
 
 
 .projeto-texto h2 {
+    font-family: 'Alexandria', sans-serif;
     margin-bottom: 14px;
     font-size: 32px;
 }
 
 
 .projeto-texto p {
+    font-family: 'Alexandria', sans-serif;
     max-width: 450px;
     font-size: 14px;
     line-height: 1.5;
 }
 
-
-/* "Por: João Silva" */
 .projeto-autor {
     margin-top: 18px;
+    font-family: 'Alexandria', sans-serif;
     font-size: 16px;
     white-space: nowrap;
 }
 
-
-/* Paginação */
 .paginacao {
     display: flex;
     justify-content: center;
     gap: 12px;
 }
-
 
 .pagina {
     display: inline-block;
@@ -130,14 +120,11 @@ body {
     text-decoration: none;
 }
 
-
 .pagina-ativa {
     background: #fff;
     border: 1px solid #aaa;
 }
 
-
-/* Garante texto preto, mesmo que o nav ou o footer mudem a cor */
 .pag h1,
 .projeto-texto h2,
 .projeto-texto p,
