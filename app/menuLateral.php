@@ -21,14 +21,16 @@
             <details class="mouse">
                 <summary class="titulo">
                     <div class="elemento">
-                        <img src="./img/EstruturaMedidores.png"><a href="./estrutura_medidores.php">
-                        Estrutura e Medidores</a>
+                        <a href="./estrutura_medidores.php"><img src="./img/EstruturaMedidores.png"></a>
+                        <p>Estrutura e Medidores</p>
                     </div>
                 </summary>
                 <div class="elementos-blocos">
+                    <button class="item"><a href="./estrutura_medidores.php">🟢 Início</a></button>
                     <?php foreach($setores as $s): ?>
-                        <button class="item"><a href="./setores_ambientes.php?id=<?= $s['id'] ?>"><?= $s['nome'] ?></a></button>
+                        <button class="item"><a href="./setores_ambientes.php?id=<?= $s['id'] ?>">🟢 <?= $s['nome'] ?></a></button>
                     <?php endforeach ?>
+                    
                     </div>
             </details>
 
@@ -37,8 +39,8 @@
                 <li><a href="./gestaoMetas.php">Gestão de Metas e Rankings</a></li>
             </div>
             <div class="elemento">
-                <a href="#"><img src="./img/AnaliseComparativos.png"></a>
-                <li><a href="#">Análise e comparativos</a></li>
+                <a href="./analise_e_comparativos.php"><img src="./img/AnaliseComparativos.png"></a>
+                <li><a href="./analise_e_comparativos.php">Análise e comparativos</a></li>
             </div>
             <div class="elemento">
                 <a href="./engajamento_e_avisos.php"><img src="./img/Avisos.png"></a>

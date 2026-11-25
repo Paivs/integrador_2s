@@ -1,10 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&display=swap');
-
+@import url('https://fonts.google.com/');
+@import url('https://fonts.googleapis.com/css2?family=Crete+Round:ital@0;1&family=Inconsolata:wght@200..900&display=swap');
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Nanum Gothic';
+  font-family: 'Inconsolata';
 }
 
 body {
@@ -26,12 +26,13 @@ body {
 
 
 .menu-lateral {
-  width: 225px;
+  width: 260px;
   background-color: #151a1c;
   color: #7bd798;
   padding: 20px;
   display: flex;
   flex-direction: column;
+  font-family: 'Inconsolata';
 }
 
 .menu-lateral img {
@@ -50,11 +51,16 @@ body {
   list-style: none;
   padding: 0;
   margin-top: 20px;
+  font-family: 'Inconsolata';
+  font-size: 20px;
+
 }
 
 .menu-lateral nav li {
   margin-top: 10px;
   margin-bottom: 20px;
+  font-family: 'Inconsolata';
+  margin-bottom: 60px;
 }
 
 .menu-lateral nav a {
@@ -62,14 +68,22 @@ body {
   text-decoration: none;
   font-family: 'Nanum Gothic';
   font-size: 15px;
+  font-family: 'Inconsolata';
+  width: 60px;
+  font-size: 20px;
+  margin-bottom: 60px;
+  
 }
 
 summary::-webkit-details-marker {
   display: none;
+  font-family: 'Inconsolata';
 }
+
 
 .mouse {
   cursor: pointer;
+  font-family: 'Inconsolata';
 }
 
 .titulo {
@@ -78,12 +92,15 @@ summary::-webkit-details-marker {
   padding: 10px 0;
   list-style: none;
   user-select: none;
+  font-family: 'Inconsolata';
 }
 
 .elementos-blocos {
   display: flex;
   flex-direction: column;
   padding-top: 5px;
+  font-family: 'Inconsolata';
+  margin-top: -50px;
 }
 
 .item {
@@ -91,23 +108,31 @@ summary::-webkit-details-marker {
   border: none;
   padding: 6px 16px;
   font-weight: bold;
+  font-family: 'Inconsolata';
+  margin-top: 10px;
+}
+.item:hover{
+  display: underline;
 }
 
 .item a {
   color: #38efa6;
+  font-family: 'Inconsolata';
 }
 
 .elemento {
   display: flex;
   align-items: center;
+  font-family: 'Inconsolata';
+  font-weight: normal;
+}
+
+.elemento p{
+  margin-top: -54;
 }
 
 .elemento img {
   width: 32px;
   height: 30px;
   margin-right: 5px;
-}
-
-.usuario{
-  float: left;
 }
