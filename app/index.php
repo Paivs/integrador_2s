@@ -1,36 +1,35 @@
-<?php
-
-declare(strict_types=1);
-
-$databaseStatus = 'Conectado';
-
-try {
-    require_once __DIR__ . '/init.php';
-    $pdo->query('SELECT 1');
-} catch (Throwable $exception) {
-    $databaseStatus = 'Indisponível';
-}
+$pagina_atual = 'inicio';
+$estilo_css = 'style';
+require_once 'cabecalho.php';
 ?>
-<!doctype html>
-<html lang="pt-BR">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Projeto Integrador</title>
-    <style>
-        body { font-family: system-ui, sans-serif; max-width: 720px; margin: 4rem auto; padding: 0 1rem; line-height: 1.5; }
-        .status { padding: 1rem; border-radius: .5rem; background: #eef6ee; }
-        code { background: #eee; padding: .15rem .3rem; border-radius: .25rem; }
-    </style>
-</head>
-<body>
-    <h1>Projeto Integrador:Food Campus</h1>
-    <h2>Anaaa Laaaura</h2>
-    <h3>OLAAAAAAAAAAAAAA</h3>
-    <p>O ambiente PHP está funcionando.</p>
-    <div class="status">
-        Banco de dados: <strong><?= htmlspecialchars($databaseStatus, ENT_QUOTES, 'UTF-8') ?></strong>
+
+<html>
+    <head>
+        <title>Doce Encontro</title>
+      <link rel="stylesheet" href="style.css">
+      </head>
+    <body>
+        <div class="banner-principal">
+    <section class="secao-boas-vindas banner-texto">
+        <div class="etiqueta-destaque">O CANTINHO MAIS CHARMOSO DA CIDADE</div>
+
+        <h1 class="titulo-hero">
+            Onde o afeto encontra o <br>
+            <span class="destaque-rosa">sabor inesquecível</span>
+        </h1>
+
+        <p class="descricao-hero">
+            Bem-vindo à <strong>Lanchonete Doce Encontro</strong>. Delicie-se com nossos cafés artesanais frescos e salgados especiais.
+        </p>
+
+        <a href="cardapio.php" class="botao-verde-grande">
+            Ver Cardápio Completo (<?= count($produtos) ?> itens)
+        </a>
+    </section>
+
+    <div class="banner-imagem">
+        <img src="./imagem/image.png" alt="Interior da Lanchonete Doce Encontro">
     </div>
-    <p>Comece a aplicação editando <code>app/index.php</code>.</p>
+</div>
 </body>
 </html>
