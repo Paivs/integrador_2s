@@ -39,7 +39,7 @@ try {
                 <div class=" form-manual">
                     <h2>Lançamento Manual</h2>
                     <form action="processa_lancamento.php" method="post" autocomplete="off">
-                        <label for="ambiente"><b>Selecione o Ambiente / Medidor:</b></label>
+                        <label for="ambiente"><b>Selecione o Ambiente / Medidor</b></label>
                         <br>
                         <select id="ambiente" name="ambiente" required>
                             <?php foreach ($ambientes as $ambiente): ?>
