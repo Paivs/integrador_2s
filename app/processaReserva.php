@@ -164,7 +164,7 @@ if (isset($userLogado)) {
             <?php endif; ?>
             <?php if (isset($_GET['sucesso'])): ?>
                 <p style="color: #2e9e4f; font-size: 0.9rem; margin-bottom: 10px;">
-                    Reserva realizada com sucesso!
+                    Reserva realizada com sucesso! <a class="tagA" href="./perfil.php">Ver Perfil</a>
                 </p>
             <?php endif; ?>
         </div>

@@ -202,3 +202,8 @@ body {
 .naoTemLogin .card-info p a {
     color: #3866f5;
 }
+
+.tagA {
+    color: #2954d4;
+    text-decoration: underline;
+}
