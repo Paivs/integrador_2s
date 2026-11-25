@@ -5,6 +5,8 @@
 
 USE makerLab;
 
+SET NAMES utf8mb4;
+
 
 -- ==========================================
 -- 1. USUARIOS

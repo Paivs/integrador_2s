@@ -1,19 +1,17 @@
+@font-face {
+    font-family: 'Alexandria';
+    src: url('/app/fonts/alexandria-woff/Alexandria-VariableFont_wght.woff') format('woff');
+    font-weight: 100 300;
+}
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-@font-face {
-    font-family: 'Montaser Arabic';
-    src: url('../fonts/MontaserArabic-Regular.woff2') format('woff2'),
-         url('../fonts/MontaserArabic-Regular.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-}
-
 body {
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Alexandria', sans-serif;
     color: #000000 !important;
 }
 
@@ -206,4 +204,39 @@ body {
 .tagA {
     color: #2954d4;
     text-decoration: underline;
+}
+
+.card-reserva form > .linha-valor {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 6px;
+    margin-bottom: 16px;
+}
+
+.card-reserva form > .linha-valor label {
+    font-family: 'Alexandria', Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: #000;
+}
+
+.card-reserva .campo {
+    font-family: 'Alexandria', Arial, sans-serif;
+    font-size: 14px;
+    padding: 10px 14px;
+    background: #f3f3f6;
+    border: 1px solid #dcdce2;
+    border-radius: 12px;
+    outline: none;
+}
+
+.card-reserva .campo:focus {
+    border-color: #3866f5;
+    background: #fff;
+}
+
+.card-reserva .campo-numero {
+    width: 70px;
+    font-size: 20px;
+    margin-right: 0;
 }
