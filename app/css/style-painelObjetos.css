@@ -169,16 +169,18 @@ header {
     color: #EEF3F6;
 }
 
-.limpar {
-    color: #2A303A;
-    font-size: 14px;
-}
-
-@media (max-width: 640px) {
-    .busca {
-        position: static;
-        margin: 16px;
-    }
+.meusObjetos {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 16px;
+    font-size: 15px;
+    border-radius: 8px;
+    border: 2px solid #14181E;
+    text-decoration: none;
+    color: #14181E;
+    background-color: #3FD6E8;
+    white-space: nowrap;
 }
 
 .telaObjetos {
