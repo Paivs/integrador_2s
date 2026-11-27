@@ -102,6 +102,7 @@ usort($objetos, fn($a, $b) => $b['idObjeto'] <=> $a['idObjeto']);
 
                     <div class="acoes-filtro">
                         <button type="submit">Buscar</button>
+                        <a href="./meusObjetos.php" class="meusObjetos">Meus objetos</a>
                     </div>
                 </form>
             </div>

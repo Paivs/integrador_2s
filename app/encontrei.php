@@ -2,47 +2,95 @@
 
 require_once __DIR__ . "/init.php";
 
+$ehNovo = isset($_GET['novo']) && $_GET['novo'] === '1';
+
 if (!isset($_SESSION['id_usuario'])) {
-    $_SESSION['voltar_para'] = 'encontrei.php?idObjeto=' . (int) ($_GET['idObjeto'] ?? 0);
+    $_SESSION['voltar_para'] = $ehNovo
+        ? 'cadastraObj.php'
+        : 'encontrei.php?idObjeto=' . (int) ($_GET['idObjeto'] ?? 0);
     header('Location: login.php?erro[]=' . urlencode('Faça login para informar que encontrou um objeto.'));
     exit;
 }
 
-$id = (int) ($_GET['idObjeto'] ?? 0);
-
-$objeto = read($pdo, 'objetos', 'idObjeto = ?', [$id]);
-
 $pontos = readAll($pdo, 'pontoColeta');
 
-if (!$objeto || $objeto['status_objeto'] !== 'Perdido') {
-    header('Location: painelObjetos.php');
-    exit;
-}
+if ($ehNovo) {
+    $objeto = $_SESSION['rascunho_objeto'] ?? null;
 
-$erro = '';
+    if (!is_array($objeto) || empty($objeto['nome'])) {
+        header('Location: cadastraObj.php');
+        exit;
+    }
+    $id = 0;
+} else {
+    $id = (int) ($_GET['idObjeto'] ?? 0);
+    $objeto = read($pdo, 'objetos', 'idObjeto = ?', [$id]);
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $estado = trim($_POST['estadoObjeto'] ?? '');
-    $local  = trim($_POST['localEncontrado'] ?? '');
-    $idPonto = (int) ($_POST['idPontoColeta'] ?? 0);
-
-    $ponto   = read($pdo, 'pontoColeta', 'idEndereco = ?', [$idPonto]);
-
-    if ($estado === '' || $local === '' || !$ponto) {
-        $erro = 'Preencha o estado e o local.';
-    } else {
-        create($pdo, 'achado', [
-            'idObjeto'        => $id,
-            'idUsuarioAchou'  => (int) $_SESSION['id_usuario'],
-            'estadoObjeto'    => $estado,
-            'localEncontrado' => $local,
-            'idPontoColeta'   => $idPonto,
-        ]);
-
-        update($pdo, 'objetos', ['status_objeto' => 'Encontrado'], 'idObjeto = ?', [$id]);
-
+    if (!$objeto || $objeto['status_objeto'] !== 'Perdido') {
         header('Location: painelObjetos.php');
         exit;
+    }
+}
+
+$estadosPermitidos = ['Perfeito', 'Com marcas de uso', 'Danificado'];
+$erro = '';
+
+$estadoSelecionado = $_POST['estadoObjeto'] ?? '';
+$idPontoSelecionado = (int) ($_POST['idPontoColeta'] ?? 0);
+$localValor = $_POST['localEncontrado'] ?? ($ehNovo ? ($objeto['localEncontrado'] ?? '') : '');
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $estado  = trim($estadoSelecionado);
+    $local   = trim($localValor);
+    $idPonto = $idPontoSelecionado;
+
+    $ponto = read($pdo, 'pontoColeta', 'idEndereco = ?', [$idPonto]);
+
+    if (!in_array($estado, $estadosPermitidos, true) || $local === '' || !$ponto) {
+        $erro = 'Preencha o estado, o ponto de coleta e o local onde encontrou o objeto.';
+    } else {
+        try {
+            $pdo->beginTransaction();
+
+            if ($ehNovo) {
+                create($pdo, 'objetos', [
+                    'nomeUsuario'     => (int) $_SESSION['id_usuario'],
+                    'nome'            => $objeto['nome'],
+                    'descricao'       => $objeto['descricao'],
+                    'localEncontrado' => $local,
+                    'categoria'       => $objeto['categoria'],
+                    'imagemObjeto'    => $objeto['imagemObjeto'],
+                    'status_objeto'   => 'Encontrado',
+                ]);
+                $idObjeto = (int) $pdo->lastInsertId();
+            } else {
+                $idObjeto = $id;
+                update($pdo, 'objetos', ['status_objeto' => 'Encontrado'], 'idObjeto = ?', [$idObjeto]);
+            }
+
+            create($pdo, 'achado', [
+                'idObjeto'        => $idObjeto,
+                'idUsuarioAchou'  => (int) $_SESSION['id_usuario'],
+                'estadoObjeto'    => $estado,
+                'localEncontrado' => $local,
+                'idPontoColeta'   => $idPonto,
+            ]);
+
+            $pdo->commit();
+
+            if ($ehNovo) {
+                unset($_SESSION['rascunho_objeto']);
+            }
+
+            header('Location: painelObjetos.php');
+            exit;
+        } catch (Throwable $e) {
+            if ($pdo->inTransaction()) {
+                $pdo->rollBack();
+            }
+            error_log('Erro ao registrar objeto encontrado: ' . $e->getMessage());
+            $erro = 'Não foi possível concluir o registro. Tente novamente.';
+        }
     }
 }
 
@@ -62,7 +110,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
     <header>
         <div class="logo">
-            <a href="./index.php"><img src="imagens/findit-white.png"></a>
+            <a href="./index.php"><img src="imagens/findit-white.png" alt="FindIt"></a>
         </div>
 
         <nav class="menu">
@@ -80,22 +128,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <main>
 
         <?php if ($erro): ?>
-            <p><?= htmlspecialchars($erro) ?></p>
+            <p class="erro" style="color:#c0392b;font-weight:bold;"><?= htmlspecialchars($erro) ?></p>
         <?php endif; ?>
 
-        <h1>Você encontrou este objeto?</h1>
+        <h1><?= $ehNovo ? 'Complete os dados do objeto encontrado' : 'Você encontrou este objeto?' ?></h1>
 
         <div class="tabela">
             <div class="objeto">
                 <div class="emoji">
                     <p><?= htmlspecialchars($objeto['imagemObjeto']) ?></p>
                 </div>
-                
-                <p class="nomeObjeto" ><?= htmlspecialchars($objeto['nome']) ?></p>
+
+                <p class="nomeObjeto"><?= htmlspecialchars($objeto['nome']) ?></p>
                 <div class="conteudo">
                     <p>Descrição: <?= htmlspecialchars($objeto['descricao']) ?></p>
                     <p>Categoria: <?= htmlspecialchars($objeto['categoria']) ?></p>
-                    <p>Perdido em: <?= htmlspecialchars($objeto['localEncontrado']) ?></p>
+                    <p><?= $ehNovo ? 'Encontrado em:' : 'Perdido em:' ?> <?= htmlspecialchars($objeto['localEncontrado']) ?></p>
                 </div>
             </div>
 
@@ -104,24 +152,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <label for="estadoObjeto">Qual era o estado do objeto:</label>
                 <select name="estadoObjeto" id="estadoObjeto" required>
                     <option value="">Selecione</option>
-                    <option value="Perfeito">Perfeito</option>
-                    <option value="Com marcas de uso">Com marcas de uso</option>
-                    <option value="Danificado">Danificado</option>
+                    <?php foreach ($estadosPermitidos as $est): ?>
+                        <option value="<?= htmlspecialchars($est) ?>" <?= $estadoSelecionado === $est ? 'selected' : '' ?>>
+                            <?= htmlspecialchars($est) ?>
+                        </option>
+                    <?php endforeach; ?>
                 </select>
-
 
                 <label for="idPontoColeta">Onde você vai entregar o objeto?</label>
                 <select name="idPontoColeta" id="idPontoColeta" required>
                     <option value="">Selecione</option>
                     <?php foreach ($pontos as $p): ?>
-                        <option value="<?= (int) $p['idEndereco'] ?>">
+                        <option value="<?= (int) $p['idEndereco'] ?>" <?= $idPontoSelecionado === (int) $p['idEndereco'] ? 'selected' : '' ?>>
                             <?= htmlspecialchars($p['nome']) ?> - <?= htmlspecialchars($p['logradouro']) ?>, <?= (int) $p['numero'] ?>
                         </option>
                     <?php endforeach; ?>
                 </select>
 
                 <label for="localEncontrado">Onde você o achou?</label>
-                <input type="text" id="localEncontrado" name="localEncontrado" required>
+                <input type="text" id="localEncontrado" name="localEncontrado" value="<?= htmlspecialchars($localValor) ?>" required>
 
                 <div class="botoes">
                     <button type="submit">Enviar</button>
