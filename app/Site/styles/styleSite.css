@@ -1,0 +1,309 @@
+
+/* Cores do projeto */
+:root {
+    --roxo-900: #0b0719;
+    --roxo-800: #190538;
+    --roxo-700: #2e086b;
+    --roxo-500: #5c00e6;
+    --amareloSafe: #ffb703;
+    --amarelo-clarinho: #ffb74d;
+    --texto: #ffffff;
+    --texto-suave: #d1c4e9;
+}
+
+/*  Configurações gerais  */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;   /* rolagem suave quando clicar no menu */
+}
+
+body {
+    background-color: var(--roxo-900);
+    color: var(--texto);
+    font-family: "Roboto Condensed", sans-serif;
+    line-height: 1.5;
+}
+
+a {
+    color: var(--amareloSafe);
+    text-decoration: none;
+}
+
+.corElectro {
+    color: var(--roxo-500);
+}
+
+.corSafe {
+    color: var(--amareloSafe);
+}
+
+/*  Header e navegação  */
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 8%;
+    background-color: var(--roxo-800);
+    border-bottom: 2px solid var(--amareloSafe);
+    position: sticky;   /* o menu fica fixo no topo independente da rolagem */
+    top: 0;
+    z-index: 10;
+}
+
+header h2 {
+    font-size: 32px;
+}
+
+.navegacao {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.navegacao a {
+    color: var(--texto-suave);
+    font-size: 18px;
+    padding: 8px 14px;
+    border-radius: 6px;
+}
+
+.navegacao a:hover {
+    background-color: var(--roxo-700);
+    color: var(--amareloSafe);
+}
+
+.navegacao a.botao-entrar {
+    background-color: var(--ambar-suave);
+    color: var(--roxo-900);
+    font-weight: 700;
+}
+
+.navegacao a.botao-entrar:hover {
+    background-color: #ffa726;
+}
+
+/* Início da página com vídeo de fundo */
+.home {
+    position: relative;
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+}
+
+.fundo-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.fundo-video video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Filtro roxo por cima do vídeo */
+.fundo-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background:
+        linear-gradient(90deg,
+            rgba(11, 7, 25, .94) 0%,
+            rgba(25, 5, 56, .82) 45%,
+            rgba(25, 5, 56, .58) 100%),
+        linear-gradient(180deg,
+            rgba(11, 7, 25, .45) 0%,
+            rgba(11, 7, 25, 0) 30%,
+            rgba(11, 7, 25, .55) 100%);
+}
+
+.home-conteudo {
+    position: relative;   /* fica na frente do vídeo */
+    max-width: 800px;
+    padding: 60px 24px;
+}
+
+.home-conteudo h1 {
+    font-size: 56px;
+    line-height: 1.1;
+    margin-bottom: 20px;
+}
+
+.texto-grande {
+    font-size: 21px;
+    color: var(--texto-suave);
+}
+
+.linha {
+    width: 120px;
+    height: 3px;
+    margin: 28px auto;
+    background-color: var(--amareloSafe);
+}
+
+/* Botões  */
+.botao,
+.botao-contorno {
+    display: inline-block;
+    margin: 20px 6px 0 6px;
+    padding: 14px 32px;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.botao {
+    background-color: var(--amarelo-clarinho);
+    color: var(--roxo-900);
+}
+
+.botao:hover {
+    background-color: #ffa726;
+}
+
+.botao-contorno {
+    border: 2px solid var(--amareloSafe);
+    color: var(--amareloSafe);
+}
+
+.botao-contorno:hover {
+    background-color: var(--amareloSafe);
+    color: var(--roxo-900);
+}
+
+/* Seções e cards */
+section {
+    scroll-margin-top: 90px;   /* não deixa o header cobrir o título */
+}
+
+.secao {
+    padding: 64px 8%;
+    text-align: center;
+}
+
+.secao-escura {
+    background-color: var(--roxo-800);
+}
+
+.secao h2 {
+    font-size: 36px;
+    margin-bottom: 32px;
+}
+
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 22px;
+}
+
+.card {
+    width: 260px;
+    min-height: 170px;
+    padding: 24px 18px;
+    background-color: rgba(25, 5, 56, .62);
+    border: 1px solid var(--amareloSafe);
+    border-radius: 20px;
+}
+
+.card h3 {
+    font-size: 22px;
+    color: var(--amareloSafe);
+    margin-bottom: 10px;
+}
+
+.card p {
+    color: var(--texto-suave);
+}
+
+.card:hover {
+    background-color: var(--roxo-700);
+}
+
+/* Textos das seções  */
+.subtitulo {
+    font-size: 26px;
+    color: var(--amareloSafe);
+    margin: 16px 0 20px 0;
+}
+
+.cards + .subtitulo {
+    margin-top: 48px;
+}
+
+.texto-secao {
+    max-width: 800px;
+    margin: 0 auto 32px auto;
+}
+
+.texto-secao p {
+    font-size: 19px;
+    color: var(--texto-suave);
+    margin-bottom: 18px;
+}
+
+.faq-lista {
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+/* Perguntas frequentes*/
+details {
+    background-color: rgba(25, 5, 56, .62);
+    border: 1px solid var(--amareloSafe);
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin-bottom: 14px;
+}
+
+summary {
+    cursor: pointer;
+    font-size: 21px;
+    color: var(--amareloSafe);
+}
+
+details p {
+    margin-top: 12px;
+    margin-bottom: 0;
+}
+
+/* Footer  */
+footer {
+    padding: 32px 8%;
+    text-align: center;
+    background-color: var(--roxo-800);
+    border-top: 2px solid var(--amareloSafe);
+    color: var(--texto-suave);
+}
+
+footer h3 {
+    font-size: 26px;
+    margin-bottom: 8px;
+}
+
+.links-rodape {
+    margin: 14px 0;
+}
+
+.links-rodape a {
+    margin: 0 10px;
+    color: var(--texto-suave);
+}
+
+.links-rodape a:hover {
+    color: var(--amareloSafe);
+}
