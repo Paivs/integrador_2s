@@ -1,6 +1,8 @@
 CREATE DATABASE IF NOT EXISTS EnergyMonitor;
 USE EnergyMonitor;
 
+SET NAMES utf8mb4;
+
 
 CREATE TABLE usuarios (
 id INT AUTO_INCREMENT PRIMARY KEY,
