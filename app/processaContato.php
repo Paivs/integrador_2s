@@ -12,7 +12,7 @@ $telefone = ($_POST['telefone'] ?? '');
 $email    = trim($_POST['email'] ?? '');
 $assunto  = $_POST['assunto'] ?? '';
 $mensagem = trim($_POST['mensagem'] ?? '');
-
+ 
 $erros = [];
 
 if (strlen($telefone) < 11 || strlen($telefone) > 11) {
