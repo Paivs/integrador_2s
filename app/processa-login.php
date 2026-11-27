@@ -5,6 +5,10 @@
         $email = $_POST['email'];
         $senha = $_POST['senha'];
     }
+    if($email == "" || $senha == ""){
+        header("Location: login.php?erro=campos_vazios");
+        exit();
+    }
     $usuario_login = read(database(), "usuarios", "email='$email'");
     if($usuario_login['senha'] == $senha){
         header("Location: index.php");
