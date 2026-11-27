@@ -48,7 +48,7 @@ if (isset($_SESSION['id_usuario'])) {
             </label>
 
             <label>Telefone:
-                <input type="tel" name="telefone" placeholder="exemplo: (11) 12345-6789" value="<?= htmlspecialchars($usuario['telefone'] ?? '') ?>" required>
+                <input type="tel" name="telefone" placeholder="exemplo:123456789" required>
             </label>
 
             <label>Email:
@@ -69,22 +69,7 @@ if (isset($_SESSION['id_usuario'])) {
             <button type="submit">Enviar</button>
         </form>
     </main>
-
-    <div class="tela">
-        <div>
-            <h3>Nosso contato:</h3>
-            <p><strong>Email:</strong> findit@gmail.com</p>
-            <p><strong>Telefone:</strong> (11) 12345-6789</p>
-        </div>
-
-        <div>
-            <h3>Atendimento:</h3>
-            <p>Segunda - Sexta feira: 08:00 às 20:00</p>
-            <p>Sábados: 10:00 às 18:00</p>
-            <p>Domingos: 10:00 às 16:00</p>
-        </div>
-</div>
-
+    
     <footer>
         <div class="rodape-coluna">
             <p>Sistema de achados e perdidos. Devolvendo pertences de forma rápida e simples.</p>
