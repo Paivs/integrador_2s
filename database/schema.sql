@@ -118,7 +118,7 @@ INSERT INTO objetos (nomeUsuario, nome, descricao, localEncontrado, categoria, i
 (3, 'Câmera',             'Câmera digital preta com alça',                 'Auditório',             'Eletrônicos',       '📷', 'Perdido'),
 (4, 'Livro',              'Livro de capa azul com marca-página',           'Sala de treinamento',   'Documentos',        '📚', 'Encontrado'),
 (5, 'Agenda',             'Agenda preta com anotações',                    'Sala de reunião 2',     'Documentos',        '📓', 'Perdido'),
-(1, 'Caneta',             'Caneta tinteiro prateada',                      'Sala de reunião 1',     'Documentos',        '🖊', 'Doado'),
+(1, 'Caneta',             'Caneta tinteiro prateada',                      'Sala de reunião 1',     'Documentos',        '🖊️', 'Doado'),
 (2, 'Martelo',            'Martelo com cabo de madeira',                   'Almoxarifado',          'Outros',            '🔨', 'Perdido');
 
 -- Achados de exemplo: só de objetos Encontrados (ids 2, 3, 7, 9, 11)

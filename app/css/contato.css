@@ -103,6 +103,14 @@ h1 {
     font-size: 50px;
 }
 
+.linkVolta a{
+    background-color: #3FD6E8;
+    padding: 10px;
+    width: auto;
+    text-decoration: none;
+    color: #000000;
+}
+
 h2 {
     margin: 6px 0 0;
     font-size: 22px;
