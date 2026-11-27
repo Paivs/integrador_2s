@@ -107,7 +107,11 @@ $metas = readAll(database(), "metas");
 
                                     echo "<h1><span class='contador'>" . $total_kwh . "</span> kWh</h1><br>";
                             
-                                    echo "<h4>Meta: " . $meta_setor . " kWh | <b class='meta_" . $cor_meta . "'><span class='contador'>" . $porcentagem_meta . "</span> % da meta</b></h4>";
+                                    if($porcentagem_meta == "Acima de 100"){
+                                        echo "<h4>Meta: " . $meta_setor . " kWh | <b class='meta_" . $cor_meta . "'>" . $porcentagem_meta . "% da meta</b></h4>";
+                                    } else {
+                                        echo "<h4>Meta: " . $meta_setor . " kWh | <b class='meta_" . $cor_meta . "'><span class='contador'>" . $porcentagem_meta . "</span>% da meta</b></h4>";
+                                    }
                                 
                                 ?> 
 
