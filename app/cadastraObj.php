@@ -76,16 +76,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } elseif (!in_array($emoji, $emojisPermitidos, true)) {
         $erro = 'Selecione um ícone para o objeto.';
     } else {
+        $dadosObjeto = [
+            'nomeUsuario'     => (int) $_SESSION['id_usuario'],
+            'nome'            => $nome,
+            'descricao'       => $descricao,
+            'localEncontrado' => $local,
+            'categoria'       => $categorias[$categoria],
+            'imagemObjeto'    => $emoji,
+            'status_objeto'   => $statusPermitidos[$status],
+        ];
+
+        if ($status === 'encontrado') {
+            $_SESSION['rascunho_objeto'] = $dadosObjeto;
+            header('Location: encontrei.php?novo=1');
+            exit;
+        }
+
         try {
-            create($pdo, 'objetos', [
-                'nomeUsuario'     => (int) ($_SESSION['id_usuario']),
-                'nome'            => $nome,
-                'descricao'       => $descricao,
-                'localEncontrado' => $local,
-                'categoria'       => $categorias[$categoria],
-                'imagemObjeto'    => $emoji,
-                'status_objeto'   => $statusPermitidos[$status],
-            ]);
+            unset($_SESSION['rascunho_objeto']);
+            create($pdo, 'objetos', $dadosObjeto);
 
             header('Location: painelObjetos.php');
             exit;
