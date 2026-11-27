@@ -62,7 +62,7 @@ $metas = readAll(database(), "metas");
 
                         if ($porcentagem_meta == "Acima de 100" || $porcentagem_meta > 100) {
                             $cor_meta = 'vermelho';
-                        } elseif ($porcentagem_meta > 80) {
+                        } elseif ($porcentagem_meta > 85) {
                             $cor_meta = 'amarelo';
                         } else {
                             $cor_meta = 'verde';
@@ -118,7 +118,7 @@ $metas = readAll(database(), "metas");
                                 <h2>Custo estimado</h2>
                                 <h4>Em reais (R$)</h4> <br>
                                 <?php
-                                    $tarifa_media = 0.7;
+                                    $tarifa_media = 0.8;
 
                                     $total_reais = $total_kwh * $tarifa_media;
 
