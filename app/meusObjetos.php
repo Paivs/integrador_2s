@@ -13,7 +13,6 @@ $pesquisa  = trim($_GET['pesquisa'] ?? '');
 $categoria = $_GET['categoria'] ?? '';
 $status    = $_GET['status'] ?? '';
 
-// 1. Filtro fixo: só objetos cadastrados pelo usuário logado (FK nomeUsuario)
 $condicoes = ['nomeUsuario = ?'];
 $params    = [$idUsuario];
 
@@ -124,7 +123,7 @@ $classeStatus = [
                     $achado = false;
                     $ponto  = false;
 
-                    // 2. Se o objeto foi Encontrado, usa o CRUD para buscar o registro em achado e o pontoColeta
+                    
                     if ($o['status_objeto'] === 'Encontrado') {
                         $achado = read($pdo, 'achado', 'idObjeto = ?', [(int) $o['idObjeto']]);
 
