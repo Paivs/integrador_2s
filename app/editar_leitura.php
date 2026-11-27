@@ -64,28 +64,17 @@ function e($v) { return htmlspecialchars((string) $v, ENT_QUOTES, 'UTF-8'); }
 
                             <label for="valor_relogio"><b>Valor do Relógio para a Alteração em (kWh):</b></label>
                             <br>
-                            <input type="number" step="any" id="valor_relogio" name="valor_relogio"
+                            <input type="number" step="any" id="valor_relogio" name="valor_relogio" placeholder="Digite o novo valor"
                                 value="<?= e($leitura['leitura_acumulada_kwh']) ?>" required><br><br>
 
                             <label for="responsavel"><b>Responsável do Registro:</b></label>
                             <br>
 
-                            <input type="text" id="responsavel" name="responsavel"
+                            <input type="text" id="responsavel" name="responsavel" placeholder="Digite seu nome"
                                 value="<?= e($leitura['responsavel'] ?? '') ?>" required><br><br>
                         </div>
 
                         <div class="selecionar">
-                            <label for="setor"><b>Setor:</b></label>
-                            <br>
-                            <select id="setor" name="setor" required>
-                                <?php foreach ($setores as $s): ?>
-
-                                    <option value="<?= e($s['id']) ?>"
-                                        <?= (($leitura['setor_id'] ?? null) == $s['id']) ? 'selected' : '' ?>>
-                                        <?= e($s['nome']) ?>
-                                    </option>
-                                <?php endforeach; ?>
-                            </select><br><br>
 
                             <label for="status_bloco"><b>Status do Bloco:</b></label>
                             <br>

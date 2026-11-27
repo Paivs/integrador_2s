@@ -53,21 +53,13 @@ try {
 
                         <label for="valor_relogio"><b>Valor Atual do Relogio em (kWh): </b></label>
                         <br>
-                        <input type="number" id="valor_relogio" name="valor_relogio" required><br><br>
+                        <input type="number" id="valor_relogio" name="valor_relogio" placeholder="Digite um valor valido"><br><br>
 
                         <label for="responsavel"><b>Responsável pelo Registro:</b></label>
                         <br>
-                        <input type="text" id="responsavel" name="responsavel" required><br><br>
+                        <input type="text" id="responsavel" name="responsavel" placeholder="Digite seu nome"><br><br>
 
-                        <label for="setor"><b>Setor:</b></label>
-                        <br>
-                        <select id="setor" name="setor" required>
-                            <?php foreach ($setores as $s): ?>
-                                <option value="<?= $s['id'] ?>"><?= $s['nome'] ?></option>
-                            <?php endforeach; ?>
-                        </select><br><br>
-
-                        <label for="status_bloco"><b>Status do Bloco:</b></label>
+                        <label for="status_bloco"><b>Status do Medidor:</b></label>
                         <br>
                         <select id="status_bloco" name="status_bloco" required>
                             <option value="ATIVO">Ativo🟢</option>

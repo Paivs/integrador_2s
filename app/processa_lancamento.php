@@ -22,7 +22,11 @@ $dados = [
     'codigo_medidor' => $ambienteBanco['codigo_medidor'],
     'estado_medidor_leituras' => $statusDado,
 ];
+$troca = [
+    'estado_medidor' => $statusDado,
+];
 create(database(), "leituras", $dados);
+update(database(), "ambientes", $troca, "id=" . $ambienteBanco['id']); 
 header("Location: lancamento_de_dados.php");
 }
 ?>
