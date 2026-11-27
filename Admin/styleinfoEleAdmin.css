@@ -1,0 +1,203 @@
+:root{
+    --fundo:        #0b0812;
+    --cor-texto-principal-elementos:#ffffff;
+
+    --cor-fundo-menu:#1f0060;
+    --cor-pag-selecionada-botes:#fdb42e;
+    --cor-fundo-form:#5900ff;
+    --linha:        #3a2a55;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Roboto Condensed", sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    background-color: var(--fundo);
+    background-image:
+      radial-gradient(ellipse 70% 40% at 0% 12%, rgba(166, 107, 184, 0.55), transparent 70%),
+      linear-gradient(160deg, var(--fundo) 40%, #17100f 100%);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    color: #ffffff;
+    min-height: 100vh;
+}
+
+
+/* ---------------------------------------------------------
+   MENU LATERAL
+   --------------------------------------------------------- */
+
+.layout-principal {
+    display: flex;
+    width: 100%;         
+    min-height: 100vh;
+}
+.barra-menu {
+    width: 260px;
+    background-color: #190538;
+    display: flex;
+    flex-direction: column;
+    padding: 17px 3px;
+    flex-shrink: 0;
+    position: sticky;
+    top: 0;
+    height: 100vh;            /* ocupa a altura da tela */
+  
+}
+
+.barra-menu-cabeça {
+    display: flex;
+    align-items: center;
+    margin-bottom: 22px;
+    padding: 37px;
+}
+
+img {
+    width: 260px;
+    height: auto;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    font-size: 41px;
+    color: #ffffff;
+}
+.corElectro {
+    color: #5c00e6;
+}
+
+.corSafe {
+    color: #ffb703;
+}
+
+.nav {
+    display: flex;
+    flex-direction: column;
+    gap: 2%; 
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    gap: 1px;
+    margin-bottom: 14px;
+    color: #d1c4e9;
+    text-decoration: none;
+    font-size: 27px; 
+    padding: 10px; 
+    border-radius: 6px;
+    transition: background 0.2s;
+    width: 100%;
+}
+
+.nav-item:hover, 
+.nav-item.active {
+    background-color: #2e086b;
+    color: #ffb703;
+}
+
+.nav-item.active {
+    border-left: 4px solid #ffb703;
+    padding-left: 6px; 
+}
+
+.nav-item i {
+    font-size: 22px;
+    width: 28px; 
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+}
+/* ===========CABEÇALHO===========*/
+header{
+    margin-top: 35px;
+    text-align: center;
+    font-weight: bolder;
+}
+
+header > h1 {
+    font-size: 45px;
+    margin-bottom: 40px;
+}
+/* ===========CABEÇALHO===========*/
+
+/*========= CONTEUDO PRINCIPAL =========*/
+main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;  
+}
+
+/* ===========CARD COM TABELA===========*/
+
+#area-centro{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-tabela{
+    width: 110%;
+    max-width: 2500px;
+    margin-top: auto;
+    margin-bottom: auto;
+    padding: 30px 35px 35px;
+    background: rgba(33, 13, 65, 0.62);
+    border-top: 4px solid rgba(255, 183, 3, .45);         
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.35);
+}
+
+
+
+.tabela-rolagem{
+    overflow-x: auto;
+}
+
+.tabela{
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.tabela th {
+    padding: 20px 25px;
+    font-size: 29px;
+    font-weight: bolder;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #b79cff;
+    border-bottom: 1px solid var(--linha, #3a2a55);
+}
+
+.tabela td{
+    padding: 20px;
+    text-align: center;
+    font-size: 26px;
+    color: #ffffff;
+    border-bottom: 1px solid var(--linha, #3a2a55);
+}
+
+.tabela tbody tr{
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.tabela tbody tr:hover{
+    background: rgba(70, 50, 95, 0.6);
+    transform: translateY(-3px);
+}
+
+.tabela-vazia{
+    text-align: center;
+    color: #d1c4e9;
+}
+/* ===========CARD COM TABELA===========*/

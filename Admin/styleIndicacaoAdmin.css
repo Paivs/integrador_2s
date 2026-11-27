@@ -1,0 +1,248 @@
+:root{
+    --fundo:        #0b0812;
+    --cor-texto-principal-elementos:#ffffff;
+
+    --cor-fundo-menu:#1f0060;
+    --cor-pag-selecionada-botes:#fdb42e;
+    --cor-fundo-form:#5900ff;
+    --linha:        #3a2a55;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Roboto Condensed", sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    background-color: var(--fundo);
+    background-image:
+      radial-gradient(ellipse 70% 40% at 0% 12%, rgba(166, 107, 184, 0.55), transparent 70%),
+      linear-gradient(160deg, var(--fundo) 40%, #17100f 100%);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    color: #ffffff;
+    min-height: 100vh;
+}
+
+/* ===========NAVEGAÇÃO===========*/
+
+.layout-principal {
+    display: flex;
+    min-height: 100vh;
+}
+
+.barra-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 260px;
+    height: 100vh;
+    background-color: #190538;
+    display: flex;
+    flex-direction: column;
+    padding: 17px 3px;
+}
+
+.barra-menu-cabeca,
+.barra-menu-cabeça {
+    display: flex;
+    align-items: center;
+    margin-bottom: 22px;
+    padding: 37px;
+}
+
+img {
+    width: 260px;
+    height: auto;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    font-size: 41px;
+    color: #ffffff;
+}
+
+.corElectro {
+    color: #5c00e6;
+}
+
+.corSafe {
+    color: #ffb703;
+}
+
+.nav {
+    display: flex;
+    flex-direction: column;
+    gap: 2%;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    gap: 1px;
+    margin-bottom: 14px;
+    color: #d1c4e9;
+    text-decoration: none;
+    font-size: 27px;
+    padding: 10px;
+    border-radius: 6px;
+    transition: background 0.2s;
+    width: 100%;
+}
+
+.nav-item:hover,
+.nav-item.active {
+    background-color: #2e086b;
+    color: #ffb703;
+}
+
+.nav-item.active {
+    border-left: 4px solid #ffb703;
+    padding-left: 6px;
+}
+
+.nav-item i {
+    font-size: 22px;
+    width: 28px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+/* ===========NAVEGAÇÃO===========*/
+
+
+/* ===========CABEÇALHO===========*/
+header{
+    margin-top: 35px;
+    text-align: center;
+    font-weight: bolder;
+}
+
+header > h1 {
+    color: var(--cor-texto-principal-elementos);
+    font-size: 45px;
+    margin-bottom: 40px;
+}
+/* ===========CABEÇALHO===========*/
+
+
+/* ===========CONTEUDO PRINCIPAL===========*/
+main{
+    margin-left: 260px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+/* ===========CONTEUDO PRINCIPAL===========*/
+
+
+/* ===========FORMULÁRIO===========*/
+#formulario{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+form{
+    border: 1px solid rgba(255, 183, 3, .45);
+    background: rgba(33, 13, 65, 0.62);
+    width: 800px;
+    padding-bottom: 20px;      
+    border-radius: 15px;
+    margin-bottom: 50px;
+}
+
+form > h2 {
+    margin-top: 25px;
+    margin-right: auto;
+    margin-bottom: 33px;
+    margin-left: auto;
+    text-align: center;
+    padding: 20px;
+    font-weight: bolder;
+    background: rgba(55, 35, 80, 0.85);
+    border-radius: 10px;
+    width: 60%;
+    font-size: 30px;
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+form > h2:hover{
+    transform: translateY(-1px);
+}
+
+.passo-um {
+    display: block;
+    font-size: 27px;
+    text-align: center;
+    color: lightgray;
+    font-weight: bold;
+    margin-top: 25px;
+    margin-bottom: 10px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+form > input {
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+    width: 540px;
+    max-width: 90%;
+    height: 47px;
+    padding: 5px 12px;
+    border: 1px solid var(--linha);
+    background: rgba(70, 50, 95, 1);
+    border-radius: 8px;
+    font-size: 22px;
+    color: white;
+    font-weight: 500;
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+form > input::placeholder{
+    color: rgba(209, 196, 233, .5);
+}
+
+form > input:hover{
+    transform: translateY(-4px);
+}
+
+form input:focus{
+    outline: none;
+    border: 2px solid rgba(255, 183, 3, .45);
+}
+
+button{
+    display: block;
+    text-align: center;
+    margin-top: 50px;
+    margin-right: auto;
+    margin-left: auto;
+    width: 175px;
+    height: 75px;
+    background-color: #fdb42e;
+    color: white;
+    font-weight: bolder;
+    border: 2px solid #fdb42e;
+    border-radius: 35px;
+    font-size: 30px;
+    cursor: pointer;
+    transition: transform 0.2s ease,
+                border-color 0.2s ease,
+                box-shadow 0.2s ease;
+}
+
+button:hover{
+    transform: translateY(-7px);
+    text-decoration: underline;
+}
+/* ===========FORMULÁRIO===========*/
