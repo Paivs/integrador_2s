@@ -31,7 +31,7 @@
                     <button type="submit">Entrar</button>
                 </form>
                 <?php if(isset($_GET['erro'])){
-                    print $mensagem;
+                    print "<p>$mensagem</p>";
                 }else{}  
                 ?>
             </div>
