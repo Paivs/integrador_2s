@@ -268,7 +268,7 @@ $setor_existe = false;
 
                         if ($porcentagem_meta == "Acima de 100" || $porcentagem_meta > 100) {
                             $cor_meta = 'vermelho';
-                        } elseif ($porcentagem_meta > 90) {
+                        } elseif ($porcentagem_meta > 85) {
                             $cor_meta = 'amarelo';
                         } else {
                             $cor_meta = 'verde';
